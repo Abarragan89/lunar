@@ -7,6 +7,17 @@
     {% block head %} {% endblock %}
 </head>
 <body>
+    <nav>
+        <ul>
+            <li> <a href="/">Home</a></li>
+            <li>Dashboard</li>
+            {% if loggedIn == True %}
+            <li><a href="{{url_for('api.logout')}}">Logout</a></li>
+            {% else %}
+            <li><a href="{{url_for('site.login')}}">Login</a></li>
+            {% endif %}
+        </ul>
+    </nav>
 
     {% block body %} {% endblock %}
 

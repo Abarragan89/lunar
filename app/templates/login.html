@@ -1,17 +1,28 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
-    <form action="/login" method="POST">
-        <input type="username" name="username" placeholder="username">
-        <br><br>
-        <input type="password" name="password" placeholder="password">
-        <input type="submit" value="Login">
-    </form>
-</body>
-</html> 
+{% extends 'base.html' %} {% block head %}
+<title>Suspense</title>
+{% endblock %} {% block body %}
+
+<h1>Sign Up</h1>
+<form action="/api/signup" method="POST">
+  <input type="username" name="username" placeholder="username" />
+  <br /><br />
+  <input type="email" name="email" placeholder="email" />
+  <br /><br />
+  <input type="password" name="password" placeholder="password" />
+  <br /><br />
+  <input type="number" name="monthly-income" placeholder="monthly-income" />
+  <br /><br />
+  <input type="submit" value="Sign Up" />
+</form>
+
+<h1>Sign Up</h1>
+<form action="/api/login" method="POST">
+  <input type="email" name="email" placeholder="email" />
+  <br /><br />
+  <input type="password" name="password" placeholder="password" />
+  <br /><br />
+  <input type="submit" value="Login" />
+</form>
+
+
+{% endblock %}
