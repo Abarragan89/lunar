@@ -30,6 +30,7 @@ bp = Blueprint('/api', __name__, url_prefix='/api')
 # Login 
 @bp.route('/login', methods=['POST'])
 def login():
+    pass
 
 
 
@@ -38,16 +39,13 @@ def login():
 
 
 
-
-
-
-    # if request.form['username'] and request.form['password'] == "123456":
-    #     session['logged_in'] = True
-    #     token = jwt.encode({
-    #         'user': request.form['username'],
-    #         'exp': datetime.utcnow() + timedelta(seconds=120)
-    #     },
-    #     bp.config['SECRET_KEY'], algorithm="HS256")
-    #     return token
-    # else:
-    #     return make_response('Unable to verify', 403, {'WWW-Authenticate': 'Basic realm: Authentication Failed!'})
+# if request.form['username'] and request.form['password'] == "123456":
+#     session['logged_in'] = True
+#     token = jwt.encode({
+#         'user': request.form['username'],
+#         'exp': datetime.utcnow() + timedelta(seconds=120)
+#     },
+#     bp.config['SECRET_KEY'], algorithm="HS256")
+#     return token
+# else:
+#     return make_response('Unable to verify', 403, {'WWW-Authenticate': 'Basic realm: Authentication Failed!'})

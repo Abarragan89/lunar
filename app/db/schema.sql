@@ -1,0 +1,4 @@
+DROP DATABASE IF EXISTS suspend
+
+CREATE DATABASE suspend
+
