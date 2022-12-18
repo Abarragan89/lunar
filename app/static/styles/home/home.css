@@ -1,0 +1,68 @@
+#home-page {
+  text-align: center;
+}
+#home-page h1 {
+  color: blue;
+}
+#home-page p {
+  font-size: 0.9em;
+  margin-bottom: 10px;
+}
+#home-page img {
+  width: 200px;
+}
+#home-page button {
+  display: block;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+#dashboard h1 {
+  color: blue;
+}
+#dashboard img {
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+#dashboard menu {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  border-top: 1px solid rgb(75, 169, 77);
+  border-radius: 8px 8px 0 0;
+  background-color: rgb(134, 190, 134);
+}
+#dashboard menu a {
+  width: 100%;
+  font-size: 0.9rem;
+  text-align: center;
+  padding: 0.6rem 0;
+}
+#dashboard menu a:not(:first-child) {
+  border-left: 1px solid black;
+}
+
+.modal-container {
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.709);
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 150%;
+  transition: 0.5s;
+}
+.modal-container .modal {
+  width: 85%;
+  text-align: center;
+  padding: 20px 10px;
+  position: relative;
+  top: 30px;
+  background-color: green;
+  margin: 0 auto;
+}
+
+.show-modal {
+  opacity: 1;
+}/*# sourceMappingURL=home.css.map */

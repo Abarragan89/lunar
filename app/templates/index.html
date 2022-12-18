@@ -1,17 +1,99 @@
-{% extends 'base.html' %}
-
-
-{% block head %}
+{% extends 'base.html' %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='/styles/home/home.css')}}"
+/>
 <title>Suspense</title>
-{% endblock %}
+{% endblock %} {% block body %} {% if loggedIn == True %}
+
+<div class="modal-container" id="expense-modal">
+    <div class="modal">
+      <h2>Add Expense</h2>
+      <form action="/api/login" method="POST">
+        <input type="email" name="email" placeholder="email" />
+        <br /><br />
+        <input type="password" name="password" placeholder="password" />
+        <br /><br />
+        <input type="submit" value="ADD"/>
+      </form>
+    </div>
+</div>
+
+<main id="dashboard">
+  <a href="{{url_for('api.logout')}}">Logout</a>
+  <div class="flex-box-sa">
+    <p><span id="money-left">$923</span> Remaing</p>
+    <p>Days til 1st: <span>4 days</span></p>
+  </div>
+
+  <div>
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+  </div>
+
+  <menu class="flex-box-sa">
+    <a href="#">History</a>
+    <a href="#">Add Cash</a>
+    <a href="#" id="add-expense">Add Expense</a>
+  </menu>
+</main>
 
 
 
 
-{% block body %}
-{% if loggedIn == True %}
-    <h1>This is your dashboard or user homepage</h1>
+
+
 {% else %}
-    <h1>This is the homepage/ Not logged in</h1>
-{% endif%}
-{% endblock %}
+<main id="home-page">
+  <h1>Suspend</h1>
+  <p>"take the suspense out of expenses"</p>
+  <img
+    src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+    alt="screenshot of graph"
+  />
+  <a href="{{ url_for('site.signup')}}"><button>Signup</button></a>
+  <a href="{{ url_for('site.login')}}"><button>Login</button></a>
+</main>
+{% endif%} {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, session, redirect, url_for
+from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
 from app.models import User
 from app.db import start_db_session
@@ -47,7 +47,7 @@ def signup():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('site.login'))
+    return render_template('index.html')
 
 # Log In
 @bp.route('/login', methods=['POST'])

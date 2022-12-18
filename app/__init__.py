@@ -3,9 +3,10 @@ from dotenv import load_dotenv
 import os
 from app.routes import home, dashboard, api
 from app.db import init_db
+# from flask_modals import Modal
 
 load_dotenv()
-
+# modal = Modal()
 
 def create_app():
     # set up app config
@@ -22,8 +23,10 @@ def create_app():
     app.register_blueprint(home)
     app.register_blueprint(dashboard)
     app.register_blueprint(api)
-    app.debug=True
     init_db(app)
+
+    # modal.init_app(app)
+    
     return app
 
 
