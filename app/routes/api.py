@@ -1,51 +1,73 @@
-from flask import render_template, request,jsonify, session, make_response, Blueprint
-from datetime import datetime, timedelta 
-import os
-from functools import wraps
-import jwt
-from dotenv import load_dotenv
+from flask import Blueprint, request, jsonify, session, redirect, url_for
+import sqlalchemy
+from app.models import User
+from app.db import start_db_session
+import sys
 
-
-load_dotenv
-
-# app.config['SECRET_KEY'] = os.getenv('JWT_SECRET')
-
-bp = Blueprint('/api', __name__, url_prefix='/api')
-
-
-# def token_required(func):
-#     @wraps(func)
-#     def decorated(*args, **kwargs):
-#         token = request.args.get('token')
-#         if not token:
-#             return jsonify({'Alert!': 'Token is missing!'}), 403
-#         try:
-#             payload = jwt.decode(token, key=app.config['SECRET_KEY'], algorithm="HS256")
-#         except:
-#             return jsonify({'Alert!': 'Invalid Token!'})
-#         return func(*args, **kwargs)
-#     return decorated
-
+bp = Blueprint('api', __name__, url_prefix='/api')
 
 # Login 
+@bp.route('/signup', methods=['POST'])
+def signup():
+    db = start_db_session()
+    data = request.form
+
+    try:
+        # try making new user
+        newUser = User(
+            username = data['username'],
+            username_lowercase = data['username'].lower(),
+            email = data['email'],
+            password = data['password'],
+            monthly_income = data['monthly-income']
+        )
+        db.add(newUser)
+        db.commit()
+    except AssertionError:
+        print(sys.exc_info()[0])
+        db.rollback()
+        return jsonify(message='Missing fields.'), 500
+    except sqlalchemy.exc.IntegrityError:
+        db.rollback()
+        print(sys.exc_info()[0])
+        return jsonify(message='Username or email already taken.'), 500
+    except:
+        db.rollback()
+        return jsonify(message='Sign up failed.'), 500
+
+    # create session
+    session.clear()
+    session['user_id'] = newUser.id
+    session['loggedIn'] = True
+
+    return redirect('/')
+
+
+# Log out
+@bp.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('site.login'))
+
+# Log In
 @bp.route('/login', methods=['POST'])
 def login():
-    pass
+    data = request.form
+    db = start_db_session()
 
+    try:
+        user = db.query(User).filter(
+            User.email == data['email']
+        ).one()
+    except:
+        print(sys.exc_info()[0])
+        return jsonify(message='Incorrect credentials'), 400
 
+    if user.verify_password(data['password']) == False:
+        return jsonify(message='Incorrect credentials')
+    
+    session.clear()
+    session['user_id'] = user.id
+    session['loggedIn'] = True
 
-
-
-
-
-
-# if request.form['username'] and request.form['password'] == "123456":
-#     session['logged_in'] = True
-#     token = jwt.encode({
-#         'user': request.form['username'],
-#         'exp': datetime.utcnow() + timedelta(seconds=120)
-#     },
-#     bp.config['SECRET_KEY'], algorithm="HS256")
-#     return token
-# else:
-#     return make_response('Unable to verify', 403, {'WWW-Authenticate': 'Basic realm: Authentication Failed!'})
+    return redirect('/')

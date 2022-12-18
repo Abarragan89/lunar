@@ -9,5 +9,9 @@
 
 
 {% block body %}
-<h1>This is the homepage</h1>
+{% if loggedIn == True %}
+    <h1>This is your dashboard or user homepage</h1>
+{% else %}
+    <h1>This is the homepage/ Not logged in</h1>
+{% endif%}
 {% endblock %}
