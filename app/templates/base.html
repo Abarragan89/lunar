@@ -4,25 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/styles/global/global.css')}}">
     {% block head %} {% endblock %}
 </head>
 <body>
-    <nav>
-        <ul>
-            <li> <a href="/">Home</a></li>
-            <li>Dashboard</li>
-            {% if loggedIn == True %}
-            <li><a href="{{url_for('api.logout')}}">Logout</a></li>
-            {% else %}
-            <li><a href="{{url_for('site.login')}}">Login</a></li>
-            {% endif %}
-        </ul>
-    </nav>
-
     {% block body %} {% endblock %}
-
-    <footer>
-        <p>This is my Footer</p>
-    </footer>
+    
+    <script src="{{url_for('static', filename='/js/modal.js')}}"></script>
 </body>
 </html>

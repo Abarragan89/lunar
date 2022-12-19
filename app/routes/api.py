@@ -1,6 +1,6 @@
-from flask import Blueprint, request, jsonify, session, redirect, url_for
+from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
-from app.models import User
+from app.models import User, Tag, Product
 from app.db import start_db_session
 import sys
 
@@ -11,7 +11,6 @@ bp = Blueprint('api', __name__, url_prefix='/api')
 def signup():
     db = start_db_session()
     data = request.form
-
     try:
         # try making new user
         newUser = User(
@@ -24,12 +23,10 @@ def signup():
         db.add(newUser)
         db.commit()
     except AssertionError:
-        print(sys.exc_info()[0])
         db.rollback()
         return jsonify(message='Missing fields.'), 500
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        print(sys.exc_info()[0])
         return jsonify(message='Username or email already taken.'), 500
     except:
         db.rollback()
@@ -47,7 +44,7 @@ def signup():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return redirect(url_for('site.login'))
+    return render_template('index.html')
 
 # Log In
 @bp.route('/login', methods=['POST'])
@@ -60,7 +57,6 @@ def login():
             User.email == data['email']
         ).one()
     except:
-        print(sys.exc_info()[0])
         return jsonify(message='Incorrect credentials'), 400
 
     if user.verify_password(data['password']) == False:
@@ -70,4 +66,54 @@ def login():
     session['user_id'] = user.id
     session['loggedIn'] = True
 
+    return redirect('/')
+
+# Add a Category
+@bp.route('/add-category', methods=['POST'])
+def add_category():
+    data = request.form
+    db = start_db_session()
+
+    try:
+        newTag = Tag(
+            tag_name = data['category-name'],
+            tag_color = data['category-color'],
+            user_id = session['user_id']
+        )
+        db.add(newTag)
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
+        return jsonify(message='Tag not added'), 500
+    return redirect('/')
+
+# Add an expense
+@bp.route('/add-expense', methods=['POST'])
+def add_expense():
+    data = request.form
+    db = start_db_session()
+    monthly_bill = False
+
+    if 'monthly-bill' in data:
+        monthly_bill = True
+
+    try:
+        newExpense = Product(
+            product_name = data['product-name'],
+            tag_id = data['product-category'],
+            user_id = session['user_id'],
+            price = data['product-price'],
+            monthly_bill = monthly_bill
+        )
+        db.add(newExpense)
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
+        return jsonify(message='Tag not added'), 500
     return redirect('/')
