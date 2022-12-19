@@ -4,12 +4,9 @@
   href="{{url_for('static', filename='/styles/home/home.css')}}"
 />
 <title>Suspense</title>
-{% endblock %} {% block body %} {% if loggedIn == True %}
-
-
-{% include 'includes/add-cash-modal.html'%}
-{% include 'includes/expense-modal.html'%}
-{% include 'includes/category-modal.html' %}
+{% endblock %} {% block body %} {% if loggedIn == True %} {% include
+'includes/add-cash-modal.html'%} {% include 'includes/expense-modal.html'%} {%
+include 'includes/category-modal.html' %}
 
 <main id="dashboard">
   <a href="{{url_for('api.logout')}}">Logout</a>
@@ -18,15 +15,25 @@
     <p><span>4 days</span>Until Payday</p>
   </div>
 
-  <div>
-    {% for tag in tags %}
-    <p>{{tag.tag_name}}</p>
-    {% endfor %}
-    <img
-      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
-      alt="screenshot of graph"
-    />
+  {% for tag in tags %}
+  <p>{{tag.tag_name}}</p>
+  {% endfor %}
+
+  <img
+    src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+    alt="screenshot of graph"
+  />
+
+  {% for expense in expenses %}
+  <div class="flex-box-sa">
+    <p>{{ expense[0].time_created }}</p>
+    <div class="flex-box-col-sa">
+      <p>{{ expense[1].tag_name }}</p>
+      <p>{{ expense[0].product_name }}</p>
+    </div>
+    <p>{{ expense[0].price }}</p>
   </div>
+  {% endfor%}
 
   <menu class="flex-box-sa">
     <a href="#">History</a>
@@ -35,7 +42,6 @@
     <a href="#" id="add-expense-btn">Add Expense</a>
   </menu>
 </main>
-
 
 {% else %}
 <main id="home-page">

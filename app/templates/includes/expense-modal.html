@@ -11,6 +11,11 @@
           {% for tag in tags%}
           <option value="{{tag.id}}">{{tag.tag_name}}</option>
           {% endfor %}
+
+          {% for expense in expenses %}
+          <p>{{expense.product_name}}</p>
+          {% endfor %}
+
         </select>
         <br /><br />
 

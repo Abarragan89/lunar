@@ -8,7 +8,7 @@ class Tag(Base):
     id = Column(Integer, primary_key=True)
     tag_name = Column(String(50), nullable=False)
     tag_color = Column(String(12), nullable=False)
-    user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
+    user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
 
     user = relationship('User')
 

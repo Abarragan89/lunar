@@ -10,7 +10,6 @@ def create_app():
     # set up app config
     app = Flask(__name__, static_url_path='/')
     app.url_map.strict_slashes = False
-
     app.config.from_mapping(
         SECRET_KEY=os.getenv('SESSION_SECRET')
     )

@@ -18,7 +18,12 @@ def home():
         .filter(Tag.user_id == user_id)
         .all()
     )
-    return render_template('index.html', loggedIn=is_loggedin, tags=allTags)
+    expenses = db.query(Product, Tag).filter(Product.user_id == user_id).filter(Product.tag_id == Tag.id).all()
+
+    for expense in expenses:
+        print(expense[0].product_name, expense[0].price, expense[1].tag_name)
+
+    return render_template('index.html', loggedIn=is_loggedin, tags=allTags, expenses=expenses)
 
 @bp.route('/login')
 def login():
