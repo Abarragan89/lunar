@@ -1,0 +1,27 @@
+<div class="modal-container" id="expense-modal">
+    <div class="modal">
+      <h2>Add Expense</h2>
+      <form action="/api/add-expense" method="POST">
+        <label for="product-name">Name</label>
+        <input type="product-name" name="product-name" placeholder="optional" />
+        <br /><br />
+
+        <label for="product-category">Category</label>
+        <select name="product-category" required>
+          {% for tag in tags%}
+          <option value="{{tag.id}}">{{tag.tag_name}}</option>
+          {% endfor %}
+        </select>
+        <br /><br />
+
+        <label for="product-price">Price</label>
+        <input type="number" name="product-price" required>
+
+        <label for="monthly-bill">Monthly</label>
+        <input type="checkbox" name="monthly-bill">
+
+
+        <input type="submit" value="ADD"/>
+      </form>
+    </div>
+</div>
