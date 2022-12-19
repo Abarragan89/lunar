@@ -23,12 +23,10 @@ def signup():
         db.add(newUser)
         db.commit()
     except AssertionError:
-        print(sys.exc_info()[0])
         db.rollback()
         return jsonify(message='Missing fields.'), 500
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        print(sys.exc_info()[0])
         return jsonify(message='Username or email already taken.'), 500
     except:
         db.rollback()
@@ -59,7 +57,6 @@ def login():
             User.email == data['email']
         ).one()
     except:
-        print(sys.exc_info()[0])
         return jsonify(message='Incorrect credentials'), 400
 
     if user.verify_password(data['password']) == False:
@@ -86,7 +83,6 @@ def add_category():
         db.add(newTag)
         db.commit()
     except AssertionError:
-        print(sys.exc_info()[0])
         db.rollback()
         return jsonify(message='Missing fields.'), 400
     except:
@@ -104,16 +100,20 @@ def add_expense():
     if 'monthly-bill' in data:
         monthly_bill = True
 
-    newExpense = Product(
-        product_name = data['product-name'],
-        tag_id = data['product-category'],
-        user_id = session['user_id'],
-        price = data['product-price'],
-        monthly_bill = monthly_bill
-    )
-    db.add(newExpense)
-    db.commit()
-    # print(data['product-price'])
-    # print(data['product-category'])
-    # print(data['product-name'])
+    try:
+        newExpense = Product(
+            product_name = data['product-name'],
+            tag_id = data['product-category'],
+            user_id = session['user_id'],
+            price = data['product-price'],
+            monthly_bill = monthly_bill
+        )
+        db.add(newExpense)
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
+        return jsonify(message='Tag not added'), 500
     return redirect('/')
