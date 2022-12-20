@@ -11,11 +11,16 @@
           {% for tag in tags%}
           <option value="{{tag.id}}">{{tag.tag_name}}</option>
           {% endfor %}
+
+          {% for expense in expenses %}
+          <p>{{expense.product_name}}</p>
+          {% endfor %}
+
         </select>
         <br /><br />
 
         <label for="product-price">Price</label>
-        <input type="number" name="product-price" required>
+        <input type="number" name="product-price" step="0.01" required>
 
         <label for="monthly-bill">Monthly</label>
         <input type="checkbox" name="monthly-bill">
