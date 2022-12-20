@@ -10,6 +10,3 @@ def days_until_first():
     count_down = num_days - current_date.day + 1
     print(count_down)
     return count_down
-
-def transactions_in_month():
-    pass

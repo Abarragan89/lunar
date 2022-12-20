@@ -4,22 +4,22 @@
   href="{{url_for('static', filename='/styles/home/home.css')}}"
 />
 <title>Suspense</title>
-{% endblock %} {% block body %} {% if loggedIn == True %} {% include
-'includes/add-cash-modal.html'%} {% include 'includes/expense-modal.html'%} {%
-include 'includes/category-modal.html' %}
+{% endblock %} 
+{% block body %} 
+{% if loggedIn == True %} 
+{% include 'includes/add-cash-modal.html'%} 
+{% include 'includes/expense-modal.html'%} 
+{% include 'includes/category-modal.html' %}
 
 <main id="dashboard">
   <a href="{{url_for('api.logout')}}">Logout</a>
 
   <div class="flex-box-sa">
 
-    <p>user monthly Income {{ user_data.monthly_income }}</p>
-    <p>total monthly expenses {{ total_monthly_expenses.total_score }}</p>
-    <p>automatic deductions {{ auto_deductions.auto_deductions}}</p>
 
 
-    <p><span id="money-left">{{ user_data.monthly_income - (total_monthly_expenses.total_score + auto_deductions.auto_deductions) }}</span> <br> Remaing</p>
-    <p><span>4 days</span> <br> Until Payday</p>
+    <p><span id="money-left">{{ user_data.monthly_income - (total_monthly_expenses + auto_deductions) }}</span> <br>remaing</p>
+    <p><span>{{ days_until_first }} days</span> <br>remaining</p>
   </div>
 
   <div class="flex-box-sa">
