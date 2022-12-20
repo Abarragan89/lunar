@@ -31,7 +31,7 @@ def home():
         .all()
     )
 
-    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name
+    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id
         ).filter(Product.user_id == user_id
         ).join(Tag
         ).order_by(desc(Product.time_created)
@@ -108,3 +108,7 @@ def signup():
 @bp.route('/add_expense')
 def add_expense():
     return render_template('add_expense_modal.html')
+
+@bp.route('/edit-activity')
+def edit_activity():
+    return 'hello'

@@ -1,0 +1,31 @@
+<div class="modal-container" id="edit-expense">
+  <div class="modal">
+    <h2>Edit Expense</h2>
+    <form action="/api/add-expense" method="POST">
+      <label for="product-name">Name</label>
+      <input type="product-name" name="product-name" id="current-product-name" placeholder="optional" />
+      <br /><br />
+
+      <label for="product-category">Category</label>
+      <select name="product-category" id="current-product-tag" required>
+        {% for tag in tags%}
+        <option value="{{tag.id}}">{{tag.tag_name}}</option>
+        {% endfor %}
+
+        {% for expense in expenses %}
+        <p>{{expense.description}}</p>
+        {% endfor %}
+
+      </select>
+      <br /><br />
+
+      <label for="product-price">Price</label>
+      <input type="number" name="product-price" id="current-product-price" step="0.01" required>
+
+      <label for="monthly-bill">Monthly</label>
+      <input type="checkbox" name="monthly-bill">
+
+      <input type="submit" value="Update"/>
+    </form>
+  </div>
+</div>
