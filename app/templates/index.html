@@ -18,7 +18,7 @@
 
 
 
-    <p><span id="money-left">{{ user_data.monthly_income - (total_monthly_expenses + auto_deductions) }}</span> <br>remaing</p>
+    <p><span id="money-left">{{ (user_data.monthly_income + user_cash) - (total_monthly_expenses + auto_deductions) }}</span> <br>remaing</p>
     <p><span>{{ days_until_first }} days</span> <br>remaining</p>
   </div>
 
@@ -33,17 +33,21 @@
     alt="screenshot of graph"
   />
 
-  {% for purchase in purchase_data %}
+  {% for data in activity_data %}
   <div class="flex-box-sa">
     <div class'flex-box-col-se'>
-      <p>{{ purchase[0].time_created.day}} {{ purchase[0].time_created.strftime(('%b')) }}</p>
-      <p>{{ purchase[0].time_created.year}}</p>
+      <p>{{ data[0].day}} {{ data[0].strftime(('%b')) }}</p>
+      <p>{{ data[0].year}}</p>
     </div>
     <div class="flex-box-col-sa">
-      <p>{{ purchase[1].tag_name }}</p>
-      <p>{{ purchase[0].product_name }}</p>
+      {% if data|length == 4 %}
+      <p>{{ data[3] }}</p>
+      {% else%}
+      <p>Deposit</p>
+      {% endif %}
+      <p>{{ data[2] }}</p>
     </div>
-    <p>{{ purchase[0].price }}</p>
+    <p>{{ data[1] }}</p>
   </div>
   {% endfor%}
 
