@@ -18,7 +18,7 @@
 
 
 
-    <p><span id="money-left">{{ user_data.monthly_income - (total_monthly_expenses + auto_deductions) }}</span> <br>remaing</p>
+    <p><span id="money-left">{{ (user_data.monthly_income + user_cash) - (total_monthly_expenses + auto_deductions) }}</span> <br>remaing</p>
     <p><span>{{ days_until_first }} days</span> <br>remaining</p>
   </div>
 

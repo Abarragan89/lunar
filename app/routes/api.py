@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
-from app.models import User, Tag, Product
+from app.models import User, Tag, Product, Cash
 from app.db import start_db_session
 import sys
 
@@ -109,6 +109,27 @@ def add_expense():
             monthly_bill = monthly_bill
         )
         db.add(newExpense)
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
+        return jsonify(message='Tag not added'), 500
+    return redirect('/')
+
+# Add Cash
+@bp.route('/add-cash', methods=['POST'])
+def add_cash():
+    data = request.form
+    db = start_db_session()
+    try:
+        newCash = Cash(
+            money_description = data['money-description'],
+            amount = data['amount'],
+            user_id = session['user_id']
+        )
+        db.add(newCash)
         db.commit()
     except AssertionError:
         db.rollback()
