@@ -26,9 +26,9 @@ db.add_all([
 
 # insert products
 db.add_all([
-  Product(product_name='shoes', price=19.32, user_id=1, tag_id=1),
-  Product(product_name='car', price=1932, user_id=1, tag_id=2),
-  Product(product_name='car payment', price=129.32, monthly_bill=True, user_id=1, tag_id=2)
+  Product(description='shoes', amount=19.32, user_id=1, tag_id=1),
+  Product(description='car', amount=1932, user_id=1, tag_id=2),
+  Product(description='car payment', amount=129.32, monthly_bill=True, user_id=1, tag_id=2)
 ])
 
 

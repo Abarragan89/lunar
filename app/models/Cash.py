@@ -7,7 +7,7 @@ from sqlalchemy.sql import func
 class Cash(Base):
     __tablename__ = 'cash'
     id = Column(Integer, primary_key=True)
-    money_description = Column(String(100), nullable=False)
+    description = Column(String(100), nullable=False, default='')
     amount = Column(Float, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     time_created = Column(DateTime(timezone=True), server_default=func.now())

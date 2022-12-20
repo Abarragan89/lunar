@@ -7,9 +7,9 @@ from sqlalchemy.sql import func
 class Product(Base):
     __tablename__ = 'products'
     id = Column(Integer, primary_key=True)
-    product_name = Column(String(50), nullable=False)
+    description = Column(String(50), nullable=False, default='')
     monthly_bill = Column(Boolean, nullable=True)
-    price = Column(Float, nullable=False)
+    amount = Column(Float, nullable=False)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     tag_id = Column(Integer, ForeignKey('tags.id', ondelete='CASCADE'), nullable=False)
     time_created = Column(DateTime(timezone=True), server_default=func.now())

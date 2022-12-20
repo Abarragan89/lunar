@@ -102,10 +102,10 @@ def add_expense():
 
     try:
         newExpense = Product(
-            product_name = data['product-name'],
+            description = data['product-name'],
             tag_id = data['product-category'],
             user_id = session['user_id'],
-            price = data['product-price'],
+            amount = data['product-price'],
             monthly_bill = monthly_bill
         )
         db.add(newExpense)
@@ -125,7 +125,7 @@ def add_cash():
     db = start_db_session()
     try:
         newCash = Cash(
-            money_description = data['money-description'],
+            description = data['money-description'],
             amount = data['amount'],
             user_id = session['user_id']
         )
