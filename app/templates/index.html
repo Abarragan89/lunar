@@ -10,28 +10,40 @@ include 'includes/category-modal.html' %}
 
 <main id="dashboard">
   <a href="{{url_for('api.logout')}}">Logout</a>
+
   <div class="flex-box-sa">
-    <p><span id="money-left">$923</span> Remaing</p>
-    <p><span>4 days</span>Until Payday</p>
+
+    <p>user monthly Income {{ user_data.monthly_income }}</p>
+    <p>total monthly expenses {{ total_monthly_expenses.total_score }}</p>
+    <p>automatic deductions {{ auto_deductions.auto_deductions}}</p>
+
+
+    <p><span id="money-left">{{ user_data.monthly_income - (total_monthly_expenses.total_score + auto_deductions.auto_deductions) }}</span> <br> Remaing</p>
+    <p><span>4 days</span> <br> Until Payday</p>
   </div>
 
-  {% for tag in tags %}
-  <p>{{tag.tag_name}}</p>
-  {% endfor %}
+  <div class="flex-box-sa">
+    {% for tag in tags %}
+    <p>{{tag.tag_name}} </p>
+    {% endfor %}
+  </div>
 
   <img
     src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
     alt="screenshot of graph"
   />
 
-  {% for expense in expenses %}
+  {% for purchase in purchase_data %}
   <div class="flex-box-sa">
-    <p>{{ expense[0].time_created }}</p>
-    <div class="flex-box-col-sa">
-      <p>{{ expense[1].tag_name }}</p>
-      <p>{{ expense[0].product_name }}</p>
+    <div class'flex-box-col-se'>
+      <p>{{ purchase[0].time_created.day}} {{ purchase[0].time_created.strftime(('%b')) }}</p>
+      <p>{{ purchase[0].time_created.year}}</p>
     </div>
-    <p>{{ expense[0].price }}</p>
+    <div class="flex-box-col-sa">
+      <p>{{ purchase[1].tag_name }}</p>
+      <p>{{ purchase[0].product_name }}</p>
+    </div>
+    <p>{{ purchase[0].price }}</p>
   </div>
   {% endfor%}
 
