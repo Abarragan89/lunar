@@ -84,6 +84,7 @@ function fillEditExpenseFields(row) {
     document.getElementById('product-id').value = currentProductId
     document.getElementById('expense-date').setAttribute('max', `${year}-${month}-${day}`)
     document.getElementById('expense-date').setAttribute('value', current_date)
+    document.getElementById('delete-expense-data').value = currentProductId
 }
 
 function fillEditDepositFields(row) {
@@ -96,4 +97,5 @@ function fillEditDepositFields(row) {
     document.getElementById('cash-id').value = currentCashId
     document.getElementById('deposit-date').setAttribute('max', `${year}-${month}-${day}`)
     document.getElementById('deposit-date').setAttribute('value', current_date)
+    document.getElementById('delete-deposit-data').value = currentCashId
 }

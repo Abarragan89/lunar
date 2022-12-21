@@ -115,7 +115,7 @@ def add_expense():
         return jsonify(message='Missing fields.'), 400
     except:
         db.rollback()
-        return jsonify(message='Tag not added'), 500
+        return jsonify(message='Expense not added'), 500
     return redirect('/')
 
 # Add Cash
@@ -136,7 +136,7 @@ def add_cash():
         return jsonify(message='Missing fields.'), 400
     except:
         db.rollback()
-        return jsonify(message='Tag not added'), 500
+        return jsonify(message='Cash not added'), 500
     return redirect('/')
 
 # Update Expense
@@ -162,8 +162,24 @@ def update_expense():
         return jsonify(message='Missing fields.'), 400
     except:
         db.rollback()
-        return jsonify(message='Tag not added'), 500
+        return jsonify(message='Expense not updated'), 500
     return redirect('/')
+
+#Delete Expense
+@bp.route('/delete-expense', methods=['POST'])
+def delete_expense():
+    db = start_db_session()
+    data = request.form
+    try:
+        db.query(Product).filter(Product.id == data['product-id']).delete()
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='Expense not deleted'), 500
+    return redirect('/')
+
+
+
 
 
 # Update Deposit
@@ -185,4 +201,17 @@ def update_deposit():
     except:
         db.rollback()
         return jsonify(message='Tag not added'), 500
+    return redirect('/')
+
+#Delete Expense
+@bp.route('/delete-deposit', methods=['POST'])
+def delete_deposit():
+    db = start_db_session()
+    data = request.form
+    try:
+        db.query(Cash).filter(Cash.id == data['cash-id']).delete()
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
