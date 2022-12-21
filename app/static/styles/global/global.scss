@@ -1,4 +1,4 @@
-/* CSS RESET */
+////// CSS RESET ///////
 * {
   padding: 0;
   margin: 0;
@@ -30,8 +30,62 @@ a {
   text-decoration: none;
 }
 
+///// Navigation Bar ////////
+nav {
+  align-items: center;
+  position: relative;
+}
+#nav-items {
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(51, 48, 48, 0.721);
+  position: absolute;
+  width: 100%;
+  top: 35px;
+  transition: .2s;
+}
+#nav-items a {
+  position: relative;
+  bottom: 200px;
+  padding: 6px 0 6px 10px;
+  color: white;
+  transition: .4s;
+}
 
-// Footer menu that is present the entire time loggedIn
+#nav-categories {
+  opacity: 0;
+  font-size: 0;
+  width: 0;
+  color: white;
+  padding-left: 25px;
+  transition: .3s;
+}
+
+
+#nav-categories a:hover {
+  cursor: pointer;
+  background-color: rgba(36, 34, 34, 0.721);
+}
+
+#category-caret {
+  position: absolute;
+  left: 85px;
+  bottom: 9px;
+}
+
+#nav-items a:hover {
+  background-color: rgba(36, 34, 34, 0.721);
+}
+
+#hamburger {
+  font-size: 1.5em;
+  margin-right: 10px;
+}
+#hamburger:hover {
+  cursor: pointer;
+}
+
+//////// FOOTER menu that is present the entire time loggedIn /////////
 menu {
   position: fixed;
   width: 100%;
@@ -51,7 +105,7 @@ menu a {
 menu a:not(:first-child) {
   border-left: 1px solid black;
 }
-// MODAL STYLES
+//////// MODAL STYLES THAT OPEN WITH FOOTER MENU /////////
 .modal-container {
   opacity: 0;
   background-color: rgba(0, 0, 0, 0.709);
@@ -60,8 +114,6 @@ menu a:not(:first-child) {
   width: 100%;
   height: 150%;
   pointer-events: none;
-  // transition: .2s cubic-bezier(0, 0, 1, 1);
-
 
   .modal {
       width: 85%;

@@ -128,7 +128,16 @@ def profile():
 @bp.route('/categories')
 def categories():
     is_loggedin = session.get('loggedIn')
+    user_id = session['user_id']
+    db = start_db_session()
+
+    allTags = (
+        db.query(Tag)
+        .filter(Tag.user_id == user_id)
+        .all()
+    )
 
     return render_template('categories.html',
         loggedIn=is_loggedin,
+        tags=allTags
     )

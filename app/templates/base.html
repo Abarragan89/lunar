@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='/styles/global/global.css')}}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     {% block head %} {% endblock %}
 </head>
 <body>
@@ -15,10 +16,20 @@
     {% include 'includes/edit-deposit-modal.html' %}
 
     {% if loggedIn %}
-    <nav>
-        <a href="{{url_for('site.profile')}}">Profile</a>
-        <a href="{{url_for('site.categories')}}">Categories</a>
-        <a href="{{url_for('api.logout')}}">Logout</a>
+    <nav class='flex-box-sb'>
+        <h1 class='ml-4'>Logo</h1>
+        <div id="nav-items" class='flex-box-col-sb nav-links'>
+            <a href="{{url_for('site.profile')}}">Profile</a>
+            <a href="#" id="category-nav-btn">Categories <i id="category-caret" class="fa-sharp fa-solid fa-caret-down"></i></a>
+            <div id="nav-categories">
+                {% for tag in tags %}
+                <a>{{tag.tag_name}}</a>
+                {% endfor %}
+                <a>Add <i class="fa-sharp fa-solid fa-plus"></i></a>
+            </div>
+            <a href="{{url_for('api.logout')}}">Logout</a>
+        </div>
+        <i class="fa fa-bars" id="hamburger"></i>
     </nav>
     {% endif %}
 
@@ -40,6 +51,7 @@
     {% endif %}
     
     <script src="{{url_for('static', filename='/js/modal.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/navigation.js')}}"></script>
 
 </body>
 </html>
