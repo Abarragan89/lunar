@@ -35,24 +35,22 @@
     alt="screenshot of graph"
   />
 
-  {% for n in range(activity_data | length)%}
+  {% for data in activity_data %}
   <a href="#" class="edit-activity-btn" id="activity{{n}}">
     <div class="flex-box-sa">
-      <div class'flex-box-col-se'>
-        <p>{{ activity_data[n][0].day}} {{ activity_data[n][0].strftime(('%b')) }}</p>
-        <p>{{ activity_data[n][0].year}}</p>
+      <div class'flex-box-col-se' class='date-div' data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+        <p>{{ data[0].day}} {{ data[0].strftime('%b') }}</p>
+        <p>{{ data[0].year}}</p>
       </div>
-
       <div class="flex-box-col-sa">
-        {% if activity_data[n]|length > 3 %}
-        <p data-type="expense" data-tag-id="{{activity_data[n][4]}}">{{ activity_data[n][3] }}</p>
+        {% if data|length > 4 %}
+        <p data-type="expense" data-product-id="{{data[5]}}" data-tag-id="{{data[4]}}">{{ data[3] }}</p>
         {% else%}
-        <p data-type="deposit">Deposit</p>
+        <p data-type="deposit" data-cash-id="{{data[3]}}">Deposit</p>
         {% endif %}
-        <p>{{ activity_data[n][2] }}</p>
+        <p>{{ data[2] }}</p>
       </div>
-      
-      <p>{{ activity_data[n][1] }}</p>
+      <p>{{ data[1] }}</p>
     </div>
   </a>
   {% endfor%}

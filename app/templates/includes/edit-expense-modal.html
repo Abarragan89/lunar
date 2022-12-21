@@ -1,11 +1,11 @@
 <div class="modal-container" id="edit-expense">
   <div class="modal">
     <h2>Edit Expense</h2>
-    <form action="/api/add-expense" method="POST">
+    <form action="/api/update-expense" method="POST">
       <label for="product-name">Name</label>
-      <input type="product-name" name="product-name" id="current-product-name" placeholder="optional" />
+      <input type="text" name="product-name" id="current-product-name" placeholder="optional" />
       <br /><br />
-
+      <input type="hidden" name="product-id" id="product-id">
       <label for="product-category">Category</label>
       <select name="product-category" id="current-product-tag" required>
         {% for tag in tags%}
@@ -24,6 +24,9 @@
 
       <label for="monthly-bill">Monthly</label>
       <input type="checkbox" name="monthly-bill">
+
+
+      <input type="date" id="expense-date" name="expense-date">
 
       <input type="submit" value="Update"/>
     </form>

@@ -31,27 +31,24 @@ def home():
         .all()
     )
 
-    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id
+    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
         ).filter(Product.user_id == user_id
         ).join(Tag
         ).order_by(desc(Product.time_created)
         ).limit(20).all()
     # # Get last 20 cash addition to display
-    add_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description
+    add_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description, Cash.id
         ).filter(Cash.user_id == user_id
         ).order_by(desc(Cash.time_created)
         ).limit(20).all()
 
-    # print('purchase data===========', purchase_data)
-
     activity_data = add_cash_data + purchase_data
     activity_data = sorted(activity_data, reverse=True, key = lambda x: x[0])
 
-    print('activity data ============', activity_data)
-
-    # Query to get total in current monthly expenses 
+    # Query to get total in current monthly expenses (minus monthly bills. Those are added separately)
     total_monthly_expenses = db.query(func.sum(Product.amount).label("total_value")
         ).filter(Product.user_id == user_id
+        ).filter(Product.monthly_bill == False
         ).filter(extract('month', Product.time_created)==current_month
         ).filter(extract('year', Product.time_created)==current_year
         ).all()
@@ -82,9 +79,7 @@ def home():
         'index.html',
         loggedIn=is_loggedin,
         tags=allTags,
-
         activity_data=activity_data,
-
         purchase_data=purchase_data,
         total_monthly_expenses=total_monthly_expenses,
         user_data=user_data,
