@@ -6,7 +6,7 @@ from app.db import start_db_session
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
-# Login 
+# Sign up 
 @bp.route('/signup', methods=['POST'])
 def signup():
     db = start_db_session()
@@ -68,6 +68,26 @@ def login():
 
     return redirect('/')
 
+
+# Update user data
+@bp.route('/update-user-info', methods=['POST'])
+def update_user():
+    data = request.form
+    db = start_db_session()
+    try:
+        user_data = db.query(User).filter(User.id == session['user_id']).one()
+        user_data.monthly_income = data['monthly_income']
+        user_data.username = data['username']
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
+        return jsonify(message='User info not updated'), 500
+    return redirect(request.referrer)
+
+
 # Add a Category
 @bp.route('/add-category', methods=['POST'])
 def add_category():
@@ -88,7 +108,7 @@ def add_category():
     except:
         db.rollback()
         return jsonify(message='Tag not added'), 500
-    return redirect('/')
+    return redirect(request.referrer)
 
 # Add an expense
 @bp.route('/add-expense', methods=['POST'])
@@ -116,7 +136,7 @@ def add_expense():
     except:
         db.rollback()
         return jsonify(message='Expense not added'), 500
-    return redirect('/')
+    return redirect(request.referrer)
 
 # Add Cash
 @bp.route('/add-cash', methods=['POST'])
@@ -137,7 +157,7 @@ def add_cash():
     except:
         db.rollback()
         return jsonify(message='Cash not added'), 500
-    return redirect('/')
+    return redirect(request.referrer)
 
 # Update Expense
 @bp.route('/update-expense', methods=['POST'])
@@ -163,7 +183,7 @@ def update_expense():
     except:
         db.rollback()
         return jsonify(message='Expense not updated'), 500
-    return redirect('/')
+    return redirect(request.referrer)
 
 #Delete Expense
 @bp.route('/delete-expense', methods=['POST'])
@@ -176,8 +196,7 @@ def delete_expense():
     except:
         db.rollback()
         return jsonify(message='Expense not deleted'), 500
-    return redirect('/')
-
+    return redirect(request.referrer)
 
 
 
@@ -201,9 +220,10 @@ def update_deposit():
     except:
         db.rollback()
         return jsonify(message='Tag not added'), 500
-    return redirect('/')
+    return redirect(request.referrer)
 
-#Delete Expense
+
+# Delete Expense
 @bp.route('/delete-deposit', methods=['POST'])
 def delete_deposit():
     db = start_db_session()
@@ -214,4 +234,4 @@ def delete_deposit():
     except:
         db.rollback()
         return jsonify(message='Deposit not deleted'), 500
-    return redirect('/')
+    return redirect(request.referrer)

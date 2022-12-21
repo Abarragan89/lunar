@@ -30,7 +30,7 @@ def home():
         .filter(Tag.user_id == user_id)
         .all()
     )
-
+    # Get all purchases with joined with tags
     purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
         ).filter(Product.user_id == user_id
         ).join(Tag
@@ -71,6 +71,8 @@ def home():
         # check if user has added extra monthly cash
         user_cash = db.query(func.sum(Cash.amount).label("total_value")
         ).filter(Cash.user_id == user_id
+        ).filter(extract('month', Cash.time_created)==current_month
+        ).filter(extract('year', Cash.time_created)==current_year
         ).all()
         # set it to zero instead of None if nothing has been added
         user_cash = 0 if user_cash[0][0] is None else round(user_cash[0][0], 2)
@@ -80,13 +82,11 @@ def home():
         loggedIn=is_loggedin,
         tags=allTags,
         activity_data=activity_data,
-        purchase_data=purchase_data,
         total_monthly_expenses=total_monthly_expenses,
         user_data=user_data,
         auto_deductions=auto_deductions,
         days_until_first=days_until_first_data,
         user_cash=user_cash
-        
     )
 
 
@@ -100,10 +100,35 @@ def signup():
     return render_template('signup.html')
 
 
-@bp.route('/add_expense')
-def add_expense():
-    return render_template('add_expense_modal.html')
+@bp.route('/profile')
+def profile():
+    db = start_db_session()
+    user_id = session.get('user_id')
+    is_loggedin = session.get('loggedIn')
+    user_data = db.query(User).filter(User.id == session['user_id']).one()
+    user_category = db.query(Product, Tag
+        ).filter(Product.user_id == session['user_id']
+        ).filter(Product.monthly_bill == True
+        ).join(Tag
+        ).all()
+    
+    allTags = (
+        db.query(Tag)
+        .filter(Tag.user_id == user_id)
+        .all()
+    )
+    
+    return render_template('profile.html',
+        user_data=user_data, 
+        category_data=user_category,
+        loggedIn=is_loggedin,
+        tags = allTags 
+    )
 
-@bp.route('/edit-activity')
-def edit_activity():
-    return 'hello'
+@bp.route('/categories')
+def categories():
+    is_loggedin = session.get('loggedIn')
+
+    return render_template('categories.html',
+        loggedIn=is_loggedin,
+    )

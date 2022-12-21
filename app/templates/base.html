@@ -8,8 +8,38 @@
     {% block head %} {% endblock %}
 </head>
 <body>
-    {% block body %} {% endblock %}
+    {% include 'includes/add-cash-modal.html'%} 
+    {% include 'includes/expense-modal.html'%} 
+    {% include 'includes/category-modal.html' %}
+    {% include 'includes/edit-expense-modal.html' %}
+    {% include 'includes/edit-deposit-modal.html' %}
+
+    {% if loggedIn %}
+    <nav>
+        <a href="{{url_for('site.profile')}}">Profile</a>
+        <a href="{{url_for('site.categories')}}">Categories</a>
+        <a href="{{url_for('api.logout')}}">Logout</a>
+    </nav>
+    {% endif %}
+
+
+    {% block body %} 
+    
+    {% endblock %}
+
+    {% if loggedIn %}
+    
+    
+    <menu class="flex-box-sa">
+        <a href="#">History</a>
+        <a href="#" id="add-cash-btn">Add Cash</a>
+        <a href="#" id="add-category-btn">Categories</a>
+        <a href="#" id="add-expense-btn">Add Expense</a>
+    </menu>
+
+    {% endif %}
     
     <script src="{{url_for('static', filename='/js/modal.js')}}"></script>
+
 </body>
 </html>
