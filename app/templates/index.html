@@ -10,6 +10,8 @@
 {% include 'includes/add-cash-modal.html'%} 
 {% include 'includes/expense-modal.html'%} 
 {% include 'includes/category-modal.html' %}
+{% include 'includes/edit-expense-modal.html' %}
+{% include 'includes/edit-deposit-modal.html' %}
 
 <main id="dashboard">
   <a href="{{url_for('api.logout')}}">Logout</a>
@@ -34,21 +36,23 @@
   />
 
   {% for data in activity_data %}
-  <div class="flex-box-sa">
-    <div class'flex-box-col-se'>
-      <p>{{ data[0].day}} {{ data[0].strftime(('%b')) }}</p>
-      <p>{{ data[0].year}}</p>
+  <a href="#" class="edit-activity-btn" id="activity{{n}}">
+    <div class="flex-box-sa">
+      <div class'flex-box-col-se' class='date-div' data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+        <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+        <p>{{ data[0].year}}</p>
+      </div>
+      <div class="flex-box-col-sa">
+        {% if data|length > 4 %}
+        <p data-type="expense" data-product-id="{{data[5]}}" data-tag-id="{{data[4]}}">{{ data[3] }}</p>
+        {% else%}
+        <p data-type="deposit" data-cash-id="{{data[3]}}">Deposit</p>
+        {% endif %}
+        <p>{{ data[2] }}</p>
+      </div>
+      <p>{{ data[1] }}</p>
     </div>
-    <div class="flex-box-col-sa">
-      {% if data|length == 4 %}
-      <p>{{ data[3] }}</p>
-      {% else%}
-      <p>Deposit</p>
-      {% endif %}
-      <p>{{ data[2] }}</p>
-    </div>
-    <p>{{ data[1] }}</p>
-  </div>
+  </a>
   {% endfor%}
 
   <menu class="flex-box-sa">

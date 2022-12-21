@@ -1,0 +1,21 @@
+<div class="modal-container" id="edit-deposit">
+  <div class="modal">
+    <h2>Edit Deposit</h2>
+    <form action="/api/edit-deposit" method="POST">
+      <label for="amount">Amount</label>
+      <input type="number" name="amount" id="current-deposit-amount" step="0.01" />
+      <input type="hidden" name="cash-id" id="cash-id">
+      <br /><br />
+      <label for="money-description">Description:</label>
+      <input type="text" name="money-description" id="current-deposit-description" placeholder="optional" />
+      <br /><br />
+      <input type="date" id="deposit-date" name="deposit-date">
+      <input type="submit" value="Update"/>
+    </form>
+
+    <form action="/api/delete-deposit" method="POST">
+      <input type="submit" value="Delete">
+      <input type="hidden" name="cash-id" id="delete-deposit-data">
+    </form>
+  </div>
+</div>

@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify, session, redirect, render_templat
 import sqlalchemy
 from app.models import User, Tag, Product, Cash
 from app.db import start_db_session
-import sys
+
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
@@ -115,7 +115,7 @@ def add_expense():
         return jsonify(message='Missing fields.'), 400
     except:
         db.rollback()
-        return jsonify(message='Tag not added'), 500
+        return jsonify(message='Expense not added'), 500
     return redirect('/')
 
 # Add Cash
@@ -136,5 +136,82 @@ def add_cash():
         return jsonify(message='Missing fields.'), 400
     except:
         db.rollback()
+        return jsonify(message='Cash not added'), 500
+    return redirect('/')
+
+# Update Expense
+@bp.route('/update-expense', methods=['POST'])
+def update_expense():
+    data = request.form 
+    db = start_db_session()
+    monthly_bill = False
+    if 'monthly-bill' in data:
+        monthly_bill = True
+    try:
+        db.query(Product).filter(Product.id == data['product-id']).update({
+            'description': data['product-name'],
+            'tag_id': data['product-category'],
+            'user_id': session['user_id'],
+            'amount': data['product-price'],
+            'monthly_bill': monthly_bill,
+            'time_created': data['expense-date']
+        })
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
+        return jsonify(message='Expense not updated'), 500
+    return redirect('/')
+
+#Delete Expense
+@bp.route('/delete-expense', methods=['POST'])
+def delete_expense():
+    db = start_db_session()
+    data = request.form
+    try:
+        db.query(Product).filter(Product.id == data['product-id']).delete()
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='Expense not deleted'), 500
+    return redirect('/')
+
+
+
+
+
+# Update Deposit
+@bp.route('/edit-deposit', methods=['POST'])
+def update_deposit():
+    data = request.form 
+    db = start_db_session()
+    try:
+        db.query(Cash).filter(Cash.id == data['cash-id']).update({
+            'description': data['money-description'],
+            'amount': data['amount'],
+            'user_id': session['user_id'],
+            'time_created': data['deposit-date']
+        })
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
         return jsonify(message='Tag not added'), 500
+    return redirect('/')
+
+#Delete Expense
+@bp.route('/delete-deposit', methods=['POST'])
+def delete_deposit():
+    db = start_db_session()
+    data = request.form
+    try:
+        db.query(Cash).filter(Cash.id == data['cash-id']).delete()
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
