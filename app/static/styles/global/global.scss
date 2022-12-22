@@ -36,52 +36,71 @@ nav {
   position: relative;
 }
 #nav-items-main-div {
-  opacity: 0;
+  right: -100vw;
+  padding-left: 25px;
   pointer-events: none;
   background-color: rgba(51, 48, 48, 0.721);
   position: absolute;
   width: 100%;
   top: 35px;
-  transition: .2s;
-}
-.main-nav-item {
-  position: relative;
-  bottom: 200px;
-  padding: 6px 0 6px 10px;
-  color: white;
-  transition: .4s;
+  transition: .15s all;
 }
 
-.nav-category-items {
+@keyframes slideInRight {
+  from {
+    // opacity: 0;
+    right: -100vw;
+  }
+  to {
+    // opacity: 1;
+    right: 0;
+  }
+}
+
+@for $i from 1 through 4 {
+  #nav-items-main-div a:nth-child(#{$i}) {
+      position: relative;
+      color: rgb(255, 255, 255);
+      animation: slideInRight .5s  .01s + ($i / 13) both;
+  }
+}
+
+// The nested items in category:
+.nav-category-item {
   display: block;
-  font-size: 0;
+  position: relative;
   color: white;
-  transform: scale(0) translateY(-200px);
-  transition: .4s;
 }
-
-// @for $i from 1 through 20 {
-//   #nav-categories:nth-child(#{$i}) {
-//       transition: .2s * $i;
-//   }
-// }
-
-// @for $i from 1 through 20 {
-//   #nav-categories:nth-child(#{$i}) {
-//       animation: dropDown .7s  .1s + ($i / 6)  both;
-//       transition: .2s;
-//   }
-// }
 
 .nav-category-items:hover {
   cursor: pointer;
   background-color: rgba(36, 34, 34, 0.721);
 }
 
-#nav-categories {
-  transform: scale(0);
+#nav-categories-div {
+  max-height: 0;
   padding-left: 25px;
-  transition: transform .4s;
+  transition: 1.3s all;
+}
+
+
+// Key Frames
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    left: -1000px;
+  }
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+
+@for $i from 1 through 20 {
+  #nav-categories-div a:nth-child(#{$i}) {
+      color: white;
+      animation: fadeIn .5s  .01s + ($i / 13) both;
+  }
 }
 
 .main-nav-item:hover {
@@ -165,8 +184,6 @@ $accentColor: rgb(94, 90, 90);
 $offWhite: rgb(232, 232, 232);
 $green: rgb(1, 137, 1);
 $transparentGreen: rgba(11, 91, 11, 0.402);
-
-
 
 
 /* Utility classes */
@@ -277,15 +294,4 @@ $transparentGreen: rgba(11, 91, 11, 0.402);
 }
 .mb-5 {
   margin-bottom: 9px;
-}
-
-// Key Frames
-@keyframes dropDown {
-  from {
-      top: -1000px;
-  }
-
-  to {
-      top: 0px;
-  }
 }

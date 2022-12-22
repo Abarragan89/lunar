@@ -36,29 +36,65 @@ nav {
 }
 
 #nav-items-main-div {
-  opacity: 0;
+  right: -100vw;
+  padding-left: 25px;
   pointer-events: none;
   background-color: rgba(51, 48, 48, 0.721);
   position: absolute;
   width: 100%;
   top: 35px;
-  transition: 0.2s;
+  transition: 0.15s all;
 }
 
-.main-nav-item {
+@-webkit-keyframes slideInRight {
+  from {
+    right: -100vw;
+  }
+  to {
+    right: 0;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    right: -100vw;
+  }
+  to {
+    right: 0;
+  }
+}
+#nav-items-main-div a:nth-child(1) {
   position: relative;
-  bottom: 200px;
-  padding: 6px 0 6px 10px;
-  color: white;
-  transition: 0.4s;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.0869230769s both;
+          animation: slideInRight 0.5s 0.0869230769s both;
 }
 
-.nav-category-items {
+#nav-items-main-div a:nth-child(2) {
+  position: relative;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.1638461538s both;
+          animation: slideInRight 0.5s 0.1638461538s both;
+}
+
+#nav-items-main-div a:nth-child(3) {
+  position: relative;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.2407692308s both;
+          animation: slideInRight 0.5s 0.2407692308s both;
+}
+
+#nav-items-main-div a:nth-child(4) {
+  position: relative;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.3176923077s both;
+          animation: slideInRight 0.5s 0.3176923077s both;
+}
+
+.nav-category-item {
   display: block;
-  font-size: 0;
+  position: relative;
   color: white;
-  transform: scale(0) translateY(-200px);
-  transition: 0.4s;
 }
 
 .nav-category-items:hover {
@@ -66,10 +102,151 @@ nav {
   background-color: rgba(36, 34, 34, 0.721);
 }
 
-#nav-categories {
-  transform: scale(0);
+#nav-categories-div {
+  max-height: 0;
   padding-left: 25px;
-  transition: transform 0.4s;
+  transition: 1.3s all;
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+    left: -1000px;
+  }
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    left: -1000px;
+  }
+  to {
+    opacity: 1;
+    left: 0px;
+  }
+}
+#nav-categories-div a:nth-child(1) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.0869230769s both;
+          animation: fadeIn 0.5s 0.0869230769s both;
+}
+
+#nav-categories-div a:nth-child(2) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.1638461538s both;
+          animation: fadeIn 0.5s 0.1638461538s both;
+}
+
+#nav-categories-div a:nth-child(3) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.2407692308s both;
+          animation: fadeIn 0.5s 0.2407692308s both;
+}
+
+#nav-categories-div a:nth-child(4) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.3176923077s both;
+          animation: fadeIn 0.5s 0.3176923077s both;
+}
+
+#nav-categories-div a:nth-child(5) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.3946153846s both;
+          animation: fadeIn 0.5s 0.3946153846s both;
+}
+
+#nav-categories-div a:nth-child(6) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.4715384615s both;
+          animation: fadeIn 0.5s 0.4715384615s both;
+}
+
+#nav-categories-div a:nth-child(7) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.5484615385s both;
+          animation: fadeIn 0.5s 0.5484615385s both;
+}
+
+#nav-categories-div a:nth-child(8) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.6253846154s both;
+          animation: fadeIn 0.5s 0.6253846154s both;
+}
+
+#nav-categories-div a:nth-child(9) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.7023076923s both;
+          animation: fadeIn 0.5s 0.7023076923s both;
+}
+
+#nav-categories-div a:nth-child(10) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.7792307692s both;
+          animation: fadeIn 0.5s 0.7792307692s both;
+}
+
+#nav-categories-div a:nth-child(11) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.8561538462s both;
+          animation: fadeIn 0.5s 0.8561538462s both;
+}
+
+#nav-categories-div a:nth-child(12) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 0.9330769231s both;
+          animation: fadeIn 0.5s 0.9330769231s both;
+}
+
+#nav-categories-div a:nth-child(13) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.01s both;
+          animation: fadeIn 0.5s 1.01s both;
+}
+
+#nav-categories-div a:nth-child(14) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.0869230769s both;
+          animation: fadeIn 0.5s 1.0869230769s both;
+}
+
+#nav-categories-div a:nth-child(15) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.1638461538s both;
+          animation: fadeIn 0.5s 1.1638461538s both;
+}
+
+#nav-categories-div a:nth-child(16) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.2407692308s both;
+          animation: fadeIn 0.5s 1.2407692308s both;
+}
+
+#nav-categories-div a:nth-child(17) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.3176923077s both;
+          animation: fadeIn 0.5s 1.3176923077s both;
+}
+
+#nav-categories-div a:nth-child(18) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.3946153846s both;
+          animation: fadeIn 0.5s 1.3946153846s both;
+}
+
+#nav-categories-div a:nth-child(19) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.4715384615s both;
+          animation: fadeIn 0.5s 1.4715384615s both;
+}
+
+#nav-categories-div a:nth-child(20) {
+  color: white;
+  -webkit-animation: fadeIn 0.5s 1.5484615385s both;
+          animation: fadeIn 0.5s 1.5484615385s both;
 }
 
 .main-nav-item:hover {
@@ -276,22 +453,4 @@ menu a:not(:first-child) {
 
 .mb-5 {
   margin-bottom: 9px;
-}
-
-@-webkit-keyframes dropDown {
-  from {
-    top: -1000px;
-  }
-  to {
-    top: 0px;
-  }
-}
-
-@keyframes dropDown {
-  from {
-    top: -1000px;
-  }
-  to {
-    top: 0px;
-  }
 }/*# sourceMappingURL=global.css.map */
