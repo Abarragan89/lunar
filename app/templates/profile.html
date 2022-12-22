@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% block head %}
+<title>Profile</title>
+{% endblock %} {% block body %}
+
+<main id='profile-main'>
+    <a href="{{url_for('site.home')}}">Back</a>
+    <h1>Profile</h1>
+    <form action="api/update-user-info" method="POST">
+        <p>Name:</p> <input type="text" value="{{ user_data.username }}" name="username">
+        <p>Monthly Income:</p> <input type="text" value="{{ user_data.monthly_income }}" name="monthly_income">
+        <input type="submit" value="Update">
+    </form>
+
+    <h1>Monthly Charges</h1>
+    {% for category in category_data %}
+    <form action="api/delete-expense" method="POST" class='flex-box-sa'>
+        <div class="flex-box-col-sa">
+            <p>Tag: {{ category[1].tag_name }}</p>
+            <p>Name: {{ category[0].description }}</p>
+        </div>
+        <p>{{ category[0].amount }}</p>
+        <input type="hidden" value="{{category[0].id}}" name="product-id">
+        <input type="submit" value="Remove">
+    </form>
+    {% endfor %}
+
+</main>
+
+
+{% endblock %}

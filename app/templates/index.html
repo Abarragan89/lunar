@@ -7,19 +7,10 @@
 {% endblock %} 
 {% block body %} 
 {% if loggedIn == True %} 
-{% include 'includes/add-cash-modal.html'%} 
-{% include 'includes/expense-modal.html'%} 
-{% include 'includes/category-modal.html' %}
-{% include 'includes/edit-expense-modal.html' %}
-{% include 'includes/edit-deposit-modal.html' %}
 
 <main id="dashboard">
-  <a href="{{url_for('api.logout')}}">Logout</a>
 
   <div class="flex-box-sa">
-
-
-
     <p><span id="money-left">{{ (user_data.monthly_income + user_cash) - (total_monthly_expenses + auto_deductions) }}</span> <br>remaing</p>
     <p><span>{{ days_until_first }} days</span> <br>remaining</p>
   </div>
@@ -55,13 +46,7 @@
   </a>
   {% endfor%}
 
-  <menu class="flex-box-sa">
-    <a href="#">History</a>
-    <a href="#" id="add-cash-btn">Add Cash</a>
-    <a href="#" id="add-category-btn">Categories</a>
-    <a href="#" id="add-expense-btn">Add Expense</a>
-  </menu>
-</main>
+
 
 {% else %}
 <main id="home-page">

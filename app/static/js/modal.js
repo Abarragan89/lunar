@@ -10,6 +10,7 @@ document.getElementById('add-cash-btn').addEventListener('click', () => {
     showModal('add-cash-modal')
 })
 
+// Give each activity row ability to open modal and call function to fill modal with data
 activity_rows = document.querySelectorAll('.edit-activity-btn')
 activity_rows.forEach((row) => {
     row.addEventListener('click', () => {
@@ -23,7 +24,6 @@ activity_rows.forEach((row) => {
         }
     })
 })
-
 
 // --- modal listeners to close --- //
 document.querySelector('#expense-modal').addEventListener('click', (e) => {
@@ -99,3 +99,18 @@ function fillEditDepositFields(row) {
     document.getElementById('deposit-date').setAttribute('value', current_date)
     document.getElementById('delete-deposit-data').value = currentCashId
 }
+
+
+// Change transition speed of modals when hovering over button
+// This is so modals don't briefly show before they are called
+// Get all buttons, then add event listener  that loops through modals and changes their transitions property
+allMenuBtns = document.querySelectorAll('menu a')
+allMenuBtns.forEach((btn) => {
+    btn.addEventListener('mouseenter', () => {
+        allModals = document.querySelectorAll('.modal-container')
+        allModals.forEach((modal) => {
+            modal.style.transition = '.2s';
+        })
+    })
+})
+
