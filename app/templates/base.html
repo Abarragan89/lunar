@@ -18,16 +18,16 @@
     {% if loggedIn %}
     <nav class='flex-box-sb'>
         <h1 class='ml-4'>Logo</h1>
-        <div id="nav-items" class='flex-box-col-sb nav-links'>
-            <a href="{{url_for('site.profile')}}">Profile</a>
-            <a href="#" id="category-nav-btn">Categories <i id="category-caret" class="fa-sharp fa-solid fa-caret-down"></i></a>
+        <div id="nav-items-main-div" class='flex-box-col-sb nav-links'>
+            <a class="main-nav-item" href="{{url_for('site.profile')}}">Profile</a>
+            <a class="main-nav-item" href="#" id="category-nav-btn">Categories <i id="category-caret" class="fa-sharp fa-solid fa-caret-down"></i></a>
             <div id="nav-categories">
                 {% for tag in tags %}
-                <a>{{tag.tag_name}}</a>
+                <a class='nav-category-items'>{{tag.tag_name}}</a>
                 {% endfor %}
-                <a>Add <i class="fa-sharp fa-solid fa-plus"></i></a>
+                <a class='nav-category-items'>Add <i class="fa-sharp fa-solid fa-plus"></i></a>
             </div>
-            <a href="{{url_for('api.logout')}}">Logout</a>
+            <a class="main-nav-item" href="{{url_for('api.logout')}}">Logout</a>
         </div>
         <i class="fa fa-bars" id="hamburger"></i>
     </nav>

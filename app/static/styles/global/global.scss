@@ -35,7 +35,7 @@ nav {
   align-items: center;
   position: relative;
 }
-#nav-items {
+#nav-items-main-div {
   opacity: 0;
   pointer-events: none;
   background-color: rgba(51, 48, 48, 0.721);
@@ -44,7 +44,7 @@ nav {
   top: 35px;
   transition: .2s;
 }
-#nav-items a {
+.main-nav-item {
   position: relative;
   bottom: 200px;
   padding: 6px 0 6px 10px;
@@ -52,17 +52,39 @@ nav {
   transition: .4s;
 }
 
-#nav-categories {
-  opacity: 0;
+.nav-category-items {
+  display: block;
   font-size: 0;
-  width: 0;
   color: white;
-  padding-left: 25px;
-  transition: .3s;
+  transform: scale(0) translateY(-200px);
+  transition: .4s;
 }
 
+// @for $i from 1 through 20 {
+//   #nav-categories:nth-child(#{$i}) {
+//       transition: .2s * $i;
+//   }
+// }
 
-#nav-categories a:hover {
+// @for $i from 1 through 20 {
+//   #nav-categories:nth-child(#{$i}) {
+//       animation: dropDown .7s  .1s + ($i / 6)  both;
+//       transition: .2s;
+//   }
+// }
+
+.nav-category-items:hover {
+  cursor: pointer;
+  background-color: rgba(36, 34, 34, 0.721);
+}
+
+#nav-categories {
+  transform: scale(0);
+  padding-left: 25px;
+  transition: transform .4s;
+}
+
+.main-nav-item:hover {
   cursor: pointer;
   background-color: rgba(36, 34, 34, 0.721);
 }
@@ -255,4 +277,15 @@ $transparentGreen: rgba(11, 91, 11, 0.402);
 }
 .mb-5 {
   margin-bottom: 9px;
+}
+
+// Key Frames
+@keyframes dropDown {
+  from {
+      top: -1000px;
+  }
+
+  to {
+      top: 0px;
+  }
 }

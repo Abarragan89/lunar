@@ -35,7 +35,7 @@ nav {
   position: relative;
 }
 
-#nav-items {
+#nav-items-main-div {
   opacity: 0;
   pointer-events: none;
   background-color: rgba(51, 48, 48, 0.721);
@@ -45,7 +45,7 @@ nav {
   transition: 0.2s;
 }
 
-#nav-items a {
+.main-nav-item {
   position: relative;
   bottom: 200px;
   padding: 6px 0 6px 10px;
@@ -53,16 +53,26 @@ nav {
   transition: 0.4s;
 }
 
-#nav-categories {
-  opacity: 0;
+.nav-category-items {
+  display: block;
   font-size: 0;
-  width: 0;
   color: white;
-  padding-left: 25px;
-  transition: 0.3s;
+  transform: scale(0) translateY(-200px);
+  transition: 0.4s;
 }
 
-#nav-categories a:hover {
+.nav-category-items:hover {
+  cursor: pointer;
+  background-color: rgba(36, 34, 34, 0.721);
+}
+
+#nav-categories {
+  transform: scale(0);
+  padding-left: 25px;
+  transition: transform 0.4s;
+}
+
+.main-nav-item:hover {
   cursor: pointer;
   background-color: rgba(36, 34, 34, 0.721);
 }
@@ -266,4 +276,22 @@ menu a:not(:first-child) {
 
 .mb-5 {
   margin-bottom: 9px;
+}
+
+@-webkit-keyframes dropDown {
+  from {
+    top: -1000px;
+  }
+  to {
+    top: 0px;
+  }
+}
+
+@keyframes dropDown {
+  from {
+    top: -1000px;
+  }
+  to {
+    top: 0px;
+  }
 }/*# sourceMappingURL=global.css.map */

@@ -1,37 +1,34 @@
+// Animate the main menu on click
 document.getElementById('hamburger').addEventListener('click', () => {
-    if (document.getElementById('nav-items').style.opacity == '1') {
-        document.getElementById('nav-items').style.opacity = '0';
-        document.getElementById('nav-items').style.pointerEvents = 'none';
-        document.querySelectorAll('#nav-items a').forEach((aTag) => {
+    if (document.getElementById('nav-items-main-div').style.opacity == '1') {
+        document.getElementById('nav-items-main-div').style.opacity = '0';
+        document.getElementById('nav-items-main-div').style.pointerEvents = 'none';
+        document.querySelectorAll('.main-nav-item').forEach((aTag) => {
             aTag.style.bottom = '200px';
         })
     } else {
-        document.getElementById('nav-items').style.opacity = '1';
-        document.getElementById('nav-items').style.pointerEvents = 'all';
-        document.querySelectorAll('#nav-items a').forEach((aTag) => {
+        document.getElementById('nav-items-main-div').style.opacity = '1';
+        document.getElementById('nav-items-main-div').style.pointerEvents = 'all';
+        document.querySelectorAll('.main-nav-item').forEach((aTag) => {
             aTag.style.bottom = 0;
         })
     }
 })
 
+//  Navigate the submenu on click
 document.getElementById('category-nav-btn').addEventListener('click', () => {
-    if(document.getElementById('nav-categories').style.opacity == '1') {
-        document.getElementById('nav-categories').style.opacity = '0';
-        document.getElementById('nav-categories').style.fontSize = '0';
-        document.getElementById('nav-categories').style.width = '0';
-        document.querySelector('i').classList.remove('fa-caret-up');
-        document.querySelector('i').classList.add('fa-caret-down');
-        document.querySelectorAll('#nav-categories a').forEach((tag) => {
-            tag.style.display = 'none';
+    if(document.querySelector('.nav-category-items').style.fontSize == '1em') {
+        document.getElementById('nav-categories').style.transform = 'scale(0)'
+
+        document.querySelectorAll('.nav-category-items').forEach((tag) => {
+            tag.style.fontSize = '0';
+            tag.style.transform = 'scale(0) translateY(-200px)'
         })
     } else {
-        document.getElementById('nav-categories').style.opacity = '1';
-        document.getElementById('nav-categories').style.fontSize = '1em';
-        document.getElementById('nav-categories').style.width = '100%';
-        document.querySelector('i').classList.remove('fa-caret-down');
-        document.querySelector('i').classList.add('fa-caret-up');
-        document.querySelectorAll('#nav-categories a').forEach((tag) => {
-            tag.style.display = 'block';
+        document.getElementById('nav-categories').style.transform = 'scale(1)'
+        document.querySelectorAll('.nav-category-items').forEach((tag) => {
+            tag.style.fontSize = '1em';
+            tag.style.transform = 'scale(1) translateY(0)'
         })
     }
 
