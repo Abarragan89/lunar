@@ -59,6 +59,7 @@ function addListenerToCategories() {
             for (let i = 0; i < allTags.length; i++) {
                 let newLI = document.createElement('a')
                 newLI.textContent = allTags[i].trim()
+                newLI.href = `/categories/${allTags[i].trim()}`
                 newLI.classList.add('nav-category-item')
                 document.getElementById('nav-categories-div').appendChild(newLI)
             }

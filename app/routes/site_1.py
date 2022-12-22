@@ -125,12 +125,29 @@ def profile():
         tags = allTags 
     )
 
-@bp.route('/categories')
-def categories():
+@bp.route('/categories/<categoryName>')
+def categories(categoryName):
     is_loggedin = session.get('loggedIn')
     user_id = session['user_id']
     db = start_db_session()
 
+    category = (
+        db.query(Tag)
+        .filter(Tag.user_id == user_id)
+        .filter(Tag.tag_name == categoryName)
+        .one()
+    )
+
+    totalAmountSpend= db.query(func.sum(Product.amount).label("total_value")
+        ).filter(Product.user_id == user_id
+        ).filter(Product.tag_id == category.id).all()
+    totalAmountSpend = totalAmountSpend[0][0]
+
+    expensesInCategories = db.query(Product
+        ).filter(Product.user_id == user_id
+        ).filter(Product.tag_id == category.id
+        ).all()
+    
     allTags = (
         db.query(Tag)
         .filter(Tag.user_id == user_id)
@@ -139,5 +156,8 @@ def categories():
 
     return render_template('categories.html',
         loggedIn=is_loggedin,
-        tags=allTags
+        category=category,
+        total=totalAmountSpend,
+        allExpenses=expensesInCategories,
+        tags = allTags
     )

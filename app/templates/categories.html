@@ -5,10 +5,18 @@
 <main id="main-categories">
     <a href="{{url_for('site.home')}}">Back</a>
     <h1>Categories</h1>
-    <div class='flex-box-sa'>
-        <p><span data-color='black' class='color-block'></span>name</p>
-        <p>$4839</p>
+    <div class='flex-box-col-sa'>
+        <p><span data-color='black' class='color-block'></span>{{category.tag_name}}</p>
+        <p>Amount Spent: {{total}}</p>
     </div>
+
+    {% for expense in allExpenses %}
+    <div class='flex-box-sa'>
+        <p>Name: {{expense.description}}</p>
+        <p>Amount: {{expense.amount}}</p>
+        <p>Date: {{expense.time_created}}</p>
+    </div>
+    {% endfor %}
 </main>
 
 
