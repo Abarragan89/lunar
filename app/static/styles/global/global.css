@@ -30,6 +30,14 @@ a {
   text-decoration: none;
 }
 
+#nav-menu-underlay {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  height: 200%;
+  background-color: rgba(255, 255, 255, 0);
+}
+
 nav {
   align-items: center;
   position: relative;
@@ -48,47 +56,47 @@ nav {
 
 @-webkit-keyframes slideInRight {
   from {
-    right: -100vw;
+    opacity: 0;
   }
   to {
-    right: 0;
+    opacity: 1;
   }
 }
 
 @keyframes slideInRight {
   from {
-    right: -100vw;
+    opacity: 0;
   }
   to {
-    right: 0;
+    opacity: 1;
   }
 }
 #nav-items-main-div a:nth-child(1) {
   position: relative;
   color: rgb(255, 255, 255);
-  -webkit-animation: slideInRight 0.5s 0.0869230769s both;
-          animation: slideInRight 0.5s 0.0869230769s both;
+  -webkit-animation: slideInRight 0.5s 0.2169230769s both;
+          animation: slideInRight 0.5s 0.2169230769s both;
 }
 
 #nav-items-main-div a:nth-child(2) {
   position: relative;
   color: rgb(255, 255, 255);
-  -webkit-animation: slideInRight 0.5s 0.1638461538s both;
-          animation: slideInRight 0.5s 0.1638461538s both;
+  -webkit-animation: slideInRight 0.5s 0.2938461538s both;
+          animation: slideInRight 0.5s 0.2938461538s both;
 }
 
 #nav-items-main-div a:nth-child(3) {
   position: relative;
   color: rgb(255, 255, 255);
-  -webkit-animation: slideInRight 0.5s 0.2407692308s both;
-          animation: slideInRight 0.5s 0.2407692308s both;
+  -webkit-animation: slideInRight 0.5s 0.3707692308s both;
+          animation: slideInRight 0.5s 0.3707692308s both;
 }
 
 #nav-items-main-div a:nth-child(4) {
   position: relative;
   color: rgb(255, 255, 255);
-  -webkit-animation: slideInRight 0.5s 0.3176923077s both;
-          animation: slideInRight 0.5s 0.3176923077s both;
+  -webkit-animation: slideInRight 0.5s 0.4476923077s both;
+          animation: slideInRight 0.5s 0.4476923077s both;
 }
 
 .nav-category-item {

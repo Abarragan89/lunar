@@ -9,17 +9,38 @@ document.getElementById('hamburger').addEventListener('click', () => {
         }
     }
     if (document.querySelector('#nav-items-main-div').children[2]) {
-        closeMainMenuElements()
-        document.getElementById('nav-items-main-div').style.right = '-100vw';
-        document.getElementById('nav-items-main-div').style.pointerEvents = 'none';
-        
+        // close menu if there are items showing
+        closeMainMenu()
+
     } else {
-        document.getElementById('nav-items-main-div').style.right = '0';
-        document.getElementById('nav-items-main-div').style.pointerEvents = 'all';
-        createMainMenuElements()
-        addListenerToCategories()
+        // open menu if there are no items and have underlay for click event exit
+        openMainMenu()
     }
 })
+
+document.getElementById('nav-menu-underlay').addEventListener('click', (e) => {
+    e.stopPropagation()
+    closeMainMenu()
+})
+
+function closeMainMenu() {
+    closeMainMenuElements()
+    document.getElementById('nav-menu-underlay').style.pointerEvents = 'none'
+    document.getElementById('nav-items-main-div').style.right = '-100vw';
+    document.getElementById('nav-items-main-div').style.pointerEvents = 'none';
+    document.getElementById('hamburger').classList.remove('fa-solid', 'fa-x')
+    document.getElementById('hamburger').classList.add('fa', 'fa-bars')
+}
+
+function openMainMenu() {
+    document.getElementById('nav-menu-underlay').style.pointerEvents = 'all'
+    document.getElementById('nav-items-main-div').style.right = '0';
+    document.getElementById('nav-items-main-div').style.pointerEvents = 'all';
+    document.getElementById('hamburger').classList.remove('fa', 'fa-bars')
+    document.getElementById('hamburger').classList.add('fa-solid', 'fa-x')
+    createMainMenuElements()
+    addListenerToCategories()
+}
 
 
 //  Open and close the navigation submenu on click(the categories)
@@ -46,31 +67,31 @@ function addListenerToCategories() {
 }
 
 // Create and append the three menu items
-function createMainMenuElements () {
-   // Create and append the main menu items
-   const navCategoryDiv = document.getElementById('nav-categories-div')
-   // Profile Link
-   const profileBtn = document.createElement('a');
-   profileBtn.textContent = "Profile";
-   profileBtn.classList.add('main-nav-item');
-   profileBtn.href = '/profile';
-   navCategoryDiv.insertAdjacentElement('beforebegin', profileBtn);
-   // Category Link
-   const categoryBtn = document.createElement('a');
-   categoryBtn.textContent = 'Categories';
-   categoryBtn.href = '#';
-   categoryBtn.classList.add('main-nav-item');
-   categoryBtn.setAttribute('id', 'category-nav-btn')
-   navCategoryDiv.insertAdjacentElement('beforebegin', categoryBtn)
-   // Caret Icon
-   const caretIcon = document.createElement('i')
-   caretIcon.classList.add('fa-sharp', 'fa-solid', 'fa-caret-down');
-   // Logout Link
-   const logoutBtn = document.createElement('a');
-   logoutBtn.textContent = 'Logout';
-   logoutBtn.href = "/api/logout"
-   logoutBtn.classList.add('main-nav-item');
-   navCategoryDiv.insertAdjacentElement('afterEnd', logoutBtn)
+function createMainMenuElements() {
+    // Create and append the main menu items
+    const navCategoryDiv = document.getElementById('nav-categories-div')
+    // Profile Link
+    const profileBtn = document.createElement('a');
+    profileBtn.textContent = "Profile";
+    profileBtn.classList.add('main-nav-item');
+    profileBtn.href = '/profile';
+    navCategoryDiv.insertAdjacentElement('beforebegin', profileBtn);
+    // Category Link
+    const categoryBtn = document.createElement('a');
+    categoryBtn.textContent = 'Categories';
+    categoryBtn.href = '#';
+    categoryBtn.classList.add('main-nav-item');
+    categoryBtn.setAttribute('id', 'category-nav-btn')
+    navCategoryDiv.insertAdjacentElement('beforebegin', categoryBtn)
+    // Caret Icon
+    const caretIcon = document.createElement('i')
+    caretIcon.classList.add('fa-sharp', 'fa-solid', 'fa-caret-down');
+    // Logout Link
+    const logoutBtn = document.createElement('a');
+    logoutBtn.textContent = 'Logout';
+    logoutBtn.href = "/api/logout"
+    logoutBtn.classList.add('main-nav-item');
+    navCategoryDiv.insertAdjacentElement('afterEnd', logoutBtn)
 }
 
 function closeMainMenuElements() {

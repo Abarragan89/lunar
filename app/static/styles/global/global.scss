@@ -31,6 +31,15 @@ a {
 }
 
 ///// Navigation Bar ////////
+
+#nav-menu-underlay {
+  position: absolute;
+  pointer-events: none;
+  width: 100%;
+  height: 200%;
+  background-color: #ffffff00;
+}
+
 nav {
   align-items: center;
   position: relative;
@@ -48,12 +57,10 @@ nav {
 
 @keyframes slideInRight {
   from {
-    // opacity: 0;
-    right: -100vw;
+    opacity: 0;
   }
   to {
-    // opacity: 1;
-    right: 0;
+    opacity: 1;
   }
 }
 
@@ -61,7 +68,7 @@ nav {
   #nav-items-main-div a:nth-child(#{$i}) {
       position: relative;
       color: rgb(255, 255, 255);
-      animation: slideInRight .5s  .01s + ($i / 13) both;
+      animation: slideInRight .5s  .14s + ($i / 13) both;
   }
 }
 
