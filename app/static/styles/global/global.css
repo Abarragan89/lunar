@@ -45,7 +45,6 @@ nav {
 
 #nav-items-main-div {
   right: -100vw;
-  padding-left: 25px;
   pointer-events: none;
   background-color: rgba(51, 48, 48, 0.721);
   position: absolute;
@@ -73,6 +72,7 @@ nav {
 }
 #nav-items-main-div a:nth-child(1) {
   position: relative;
+  padding-left: 25px;
   color: rgb(255, 255, 255);
   -webkit-animation: slideInRight 0.5s 0.2169230769s both;
           animation: slideInRight 0.5s 0.2169230769s both;
@@ -80,6 +80,7 @@ nav {
 
 #nav-items-main-div a:nth-child(2) {
   position: relative;
+  padding-left: 25px;
   color: rgb(255, 255, 255);
   -webkit-animation: slideInRight 0.5s 0.2938461538s both;
           animation: slideInRight 0.5s 0.2938461538s both;
@@ -87,6 +88,7 @@ nav {
 
 #nav-items-main-div a:nth-child(3) {
   position: relative;
+  padding-left: 25px;
   color: rgb(255, 255, 255);
   -webkit-animation: slideInRight 0.5s 0.3707692308s both;
           animation: slideInRight 0.5s 0.3707692308s both;
@@ -94,9 +96,138 @@ nav {
 
 #nav-items-main-div a:nth-child(4) {
   position: relative;
+  padding-left: 25px;
   color: rgb(255, 255, 255);
   -webkit-animation: slideInRight 0.5s 0.4476923077s both;
           animation: slideInRight 0.5s 0.4476923077s both;
+}
+
+#nav-items-main-div a:nth-child(5) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.5246153846s both;
+          animation: slideInRight 0.5s 0.5246153846s both;
+}
+
+#nav-items-main-div a:nth-child(6) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.6015384615s both;
+          animation: slideInRight 0.5s 0.6015384615s both;
+}
+
+#nav-items-main-div a:nth-child(7) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.6784615385s both;
+          animation: slideInRight 0.5s 0.6784615385s both;
+}
+
+#nav-items-main-div a:nth-child(8) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.7553846154s both;
+          animation: slideInRight 0.5s 0.7553846154s both;
+}
+
+#nav-items-main-div a:nth-child(9) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.8323076923s both;
+          animation: slideInRight 0.5s 0.8323076923s both;
+}
+
+#nav-items-main-div a:nth-child(10) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.9092307692s both;
+          animation: slideInRight 0.5s 0.9092307692s both;
+}
+
+#nav-items-main-div a:nth-child(11) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 0.9861538462s both;
+          animation: slideInRight 0.5s 0.9861538462s both;
+}
+
+#nav-items-main-div a:nth-child(12) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.0630769231s both;
+          animation: slideInRight 0.5s 1.0630769231s both;
+}
+
+#nav-items-main-div a:nth-child(13) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.14s both;
+          animation: slideInRight 0.5s 1.14s both;
+}
+
+#nav-items-main-div a:nth-child(14) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.2169230769s both;
+          animation: slideInRight 0.5s 1.2169230769s both;
+}
+
+#nav-items-main-div a:nth-child(15) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.2938461538s both;
+          animation: slideInRight 0.5s 1.2938461538s both;
+}
+
+#nav-items-main-div a:nth-child(16) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.3707692308s both;
+          animation: slideInRight 0.5s 1.3707692308s both;
+}
+
+#nav-items-main-div a:nth-child(17) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.4476923077s both;
+          animation: slideInRight 0.5s 1.4476923077s both;
+}
+
+#nav-items-main-div a:nth-child(18) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.5246153846s both;
+          animation: slideInRight 0.5s 1.5246153846s both;
+}
+
+#nav-items-main-div a:nth-child(19) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.6015384615s both;
+          animation: slideInRight 0.5s 1.6015384615s both;
+}
+
+#nav-items-main-div a:nth-child(20) {
+  position: relative;
+  padding-left: 25px;
+  color: rgb(255, 255, 255);
+  -webkit-animation: slideInRight 0.5s 1.6784615385s both;
+          animation: slideInRight 0.5s 1.6784615385s both;
 }
 
 .nav-category-item {
@@ -112,7 +243,6 @@ nav {
 
 #nav-categories-div {
   max-height: 0;
-  padding-left: 25px;
   transition: 1.3s all;
 }
 
@@ -139,120 +269,140 @@ nav {
 }
 #nav-categories-div a:nth-child(1) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.0869230769s both;
           animation: fadeIn 0.5s 0.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(2) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.1638461538s both;
           animation: fadeIn 0.5s 0.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(3) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.2407692308s both;
           animation: fadeIn 0.5s 0.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(4) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.3176923077s both;
           animation: fadeIn 0.5s 0.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(5) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.3946153846s both;
           animation: fadeIn 0.5s 0.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(6) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.4715384615s both;
           animation: fadeIn 0.5s 0.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(7) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.5484615385s both;
           animation: fadeIn 0.5s 0.5484615385s both;
 }
 
 #nav-categories-div a:nth-child(8) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.6253846154s both;
           animation: fadeIn 0.5s 0.6253846154s both;
 }
 
 #nav-categories-div a:nth-child(9) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.7023076923s both;
           animation: fadeIn 0.5s 0.7023076923s both;
 }
 
 #nav-categories-div a:nth-child(10) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.7792307692s both;
           animation: fadeIn 0.5s 0.7792307692s both;
 }
 
 #nav-categories-div a:nth-child(11) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.8561538462s both;
           animation: fadeIn 0.5s 0.8561538462s both;
 }
 
 #nav-categories-div a:nth-child(12) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 0.9330769231s both;
           animation: fadeIn 0.5s 0.9330769231s both;
 }
 
 #nav-categories-div a:nth-child(13) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.01s both;
           animation: fadeIn 0.5s 1.01s both;
 }
 
 #nav-categories-div a:nth-child(14) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.0869230769s both;
           animation: fadeIn 0.5s 1.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(15) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.1638461538s both;
           animation: fadeIn 0.5s 1.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(16) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.2407692308s both;
           animation: fadeIn 0.5s 1.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(17) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.3176923077s both;
           animation: fadeIn 0.5s 1.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(18) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.3946153846s both;
           animation: fadeIn 0.5s 1.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(19) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.4715384615s both;
           animation: fadeIn 0.5s 1.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(20) {
   color: white;
+  padding-left: 50px;
   -webkit-animation: fadeIn 0.5s 1.5484615385s both;
           animation: fadeIn 0.5s 1.5484615385s both;
 }
@@ -262,13 +412,8 @@ nav {
   background-color: rgba(36, 34, 34, 0.721);
 }
 
-#category-caret {
-  position: absolute;
-  left: 85px;
-  bottom: 9px;
-}
-
-#nav-items a:hover {
+#nav-categories-div a:hover {
+  cursor: pointer;
   background-color: rgba(36, 34, 34, 0.721);
 }
 

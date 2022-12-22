@@ -18,6 +18,7 @@ document.getElementById('hamburger').addEventListener('click', () => {
     }
 })
 
+// Add click event to outside menu so it will close
 document.getElementById('nav-menu-underlay').addEventListener('click', (e) => {
     e.stopPropagation()
     closeMainMenu()
@@ -47,7 +48,7 @@ function openMainMenu() {
 function addListenerToCategories() {
     document.getElementById('category-nav-btn').addEventListener('click', function () {
         let categoryDivEl = document.getElementById('nav-categories-div')
-        if (categoryDivEl.children[0]) {
+        if (categoryDivEl.children[1]) {
             categoryDivEl.style.maxHeight = '0'
             while (categoryDivEl.firstChild) {
                 categoryDivEl.removeChild(categoryDivEl.firstChild);
@@ -71,22 +72,27 @@ function addListenerToCategories() {
 function createMainMenuElements() {
     // Create and append the main menu items
     const navCategoryDiv = document.getElementById('nav-categories-div')
+
     // Profile Link
     const profileBtn = document.createElement('a');
     profileBtn.textContent = "Profile";
     profileBtn.classList.add('main-nav-item');
     profileBtn.href = '/profile';
     navCategoryDiv.insertAdjacentElement('beforebegin', profileBtn);
+
     // Category Link
     const categoryBtn = document.createElement('a');
     categoryBtn.textContent = 'Categories';
     categoryBtn.href = '#';
     categoryBtn.classList.add('main-nav-item');
-    categoryBtn.setAttribute('id', 'category-nav-btn')
-    navCategoryDiv.insertAdjacentElement('beforebegin', categoryBtn)
+    categoryBtn.setAttribute('id', 'category-nav-btn');
+    navCategoryDiv.insertAdjacentElement('beforebegin', categoryBtn);
+
     // Caret Icon
-    const caretIcon = document.createElement('i')
-    caretIcon.classList.add('fa-sharp', 'fa-solid', 'fa-caret-down');
+    // const caretIcon = document.createElement('i');
+    // caretIcon.classList.add('category-caret', 'fa-sharp', 'fa-solid', 'fa-chevron-down');
+    // navCategoryDiv.appendChild(caretIcon)
+
     // Logout Link
     const logoutBtn = document.createElement('a');
     logoutBtn.textContent = 'Logout';
