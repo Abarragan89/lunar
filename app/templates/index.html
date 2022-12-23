@@ -4,20 +4,23 @@
   href="{{url_for('static', filename='/styles/home/home.css')}}"
 />
 <title>Suspense</title>
-{% endblock %} 
-{% block body %} 
-{% if loggedIn == True %} 
+{% endblock %} {% block body %} {% if loggedIn == True %}
 
 <main id="dashboard">
-
   <div class="flex-box-sa">
-    <p><span id="money-left">{{ (user_data.monthly_income + user_cash) - (total_monthly_expenses + auto_deductions) }}</span> <br>remaing</p>
-    <p><span>{{ days_until_first }} days</span> <br>remaining</p>
+    <p>
+      <span id="money-left"
+        >${{ (user_data.monthly_income + user_cash) - (total_monthly_expenses +
+        auto_deductions) }}</span
+      >
+      <br />remaing
+    </p>
+    <p><span>{{ days_until_first }} days</span> <br />remaining</p>
   </div>
 
   <div class="flex-box-sa">
     {% for tag in tags %}
-    <p>{{tag.tag_name}} </p>
+    <p><span class="tag-color-square" data-color="{{tag.tag_color}}"></span>{{tag.tag_name}}</p>
     {% endfor %}
   </div>
 
@@ -28,35 +31,43 @@
 
   {% for data in activity_data %}
   <a href="#" class="edit-activity-btn" id="activity{{n}}">
-    <div class="flex-box-sa">
-      <div class'flex-box-col-se' class='date-div' data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+    {% if data|length > 4 %}
+    <div class="flex-box-sa" data-type="expense">
+    {% else%}
+    <div class="flex-box-sa" data-type="deposit">
+    {% endif %}
+        <div class='flex-box-col-se date-div'
+        data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
         <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
         <p>{{ data[0].year}}</p>
       </div>
       <div class="flex-box-col-sa">
         {% if data|length > 4 %}
-        <p data-type="expense" data-product-id="{{data[5]}}" data-tag-id="{{data[4]}}">{{ data[3] }}</p>
+        <p
+          data-product-id="{{data[5]}}"
+          data-tag-id="{{data[4]}}"
+        >
+          {{ data[3] }}
+        </p>
         {% else%}
-        <p data-type="deposit" data-cash-id="{{data[3]}}">Deposit</p>
+        <p data-cash-id="{{data[3]}}">Deposit</p>
         {% endif %}
         <p>{{ data[2] }}</p>
       </div>
-      <p>{{ data[1] }}</p>
+      <p>${{ data[1] }}</p>
     </div>
   </a>
-  {% endfor%}
-
-
-
-{% else %}
-<main id="home-page">
-  <h1>Suspend</h1>
-  <p>"take the suspense out of expenses"</p>
-  <img
-    src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
-    alt="screenshot of graph"
-  />
-  <a href="{{ url_for('site.signup')}}"><button>Signup</button></a>
-  <a href="{{ url_for('site.login')}}"><button>Login</button></a>
+  {% endfor%} 
+  {% else %}
+  <main id="home-page">
+    <h1>Suspend</h1>
+    <p>"take the suspense out of expenses"</p>
+    <img
+      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+      alt="screenshot of graph"
+    />
+    <a href="{{ url_for('site.signup')}}"><button>Signup</button></a>
+    <a href="{{ url_for('site.login')}}"><button>Login</button></a>
+  </main>
+  {% endif%} {% endblock %}
 </main>
-{% endif%} {% endblock %}

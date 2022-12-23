@@ -3,7 +3,6 @@ import sqlalchemy
 from app.models import User, Tag, Product, Cash
 from app.db import start_db_session
 
-
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 # Sign up 
@@ -199,8 +198,6 @@ def delete_expense():
     return redirect(request.referrer)
 
 
-
-
 # Update Deposit
 @bp.route('/edit-deposit', methods=['POST'])
 def update_deposit():
@@ -223,7 +220,7 @@ def update_deposit():
     return redirect(request.referrer)
 
 
-# Delete Expense
+# Delete Cash deposit
 @bp.route('/delete-deposit', methods=['POST'])
 def delete_deposit():
     db = start_db_session()
@@ -235,3 +232,40 @@ def delete_deposit():
         db.rollback()
         return jsonify(message='Deposit not deleted'), 500
     return redirect(request.referrer)
+
+
+# Update Category
+@bp.route('/edit-category', methods=['POST'])
+def edit_category():
+    data = request.form 
+    db = start_db_session()
+    print('category id', data['category-id'])
+    print('category color', data['category-color'])
+    print('category name', data['category-name'])
+
+    try:
+        current_tag = db.query(Tag).filter(Tag.id == data['category-id']).one()
+        current_tag.tag_color = data['category-color']
+        current_tag.tag_name = data['category-name']
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except:
+        db.rollback()
+        return jsonify(message='Tag not updated'), 500
+    return redirect(f"/categories/{data['category-name']}")
+
+
+# Delete Category
+@bp.route('/delete-category', methods=['POST'])
+def delete_category():
+    db = start_db_session()
+    data = request.form
+    try:
+        db.query(Tag).filter(Tag.id == data['category-id']).delete()
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='Deposit not deleted'), 500
+    return redirect('/')

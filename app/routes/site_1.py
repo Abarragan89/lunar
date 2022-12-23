@@ -125,6 +125,7 @@ def profile():
         tags = allTags 
     )
 
+# Load the Category Page and Data
 @bp.route('/categories/<categoryName>')
 def categories(categoryName):
     is_loggedin = session.get('loggedIn')
@@ -143,9 +144,11 @@ def categories(categoryName):
         ).filter(Product.tag_id == category.id).all()
     totalAmountSpend = totalAmountSpend[0][0]
 
-    expensesInCategories = db.query(Product
+    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
         ).filter(Product.user_id == user_id
         ).filter(Product.tag_id == category.id
+        ).join(Tag
+        ).order_by(desc(Product.time_created)
         ).all()
     
     allTags = (
@@ -158,6 +161,6 @@ def categories(categoryName):
         loggedIn=is_loggedin,
         category=category,
         total=totalAmountSpend,
-        allExpenses=expensesInCategories,
-        tags = allTags
+        allExpenses=purchase_data,
+        tags=allTags
     )

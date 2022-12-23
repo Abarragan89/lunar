@@ -1,0 +1,28 @@
+
+<div class="modal-container" id="edit-category">
+        <div class="modal">
+          <h2>Edit Category</h2>
+          {% for tag in tags %}
+          {% if tag.tag_name == category.tag_name %}
+            <form action="/api/edit-category" method="POST">
+              <label for="category-name">Category:</label>
+              <input type="text" name="category-name" value="{{tag.tag_name}}" required/>
+              <br />
+              <label for="">Color</label>
+              <input type="color" value="{{tag.tag_color}}" name="category-color" required/>
+              <br />
+              <input type="hidden" value="{{tag.id}}" name="category-id">
+              <input type="submit" value="Update"/>
+            </form>
+
+            <form action="/api/delete-category" method="POST">
+                <input type="hidden" value="{{tag.id}}" name="category-id">
+                <input type="submit" value="Delete">
+            </form>
+          {% endif %}
+          {% endfor %}
+
+
+        </div>
+    </div>
+  </div>

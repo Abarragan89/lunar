@@ -1,23 +1,43 @@
 {% extends 'base.html' %} {% block head %}
 <title>Categories</title>
+
+{% include 'includes/edit-category-modal.html' %}
+
 {% endblock %} {% block body %}
+
 
 <main id="main-categories">
     <a href="{{url_for('site.home')}}">Back</a>
-    <h1>Categories</h1>
-    <div class='flex-box-col-sa'>
-        <p><span data-color='black' class='color-block'></span>{{category.tag_name}}</p>
-        <p>Amount Spent: {{total}}</p>
+    <div class="flex-box-sa">
+        <div class="flex-box-col-se">
+            <p><span data-color='black' class="color-block"></span>{{category.tag_name}}</p>
+            <p>Amount Spent: ${{total}}</p>
+        </div>
+        <div class="flex-box-col-se">
+            <a href="#" id="edit-category-btn">Edit</a>
+        </div>
     </div>
 
-    {% for expense in allExpenses %}
-    <div class='flex-box-sa'>
-        <p>Name: {{expense.description}}</p>
-        <p>Amount: {{expense.amount}}</p>
-        <p>Date: {{expense.time_created}}</p>
-    </div>
-    {% endfor %}
+    {% for data in allExpenses %}
+        <a href="#" class="edit-activity-btn" id="activity{{n}}">
+            <div class="flex-box-sa" data-type="edit-in-categories">
+                <div class='flex-box-col-se date-div'
+                data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+            <p>{{ data[0].year}}</p>
+            </div>
+            <div class="flex-box-col-sa">
+                <p data-product-id="{{data[5]}}" data-tag-id="{{data[4]}}">
+                {{ data[3] }}
+                </p>
+                <p>{{ data[2] }}</p>
+            </div>
+                <p>${{ data[1] }}</p>
+            </div>
+            </div>
+        </a>
+    {% endfor%} 
 </main>
-
+<script src="{{url_for('static', filename='/js/edit-category.js')}}"></script>
 
 {% endblock %}
