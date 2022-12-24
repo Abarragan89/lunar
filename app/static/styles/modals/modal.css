@@ -1,0 +1,9 @@
+.error-msg {
+  display: none;
+  color: red;
+  font-size: 0.7em;
+}
+
+.show-error {
+  display: block;
+}/*# sourceMappingURL=modal.css.map */

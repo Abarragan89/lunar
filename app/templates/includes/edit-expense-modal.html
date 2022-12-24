@@ -20,13 +20,14 @@
       <br /><br />
       <label for="product-price">Price</label>
       <input type="number" name="product-price" id="current-product-price" step="0.01" required>
-      <label for="monthly-bill">Monthly</label>
-      <input type="checkbox" name="monthly-bill">
-      <input type="date" id="expense-date" name="expense-date">
+      <input type="checkbox" name="monthly-bill" id="monthly-bill">
+      <label for="monthly-bill">Monthly</label><br>
+      <input type="date" id="expense-date" name="expense-date" required><br>
 
       <input type="submit" value="Update"/>
     </form>
 
+    <br>
 
     <form action="/api/delete-expense" method="POST">
       <input type="submit" value="Delete">

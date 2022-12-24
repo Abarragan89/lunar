@@ -1,0 +1,10 @@
+///////////////// Styles for Error Messages and Modals/////////////
+.error-msg {
+    display: none;
+    color: red;
+    font-size: .7em;
+}
+
+.show-error {
+    display: block;
+}

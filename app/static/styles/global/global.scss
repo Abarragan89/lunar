@@ -15,7 +15,7 @@ height: 100%;
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    background-color: rgb(245, 234, 221);
+    background-color: rgb(215, 200, 185);
   }
 
 input, button, textarea, select {
@@ -31,7 +31,6 @@ a {
 }
 
 ///// Navigation Bar ////////
-
 #nav-menu-underlay {
   position: absolute;
   pointer-events: none;
@@ -46,7 +45,6 @@ nav {
 }
 #nav-items-main-div {
   right: -100vw;
-  padding-left: 25px;
   pointer-events: none;
   background-color: rgba(51, 48, 48, 0.721);
   position: absolute;
@@ -64,9 +62,10 @@ nav {
   }
 }
 
-@for $i from 1 through 4 {
+@for $i from 1 through 20 {
   #nav-items-main-div a:nth-child(#{$i}) {
       position: relative;
+      padding-left: 25px;
       color: rgb(255, 255, 255);
       animation: slideInRight .5s  .14s + ($i / 13) both;
   }
@@ -86,7 +85,6 @@ nav {
 
 #nav-categories-div {
   max-height: 0;
-  padding-left: 25px;
   transition: 1.3s all;
 }
 
@@ -103,10 +101,11 @@ nav {
   }
 }
 
-@for $i from 1 through 20 {
+@for $i from 1 through 25 {
   #nav-categories-div a:nth-child(#{$i}) {
       color: white;
-      animation: fadeIn .5s  .01s + ($i / 13) both;
+      padding-left: 50px;
+      animation: fadeIn .2s  .01s + ($i / 13) both;
   }
 }
 
@@ -115,13 +114,18 @@ nav {
   background-color: rgba(36, 34, 34, 0.721);
 }
 
-#category-caret {
-  position: absolute;
-  left: 85px;
-  bottom: 9px;
-}
+// .category-caret {
+//   font-size: .6em;
+//   color: white;
+//   position: absolute;
+//   left: 99px;
+//   bottom: 28px;
+//   -webkit-animation: slideInRight 0.5s 0.2938461538s both;
+//           animation: slideInRight 0.5s 0.2938461538s both;
+// }
 
-#nav-items a:hover {
+#nav-categories-div a:hover {
+  cursor: pointer;
   background-color: rgba(36, 34, 34, 0.721);
 }
 

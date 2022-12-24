@@ -2,10 +2,11 @@
 <title>Login</title>
 {% endblock %} {% block body %}
 
+<p>{{ error }}</p>
 <div>
     <h2>Login</h2>
     <form action="/api/login" method="POST">
-      <input type="email" name="email" placeholder="email" required />
+      <input type="email" name="email" placeholder="email" value={{ email }} required />
       <br /><br />
       <input type="password" name="password" placeholder="password" required/>
       <br /><br />
@@ -15,4 +16,3 @@
 
 
 {% endblock %}
-
