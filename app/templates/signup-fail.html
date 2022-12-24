@@ -1,17 +1,18 @@
 {% extends 'base.html' %} {% block head %}
-<title>Signup</title>
+<title>Error</title>
 {% endblock %} {% block body %}
 
+<p>{{error}}</p>
 <div>
     <h2>Signup</h2>
     <form id="signup-form" action="/api/signup" method="POST">
-      <input type="username" name="username" placeholder="username" required />
+      <input type="username" name="username" placeholder="username" value={{ username }} required />
       <br /><br />
-      <input type="email" name="email" placeholder="email" id="signup-email" required />
+      <input type="email" name="email" placeholder="email" id="signup-email" value={{ email }} required />
       <br /><br />
       <input type="password" name="password" placeholder="password" required />
       <br /><br />
-      <input type="number" name="monthly-income" step="0.01" placeholder="monthly-income" required />
+      <input type="number" name="monthly-income" step="0.01" placeholder="monthly-income" value={{ monthly_income }} required />
       <br /><br />
       <input type="submit" value="Sign Up" />
     </form>

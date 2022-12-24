@@ -13,33 +13,52 @@ def signup():
     try:
         # try making new user
         newUser = User(
-            username = data['username'],
-            username_lowercase = data['username'].lower(),
-            email = data['email'],
-            password = data['password'],
-            monthly_income = data['monthly-income']
+            username = data['username'].strip(),
+            username_lowercase = data['username'].lower().strip(),
+            email = data['email'].strip(),
+            password = data['password'].strip(),
+            monthly_income = data['monthly-income'].strip()
         )
         db.add(newUser)
+        db.commit()
         # give user basic categories
-        tag_names = ['Mortgage/Rent', 'Dining', 'Groceries', 'Presents', 'Bills', 'Entertainment', 'Investments', 'Travel', 'Shopping', 'Alcohol']
+        tag_names = ['Mortgage-Rent', 'Dining', 'Groceries', 'Presents', 'Bills', 'Entertainment', 'Investments', 'Travel', 'Shopping', 'Alcohol']
         tag_colors =['#da3dad', '#6f20e2', '#140eee', '#1a593e', '#00bc69', '#cfe221', '#c47106','#e8b565', '#1bdcc8', '#cf0938']
         for num in range(10):
             newTag = Tag(
-                tag_name = 'Dining',
-                tag_color = '',
+                tag_name = tag_names[num],
+                tag_color = tag_colors[num],
                 user_id = newUser.id
             )
             db.add(newTag)
-        db.commit()
+            db.commit()
     except AssertionError:
         db.rollback()
-        return jsonify(message='Missing fields.'), 500
+        print('assertion error')
+        return render_template('signup-fail.html', 
+            error='Please fill in all fields.',
+            username = data['username'].strip(),
+            email = data['email'].strip(),
+            monthly_income = data['monthly-income'].strip()
+            )
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        return jsonify(message='Username or email already taken.'), 500
+        print('Not unique')
+        return render_template('signup-fail.html', 
+            error='Email is already taken.',
+            username = data['username'].strip(),
+            email = data['email'].strip(),
+            monthly_income = data['monthly-income'].strip()
+            )
     except:
         db.rollback()
-        return jsonify(message='Sign up failed.'), 500
+        print('other error')
+        return render_template('signup-fail.html', 
+            error='An error occurred. Please try again',
+            username = data['username'].strip(),
+            email = data['email'].strip(),
+            monthly_income = data['monthly-income'].strip()
+            )
 
     # create session
     session.clear()
@@ -63,13 +82,13 @@ def login():
 
     try:
         user = db.query(User).filter(
-            User.email == data['email']
+            User.email == data['email'].strip()
         ).one()
     except:
-        return jsonify(message='Incorrect credentials'), 400
+        return render_template('login-fail.html', error='User not found.', email=data['email'].strip())
 
     if user.verify_password(data['password']) == False:
-        return jsonify(message='Incorrect credentials')
+        return render_template('login-fail.html', error='Incorrect credentials.', email=data['email'].strip())
     
     session.clear()
     session['user_id'] = user.id
@@ -85,8 +104,8 @@ def update_user():
     db = start_db_session()
     try:
         user_data = db.query(User).filter(User.id == session['user_id']).one()
-        user_data.monthly_income = data['monthly_income']
-        user_data.username = data['username']
+        user_data.monthly_income = data['monthly_income'].strip()
+        user_data.username = data['username'].strip()
         db.commit()
     except AssertionError:
         db.rollback()
@@ -105,7 +124,7 @@ def add_category():
 
     try:
         newTag = Tag(
-            tag_name = data['category-name'],
+            tag_name = data['category-name'].strip(),
             tag_color = data['category-color'],
             user_id = session['user_id']
         )
@@ -131,10 +150,10 @@ def add_expense():
 
     try:
         newExpense = Product(
-            description = data['product-name'],
+            description = data['product-name'].strip(),
             tag_id = data['product-category'],
             user_id = session['user_id'],
-            amount = data['product-price'],
+            amount = data['product-price'].strip(),
             monthly_bill = monthly_bill
         )
         db.add(newExpense)
@@ -154,8 +173,8 @@ def add_cash():
     db = start_db_session()
     try:
         newCash = Cash(
-            description = data['money-description'],
-            amount = data['amount'],
+            description = data['money-description'].strip(),
+            amount = data['amount'].strip(),
             user_id = session['user_id']
         )
         db.add(newCash)
@@ -178,10 +197,10 @@ def update_expense():
         monthly_bill = True
     try:
         db.query(Product).filter(Product.id == data['product-id']).update({
-            'description': data['product-name'],
+            'description': data['product-name'].strip(),
             'tag_id': data['product-category'],
             'user_id': session['user_id'],
-            'amount': data['product-price'],
+            'amount': data['product-price'].strip(),
             'monthly_bill': monthly_bill,
             'time_created': data['expense-date']
         })
@@ -200,7 +219,7 @@ def delete_expense():
     db = start_db_session()
     data = request.form
     try:
-        db.query(Product).filter(Product.id == data['product-id']).delete()
+        db.query(Product).filter(Product.id == data['product-id'].strip()).delete()
         db.commit()
     except:
         db.rollback()
@@ -215,8 +234,8 @@ def update_deposit():
     db = start_db_session()
     try:
         db.query(Cash).filter(Cash.id == data['cash-id']).update({
-            'description': data['money-description'],
-            'amount': data['amount'],
+            'description': data['money-description'].strip(),
+            'amount': data['amount'].strip(),
             'user_id': session['user_id'],
             'time_created': data['deposit-date']
         })
@@ -255,8 +274,8 @@ def edit_category():
 
     try:
         current_tag = db.query(Tag).filter(Tag.id == data['category-id']).one()
-        current_tag.tag_color = data['category-color']
-        current_tag.tag_name = data['category-name']
+        current_tag.tag_color = data['category-color'].strip()
+        current_tag.tag_name = data['category-name'].strip()
         db.commit()
     except AssertionError:
         db.rollback()

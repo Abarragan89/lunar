@@ -107,3 +107,6 @@ function closeMainMenuElements() {
         navItem.remove()
     })
 }
+
+
+

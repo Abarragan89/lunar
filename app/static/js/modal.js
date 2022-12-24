@@ -9,9 +9,7 @@ document.getElementById('add-category-btn').addEventListener('click', () => {
 document.getElementById('add-cash-btn').addEventListener('click', () => {
     showModal('add-cash-modal');
 })
-// document.getElementById('edit-category-btn').addEventListener('click', () => {
-//     showModal('edit-category');
-// })
+
 
 // Give each activity row ability to open modal and call function to fill modal with data
 activity_rows = document.querySelectorAll('.edit-activity-btn');

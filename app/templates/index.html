@@ -4,9 +4,11 @@
   href="{{url_for('static', filename='/styles/home/home.css')}}"
 />
 <title>Suspense</title>
-{% endblock %} {% block body %} {% if loggedIn == True %}
+{% endblock %} {% block body %} 
 
-<main id="dashboard">
+{% if loggedIn == True %}
+
+<main data-set-loggedIn="true" id="dashboard">
   <div class="flex-box-sa">
     <p>
       <span id="money-left"
@@ -48,7 +50,7 @@
           callbacks: {
               label: function(tooltipItem, data) {
                 const item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                return item
+                return `$${item}`
               }
           } 
         }
@@ -86,8 +88,9 @@
     </div>
   </a>
   {% endfor%} 
+
   {% else %}
-  <main id="home-page">
+  <main data-set-loggedIn="false" id="home-page">
     <h1>Suspend</h1>
     <p>"take the suspense out of expenses"</p>
     <img

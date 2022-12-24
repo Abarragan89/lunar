@@ -270,141 +270,176 @@ nav {
 #nav-categories-div a:nth-child(1) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.0869230769s both;
-          animation: fadeIn 0.5s 0.0869230769s both;
+  -webkit-animation: fadeIn 0.2s 0.0869230769s both;
+          animation: fadeIn 0.2s 0.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(2) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.1638461538s both;
-          animation: fadeIn 0.5s 0.1638461538s both;
+  -webkit-animation: fadeIn 0.2s 0.1638461538s both;
+          animation: fadeIn 0.2s 0.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(3) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.2407692308s both;
-          animation: fadeIn 0.5s 0.2407692308s both;
+  -webkit-animation: fadeIn 0.2s 0.2407692308s both;
+          animation: fadeIn 0.2s 0.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(4) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.3176923077s both;
-          animation: fadeIn 0.5s 0.3176923077s both;
+  -webkit-animation: fadeIn 0.2s 0.3176923077s both;
+          animation: fadeIn 0.2s 0.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(5) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.3946153846s both;
-          animation: fadeIn 0.5s 0.3946153846s both;
+  -webkit-animation: fadeIn 0.2s 0.3946153846s both;
+          animation: fadeIn 0.2s 0.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(6) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.4715384615s both;
-          animation: fadeIn 0.5s 0.4715384615s both;
+  -webkit-animation: fadeIn 0.2s 0.4715384615s both;
+          animation: fadeIn 0.2s 0.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(7) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.5484615385s both;
-          animation: fadeIn 0.5s 0.5484615385s both;
+  -webkit-animation: fadeIn 0.2s 0.5484615385s both;
+          animation: fadeIn 0.2s 0.5484615385s both;
 }
 
 #nav-categories-div a:nth-child(8) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.6253846154s both;
-          animation: fadeIn 0.5s 0.6253846154s both;
+  -webkit-animation: fadeIn 0.2s 0.6253846154s both;
+          animation: fadeIn 0.2s 0.6253846154s both;
 }
 
 #nav-categories-div a:nth-child(9) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.7023076923s both;
-          animation: fadeIn 0.5s 0.7023076923s both;
+  -webkit-animation: fadeIn 0.2s 0.7023076923s both;
+          animation: fadeIn 0.2s 0.7023076923s both;
 }
 
 #nav-categories-div a:nth-child(10) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.7792307692s both;
-          animation: fadeIn 0.5s 0.7792307692s both;
+  -webkit-animation: fadeIn 0.2s 0.7792307692s both;
+          animation: fadeIn 0.2s 0.7792307692s both;
 }
 
 #nav-categories-div a:nth-child(11) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.8561538462s both;
-          animation: fadeIn 0.5s 0.8561538462s both;
+  -webkit-animation: fadeIn 0.2s 0.8561538462s both;
+          animation: fadeIn 0.2s 0.8561538462s both;
 }
 
 #nav-categories-div a:nth-child(12) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 0.9330769231s both;
-          animation: fadeIn 0.5s 0.9330769231s both;
+  -webkit-animation: fadeIn 0.2s 0.9330769231s both;
+          animation: fadeIn 0.2s 0.9330769231s both;
 }
 
 #nav-categories-div a:nth-child(13) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.01s both;
-          animation: fadeIn 0.5s 1.01s both;
+  -webkit-animation: fadeIn 0.2s 1.01s both;
+          animation: fadeIn 0.2s 1.01s both;
 }
 
 #nav-categories-div a:nth-child(14) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.0869230769s both;
-          animation: fadeIn 0.5s 1.0869230769s both;
+  -webkit-animation: fadeIn 0.2s 1.0869230769s both;
+          animation: fadeIn 0.2s 1.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(15) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.1638461538s both;
-          animation: fadeIn 0.5s 1.1638461538s both;
+  -webkit-animation: fadeIn 0.2s 1.1638461538s both;
+          animation: fadeIn 0.2s 1.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(16) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.2407692308s both;
-          animation: fadeIn 0.5s 1.2407692308s both;
+  -webkit-animation: fadeIn 0.2s 1.2407692308s both;
+          animation: fadeIn 0.2s 1.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(17) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.3176923077s both;
-          animation: fadeIn 0.5s 1.3176923077s both;
+  -webkit-animation: fadeIn 0.2s 1.3176923077s both;
+          animation: fadeIn 0.2s 1.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(18) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.3946153846s both;
-          animation: fadeIn 0.5s 1.3946153846s both;
+  -webkit-animation: fadeIn 0.2s 1.3946153846s both;
+          animation: fadeIn 0.2s 1.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(19) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.4715384615s both;
-          animation: fadeIn 0.5s 1.4715384615s both;
+  -webkit-animation: fadeIn 0.2s 1.4715384615s both;
+          animation: fadeIn 0.2s 1.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(20) {
   color: white;
   padding-left: 50px;
-  -webkit-animation: fadeIn 0.5s 1.5484615385s both;
-          animation: fadeIn 0.5s 1.5484615385s both;
+  -webkit-animation: fadeIn 0.2s 1.5484615385s both;
+          animation: fadeIn 0.2s 1.5484615385s both;
+}
+
+#nav-categories-div a:nth-child(21) {
+  color: white;
+  padding-left: 50px;
+  -webkit-animation: fadeIn 0.2s 1.6253846154s both;
+          animation: fadeIn 0.2s 1.6253846154s both;
+}
+
+#nav-categories-div a:nth-child(22) {
+  color: white;
+  padding-left: 50px;
+  -webkit-animation: fadeIn 0.2s 1.7023076923s both;
+          animation: fadeIn 0.2s 1.7023076923s both;
+}
+
+#nav-categories-div a:nth-child(23) {
+  color: white;
+  padding-left: 50px;
+  -webkit-animation: fadeIn 0.2s 1.7792307692s both;
+          animation: fadeIn 0.2s 1.7792307692s both;
+}
+
+#nav-categories-div a:nth-child(24) {
+  color: white;
+  padding-left: 50px;
+  -webkit-animation: fadeIn 0.2s 1.8561538462s both;
+          animation: fadeIn 0.2s 1.8561538462s both;
+}
+
+#nav-categories-div a:nth-child(25) {
+  color: white;
+  padding-left: 50px;
+  -webkit-animation: fadeIn 0.2s 1.9330769231s both;
+          animation: fadeIn 0.2s 1.9330769231s both;
 }
 
 .main-nav-item:hover {

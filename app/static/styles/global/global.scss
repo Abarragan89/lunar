@@ -31,7 +31,6 @@ a {
 }
 
 ///// Navigation Bar ////////
-
 #nav-menu-underlay {
   position: absolute;
   pointer-events: none;
@@ -102,11 +101,11 @@ nav {
   }
 }
 
-@for $i from 1 through 20 {
+@for $i from 1 through 25 {
   #nav-categories-div a:nth-child(#{$i}) {
       color: white;
       padding-left: 50px;
-      animation: fadeIn .5s  .01s + ($i / 13) both;
+      animation: fadeIn .2s  .01s + ($i / 13) both;
   }
 }
 

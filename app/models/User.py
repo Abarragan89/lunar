@@ -8,7 +8,7 @@ salt = bcrypt.gensalt()
 class User(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True)
-    username_lowercase = Column(String(50), nullable=True)
+    username_lowercase = Column(String(50))
     username = Column(String(50), nullable=False)
     email = Column(String(50), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
