@@ -30,13 +30,14 @@ def home():
         .filter(Tag.user_id == user_id)
         .all()
     )
-    # Get all purchases with joined with tags
+    # Get all purchases with joined with tags for activity display will be mixed with deposit data
     purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
         ).filter(Product.user_id == user_id
         ).join(Tag
         ).order_by(desc(Product.time_created)
         ).limit(20).all()
-    # # Get last 20 cash addition to display
+    
+    # Get last 20 cash addition to display
     add_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description, Cash.id
         ).filter(Cash.user_id == user_id
         ).order_by(desc(Cash.time_created)
@@ -56,7 +57,7 @@ def home():
     total_monthly_expenses = 0 if total_monthly_expenses[0][0] is None else round(total_monthly_expenses[0][0], 2)
 
 
-    # Get Auto Deductions to always subtract
+    # Get Auto Deductions to always subtract. These are the expenses that are monthly bills
     auto_deductions = db.query(func.sum(Product.amount).label("auto_deductions")
         ).filter(Product.user_id == user_id
         ).filter(Product.monthly_bill == True
@@ -76,6 +77,29 @@ def home():
         ).all()
         # set it to zero instead of None if nothing has been added
         user_cash = 0 if user_cash[0][0] is None else round(user_cash[0][0], 2)
+    
+
+    # Get data for the charts
+    allMonthlyExpenses = db.query(Tag.tag_name, Tag.tag_color, Product.amount
+        ).filter(Product.user_id == user_id
+        ).filter(extract('month', Product.time_created)==current_month
+        ).filter(extract('year', Product.time_created)==current_year
+        ).join(Tag
+        ).all()
+    
+    # Create a chartData object to remove repeated Tags in products, and add up the total in products
+    chartData = {}
+    for expense in allMonthlyExpenses:
+        if expense[0] in chartData:
+            chartData[expense[0]]['product_amount'] += expense[2]
+        else:
+            chartData[expense[0]] = {'tag_color': expense[1], 'product_amount': expense[2]} 
+    
+    # Getting data from dictionary to get three distinct lists with relevant data to pass
+    values = chartData.values()
+    relevant_tag_names = [ tag_name for tag_name in chartData.keys()]
+    tag_total = [float(item['product_amount']) for item in values]
+    relevant_tag_colors = [item['tag_color'] for item in values]
 
     return render_template(
         'index.html',
@@ -86,7 +110,11 @@ def home():
         user_data=user_data,
         auto_deductions=auto_deductions,
         days_until_first=days_until_first_data,
-        user_cash=user_cash
+        user_cash=user_cash,
+        # Chart Data:
+        relevant_tag_names=relevant_tag_names,
+        values=tag_total,
+        relevant_tag_colors=relevant_tag_colors
     )
 
 

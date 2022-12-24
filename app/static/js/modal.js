@@ -64,12 +64,6 @@ document.querySelector('#edit-deposit').addEventListener('click', (e) => {
         closeModal('edit-deposit');
     }
 })
-document.querySelector('#edit-category').addEventListener('click', (e) => {
-    const isOutside = e.target.closest('.modal');
-    if (!isOutside) {
-        closeModal('edit-category');
-    }
-})
 
 
 // --- show / close function -- //
@@ -132,5 +126,12 @@ allMenuBtns.forEach((btn) => {
             modal.style.transition = '.2s';
         })
     })
+})
+
+// Get the span elements to give them color on the homepage
+allColorSpans = document.querySelectorAll('.tag-color-square')
+allColorSpans.forEach(colorSpan => {
+    customColor = colorSpan.getAttribute('data-color');
+    colorSpan.style.backgroundColor = customColor;
 })
 

@@ -17,17 +17,45 @@
     </p>
     <p><span>{{ days_until_first }} days</span> <br />remaining</p>
   </div>
-
-  <div class="flex-box-sa">
-    {% for tag in tags %}
-    <p><span class="tag-color-square" data-color="{{tag.tag_color}}"></span>{{tag.tag_name}}</p>
-    {% endfor %}
+  
+  <div class='flex-box-sa'>
+    <div class='flex-box-col-sa-wrap'>
+      <p>Categories:</p>
+      {% for num in range( relevant_tag_colors | length )%}
+      <p><span class="tag-color-square" data-color="{{relevant_tag_colors[num]}}"></span>{{relevant_tag_names[num]}}</p>
+      {% endfor %}
+    </div>
+    <canvas id="pieChart" width="300" height="300"></canvas>
   </div>
+  <script>
+    const ctx = document.getElementById('pieChart').getContext('2d')
+    const pieChart = new Chart(ctx, {
+      type: 'pie', 
+      data: {
+        
+        datasets: [
+          {
+            data: {{ values | safe }},
+            backgroundColor: {{ relevant_tag_colors | safe}},
+            borderWidth: 0
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        tooltips: {
+          enabled: true,
+          callbacks: {
+              label: function(tooltipItem, data) {
+                const item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                return item
+              }
+          } 
+        }
+      }
+  });
+  </script>
 
-  <img
-    src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
-    alt="screenshot of graph"
-  />
 
   {% for data in activity_data %}
   <a href="#" class="edit-activity-btn" id="activity{{n}}">

@@ -20,6 +20,16 @@ def signup():
             monthly_income = data['monthly-income']
         )
         db.add(newUser)
+        # give user basic categories
+        tag_names = ['Mortgage/Rent', 'Dining', 'Groceries', 'Presents', 'Bills', 'Entertainment', 'Investments', 'Travel', 'Shopping', 'Alcohol']
+        tag_colors =['#da3dad', '#6f20e2', '#140eee', '#1a593e', '#00bc69', '#cfe221', '#c47106','#e8b565', '#1bdcc8', '#cf0938']
+        for num in range(10):
+            newTag = Tag(
+                tag_name = 'Dining',
+                tag_color = '',
+                user_id = newUser.id
+            )
+            db.add(newTag)
         db.commit()
     except AssertionError:
         db.rollback()
