@@ -1,21 +1,27 @@
 <div class="modal-container" id="edit-deposit">
   <div class="modal">
-    <h2>Edit Deposit</h2>
+    <h2 class='section-heading modal-heading'>
+      <span>
+        Edit Deposit
+      </span>
+    </h2>
     <form action="/api/edit-deposit" method="POST">
-      <label for="amount">Amount</label>
-      <input type="number" name="amount" maxlength="50" id="current-deposit-amount" step="0.01" />
+      <span class="input-symbol-dollar">
+        <input type="number" class="input-amount-modal" name="amount" placeholder="Amount" maxlength="50" id="current-deposit-amount" step="0.01" />
+      </span>
       <input type="hidden" name="cash-id" id="cash-id">
-      <br /><br />
-      <label for="money-description">Description:</label>
-      <input type="text" name="money-description" id="current-deposit-description" placeholder="optional" />
-      <br /><br />
+      <input type="text" name="money-description" id="current-deposit-description" placeholder="Description(optional)" />
       <input type="date" id="deposit-date" name="deposit-date">
-      <input type="submit" value="Update"/>
-    </form>
+    <div class="flex-box-sa">
+        <button type="submit" class="button-30">Update</button>
+      </form>
 
-    <form action="/api/delete-deposit" method="POST">
-      <input type="submit" value="Delete">
-      <input type="hidden" name="cash-id" id="delete-deposit-data">
-    </form>
+      <form action="/api/delete-deposit" method="POST">
+        <input type="hidden" name="cash-id" id="delete-deposit-data">
+        <button type="submit" class="button-30 delete-btn">Delete</button>
+      </form>
+      
+    </div>
+
   </div>
 </div>

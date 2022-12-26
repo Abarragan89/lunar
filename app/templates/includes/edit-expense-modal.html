@@ -37,15 +37,16 @@
       <label for="monthly-bill-edit">Monthly Bill</label>
 
       <div class="flex-box-sa">
-        <form action="/api/delete-expense" method="POST">
-          <button type="submit" class="button-30 delete-btn">Delete</button>
-          <input type="hidden" name="product-id" id="delete-expense-data">
-        </form>
         
         <button type="submit" class="button-30">Update</button>
-      </div>
-
-    </form>
-
+      </form>
+      
+      <form action="/api/delete-expense" method="POST">
+        <button type="submit" class="button-30 delete-btn">Delete</button>
+        <input type="hidden" name="product-id" id="delete-expense-data">
+      </form>
+      
+    </div>
+      
+    </div>
   </div>
-</div>

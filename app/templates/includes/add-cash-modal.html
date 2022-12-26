@@ -1,16 +1,16 @@
 <div class="modal-container" id="add-cash-modal">
     <div class="modal">
-      <h2>Add Cash</h2>
+      <h2 class='section-heading modal-heading'>
+        <span>
+          Add Cash
+        </span>
+      </h2>
       <form action="/api/add-cash" method="POST">
-        <label for="amount">Amount</label>
-        <input type="number" name="amount" step="0.01"/>
-        <br /><br />
-        <label for="money-description">Description:</label>
-        <input type="text" name="money-description" maxlength="50" placeholder="optional" />
-        <br /><br />
-
+        <span class="input-symbol-dollar">
+          <input type="number" name="amount" class="input-amount-modal" placeholder="Amount" step="0.01"/>
+        </span>
+        <input type="text" name="money-description" maxlength="50" placeholder="Description(optional)" />
         <input type="date" id="add-cash-date" name="add-cash-date" required><br>
-        
         <button type="submit" class="button-30">Add</button>
       </form>
     </div>

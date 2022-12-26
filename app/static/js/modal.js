@@ -105,6 +105,8 @@ function fillEditExpenseFields(row) {
     currentProductPrice = currentProductPrice.slice(1);
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
 
+    console.log(currentProductId)
+
     document.getElementById('current-product-price').value = currentProductPrice;
     document.getElementById('current-product-tag').value = currentProductTagId;
     document.getElementById('current-product-name').value = currentProductName;

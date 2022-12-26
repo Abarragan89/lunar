@@ -665,7 +665,7 @@ menu p:not(:first-child) {
   content: "$";
   left: 37px;
 }
-.modal-container .modal #current-product-price, .modal-container .modal #expense-amount-input {
+.modal-container .modal #current-product-price, .modal-container .modal #expense-amount-input, .modal-container .modal .input-amount-modal {
   width: 100px;
 }
 .modal-container .modal button {

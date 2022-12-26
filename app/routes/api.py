@@ -222,7 +222,7 @@ def delete_expense():
     db = start_db_session()
     data = request.form
     try:
-        db.query(Product).filter(Product.id == data['product-id'].strip()).delete()
+        db.query(Product).filter(Product.id == data['product-id']).delete()
         db.commit()
     except:
         db.rollback()
