@@ -154,14 +154,16 @@ def add_expense():
             tag_id = data['product-category'],
             user_id = session['user_id'],
             amount = data['product-price'].strip(),
-            monthly_bill = monthly_bill
+            monthly_bill = monthly_bill,
+            time_created = data['expense-date']
         )
         db.add(newExpense)
         db.commit()
     except AssertionError:
         db.rollback()
         return jsonify(message='Missing fields.'), 400
-    except:
+    except Exception as e:
+        print(e)
         db.rollback()
         return jsonify(message='Expense not added'), 500
     return redirect(request.referrer)
@@ -175,7 +177,8 @@ def add_cash():
         newCash = Cash(
             description = data['money-description'].strip(),
             amount = data['amount'].strip(),
-            user_id = session['user_id']
+            user_id = session['user_id'],
+            time_created = data['add-cash-date']
         )
         db.add(newCash)
         db.commit()
@@ -202,7 +205,7 @@ def update_expense():
             'user_id': session['user_id'],
             'amount': data['product-price'].strip(),
             'monthly_bill': monthly_bill,
-            'time_created': data['expense-date']
+            'time_created': data['expense-date-current']
         })
         db.commit()
     except AssertionError:

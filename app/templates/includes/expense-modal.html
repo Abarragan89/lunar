@@ -1,13 +1,15 @@
 <div class="modal-container" id="expense-modal">
     <div class="modal">
-      <h2>Add Expense</h2>
-      <form action="/api/add-expense" method="POST">
-        <label for="product-name">Name</label>
-        <input type="product-name" name="product-name" maxlength="50" placeholder="optional" />
-        <br /><br />
 
-        <label for="product-category">Category</label>
+      <h2 class='section-heading modal-heading'>
+        <span>
+          Add Expense
+        </span>
+      </h2>
+      <form action="/api/add-expense" method="POST">
+
         <select name="product-category" required>
+          <option selected disabled >Pick a category</option>
           {% for tag in tags%}
           <option value="{{tag.id}}">{{tag.tag_name}}</option>
           {% endfor %}
@@ -15,17 +17,24 @@
           {% for expense in expenses %}
           <p>{{expense.description}}</p>
           {% endfor %}
+        </select> <br>
 
-        </select>
-        <br /><br />
+        <span class="input-symbol-dollar">
+          <input type="number" name="product-price" step="0.01" id="expense-amount-input" placeholder="amount" autocomplete="off" required />
+        </span> 
+        
 
-        <label for="product-price">Price</label>
-        <input type="number" name="product-price" step="0.01" required>
 
-        <label for="monthly-bill">Monthly</label>
-        <input type="checkbox" name="monthly-bill">
 
-        <input type="submit" value="ADD"/>
+        <input type="product-name" name="product-name" maxlength="50" placeholder="Description(optional)" autocomplete="off" />
+
+
+        <input type="date" id="expense-date" name="expense-date" required><br>
+
+        <input type="checkbox" name="monthly-bill" id="monthly-bill">
+        <label for="monthly-bill">Monthly Bill</label> <br>
+
+        <button type="submit" class="button-30"/>Add</button>
       </form>
     </div>
 </div>

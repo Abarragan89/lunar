@@ -68,18 +68,15 @@
   text-align: center;
   align-items: center;
   justify-items: center;
-  border: 1px solid #35858B;
-  border-radius: 4px;
+  border: 1px solid rgb(199, 195, 195);
+  border-radius: 3px;
   margin-bottom: 10px;
   margin-right: 5%;
   margin-left: 5%;
   padding: 5px 10px;
   box-shadow: rgba(0, 0, 0, 0.635) 1.95px 1.95px 2.6px;
 }
-.activity-link .activity-link-tag {
-  font-size: 1.2em;
-}
-.activity-link .activity-link-deposit {
+.activity-link .activity-link-tag, .activity-link .activity-link-deposit {
   font-size: 1.2em;
 }
 .activity-link .activity-link-description {

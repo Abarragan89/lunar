@@ -31,7 +31,7 @@ def home():
         .all()
     )
     # Get all purchases with joined with tags for activity display will be mixed with deposit data
-    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
+    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id, Product.monthly_bill
         ).filter(Product.user_id == user_id
         ).join(Tag
         ).order_by(desc(Product.time_created)

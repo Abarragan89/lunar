@@ -16,8 +16,8 @@
     {% include 'includes/add-cash-modal.html'%} 
     {% include 'includes/expense-modal.html'%} 
     {% include 'includes/category-modal.html' %}
-    {% include 'includes/edit-expense-modal.html' %}
     {% include 'includes/edit-deposit-modal.html' %}
+    {% include 'includes/edit-expense-modal.html' %}
     
     {% if loggedIn %}
 
@@ -42,9 +42,9 @@
     {% if loggedIn %}
     
     <menu class="flex-box-sa">
-        <a href="#" id="add-category-btn">Add Category</a>
-        <a href="#" id="add-cash-btn">Add Cash</a>
-        <a href="#" id="add-expense-btn">Add Expense</a>
+        <p id="add-category-btn">Add Category</p>
+        <p id="add-cash-btn">Add Cash</p>
+        <p id="add-expense-btn">Add Expense</p>
     </menu>
 
     {% endif %}

@@ -588,20 +588,21 @@ menu {
   position: fixed;
   width: 100%;
   bottom: 0;
-  border-top: 1px solid #35858B;
+  border-top: 1px solid #4FBDBA;
   background-color: #031920;
   box-shadow: 0px 0px 15px rgb(8, 8, 8);
 }
 
-menu a {
+menu p {
+  color: rgb(228, 240, 239);
   width: 100%;
   font-size: 0.9rem;
   text-align: center;
   padding: 0.6rem 0;
 }
 
-menu a:not(:first-child) {
-  border-left: 1px solid #35858B;
+menu p:not(:first-child) {
+  border-left: 1px solid #4FBDBA;
 }
 
 .modal-container {
@@ -619,9 +620,60 @@ menu a:not(:first-child) {
   border-radius: 4px;
   padding: 20px 10px;
   position: relative;
-  top: 50px;
-  background-color: #35858B;
+  top: 80px;
+  background-color: #031920;
   margin: 0 auto;
+  color: white;
+  border: 1px solid #6bd0d2;
+}
+.modal-container .modal .modal-heading {
+  margin: 15px 0;
+}
+.modal-container .modal #monthly-bill, .modal-container .modal #monthly-bill-edit {
+  margin: 10px 0px 0;
+}
+.modal-container .modal input, .modal-container .modal select {
+  background-color: #031920;
+  border: none;
+  border-bottom: 1px solid rgb(199, 195, 195);
+  font-size: 1.2em;
+  color: rgb(228, 240, 239);
+  margin: 20px 40px 10px;
+  padding-left: 10px;
+  color-scheme: dark;
+  text-align: center;
+}
+.modal-container .modal input:focus {
+  outline: none;
+  background-color: #031920;
+}
+.modal-container .modal input:active {
+  outline: none;
+  background-color: #031920;
+}
+.modal-container .modal input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #031920 inset !important;
+  -webkit-text-fill-color: rgb(228, 240, 239) !important;
+}
+.modal-container .modal .input-symbol-dollar {
+  position: relative;
+}
+.modal-container .modal .input-symbol-dollar:before {
+  font-size: 1.2em;
+  position: absolute;
+  top: -5px;
+  content: "$";
+  left: 37px;
+}
+.modal-container .modal #current-product-price, .modal-container .modal #expense-amount-input {
+  width: 100px;
+}
+.modal-container .modal button {
+  margin-top: 20px;
+}
+.modal-container .modal .delete-btn {
+  background-color: rgb(158, 9, 9);
+  color: rgb(228, 240, 239);
 }
 
 #add-expense-btn:hover .modal-container {
