@@ -26,7 +26,7 @@ document.getElementById('nav-menu-underlay').addEventListener('click', (e) => {
 
 function closeMainMenu() {
     closeMainMenuElements()
-    document.getElementById('nav-menu-underlay').style.pointerEvents = 'none'
+    document.getElementById('nav-menu-underlay').style.display = 'none'
     document.getElementById('nav-items-main-div').style.right = '-100vw';
     document.getElementById('nav-items-main-div').style.pointerEvents = 'none';
     document.getElementById('hamburger').classList.remove('fa-solid', 'fa-x')
@@ -34,7 +34,7 @@ function closeMainMenu() {
 }
 
 function openMainMenu() {
-    document.getElementById('nav-menu-underlay').style.pointerEvents = 'all'
+    document.getElementById('nav-menu-underlay').style.display = 'block'
     document.getElementById('nav-items-main-div').style.right = '0';
     document.getElementById('nav-items-main-div').style.pointerEvents = 'all';
     document.getElementById('hamburger').classList.remove('fa', 'fa-bars')
@@ -83,15 +83,9 @@ function createMainMenuElements() {
     // Category Link
     const categoryBtn = document.createElement('a');
     categoryBtn.textContent = 'Categories';
-    categoryBtn.href = '#';
     categoryBtn.classList.add('main-nav-item');
     categoryBtn.setAttribute('id', 'category-nav-btn');
     navCategoryDiv.insertAdjacentElement('beforebegin', categoryBtn);
-
-    // Caret Icon
-    // const caretIcon = document.createElement('i');
-    // caretIcon.classList.add('category-caret', 'fa-sharp', 'fa-solid', 'fa-chevron-down');
-    // navCategoryDiv.appendChild(caretIcon)
 
     // Logout Link
     const logoutBtn = document.createElement('a');
@@ -99,6 +93,13 @@ function createMainMenuElements() {
     logoutBtn.href = "/api/logout"
     logoutBtn.classList.add('main-nav-item');
     navCategoryDiv.insertAdjacentElement('afterEnd', logoutBtn)
+
+    // History Link
+    const historyBtn = document.createElement('a');
+    historyBtn.textContent = 'History';
+    historyBtn.classList.add('main-nav-item');
+    historyBtn.setAttribute('id', 'history-nav-btn');
+    navCategoryDiv.insertAdjacentElement('afterEnd', historyBtn);
 }
 
 function closeMainMenuElements() {

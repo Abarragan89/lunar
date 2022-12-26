@@ -3,7 +3,7 @@
     <h2>Edit Expense</h2>
     <form action="/api/update-expense" method="POST">
       <label for="product-name">Name</label>
-      <input type="text" name="product-name" id="current-product-name" placeholder="optional" />
+      <input type="text" name="product-name" maxlength="50" id="current-product-name" placeholder="optional" />
       <br /><br />
       <input type="hidden" name="product-id" id="product-id">
       <label for="product-category">Category</label>

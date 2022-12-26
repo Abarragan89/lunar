@@ -1,3 +1,4 @@
+/* GLOBAL COLORS AND FONTS*/
 * {
   padding: 0;
   margin: 0;
@@ -8,21 +9,22 @@
 }
 
 html, body {
-  height: 100%;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  overflow: auto;
+  background-color: #031920;
+  color: rgb(199, 195, 195);
+  padding-bottom: 30px;
 }
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
-  background-color: rgb(215, 200, 185);
 }
 
 input, button, textarea, select {
   font: inherit;
-}
-
-h1 {
-  color: red;
 }
 
 a {
@@ -30,23 +32,41 @@ a {
   text-decoration: none;
 }
 
+.section-heading {
+  border-bottom: 1px solid rgb(199, 195, 195);
+  font-size: 1.7em;
+  line-height: 0.017rem;
+  margin: 0 0 15px;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.section-heading span {
+  background-color: #031920;
+  padding: 0 10px;
+}
+
 #nav-menu-underlay {
   position: absolute;
-  pointer-events: none;
+  display: none;
   width: 100%;
-  height: 200%;
+  height: 250%;
   background-color: rgba(255, 255, 255, 0);
 }
 
 nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
   align-items: center;
-  position: relative;
+  background-color: #35858B;
 }
 
 #nav-items-main-div {
   right: -100vw;
   pointer-events: none;
-  background-color: rgba(51, 48, 48, 0.721);
+  background-color: rgba(29, 31, 31, 0.895);
   position: absolute;
   width: 100%;
   top: 35px;
@@ -72,160 +92,200 @@ nav {
 }
 #nav-items-main-div a:nth-child(1) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.2169230769s both;
           animation: slideInRight 0.5s 0.2169230769s both;
 }
 
 #nav-items-main-div a:nth-child(2) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.2938461538s both;
           animation: slideInRight 0.5s 0.2938461538s both;
 }
 
 #nav-items-main-div a:nth-child(3) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.3707692308s both;
           animation: slideInRight 0.5s 0.3707692308s both;
 }
 
 #nav-items-main-div a:nth-child(4) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.4476923077s both;
           animation: slideInRight 0.5s 0.4476923077s both;
 }
 
 #nav-items-main-div a:nth-child(5) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.5246153846s both;
           animation: slideInRight 0.5s 0.5246153846s both;
 }
 
 #nav-items-main-div a:nth-child(6) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.6015384615s both;
           animation: slideInRight 0.5s 0.6015384615s both;
 }
 
 #nav-items-main-div a:nth-child(7) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.6784615385s both;
           animation: slideInRight 0.5s 0.6784615385s both;
 }
 
 #nav-items-main-div a:nth-child(8) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.7553846154s both;
           animation: slideInRight 0.5s 0.7553846154s both;
 }
 
 #nav-items-main-div a:nth-child(9) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.8323076923s both;
           animation: slideInRight 0.5s 0.8323076923s both;
 }
 
 #nav-items-main-div a:nth-child(10) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.9092307692s both;
           animation: slideInRight 0.5s 0.9092307692s both;
 }
 
 #nav-items-main-div a:nth-child(11) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 0.9861538462s both;
           animation: slideInRight 0.5s 0.9861538462s both;
 }
 
 #nav-items-main-div a:nth-child(12) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.0630769231s both;
           animation: slideInRight 0.5s 1.0630769231s both;
 }
 
 #nav-items-main-div a:nth-child(13) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.14s both;
           animation: slideInRight 0.5s 1.14s both;
 }
 
 #nav-items-main-div a:nth-child(14) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.2169230769s both;
           animation: slideInRight 0.5s 1.2169230769s both;
 }
 
 #nav-items-main-div a:nth-child(15) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.2938461538s both;
           animation: slideInRight 0.5s 1.2938461538s both;
 }
 
 #nav-items-main-div a:nth-child(16) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.3707692308s both;
           animation: slideInRight 0.5s 1.3707692308s both;
 }
 
 #nav-items-main-div a:nth-child(17) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.4476923077s both;
           animation: slideInRight 0.5s 1.4476923077s both;
 }
 
 #nav-items-main-div a:nth-child(18) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.5246153846s both;
           animation: slideInRight 0.5s 1.5246153846s both;
 }
 
 #nav-items-main-div a:nth-child(19) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.6015384615s both;
           animation: slideInRight 0.5s 1.6015384615s both;
 }
 
 #nav-items-main-div a:nth-child(20) {
   position: relative;
-  padding-left: 25px;
-  color: rgb(255, 255, 255);
+  font-size: 1.1em;
+  padding-left: 15px;
+  margin-top: 3px;
+  color: rgb(228, 240, 239);
   -webkit-animation: slideInRight 0.5s 1.6784615385s both;
           animation: slideInRight 0.5s 1.6784615385s both;
 }
@@ -233,12 +293,12 @@ nav {
 .nav-category-item {
   display: block;
   position: relative;
-  color: white;
+  color: rgb(228, 240, 239);
 }
 
 .nav-category-items:hover {
   cursor: pointer;
-  background-color: rgba(36, 34, 34, 0.721);
+  background-color: #35858B;
 }
 
 #nav-categories-div {
@@ -268,206 +328,269 @@ nav {
   }
 }
 #nav-categories-div a:nth-child(1) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.0869230769s both;
           animation: fadeIn 0.2s 0.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(2) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.1638461538s both;
           animation: fadeIn 0.2s 0.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(3) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.2407692308s both;
           animation: fadeIn 0.2s 0.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(4) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.3176923077s both;
           animation: fadeIn 0.2s 0.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(5) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.3946153846s both;
           animation: fadeIn 0.2s 0.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(6) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.4715384615s both;
           animation: fadeIn 0.2s 0.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(7) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.5484615385s both;
           animation: fadeIn 0.2s 0.5484615385s both;
 }
 
 #nav-categories-div a:nth-child(8) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.6253846154s both;
           animation: fadeIn 0.2s 0.6253846154s both;
 }
 
 #nav-categories-div a:nth-child(9) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.7023076923s both;
           animation: fadeIn 0.2s 0.7023076923s both;
 }
 
 #nav-categories-div a:nth-child(10) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.7792307692s both;
           animation: fadeIn 0.2s 0.7792307692s both;
 }
 
 #nav-categories-div a:nth-child(11) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.8561538462s both;
           animation: fadeIn 0.2s 0.8561538462s both;
 }
 
 #nav-categories-div a:nth-child(12) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 0.9330769231s both;
           animation: fadeIn 0.2s 0.9330769231s both;
 }
 
 #nav-categories-div a:nth-child(13) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.01s both;
           animation: fadeIn 0.2s 1.01s both;
 }
 
 #nav-categories-div a:nth-child(14) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.0869230769s both;
           animation: fadeIn 0.2s 1.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(15) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.1638461538s both;
           animation: fadeIn 0.2s 1.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(16) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.2407692308s both;
           animation: fadeIn 0.2s 1.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(17) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.3176923077s both;
           animation: fadeIn 0.2s 1.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(18) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.3946153846s both;
           animation: fadeIn 0.2s 1.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(19) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.4715384615s both;
           animation: fadeIn 0.2s 1.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(20) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.5484615385s both;
           animation: fadeIn 0.2s 1.5484615385s both;
 }
 
 #nav-categories-div a:nth-child(21) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.6253846154s both;
           animation: fadeIn 0.2s 1.6253846154s both;
 }
 
 #nav-categories-div a:nth-child(22) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.7023076923s both;
           animation: fadeIn 0.2s 1.7023076923s both;
 }
 
 #nav-categories-div a:nth-child(23) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.7792307692s both;
           animation: fadeIn 0.2s 1.7792307692s both;
 }
 
 #nav-categories-div a:nth-child(24) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.8561538462s both;
           animation: fadeIn 0.2s 1.8561538462s both;
 }
 
 #nav-categories-div a:nth-child(25) {
-  color: white;
-  padding-left: 50px;
+  color: rgb(228, 240, 239);
+  padding-left: 40px;
   -webkit-animation: fadeIn 0.2s 1.9330769231s both;
           animation: fadeIn 0.2s 1.9330769231s both;
 }
 
 .main-nav-item:hover {
   cursor: pointer;
-  background-color: rgba(36, 34, 34, 0.721);
+  background-color: #35858B;
 }
 
 #nav-categories-div a:hover {
   cursor: pointer;
-  background-color: rgba(36, 34, 34, 0.721);
+  background-color: #35858B;
 }
 
 #hamburger {
   font-size: 1.5em;
   margin-right: 10px;
+  color: rgb(228, 240, 239);
 }
 
 #hamburger:hover {
   cursor: pointer;
 }
 
+/* CSS */
+.button-30 {
+  align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: 4px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, 0.2) 0 3px 1px -2px, rgba(0, 0, 0, 0.625) 0 2px 2px 0, rgba(0, 0, 0, 0.577) 0 1px 5px 0;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 0.8rem;
+  font-weight: 500;
+  height: 30px;
+  justify-content: center;
+  letter-spacing: 0.0892857em;
+  line-height: normal;
+  min-width: 64px;
+  outline: none;
+  overflow: visible;
+  padding: 0 15px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  will-change: transform, opacity;
+}
+
+.button-30:hover {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
+}
+
+.button-30:disabled {
+  background-color: rgba(0, 0, 0, 0.12);
+  box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 0, rgba(0, 0, 0, 0.14) 0 0 0 0, rgba(0, 0, 0, 0.12) 0 0 0 0;
+  color: rgba(0, 0, 0, 0.37);
+  cursor: default;
+  pointer-events: none;
+}
+
+.button-30:not(:disabled) {
+  background-color: #6bd0d2;
+}
+
+.button-30:focus {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
+}
+
+.button-30:active {
+  box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px -3px, rgba(0, 0, 0, 0.14) 0 8px 10px 1px, rgba(0, 0, 0, 0.12) 0 3px 14px 2px;
+  background-color: #35858B;
+}
+
 menu {
   position: fixed;
   width: 100%;
   bottom: 0;
-  border-top: 1px solid rgb(75, 169, 77);
-  border-radius: 8px 8px 0 0;
-  background-color: rgb(134, 190, 134);
+  border-top: 1px solid #35858B;
+  background-color: #031920;
+  box-shadow: 0px 0px 15px rgb(8, 8, 8);
 }
 
 menu a {
@@ -478,25 +601,26 @@ menu a {
 }
 
 menu a:not(:first-child) {
-  border-left: 1px solid black;
+  border-left: 1px solid #35858B;
 }
 
 .modal-container {
-  opacity: 0;
+  display: none;
   background-color: rgba(0, 0, 0, 0.709);
   position: absolute;
   z-index: 999;
   width: 100%;
-  height: 150%;
+  height: 250%;
   pointer-events: none;
 }
 .modal-container .modal {
   width: 85%;
   text-align: center;
+  border-radius: 4px;
   padding: 20px 10px;
   position: relative;
-  top: 30px;
-  background-color: green;
+  top: 50px;
+  background-color: #35858B;
   margin: 0 auto;
 }
 
@@ -505,11 +629,10 @@ menu a:not(:first-child) {
 }
 
 .show-modal {
-  opacity: 1;
+  display: block;
   pointer-events: all;
 }
 
-/* GLOBAL COLORS AND FONTS*/
 /* Utility classes */
 .flex-box-sa {
   display: flex;

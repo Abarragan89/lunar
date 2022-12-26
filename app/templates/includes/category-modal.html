@@ -3,7 +3,7 @@
       <h2>Categories</h2>
       <form id='category-form' action="/api/add-category" method="POST">
         <label for="category-name">Category:</label>
-        <input type="text" name="category-name" placeholder="category" id="category-name" required />
+        <input type="text" name="category-name" maxlength="50" placeholder="category" id="category-name" required />
         <p class="error-msg" id="error-msg">
           Only alphnumeric, '-', '_', and spaces are allowed
         </p>

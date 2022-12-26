@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='/styles/utilities/variables.css')}}">
+    
     <link rel="stylesheet" href="{{url_for('static', filename='/styles/global/global.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename='/styles/modals/modal.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
@@ -21,14 +23,16 @@
 
     <div id="nav-menu-underlay"></div>
 
-    <nav class='flex-box-sb'>
-        <h1 class='ml-4'>Logo</h1>
-        <div id="nav-items-main-div" tabindex="0" class="flex-box-col-sb nav-links">
-            <div data-all-tags="{{tags|map(attribute='tag_name')|join(', ')}}" id="nav-categories-div">
+    <div>
+        <nav class='flex-box-sb'>
+            <h1 class='ml-4'>Logo</h1>
+            <div id="nav-items-main-div" tabindex="0" class="flex-box-col-sb nav-links">
+                <div data-all-tags="{{tags|map(attribute='tag_name')|join(', ')}}" id="nav-categories-div">
+                </div>
             </div>
-        </div>
-        <i class="fa fa-bars" id="hamburger"></i>
-    </nav>
+            <i class="fa fa-bars" id="hamburger"></i>
+        </nav>
+    </div>
     {% endif %}
 
     {% block body %} 
@@ -38,9 +42,8 @@
     {% if loggedIn %}
     
     <menu class="flex-box-sa">
-        <a href="#">History</a>
+        <a href="#" id="add-category-btn">Add Category</a>
         <a href="#" id="add-cash-btn">Add Cash</a>
-        <a href="#" id="add-category-btn">Categories</a>
         <a href="#" id="add-expense-btn">Add Expense</a>
     </menu>
 

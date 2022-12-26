@@ -19,6 +19,7 @@ activity_rows.forEach((row) => {
         if (typeOfActivity === 'deposit') {
             showModal('edit-deposit');
             fillEditDepositFields(row);
+
         } else if (typeOfActivity === 'expense') {
             showModal('edit-expense');
             fillEditExpenseFields(row);
@@ -67,9 +68,14 @@ document.querySelector('#edit-deposit').addEventListener('click', (e) => {
 // --- show / close function -- //
 function showModal(id) {
     document.getElementById(id).classList.add('show-modal');
+    document.getElementById(id).style.top = `${window.scrollY}px`;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.scroll = "no";
 }
 function closeModal(id) {
     document.getElementById(id).classList.remove('show-modal');
+    document.documentElement.style.overflow = 'auto';
+    document.body.scroll = "yes";
 }
 
 // Get and format date to restrict date chosen in update

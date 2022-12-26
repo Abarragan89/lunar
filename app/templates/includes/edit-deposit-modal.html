@@ -3,7 +3,7 @@
     <h2>Edit Deposit</h2>
     <form action="/api/edit-deposit" method="POST">
       <label for="amount">Amount</label>
-      <input type="number" name="amount" id="current-deposit-amount" step="0.01" />
+      <input type="number" name="amount" maxlength="50" id="current-deposit-amount" step="0.01" />
       <input type="hidden" name="cash-id" id="cash-id">
       <br /><br />
       <label for="money-description">Description:</label>

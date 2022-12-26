@@ -1,10 +1,10 @@
+@import '../utilities/variables.scss';
+
 #home-page {
     text-align: center;
-    h1 {
-        color: blue;
-    }
+
     p {
-        font-size: .9em;
+        font-size: .8em;
         margin-bottom: 10px;
     }
     
@@ -22,22 +22,85 @@
 
 //  LOGGED IN STYLES
 #dashboard {
-    h1 {
-        color: blue;
-    }
-    img {
-        display: block;
-        width: 90%;
-        margin: 0 auto;
+    margin-top: 40px;
+    .current-date {
+        text-align: center;
         margin-top: 10px;
+        color: $gray;
+        font-size: 1.1em;
     }
+    .money-day-countdown {
+        margin: 10px 0 30px 0;
+
+        p {
+            font-size: 1.2em;
+            text-align: center;
+            color: $offWhite;
+        }
+
+        #money-left-positive, #money-left-negative {
+            font-size: 1.2rem;
+        }
+        #money-left-positive {
+            color: $accentColor;
+        }
+        #money-left-negative {
+            color: $redMsg;
+        }
+        #days-left {
+            font-size: 1.2rem;
+            color: $accentColor;
+        }
+    }
+    // Tag colored squares
+    .relevant-graph-tags {
+        margin-right: 15px;
+        font-size: 1.1em;
+    }
+    .tag-color-square {
+        margin: 0 5px;
+        border-radius: 8px;
+        width: 7px;
+        height: 7px;
+        display: inline-block;
+    }
+    .current-data-graph-div {
+        align-items: center;
+        margin: 0 5% 20px;
+        border-radius: 3px;
+        padding-bottom: 20px;
+        margin-bottom: 30px;
+    }
+
 }
 
-// Tag colored squares
-.tag-color-square {
-    margin-right: 5px;
-    border-radius: 8px;
-    width: 7px;
-    height: 7px;
-    display: inline-block;
+
+.activity-link {
+    text-align: center;
+    align-items: center;
+    justify-items: center;
+    border: 1px solid $secondaryColor;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    margin-right: 5%;
+    margin-left: 5%;
+    padding: 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.635) 1.95px 1.95px 2.6px;
+
+    .activity-link-tag {
+        font-size: 1.2em;
+    }
+    .activity-link-deposit {
+        font-size: 1.2em;
+    }
+    .activity-link-description {
+        flex: 1;
+
+        p:last-child {
+            font-size: .85rem;
+            padding: 0 15px;
+            line-height: .9rem;
+            font-style: italic;
+        }
+    }
 }

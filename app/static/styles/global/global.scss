@@ -1,3 +1,5 @@
+@import '../utilities/variables.scss';
+
 ////// CSS RESET ///////
 * {
   padding: 0;
@@ -9,44 +11,65 @@
   }
 
 html, body {
-height: 100%;
+height: fit-content;
+overflow: auto;
+background-color: $primaryColor;
+color: $gray;
+padding-bottom: 30px;
 }
 
 body {
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
-    background-color: rgb(215, 200, 185);
   }
 
 input, button, textarea, select {
 font: inherit;
 }
 
-h1 {
-  color: red;
-}
 a {
   color: inherit;
   text-decoration: none;
 }
 
-///// Navigation Bar ////////
+///////////////////// Section Heading Titles ///////////////////
+.section-heading {
+  border-bottom: 1px solid $gray;
+  font-size: 1.7em;
+  line-height: .017rem;
+  margin: 0 0 15px;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+
+  span {
+      background-color: $primaryColor;
+      padding: 0 10px;
+  }
+}
+
+////////////////// Navigation Bar //////////////////
 #nav-menu-underlay {
   position: absolute;
-  pointer-events: none;
+  display: none;
+  // pointer-events: none;
   width: 100%;
-  height: 200%;
+  height: 250%;
   background-color: #ffffff00;
 }
 
 nav {
+  position: fixed;
+  width: 100%;
+	top: 0;
   align-items: center;
-  position: relative;
+  background-color: $secondaryColor;
 }
 #nav-items-main-div {
   right: -100vw;
   pointer-events: none;
-  background-color: rgba(51, 48, 48, 0.721);
+  background-color: rgba(29, 31, 31, 0.895);
   position: absolute;
   width: 100%;
   top: 35px;
@@ -65,8 +88,10 @@ nav {
 @for $i from 1 through 20 {
   #nav-items-main-div a:nth-child(#{$i}) {
       position: relative;
-      padding-left: 25px;
-      color: rgb(255, 255, 255);
+      font-size: 1.1em;
+      padding-left: 15px;
+      margin-top: 3px;
+      color: $offWhite;
       animation: slideInRight .5s  .14s + ($i / 13) both;
   }
 }
@@ -75,12 +100,12 @@ nav {
 .nav-category-item {
   display: block;
   position: relative;
-  color: white;
+  color: $offWhite;
 }
 
 .nav-category-items:hover {
   cursor: pointer;
-  background-color: rgba(36, 34, 34, 0.721);
+  background-color: $secondaryColor;;
 }
 
 #nav-categories-div {
@@ -103,48 +128,101 @@ nav {
 
 @for $i from 1 through 25 {
   #nav-categories-div a:nth-child(#{$i}) {
-      color: white;
-      padding-left: 50px;
+      color: $offWhite;
+      padding-left: 40px;
       animation: fadeIn .2s  .01s + ($i / 13) both;
   }
 }
 
 .main-nav-item:hover {
   cursor: pointer;
-  background-color: rgba(36, 34, 34, 0.721);
+  background-color: $secondaryColor;
 }
 
-// .category-caret {
-//   font-size: .6em;
-//   color: white;
-//   position: absolute;
-//   left: 99px;
-//   bottom: 28px;
-//   -webkit-animation: slideInRight 0.5s 0.2938461538s both;
-//           animation: slideInRight 0.5s 0.2938461538s both;
-// }
 
 #nav-categories-div a:hover {
   cursor: pointer;
-  background-color: rgba(36, 34, 34, 0.721);
+  // background-color: rgba(36, 34, 34, 0.721);
+  background-color: $secondaryColor;
 }
 
 #hamburger {
   font-size: 1.5em;
   margin-right: 10px;
+  color: $offWhite;
 }
 #hamburger:hover {
   cursor: pointer;
 }
+
+////////// Main button class ////////////////////
+/* CSS */
+.button-30 {
+  align-items: center;
+  appearance: none;
+  border-radius: 4px;
+  border-style: none;
+  box-shadow: rgba(0, 0, 0, .2) 0 3px 1px -2px,rgba(0, 0, 0, 0.625) 0 2px 2px 0,rgba(0, 0, 0, 0.577) 0 1px 5px 0;
+  box-sizing: border-box;
+  color: black;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: .8rem;
+  font-weight: 500;
+  height: 30px;
+  justify-content: center;
+  letter-spacing: .0892857em;
+  line-height: normal;
+  min-width: 64px;
+  outline: none;
+  overflow: visible;
+  padding: 0 15px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: box-shadow 300ms cubic-bezier(.4, 0, .2, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  will-change: transform,opacity;
+}
+
+.button-30:hover {
+  box-shadow: rgba(0, 0, 0, .2) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
+}
+
+.button-30:disabled {
+  background-color: rgba(0, 0, 0, .12);
+  box-shadow: rgba(0, 0, 0, .2) 0 0 0 0, rgba(0, 0, 0, .14) 0 0 0 0, rgba(0, 0, 0, .12) 0 0 0 0;
+  color: rgba(0, 0, 0, .37);
+  cursor: default;
+  pointer-events: none;
+}
+
+.button-30:not(:disabled) {
+  background-color: $accentColor;
+}
+
+.button-30:focus {
+  box-shadow: rgba(0, 0, 0, .2) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
+}
+
+.button-30:active {
+  box-shadow: rgba(0, 0, 0, .2) 0 5px 5px -3px, rgba(0, 0, 0, .14) 0 8px 10px 1px, rgba(0, 0, 0, .12) 0 3px 14px 2px;
+  background-color: $secondaryColor;
+}
+
 
 //////// FOOTER menu that is present the entire time loggedIn /////////
 menu {
   position: fixed;
   width: 100%;
   bottom: 0;
-  border-top: 1px solid rgb(75, 169, 77);
-  border-radius: 8px 8px 0 0;
-  background-color: rgb(134, 190, 134);
+  border-top: 1px solid $secondaryColor;
+  background-color: $primaryColor;
+  box-shadow: 0px 0px 15px rgb(8, 8, 8);
 }
 
 menu a {
@@ -155,25 +233,26 @@ menu a {
 }
 
 menu a:not(:first-child) {
-  border-left: 1px solid black;
+  border-left: 1px solid $secondaryColor;
 }
 //////// MODAL STYLES THAT OPEN WITH FOOTER MENU /////////
 .modal-container {
-  opacity: 0;
+  display: none;
   background-color: rgba(0, 0, 0, 0.709);
   position: absolute;
   z-index: 999;
   width: 100%;
-  height: 150%;
+  height: 250%;
   pointer-events: none;
 
   .modal {
       width: 85%;
       text-align: center;
+      border-radius: 4px;
       padding: 20px 10px;
       position: relative;
-      top: 30px;
-      background-color: green;
+      top: 50px;
+      background-color: $secondaryColor;
       margin: 0 auto;
   }
 }
@@ -182,19 +261,9 @@ menu a:not(:first-child) {
 } 
 
 .show-modal {
-  opacity: 1;
+  display: block;
   pointer-events: all;
 }
-
-
-/* GLOBAL COLORS AND FONTS*/
-$primaryColor: #2d0186;
-$secondaryColor: gold;
-$tertiaryColor: #004e86;
-$accentColor: rgb(94, 90, 90);
-$offWhite: rgb(232, 232, 232);
-$green: rgb(1, 137, 1);
-$transparentGreen: rgba(11, 91, 11, 0.402);
 
 
 /* Utility classes */
