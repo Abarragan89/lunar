@@ -10,12 +10,13 @@
 
 <main data-set-loggedIn="true" id="dashboard">
   <div class="current-date">
-    <h2>{{today.strftime('%A')}}, {{today.strftime('%-b')}} {{today.strftime('%-d')}}</h2>
+    <h2>{{today.strftime('%A')}}, {{today.strftime('%-d')}}{{ format_date_ending(today.strftime('%-d'))}}</h2>
   </div>
   <div class="flex-box-sa money-day-countdown">
     <p>
       {% if (total_monthly_expenses + auto_deductions) > (user_data.monthly_income + user_cash)%}
       Over:<br />
+      
       <span id="money-left-negative" 
         >-${{(total_monthly_expenses +
         auto_deductions) - (user_data.monthly_income + user_cash)}}</span
@@ -39,7 +40,7 @@
   
   <h2 class='section-heading'>
     <span>
-      December
+      {{today.strftime('%B')}}
     </span>
   </h2>
 

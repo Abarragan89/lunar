@@ -11,6 +11,11 @@ document.getElementById('add-cash-btn').addEventListener('click', () => {
     showModal('add-cash-modal');
     getCurrentDate('add-cash-date')
 })
+document.getElementById('edit-profile-btn').addEventListener('click', () => {
+    showModal('edit-user-modal');
+})
+
+
 
 
 function getCurrentDate(id) {
@@ -75,6 +80,14 @@ document.querySelector('#edit-deposit').addEventListener('click', (e) => {
     }
 })
 
+document.getElementById('edit-user-modal').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('edit-user-modal');
+    }
+})
+
+
 
 // --- show / close function -- //
 function showModal(id) {
@@ -104,8 +117,6 @@ function fillEditExpenseFields(row) {
     let currentProductPrice = row.children[0].children[2].textContent;
     currentProductPrice = currentProductPrice.slice(1);
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
-
-    console.log(currentProductId)
 
     document.getElementById('current-product-price').value = currentProductPrice;
     document.getElementById('current-product-tag').value = currentProductTagId;

@@ -19,7 +19,7 @@ padding-bottom: 30px;
 }
 
 body {
-    line-height: 1.5;
+    line-height: 1.3;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -68,7 +68,7 @@ nav {
 #nav-items-main-div {
   right: -100vw;
   pointer-events: none;
-  background-color: rgba(29, 31, 31, 0.895);
+  background-color: rgba(11, 30, 30, 0.962);
   position: absolute;
   width: 100%;
   top: 35px;
@@ -87,9 +87,9 @@ nav {
 @for $i from 1 through 20 {
   #nav-items-main-div a:nth-child(#{$i}) {
       position: relative;
-      font-size: 1.1em;
+      font-size: 1.3em;
       padding-left: 15px;
-      margin-top: 3px;
+      margin-top: 5px;
       color: $offWhite;
       animation: slideInRight .5s  .14s + ($i / 13) both;
   }
@@ -129,6 +129,7 @@ nav {
   #nav-categories-div a:nth-child(#{$i}) {
       color: $offWhite;
       padding-left: 40px;
+      font-size: 1.2em;
       animation: fadeIn .2s  .01s + ($i / 13) both;
   }
 }
@@ -227,9 +228,15 @@ menu {
 menu p {
   color: $offWhite;
   width: 100%;
-  font-size: .9rem;
+  font-size: 1.15rem;
   text-align: center;
   padding: .6rem 0;
+}
+menu p:hover {
+  cursor: pointer;
+}
+menu p:active {
+  background-color: $accentColor;
 }
 
 menu p:not(:first-child) {
@@ -257,16 +264,15 @@ menu p:not(:first-child) {
       color: white;
       border: 1px solid $accentColor;
 
-      .modal-heading {
-        margin: 15px 0;
-      }
+    .modal-heading {
+      margin: 15px 0;
+    }
 
     #monthly-bill, #monthly-bill-edit {
       margin: 10px 0px 0;
       accent-color: $accentColor;
     }
 
-    
     input, select {
         background-color: $primaryColor;
         border: none;
@@ -309,11 +315,21 @@ menu p:not(:first-child) {
     button {
       margin-top: 20px;
     }
+    #category-color-picker {
+      border: none;
+      margin: 15px 5px 0;
+      padding: 0;
+    }
 
     .delete-btn {
       background-color: $redBg;
       color: $offWhite;
     }
+    .error-msg {
+      display: none;
+      text-align: center;
+      color: $redMsg;
+  }
 
   }
 }

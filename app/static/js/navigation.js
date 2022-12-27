@@ -54,15 +54,33 @@ function addListenerToCategories() {
                 categoryDivEl.removeChild(categoryDivEl.firstChild);
             }
         } else {
-            document.getElementById('nav-categories-div').style.maxHeight = '500px'
+            categoryDivEl.style.maxHeight = '500px'
             let allTags = categoryDivEl.getAttribute('data-all-tags')
+            let allTagColor = categoryDivEl.getAttribute('data-all-tags-colors')
             allTags = allTags.split(",")
+            allTagColor = allTagColor.split("),")
+
             for (let i = 0; i < allTags.length; i++) {
+
+                // Create category link in nav
                 let newLI = document.createElement('a')
-                newLI.textContent = allTags[i].trim()
+                newLI.textContent = `${allTags[i].trim()} `
                 newLI.href = `/categories/${allTags[i].trim()}`
                 newLI.classList.add('nav-category-item')
-                document.getElementById('nav-categories-div').appendChild(newLI)
+
+                // Attach color span to category link in nav
+                let newTagColor = document.createElement('p');
+                newTagColor.style.height = '8px'
+                newTagColor.style.fontSize = '.001em';
+                newTagColor.style.display = 'inline-block'
+                newTagColor.style.width = '20px'
+                newTagColor.style.color = 'transparent';
+                newTagColor.style.backgroundColor = allTagColor[i];
+
+                // Attach color to tags and tag to category div element
+                newLI.appendChild(newTagColor);
+                categoryDivEl.appendChild(newLI);
+                
             }
         }
     })
