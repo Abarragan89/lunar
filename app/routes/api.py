@@ -21,10 +21,22 @@ def signup():
         )
         db.add(newUser)
         db.commit()
+        tag_colors =[
+                'rgba(255, 0, 0, 0.407)', 
+                'rgba(255, 140, 0, 0.407)',
+                'rgba(212, 255, 0, 0.407)', 
+                'rgba(26, 255, 0, 0.407)', 
+                'rgba(0, 255, 162, 0.407)',  
+                'rgba(0, 191, 255, 0.407)',
+                'rgba(0, 68, 255, 0.407)',
+                'rgba(38, 0, 255, 0.407)',
+                'rgba(153, 0, 255, 0.407)',
+                'rgba(255, 0, 234, 0.407)',
+                'rgba(255, 0, 64, 0.407)'
+                ]
         # give user basic categories
-        tag_names = ['Mortgage-Rent', 'Dining', 'Groceries', 'Presents', 'Bills', 'Entertainment', 'Investments', 'Travel', 'Shopping', 'Alcohol']
-        tag_colors =['#da3dad', '#6f20e2', '#140eee', '#1a593e', '#00bc69', '#cfe221', '#c47106','#e8b565', '#1bdcc8', '#cf0938']
-        for num in range(10):
+        tag_names = ['Mortgage-Rent', 'Dining', 'Groceries', 'Presents', 'Bills', 'Entertainment', 'Investments', 'Travel', 'Shopping', 'Alcohol', 'Misc.']
+        for num in range(11):
             newTag = Tag(
                 tag_name = tag_names[num],
                 tag_color = tag_colors[num],
@@ -121,11 +133,15 @@ def update_user():
 def add_category():
     data = request.form
     db = start_db_session()
+    # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
+    h = data['category-color'][1:]
+    colorTuple = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, .4)'
 
     try:
         newTag = Tag(
             tag_name = data['category-name'].strip(),
-            tag_color = data['category-color'],
+            tag_color = adjust_color,
             user_id = session['user_id']
         )
         db.add(newTag)

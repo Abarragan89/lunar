@@ -631,6 +631,7 @@ menu p:not(:first-child) {
 }
 .modal-container .modal #monthly-bill, .modal-container .modal #monthly-bill-edit {
   margin: 10px 0px 0;
+  accent-color: #6bd0d2;
 }
 .modal-container .modal input, .modal-container .modal select {
   background-color: #031920;
@@ -816,4 +817,12 @@ menu p:not(:first-child) {
 
 .mb-5 {
   margin-bottom: 9px;
+}
+
+#temporary-block {
+  width: 50px;
+  display: block;
+  margin: 0 auto;
+  color: rgba(255, 255, 255, 0);
+  background-color: rgba(255, 0, 64, 0.407);
 }/*# sourceMappingURL=global.css.map */

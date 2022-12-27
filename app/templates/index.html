@@ -42,6 +42,9 @@
       December
     </span>
   </h2>
+
+ 
+
   <div class='current-data-graph-div flex-box-col-sa'>
     <div class='flex-box-sa-wrap'>
       {% for num in range( relevant_tag_colors | length )%}
@@ -62,7 +65,8 @@
           {
             data: {{ values | safe }},
             backgroundColor: {{ relevant_tag_colors | safe}},
-            borderWidth: 0
+            borderWidth: 1,
+            borderColor: "black"
           }
         ]
       },

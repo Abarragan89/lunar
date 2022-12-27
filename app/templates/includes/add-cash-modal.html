@@ -7,7 +7,7 @@
       </h2>
       <form action="/api/add-cash" method="POST">
         <span class="input-symbol-dollar">
-          <input type="number" name="amount" class="input-amount-modal" placeholder="Amount" step="0.01"/>
+          <input type="number" name="amount" min="0" class="input-amount-modal" placeholder="Amount" step="0.01"/>
         </span>
         <input type="text" name="money-description" maxlength="50" placeholder="Description(optional)" />
         <input type="date" id="add-cash-date" name="add-cash-date" required><br>

@@ -7,7 +7,7 @@
     </h2>
     <form action="/api/edit-deposit" method="POST">
       <span class="input-symbol-dollar">
-        <input type="number" class="input-amount-modal" name="amount" placeholder="Amount" maxlength="50" id="current-deposit-amount" step="0.01" />
+        <input type="number" class="input-amount-modal" min="0" name="amount" placeholder="Amount" maxlength="50" id="current-deposit-amount" step="0.01" />
       </span>
       <input type="hidden" name="cash-id" id="cash-id">
       <input type="text" name="money-description" id="current-deposit-description" placeholder="Description(optional)" />
