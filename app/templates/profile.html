@@ -1,17 +1,37 @@
 {% extends 'base.html' %} {% block head %}
+
 <title>Profile</title>
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/profile/profile.css')}}">
 {% endblock %} {% block body %}
 
 <main id='profile-main'>
     <a href="{{url_for('site.home')}}">Back</a>
-    <h1>Profile</h1>
+    <h1 class='section-heading page-heading'>
+        <span>
+          Profile
+        </span>
+      </h1>
+
+    <div class="flex-box-sa user-profile">
+        <div class="flex-box-col-se">
+            <p>Name: <span>{{user_data.username}}</span></p>
+            <p>Salary: <span>{{user_data.monthly_income}}</span></p>
+        </div>
+        <p id="edit-profile-btn">Edit</p>
+    </div>
+
     <form action="api/update-user-info" method="POST">
         <p>Name:</p> <input type="text" value="{{ user_data.username }}" name="username">
-        <p>Monthly Income:</p> <input type="text" value="{{ user_data.monthly_income }}" name="monthly_income">
         <input type="submit" value="Update">
+        <p>Monthly Income:</p> <input type="text" value="{{ user_data.monthly_income }}" name="monthly_income">
     </form>
-
-    <h1>Monthly Charges</h1>
+    
+    
+    <h2 class='section-heading modal-heading'>
+        <span>
+          Monthly Charges
+        </span>
+      </h2>
     {% for category in category_data %}
     <form action="api/delete-expense" method="POST" class='flex-box-sa'>
         <div class="flex-box-col-sa">

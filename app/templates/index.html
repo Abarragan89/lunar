@@ -9,25 +9,52 @@
 {% if loggedIn == True %}
 
 <main data-set-loggedIn="true" id="dashboard">
-  <div class="flex-box-sa">
+  <div class="current-date">
+    <h2>{{today.strftime('%A')}}, {{today.strftime('%-d')}}{{ format_date_ending(today.strftime('%-d'))}}</h2>
+  </div>
+  <div class="flex-box-sa money-day-countdown">
     <p>
-      <span id="money-left"
+      {% if (total_monthly_expenses + auto_deductions) > (user_data.monthly_income + user_cash)%}
+      Over:<br />
+      
+      <span id="money-left-negative" 
+        >-${{(total_monthly_expenses +
+        auto_deductions) - (user_data.monthly_income + user_cash)}}</span
+      >
+      
+
+      {% else %}
+      Money Remaining:<br />
+      <span id="money-left-positive"
         >${{ (user_data.monthly_income + user_cash) - (total_monthly_expenses +
         auto_deductions) }}</span
       >
-      <br />remaing
+      
+      {% endif %}
     </p>
-    <p><span>{{ days_until_first }} days</span> <br />remaining</p>
+    <p>
+      Days Remaining:<br />
+      <span id="days-left">{{ days_until_first }}
+      </span></p>
   </div>
   
-  <div class='flex-box-sa'>
-    <div class='flex-box-col-sa-wrap'>
-      <p>Categories:</p>
+  <h2 class='section-heading'>
+    <span>
+      {{today.strftime('%B')}}
+    </span>
+  </h2>
+
+ 
+
+  <div class='current-data-graph-div flex-box-col-sa'>
+    <div class='flex-box-sa-wrap'>
       {% for num in range( relevant_tag_colors | length )%}
-      <p><span class="tag-color-square" data-color="{{relevant_tag_colors[num]}}"></span>{{relevant_tag_names[num]}}</p>
+       <a href="/categories/{{relevant_tag_names[num]}}">
+         <p class="relevant-graph-tags"><span class="tag-color-square" data-color="{{relevant_tag_colors[num]}}"></span>{{relevant_tag_names[num]}}</p>
+       </a>
       {% endfor %}
     </div>
-    <canvas id="pieChart" width="300" height="300"></canvas>
+    <canvas id="pieChart" width="250" height="250"></canvas>
   </div>
   <script>
     const ctx = document.getElementById('pieChart').getContext('2d')
@@ -39,7 +66,8 @@
           {
             data: {{ values | safe }},
             backgroundColor: {{ relevant_tag_colors | safe}},
-            borderWidth: 0
+            borderWidth: 1,
+            borderColor: "black"
           }
         ]
       },
@@ -58,47 +86,58 @@
   });
   </script>
 
+  <h2 class='section-heading'>
+    <span>
+      Recent Activity
+    </span>
+  </h2>
+  <div>
+    {% for data in activity_data %}
+    <a class="edit-activity-btn" id="activity{{n}}">
+      {% if data|length > 4 %}
+      <div class="flex-box-sb activity-link" data-type="expense">
+      {% else%}
+      <div class="flex-box-sb activity-link" data-type="deposit">
+      {% endif %}
+          <div class='flex-box-col-se date-div'
+          data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+            <p>{{ data[0].year}}</p>
+          </div>
+          <div class="flex-box-col-sa activity-link-description">
+            {% if data|length > 4 %}
+            <p
+              class="activity-link-tag"
+              data-isMonthly="{{data[6]}}"
+              data-product-id="{{data[5]}}"
+              data-tag-id="{{data[4]}}"
+            >
+              {{ data[3] }}
+            </p>
+            {% else%}
+            <p class="activity-link-deposit" data-cash-id="{{data[3]}}">Deposit</p>
+            {% endif %}
+            <p>{{ data[2] }}</p>
+          </div>
+          <p>${{ data[1] }}</p>
+      </div>
+    </a>
+    {% endfor%} 
+  </div>
 
-  {% for data in activity_data %}
-  <a href="#" class="edit-activity-btn" id="activity{{n}}">
-    {% if data|length > 4 %}
-    <div class="flex-box-sa" data-type="expense">
-    {% else%}
-    <div class="flex-box-sa" data-type="deposit">
-    {% endif %}
-        <div class='flex-box-col-se date-div'
-        data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
-        <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
-        <p>{{ data[0].year}}</p>
-      </div>
-      <div class="flex-box-col-sa">
-        {% if data|length > 4 %}
-        <p
-          data-product-id="{{data[5]}}"
-          data-tag-id="{{data[4]}}"
-        >
-          {{ data[3] }}
-        </p>
-        {% else%}
-        <p data-cash-id="{{data[3]}}">Deposit</p>
-        {% endif %}
-        <p>{{ data[2] }}</p>
-      </div>
-      <p>${{ data[1] }}</p>
-    </div>
-  </a>
-  {% endfor%} 
+
+
 
   {% else %}
   <main data-set-loggedIn="false" id="home-page">
-    <h1>Suspend</h1>
+    {% include 'includes/header.html' %}
     <p>"take the suspense out of expenses"</p>
     <img
       src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
       alt="screenshot of graph"
     />
-    <a href="{{ url_for('site.signup')}}"><button>Signup</button></a>
-    <a href="{{ url_for('site.login')}}"><button>Login</button></a>
+    <a href="{{ url_for('site.signup')}}"><button class="button-30">Signup</button></a>
+    <a href="{{ url_for('site.login')}}"><button class="button-30">Login</button></a>
   </main>
   {% endif%} {% endblock %}
 </main>

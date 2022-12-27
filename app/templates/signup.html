@@ -1,20 +1,29 @@
 {% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/login/login.css')}}">
 <title>Signup</title>
 {% endblock %} {% block body %}
 
-<div>
-    <h2>Signup</h2>
+{% include 'includes/header.html' %}
+
+<div class="login-signup-div">
+    <legend>
+      <span>Signup</span>
+    </legend>
     <form id="signup-form" action="/api/signup" method="POST">
-      <input type="username" name="username" placeholder="username" required />
+      <input type="username" name="username" maxlength="50" placeholder="username" required />
       <br /><br />
       <input type="email" name="email" placeholder="email" id="signup-email" required />
       <br /><br />
       <input type="password" name="password" placeholder="password" required />
       <br /><br />
-      <input type="number" name="monthly-income" step="0.01" placeholder="monthly-income" required />
+      <span class="input-symbol-dollar">
+        <input type="number" name="monthly-income" step="0.01" placeholder="monthly-income" value={{ monthly_income }} required />
+      </span>     
       <br /><br />
-      <input type="submit" value="Sign Up" />
+      <button type="submit" class="button-30" />Sign up</button>
     </form>
 </div>
+<p class="need-account">Already have an account? <a href="{{ url_for('site.login')}}">Login</a></p>
+
 
 {% endblock %}

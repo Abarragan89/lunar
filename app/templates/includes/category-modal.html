@@ -1,17 +1,20 @@
 <div class="modal-container" id="category-modal">
     <div class="modal">
-      <h2>Categories</h2>
+      <h2 class='section-heading modal-heading'>
+        <span>
+          Add Category
+        </span>
+      </h2>
       <form id='category-form' action="/api/add-category" method="POST">
-        <label for="category-name">Category:</label>
-        <input type="text" name="category-name" placeholder="category" id="category-name" required />
+        <input type="text" name="category-name" maxlength="50" placeholder="Category name" id="category-name" required />
         <p class="error-msg" id="error-msg">
-          Only alphnumeric, '-', '_', and spaces are allowed
-        </p>
+          Only alphnumeric, '-', '_', and spaces are allowed. <br>
+          Category names must be unique.
+        </p> 
+        <br><label for="category-color-picker">Pick a color:</label>
+        <input type="color" name="category-color" id="category-color-picker" required/>
         <br />
-        <label for="">Color</label>
-        <input type="color" name="category-color" required/>
-        <br />
-        <input type="submit" value="ADD"/>
+        <button type="submit" class="button-30">Add</button>
       </form>
     </div>
 </div>

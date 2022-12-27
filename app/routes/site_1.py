@@ -31,17 +31,17 @@ def home():
         .all()
     )
     # Get all purchases with joined with tags for activity display will be mixed with deposit data
-    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
+    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id, Product.monthly_bill
         ).filter(Product.user_id == user_id
         ).join(Tag
         ).order_by(desc(Product.time_created)
-        ).limit(20).all()
+        ).limit(10).all()
     
     # Get last 20 cash addition to display
     add_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description, Cash.id
         ).filter(Cash.user_id == user_id
         ).order_by(desc(Cash.time_created)
-        ).limit(20).all()
+        ).limit(5).all()
 
     activity_data = add_cash_data + purchase_data
     activity_data = sorted(activity_data, reverse=True, key = lambda x: x[0])
@@ -101,7 +101,7 @@ def home():
     tag_total = [float(item['product_amount']) for item in values]
     relevant_tag_colors = [item['tag_color'] for item in values]
 
-    return render_template(
+    return render_template (
         'index.html',
         loggedIn=is_loggedin,
         tags=allTags,
@@ -111,6 +111,7 @@ def home():
         auto_deductions=auto_deductions,
         days_until_first=days_until_first_data,
         user_cash=user_cash,
+        today=today,
         # Chart Data:
         relevant_tag_names=relevant_tag_names,
         values=tag_total,

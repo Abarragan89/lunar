@@ -1,11 +1,9 @@
+/* GLOBAL COLORS AND FONTS*/
 #home-page {
   text-align: center;
 }
-#home-page h1 {
-  color: blue;
-}
 #home-page p {
-  font-size: 0.9em;
+  font-size: 0.8em;
   margin-bottom: 10px;
 }
 #home-page img {
@@ -17,20 +15,76 @@
   margin-top: 20px;
 }
 
-#dashboard h1 {
-  color: blue;
+#dashboard {
+  margin-top: 40px;
 }
-#dashboard img {
-  display: block;
-  width: 90%;
-  margin: 0 auto;
+#dashboard .current-date {
+  text-align: center;
   margin-top: 10px;
+  color: rgb(199, 195, 195);
+  font-size: 1.1em;
 }
-
-.tag-color-square {
-  margin-right: 5px;
+#dashboard .money-day-countdown {
+  margin: 10px 0 30px 0;
+}
+#dashboard .money-day-countdown p {
+  font-size: 1.2em;
+  text-align: center;
+  color: rgb(228, 240, 239);
+}
+#dashboard .money-day-countdown #money-left-positive, #dashboard .money-day-countdown #money-left-negative {
+  font-size: 1.2rem;
+}
+#dashboard .money-day-countdown #money-left-positive {
+  color: #6bd0d2;
+}
+#dashboard .money-day-countdown #money-left-negative {
+  color: rgb(204, 5, 5);
+}
+#dashboard .money-day-countdown #days-left {
+  font-size: 1.2rem;
+  color: #6bd0d2;
+}
+#dashboard .relevant-graph-tags {
+  margin-right: 15px;
+  font-size: 1.1em;
+}
+#dashboard .tag-color-square {
+  margin: 0 5px;
   border-radius: 8px;
   width: 7px;
   height: 7px;
   display: inline-block;
+}
+#dashboard .current-data-graph-div {
+  align-items: center;
+  margin: 0 5% 20px;
+  border-radius: 3px;
+  padding-bottom: 20px;
+  margin-bottom: 30px;
+}
+
+.activity-link {
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  border: 1px solid rgb(199, 195, 195);
+  border-radius: 3px;
+  margin-bottom: 10px;
+  margin-right: 5%;
+  margin-left: 5%;
+  padding: 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.635) 1.95px 1.95px 2.6px;
+}
+.activity-link .activity-link-tag, .activity-link .activity-link-deposit {
+  font-size: 1.2em;
+}
+.activity-link .activity-link-description {
+  flex: 1;
+}
+.activity-link .activity-link-description p:last-child {
+  font-size: 0.85rem;
+  padding: 0 15px;
+  line-height: 0.9rem;
+  font-style: italic;
 }/*# sourceMappingURL=home.css.map */

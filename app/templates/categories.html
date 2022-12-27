@@ -1,4 +1,6 @@
 {% extends 'base.html' %} {% block head %}
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/categories/categories.css')}}">
+
 <title>Categories</title>
 
 {% include 'includes/edit-category-modal.html' %}

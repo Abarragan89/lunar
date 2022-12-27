@@ -1,3 +1,75 @@
-h1 {
-  color: red;
+/* GLOBAL COLORS AND FONTS*/
+.login-signup-div {
+  border: 1px solid rgb(199, 195, 195);
+  border-top: none;
+  border-radius: 4px;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 80px;
+  margin-bottom: 5px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+.login-signup-div legend {
+  border-bottom: 1px solid rgb(199, 195, 195);
+  font-size: 1.7em;
+  line-height: 0.017rem;
+  margin: 20px 0 15px;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 30px;
+}
+.login-signup-div legend span {
+  background-color: #041b20;
+}
+.login-signup-div input {
+  background-color: #041b20;
+  border: none;
+  border-bottom: 1px solid rgb(199, 195, 195);
+  font-size: 1.2em;
+  color: rgb(228, 240, 239);
+  margin: 5px 40px;
+  padding-left: 10px;
+}
+.login-signup-div input:focus {
+  outline: none;
+  background-color: #041b20;
+}
+.login-signup-div input:active {
+  outline: none;
+  background-color: #041b20;
+}
+.login-signup-div input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 1000px #041b20 inset !important;
+  -webkit-text-fill-color: rgb(228, 240, 239) !important;
+}
+.login-signup-div .input-symbol-dollar {
+  position: relative;
+}
+.login-signup-div .input-symbol-dollar:before {
+  font-size: 1.2em;
+  position: absolute;
+  top: -5px;
+  content: "$";
+  left: 37px;
+}
+.login-signup-div button {
+  color: black;
+  margin-bottom: 20px;
+}
+
+.need-account {
+  text-align: center;
+  margin-top: 5px;
+}
+.need-account a {
+  color: #6bd0d2;
+  text-decoration: underline;
+}
+
+.error-msg {
+  text-align: center;
+  color: rgb(204, 5, 5);
 }/*# sourceMappingURL=login.css.map */
