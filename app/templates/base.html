@@ -12,13 +12,14 @@
     {% block head %} {% endblock %}
 </head>
 <body>
+
     {% include 'includes/add-cash-modal.html'%} 
     {% include 'includes/expense-modal.html'%} 
     {% include 'includes/category-modal.html' %}
     {% include 'includes/edit-deposit-modal.html' %}
     {% include 'includes/edit-expense-modal.html' %}
     {% include 'includes/edit-user.html' %}
-    
+
     {% if loggedIn %}
 
     <div id="nav-menu-underlay"></div>
@@ -48,11 +49,9 @@
     </menu>
 
     {% endif %}
-
-
+    
     <script src="{{url_for('static', filename='/js/data-validation.js')}}"></script>
     <script src="{{url_for('static', filename='/js/modal.js')}}"></script>
     <script src="{{url_for('static', filename='/js/navigation.js')}}"></script>
-
 </body>
 </html>

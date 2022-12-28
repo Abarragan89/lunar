@@ -11,16 +11,23 @@ document.getElementById('category-form').addEventListener('submit', function(e) 
     }
 })
 
-document.getElementById('signup-form').addEventListener('submit', function(e) {
-    const errorEl = document.getElementById('signup-error-msg')
-    console.log(errorEl)
-    if (errorEl.textContent !== "") {
-        e.preventDefault();
-        errorEl.classList.add('show-error');
-        return false;
-    }
-})
-document.getElementById('signup-email').addEventListener('keydown', function() {
-    const errorEl = document.getElementById('signup-error-msg')
-    errorEl.textContent = "";
-})
+
+if (window.location.pathname === '/') {
+
+} else if (window.location.pathname === '/login') {
+
+} else if (window.location.pathname === '/signin') {
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+        const errorEl = document.getElementById('signup-error-msg')
+        console.log(errorEl)
+        if (errorEl.textContent !== "") {
+            e.preventDefault();
+            errorEl.classList.add('show-error');
+            return false;
+        }f
+    })
+    document.getElementById('signup-email').addEventListener('keydown', function() {
+        const errorEl = document.getElementById('signup-error-msg')
+        errorEl.textContent = "";
+    })
+}

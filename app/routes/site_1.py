@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session
 from sqlalchemy import extract, desc
-from app.models import User, Tag, Product, Cash
+from app.models import User, Tag, Product, Cash, Salary
 from app.db import start_db_session
 import datetime
 from sqlalchemy.sql import func
@@ -22,6 +22,7 @@ def home():
     user_id = session.get('user_id')
     user_data = ''
     user_cash = 0
+    salaries = 0
     db = start_db_session()
 
     # Get all tags
@@ -68,6 +69,7 @@ def home():
     # Get User Data if logged in
     if 'user_id' in session:
         user_data = db.query(User).filter(User.id == user_id).one()
+        salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
 
         # check if user has added extra monthly cash
         user_cash = db.query(func.sum(Cash.amount).label("total_value")
@@ -77,6 +79,8 @@ def home():
         ).all()
         # set it to zero instead of None if nothing has been added
         user_cash = 0 if user_cash[0][0] is None else round(user_cash[0][0], 2)
+        print('===========', salaries)
+   
     
 
     # Get data for the charts
@@ -100,6 +104,7 @@ def home():
     relevant_tag_names = [ tag_name for tag_name in chartData.keys()]
     tag_total = [float(item['product_amount']) for item in values]
     relevant_tag_colors = [item['tag_color'] for item in values]
+    print(user_data)
 
     return render_template (
         'index.html',
@@ -108,6 +113,7 @@ def home():
         activity_data=activity_data,
         total_monthly_expenses=total_monthly_expenses,
         user_data=user_data,
+        salaries=salaries,
         auto_deductions=auto_deductions,
         days_until_first=days_until_first_data,
         user_cash=user_cash,

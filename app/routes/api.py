@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
-from app.models import User, Tag, Product, Cash
+from app.models import User, Tag, Product, Cash, Salary
 from app.db import start_db_session
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -11,16 +11,25 @@ def signup():
     db = start_db_session()
     data = request.form
     try:
-        # try making new user
+        # Make new user
         newUser = User(
             username = data['username'].strip(),
             username_lowercase = data['username'].lower().strip(),
             email = data['email'].strip(),
             password = data['password'].strip(),
-            monthly_income = data['monthly-income'].strip()
         )
         db.add(newUser)
         db.commit()
+
+        # Add Salary Model
+        newSalary = Salary (
+            salary_amount = data['monthly-income'].strip(),
+            user_id = newUser.id
+        )
+        db.add(newSalary)
+        db.commit()
+
+        # Add default tags and colors
         tag_colors =[
                 'rgba(255, 0, 0, 0.407)', 
                 'rgba(255, 140, 0, 0.407)',
@@ -35,7 +44,19 @@ def signup():
                 'rgba(255, 0, 64, 0.407)'
                 ]
         # give user basic categories
-        tag_names = ['Mortgage-Rent', 'Dining', 'Groceries', 'Presents', 'Bills', 'Entertainment', 'Investments', 'Travel', 'Shopping', 'Alcohol', 'Misc.']
+        tag_names = [
+                'Mortgage-Rent', 
+                'Dining', 
+                'Groceries', 
+                'Presents', 
+                'Bills', 
+                'Entertainment', 
+                'Investments', 
+                'Travel', 
+                'Shopping', 
+                'Alcohol', 
+                'Misc.'
+                ]
         for num in range(11):
             newTag = Tag(
                 tag_name = tag_names[num],
@@ -55,7 +76,6 @@ def signup():
             )
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        print('Not unique')
         return render_template('signup-fail.html', 
             error='Email is already taken.',
             username = data['username'].strip(),
@@ -64,7 +84,6 @@ def signup():
             )
     except:
         db.rollback()
-        print('other error')
         return render_template('signup-fail.html', 
             error='An error occurred. Please try again',
             username = data['username'].strip(),
@@ -317,3 +336,5 @@ def delete_category():
         db.rollback()
         return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
+
+# 

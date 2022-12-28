@@ -8,25 +8,24 @@
 
 {% if loggedIn == True %}
 
+
 <main data-set-loggedIn="true" id="dashboard">
   <div class="current-date">
     <h2>{{today.strftime('%A')}}, {{today.strftime('%-d')}}{{ format_date_ending(today.strftime('%-d'))}}</h2>
   </div>
   <div class="flex-box-sa money-day-countdown">
     <p>
-      {% if (total_monthly_expenses + auto_deductions) > (user_data.monthly_income + user_cash)%}
+      {% if (total_monthly_expenses + auto_deductions) > (salaries[0].salary_amount + user_cash)%}
       Over:<br />
       
       <span id="money-left-negative" 
         >-${{(total_monthly_expenses +
-        auto_deductions) - (user_data.monthly_income + user_cash)}}</span
+        auto_deductions) - (salaries[0].salary_amount + user_cash)}}</span
       >
-      
-
       {% else %}
       Money Remaining:<br />
       <span id="money-left-positive"
-        >${{ (user_data.monthly_income + user_cash) - (total_monthly_expenses +
+        >${{ (salaries[0].salary_amount + user_cash) - (total_monthly_expenses +
         auto_deductions) }}</span
       >
       
@@ -125,16 +124,13 @@
     {% endfor%} 
   </div>
 
-
-
-
   {% else %}
   <main data-set-loggedIn="false" id="home-page">
     {% include 'includes/header.html' %}
     <p>"take the suspense out of expenses"</p>
     <img
-      src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
-      alt="screenshot of graph"
+    src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
+    alt="screenshot of graph"
     />
     <a href="{{ url_for('site.signup')}}"><button class="button-30">Signup</button></a>
     <a href="{{ url_for('site.login')}}"><button class="button-30">Login</button></a>

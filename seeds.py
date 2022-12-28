@@ -1,4 +1,4 @@
-from app.models import User, Product, Tag
+from app.models import User, Product, Salary
 from app.db import Session, Base, engine
 
 # drop and rebuild tables
@@ -11,17 +11,12 @@ db = Session()
 
 # insert users
 db.add_all([
-  User(id="1", username='Tony', email='tony@gmail.com', password='123456', monthly_income=4492.32),
+  User(username='Tony', email='tony@gmail.com', password='123456'),
 ])
+db.commit()
 
-# insert tags
 db.add_all([
-    Tag(id="1", tag_name='Mortgage', tag_color='red', user_id=1), #1
-    Tag(id="2", tag_name='rent', tag_color='blue', user_id=1), #2
-    Tag(id="3", tag_name='music', tag_color='green', user_id=1), #3
-    Tag(id="4", tag_name='bills', tag_color='orange', user_id=1), #4
-    Tag(id="5", tag_name='Hobby Lobby', tag_color='yellow', user_id=1), #5
-    Tag(id="6", tag_name='car stuff', tag_color='black', user_id=1) #6
+    Salary(salary_amount=4887, user_id=1),
 ])
 
 # insert products
