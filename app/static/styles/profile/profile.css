@@ -5,6 +5,9 @@
 #profile-main .page-heading {
   margin-top: 30px;
 }
+#profile-main .user-profile {
+  margin-bottom: 40px;
+}
 #profile-main .user-profile p {
   font-size: 1.2em;
 }

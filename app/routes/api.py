@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
-from app.models import User, Tag, Product, Cash
+from app.models import User, Tag, Product, Cash, Salary
 from app.db import start_db_session
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -11,16 +11,25 @@ def signup():
     db = start_db_session()
     data = request.form
     try:
-        # try making new user
+        # Make new user
         newUser = User(
             username = data['username'].strip(),
             username_lowercase = data['username'].lower().strip(),
             email = data['email'].strip(),
             password = data['password'].strip(),
-            monthly_income = data['monthly-income'].strip()
         )
         db.add(newUser)
         db.commit()
+
+        # Add Salary Model
+        newSalary = Salary (
+            salary_amount = data['monthly-income'].strip(),
+            user_id = newUser.id
+        )
+        db.add(newSalary)
+        db.commit()
+
+        # Add default tags and colors
         tag_colors =[
                 'rgba(255, 0, 0, 0.407)', 
                 'rgba(255, 140, 0, 0.407)',
@@ -35,7 +44,19 @@ def signup():
                 'rgba(255, 0, 64, 0.407)'
                 ]
         # give user basic categories
-        tag_names = ['Mortgage-Rent', 'Dining', 'Groceries', 'Presents', 'Bills', 'Entertainment', 'Investments', 'Travel', 'Shopping', 'Alcohol', 'Misc.']
+        tag_names = [
+                'Mortgage-Rent', 
+                'Dining', 
+                'Groceries', 
+                'Presents', 
+                'Bills', 
+                'Entertainment', 
+                'Investments', 
+                'Travel', 
+                'Shopping', 
+                'Alcohol', 
+                'Misc.'
+                ]
         for num in range(11):
             newTag = Tag(
                 tag_name = tag_names[num],
@@ -55,16 +76,15 @@ def signup():
             )
     except sqlalchemy.exc.IntegrityError:
         db.rollback()
-        print('Not unique')
         return render_template('signup-fail.html', 
             error='Email is already taken.',
             username = data['username'].strip(),
             email = data['email'].strip(),
             monthly_income = data['monthly-income'].strip()
             )
-    except:
+    except Exception as e:
+        print(e)
         db.rollback()
-        print('other error')
         return render_template('signup-fail.html', 
             error='An error occurred. Please try again',
             username = data['username'].strip(),
@@ -77,7 +97,7 @@ def signup():
     session['user_id'] = newUser.id
     session['loggedIn'] = True
 
-    return redirect('/')
+    return redirect('/dashboard')
 
 
 # Log out
@@ -106,26 +126,7 @@ def login():
     session['user_id'] = user.id
     session['loggedIn'] = True
 
-    return redirect('/')
-
-
-# Update user data
-@bp.route('/update-user-info', methods=['POST'])
-def update_user():
-    data = request.form
-    db = start_db_session()
-    try:
-        user_data = db.query(User).filter(User.id == session['user_id']).one()
-        user_data.monthly_income = data['monthly_income'].strip()
-        user_data.username = data['username'].strip()
-        db.commit()
-    except AssertionError:
-        db.rollback()
-        return jsonify(message='Missing fields.'), 400
-    except:
-        db.rollback()
-        return jsonify(message='User info not updated'), 500
-    return redirect(request.referrer)
+    return redirect('/dashboard')
 
 
 # Add a Category
@@ -317,3 +318,51 @@ def delete_category():
         db.rollback()
         return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
+
+# Add new salary
+@bp.route('/add-salary', methods=['POST'])
+def add_salary():
+    db = start_db_session()
+    data = request.form
+
+# Update user data
+@bp.route('/update-user-info', methods=['POST'])
+def update_user():
+    data = request.form
+    db = start_db_session()
+    try:
+        user_data = db.query(User).filter(User.id == session['user_id']).one()
+        user_data.username = data['new_username'].strip()
+
+        db.commit()
+        if data['new_salary_date'] and data['new_salary']:
+            # check to see if a salary in that month and year is already present
+            # extract the month and year from the salary date
+            month = data['new_salary_date'].split('-')[1]
+            year = data['new_salary_date'].split('-')[0]
+
+            try:
+                salaryExists = db.query(Salary
+                    ).filter(Salary.user_id == user_data.id
+                    ).filter(sqlalchemy.extract('month', Salary.time_created) == month
+                    ).filter(sqlalchemy.extract('year', Salary.time_created) == year
+                    ).one()
+                salaryExists.salary_amount = data['new_salary']
+                db.commit()
+            except:
+                newSalary = Salary (
+                    salary_amount = data['new_salary'].strip(),
+                    user_id = user_data.id,
+                    time_created = data['new_salary_date'] + '-1'
+                )
+                db.add(newSalary)
+                db.commit()
+
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except Exception as e:
+        print(e)
+        db.rollback()
+        return jsonify(message='User info not updated'), 500
+    return redirect(request.referrer)

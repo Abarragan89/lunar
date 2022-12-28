@@ -18,13 +18,17 @@
           <input type="color" value="{{ rgbaToRgb(tag.tag_color)}}" name="category-color" required/>
           <br />
           <input type="hidden" value="{{tag.id}}" name="category-id">
-          <input type="submit" value="Update"/>
-        </form>
 
-        <form action="/api/delete-category" method="POST">
-            <input type="hidden" value="{{tag.id}}" name="category-id">
-            <input type="submit" value="Delete">
-        </form>
+          <div class="flex-box-sa">
+            <button type="submit" class="button-30">Update</button>
+          </form>
+  
+          <form action="/api/delete-category" method="POST">
+              <input type="hidden" value="{{tag.id}}" name="category-id">
+              <button type="submit" class="button-30 delete-btn">Delete</button>
+          </form>            
+          </div>
+          
 
       {% endif %}
       {% endfor %}

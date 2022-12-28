@@ -11,12 +11,6 @@ document.getElementById('add-cash-btn').addEventListener('click', () => {
     showModal('add-cash-modal');
     getCurrentDate('add-cash-date')
 })
-document.getElementById('edit-profile-btn').addEventListener('click', () => {
-    showModal('edit-user-modal');
-})
-
-
-
 
 function getCurrentDate(id) {
     const today = new Date();
@@ -79,15 +73,6 @@ document.querySelector('#edit-deposit').addEventListener('click', (e) => {
         closeModal('edit-deposit');
     }
 })
-
-document.getElementById('edit-user-modal').addEventListener('click', (e) => {
-    const isOutside = e.target.closest('.modal');
-    if (!isOutside) {
-        closeModal('edit-user-modal');
-    }
-})
-
-
 
 // --- show / close function -- //
 function showModal(id) {

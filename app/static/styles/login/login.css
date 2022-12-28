@@ -22,10 +22,10 @@
   margin-bottom: 30px;
 }
 .login-signup-div legend span {
-  background-color: #041b20;
+  background-color: #031920;
 }
 .login-signup-div input {
-  background-color: #041b20;
+  background-color: #031920;
   border: none;
   border-bottom: 1px solid rgb(199, 195, 195);
   font-size: 1.2em;
@@ -35,14 +35,14 @@
 }
 .login-signup-div input:focus {
   outline: none;
-  background-color: #041b20;
+  background-color: #031920;
 }
 .login-signup-div input:active {
   outline: none;
-  background-color: #041b20;
+  background-color: #031920;
 }
 .login-signup-div input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px #041b20 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #031920 inset !important;
   -webkit-text-fill-color: rgb(228, 240, 239) !important;
 }
 .login-signup-div .input-symbol-dollar {

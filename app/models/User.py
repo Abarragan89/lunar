@@ -1,5 +1,5 @@
 from app.db import Base
-from sqlalchemy import Column, Integer, String, Float, Numeric
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import validates
 import bcrypt
 
@@ -12,7 +12,6 @@ class User(Base):
     username = Column(String(50), nullable=False)
     email = Column(String(50), nullable=False, unique=True)
     password = Column(String(100), nullable=False)
-    monthly_income = Column(Numeric(precision=15, scale=2), nullable=False)
 
     def verify_password(self, password):
         return bcrypt.checkpw(
