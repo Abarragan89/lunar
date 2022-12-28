@@ -11,6 +11,7 @@ days_until_first_data = days_until_first()
 today = datetime.datetime.now()
 current_month = today.month
 current_year = today.year
+
 # Create Blueprint
 bp = Blueprint('site', __name__)
 
@@ -80,8 +81,6 @@ def home():
         # set it to zero instead of None if nothing has been added
         user_cash = 0 if user_cash[0][0] is None else round(user_cash[0][0], 2)
         print('===========', salaries)
-   
-    
 
     # Get data for the charts
     allMonthlyExpenses = db.query(Tag.tag_name, Tag.tag_color, Product.amount
@@ -104,7 +103,6 @@ def home():
     relevant_tag_names = [ tag_name for tag_name in chartData.keys()]
     tag_total = [float(item['product_amount']) for item in values]
     relevant_tag_colors = [item['tag_color'] for item in values]
-    print(user_data)
 
     return render_template (
         'index.html',

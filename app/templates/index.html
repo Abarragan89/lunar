@@ -8,7 +8,6 @@
 
 {% if loggedIn == True %}
 
-
 <main data-set-loggedIn="true" id="dashboard">
   <div class="current-date">
     <h2>{{today.strftime('%A')}}, {{today.strftime('%-d')}}{{ format_date_ending(today.strftime('%-d'))}}</h2>
