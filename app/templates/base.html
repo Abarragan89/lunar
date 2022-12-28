@@ -18,7 +18,6 @@
     {% include 'includes/category-modal.html' %}
     {% include 'includes/edit-deposit-modal.html' %}
     {% include 'includes/edit-expense-modal.html' %}
-    {% include 'includes/edit-user.html' %}
 
     {% if loggedIn %}
 
@@ -48,11 +47,12 @@
         <p id="add-expense-btn">Add Expense</p>
     </menu>
 
-    {% endif %}
-
-    <script src="{{url_for('static', filename='/js/data-validation.js')}}"></script>
     <script src="{{url_for('static', filename='/js/modal.js')}}"></script>
     <script src="{{url_for('static', filename='/js/navigation.js')}}"></script>
+    
+    {% endif %}
+    
+    <script src="{{url_for('static', filename='/js/data-validation.js')}}"></script>
 
 </body>
 </html>

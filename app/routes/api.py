@@ -82,7 +82,8 @@ def signup():
             email = data['email'].strip(),
             monthly_income = data['monthly-income'].strip()
             )
-    except:
+    except Exception as e:
+        print(e)
         db.rollback()
         return render_template('signup-fail.html', 
             error='An error occurred. Please try again',
@@ -96,7 +97,7 @@ def signup():
     session['user_id'] = newUser.id
     session['loggedIn'] = True
 
-    return redirect('/')
+    return redirect('/dashboard')
 
 
 # Log out
@@ -125,26 +126,7 @@ def login():
     session['user_id'] = user.id
     session['loggedIn'] = True
 
-    return redirect('/')
-
-
-# Update user data
-@bp.route('/update-user-info', methods=['POST'])
-def update_user():
-    data = request.form
-    db = start_db_session()
-    try:
-        user_data = db.query(User).filter(User.id == session['user_id']).one()
-        user_data.monthly_income = data['monthly_income'].strip()
-        user_data.username = data['username'].strip()
-        db.commit()
-    except AssertionError:
-        db.rollback()
-        return jsonify(message='Missing fields.'), 400
-    except:
-        db.rollback()
-        return jsonify(message='User info not updated'), 500
-    return redirect(request.referrer)
+    return redirect('/dashboard')
 
 
 # Add a Category
@@ -337,4 +319,50 @@ def delete_category():
         return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
 
-# 
+# Add new salary
+@bp.route('/add-salary', methods=['POST'])
+def add_salary():
+    db = start_db_session()
+    data = request.form
+
+# Update user data
+@bp.route('/update-user-info', methods=['POST'])
+def update_user():
+    data = request.form
+    db = start_db_session()
+    try:
+        user_data = db.query(User).filter(User.id == session['user_id']).one()
+        user_data.username = data['new_username'].strip()
+
+        db.commit()
+        if data['new_salary_date'] and data['new_salary']:
+            # check to see if a salary in that month and year is already present
+            # extract the month and year from the salary date
+            month = data['new_salary_date'].split('-')[1]
+            year = data['new_salary_date'].split('-')[0]
+
+            try:
+                salaryExists = db.query(Salary
+                    ).filter(Salary.user_id == user_data.id
+                    ).filter(sqlalchemy.extract('month', Salary.time_created) == month
+                    ).filter(sqlalchemy.extract('year', Salary.time_created) == year
+                    ).one()
+                salaryExists.salary_amount = data['new_salary']
+                db.commit()
+            except:
+                newSalary = Salary (
+                    salary_amount = data['new_salary'].strip(),
+                    user_id = user_data.id,
+                    time_created = data['new_salary_date'] + '-1'
+                )
+                db.add(newSalary)
+                db.commit()
+
+    except AssertionError:
+        db.rollback()
+        return jsonify(message='Missing fields.'), 400
+    except Exception as e:
+        print(e)
+        db.rollback()
+        return jsonify(message='User info not updated'), 500
+    return redirect(request.referrer)

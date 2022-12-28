@@ -7,14 +7,16 @@
       </h2>
       <form action="/api/update-user-info" method="POST">
 
+        <input type="text" name="new_username" value="{{user_data.username}}" maxlength="50" placeholder="Username" autofocus /> <br>
 
         <span class="input-symbol-dollar">
-          <input type="number" name="amount" min="0" class="input-amount-modal" placeholder="Amount" step="0.01"/>
+          <input type="number" name="new_salary" maxlength="19" id="new_salary" placeholder="New Salary" />
         </span>
-        <input type="text" name="money-description" maxlength="50" placeholder="Description(optional)" />
-        <button type="submit" class="button-30">Add</button>
 
+        <p>When is new salary effective? </p>
+        <input type="month" name="new_salary_date" id="new_salary_date"> <br>
 
+        <button type="submit" class="button-30">Update</button>
       </form>
     </div>
 </div>
