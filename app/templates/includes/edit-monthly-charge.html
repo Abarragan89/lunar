@@ -5,10 +5,8 @@
               Edit Monthly Charge
             </span>
           </h2>
-          <form action="/api/update-expense" method="POST">
-            
-            
-            <select name="product-category" id="current-monthly-tag" required>
+          <form action="/api/edit-monthly-charge" method="POST">
+            <select name="monthly-category" id="current-monthly-tag" required>
               <option selected disabled >Pick a category</option>
               {% for tag in tags%}
               <option value="{{tag.id}}">{{tag.tag_name}}</option>
@@ -33,11 +31,11 @@
             <div class="flex-box-sa">
               <button type="submit" class="button-30">Update</button>
             </form>
-            <form action="/api/delete-expense" method="POST">
+
+            <form action="/api/delete-monthly-charge" method="POST">
               <button type="submit" class="button-30 delete-btn">Delete</button>
               <input type="hidden" name="monthly-id" id="delete-monthly-data">
             </form>
-            
           </div>
     </div>
 </div>

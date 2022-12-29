@@ -379,9 +379,26 @@ def update_user():
     return redirect(request.referrer)
 
 # Update Monthly Bill
-@bp.route('/api/edit-monthly-charge')
+@bp.route('/edit-monthly-charge', methods=['POST'])
 def edit_monthly_charge():
-    pass
+    data = request.form
+    db = start_db_session()
+    monthly_id = data['monthly-id']
+    monthly_tag = data['monthly-category']
+    monthly_price = data['monthly-price']
+    monthly_description = data['monthly-name']
+    try:
+        db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).update({
+            'description': monthly_description.strip(),
+            'amount': monthly_price.strip(),
+            'user_id': session['user_id'],
+            'tag_id': monthly_tag
+        })
+        db.commit()
+    except Exception as e:
+        print('===============', e)
+    return redirect(request.referrer)
+
 
 # Stop Monthly Bill
 @bp.route('/api/stop-monthly-charge')
@@ -389,6 +406,16 @@ def stop_monthly_charge():
     pass
 
 # Delete Monthly Bill
-@bp.route('/api/delete-monthly-charge')
+@bp.route('/delete-monthly-charge', methods=['POST'])
 def delete_monthly_charge():
-    pass
+    data = request.form
+    db = start_db_session()
+    try:
+        db.query(MonthlyCharge).filter(MonthlyCharge.id == data['monthly-id']).delete()
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        return jsonify(message='Expense not deleted'), 500
+    return redirect(request.referrer)
+
+    
