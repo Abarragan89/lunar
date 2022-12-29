@@ -353,7 +353,6 @@ def update_user():
             # extract the month and year from the salary date
             month = data['new_salary_date'].split('-')[1]
             year = data['new_salary_date'].split('-')[0]
-
             try:
                 salaryExists = db.query(Salary
                     ).filter(Salary.user_id == user_data.id
@@ -370,7 +369,6 @@ def update_user():
                 )
                 db.add(newSalary)
                 db.commit()
-
     except AssertionError:
         db.rollback()
         return jsonify(message='Missing fields.'), 400
@@ -379,3 +377,18 @@ def update_user():
         db.rollback()
         return jsonify(message='User info not updated'), 500
     return redirect(request.referrer)
+
+# Update Monthly Bill
+@bp.route('/api/edit-monthly-charge')
+def edit_monthly_charge():
+    pass
+
+# Stop Monthly Bill
+@bp.route('/api/stop-monthly-charge')
+def stop_monthly_charge():
+    pass
+
+# Delete Monthly Bill
+@bp.route('/api/delete-monthly-charge')
+def delete_monthly_charge():
+    pass

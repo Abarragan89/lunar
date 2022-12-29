@@ -77,7 +77,7 @@ def dashboard():
     total_monthly_expenses = 0 if total_monthly_expenses[0][0] is None else round(total_monthly_expenses[0][0], 2)
 
 
-    # Get Auto Deductions to always subtract. These are the expenses that are monthly bills
+    # Get Auto Deductions Sum to always subtract. These are the expenses that are monthly bills
     auto_deductions = db.query(func.sum(MonthlyCharge.amount).label("auto_deductions")
         ).filter(MonthlyCharge.user_id == user_id
         ).all()
@@ -98,7 +98,6 @@ def dashboard():
         ).all()
         # set it to zero instead of None if nothing has been added
         user_cash = 0 if user_cash[0][0] is None else round(user_cash[0][0], 2)
-        print('===========', salaries)
 
     # Get data for the charts
     allMonthlyExpenses = db.query(Tag.tag_name, Tag.tag_color, Product.amount
@@ -122,6 +121,12 @@ def dashboard():
     tag_total = [float(item['product_amount']) for item in values]
     relevant_tag_colors = [item['tag_color'] for item in values]
 
+    # Change this query to just getting monthly charges
+    user_category = db.query(MonthlyCharge.time_created, MonthlyCharge.amount, MonthlyCharge.description, Tag.tag_name, Tag.id, MonthlyCharge.id
+        ).filter(MonthlyCharge.user_id == session['user_id']
+        ).join(Tag
+        ).all()
+    
     return render_template (
         'dashboard.html',
         loggedIn=is_loggedin,
@@ -130,6 +135,7 @@ def dashboard():
         total_monthly_expenses=total_monthly_expenses,
         user_data=user_data,
         salaries=salaries,
+        category_data=user_category,
         auto_deductions=auto_deductions,
         days_until_first=days_until_first_data,
         user_cash=user_cash,
@@ -150,13 +156,6 @@ def profile():
     user_data = db.query(User).filter(User.id == session['user_id']).one()
     salaries = db.query(Salary).filter(Salary.user_id == user_id).order_by(desc(Salary.time_created)).all()
 
-
-    # Change this query to just getting monthly charges
-    # user_category = db.query(Product, Tag
-    #     ).filter(Product.user_id == session['user_id']
-    #     ).filter(Product.monthly_bill == True
-    #     ).join(Tag
-    #     ).all()
     
     allTags = (
         db.query(Tag)
@@ -167,8 +166,6 @@ def profile():
     return render_template('profile.html',
         user_data=user_data, 
         salaries=salaries,
-        #category_data will become a query for jsut monthly charges
-        # category_data=user_category,
         loggedIn=is_loggedin,
         tags = allTags, 
         today=today

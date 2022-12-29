@@ -6,6 +6,7 @@
 <title>Dashboard</title>
 {% endblock %} {% block body %} 
 
+
 <main data-set-loggedIn="true" id="dashboard">
   <div class="current-date">
     <h2>{{today.strftime('%A')}}, {{today.strftime('%-d')}}{{ format_date_ending(today.strftime('%-d'))}}</h2>
@@ -87,9 +88,9 @@
       Recent Activity
     </span>
   </h2>
-  <div>
+  <div class="main-activity-div">
     {% for data in activity_data %}
-    <a class="edit-activity-btn" id="activity{{n}}">
+    <a class="edit-activity-btn">
       {% if data|length > 4 %}
       <div class="flex-box-sb activity-link" data-type="expense">
       {% else%}
@@ -118,6 +119,35 @@
       </div>
     </a>
     {% endfor%} 
+
+    <h2 class='section-heading'>
+      <span>
+        Monthly Charges
+      </span>
+    </h2>
+    {% for data in category_data %}
+    <a class="edit-monthly-charge-btn">
+      <div class="flex-box-sb activity-link" data-type="expense">
+
+          <div class='flex-box-col-se date-div'
+          data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+            <p>{{ data[0].year}}</p>
+          </div>
+          <div class="flex-box-col-sa activity-link-description">
+            <p
+              class="activity-link-tag"
+              data-monthly-id="{{data[5]}}"
+              data-monthly-tag-id="{{data[4]}}"
+            >
+              {{ data[3] }}
+            </p>
+            <p>{{ data[2] }}</p>
+          </div>
+          <p>${{ data[1] }}</p>
+      </div>
+    </a>
+    {% endfor %}
   </div>
 
 

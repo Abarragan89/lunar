@@ -4,17 +4,30 @@
     margin-top: 30px;
 
     .page-heading {
-        margin-top: 30px;
+        margin-top: 15px;
         
     }
     .user-profile {
         margin-bottom: 40px;
         p {
             font-size: 1.33em;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
         p span {
             color: $accentColor;
         }
+    }
+    .edit-pencil-btn {
+        border: 0;
+        padding: 0;
+        height: 0;
+        color: $gray;
+        font-size: 1.4em;
+    }
+    .edit-pencil-btn:hover {
+        cursor: pointer;
+    }
+    .edit-pencil-btn:hover, .edit-pencil-btn:active {
+        color: $offWhite;
     }
 }

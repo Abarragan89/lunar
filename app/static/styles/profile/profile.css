@@ -3,15 +3,28 @@
   margin-top: 30px;
 }
 #profile-main .page-heading {
-  margin-top: 30px;
+  margin-top: 15px;
 }
 #profile-main .user-profile {
   margin-bottom: 40px;
 }
 #profile-main .user-profile p {
   font-size: 1.33em;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 }
 #profile-main .user-profile p span {
   color: #6bd0d2;
+}
+#profile-main .edit-pencil-btn {
+  border: 0;
+  padding: 0;
+  height: 0;
+  color: rgb(199, 195, 195);
+  font-size: 1.4em;
+}
+#profile-main .edit-pencil-btn:hover {
+  cursor: pointer;
+}
+#profile-main .edit-pencil-btn:hover, #profile-main .edit-pencil-btn:active {
+  color: rgb(228, 240, 239);
 }/*# sourceMappingURL=profile.css.map */
