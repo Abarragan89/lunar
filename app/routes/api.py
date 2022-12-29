@@ -160,29 +160,44 @@ def add_category():
 def add_expense():
     data = request.form
     db = start_db_session()
-    monthly_bill = False
 
     if 'monthly-bill' in data:
-        monthly_bill = True
-
-    try:
-        newExpense = Product(
-            description = data['product-name'].strip(),
-            tag_id = data['product-category'],
-            user_id = session['user_id'],
-            amount = data['product-price'].strip(),
-            monthly_bill = monthly_bill,
-            time_created = data['expense-date']
-        )
-        db.add(newExpense)
-        db.commit()
-    except AssertionError:
-        db.rollback()
-        return jsonify(message='Missing fields.'), 400
-    except Exception as e:
-        print(e)
-        db.rollback()
-        return jsonify(message='Expense not added'), 500
+        try:
+            newMonthly = MonthlyCharge(
+                description = data['product-name'].strip(),
+                tag_id = data['product-category'],
+                user_id = session['user_id'],
+                amount = data['product-price'].strip(),
+                time_created = data['expense-date']
+            )
+            db.add(newMonthly)
+            db.commit()
+        except AssertionError:
+            db.rollback()
+            return jsonify(message='Missing fields.'), 400
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return jsonify(message='Expense not added'), 500
+        return redirect(request.referrer)
+    else:
+        try:
+            newExpense = Product(
+                description = data['product-name'].strip(),
+                tag_id = data['product-category'],
+                user_id = session['user_id'],
+                amount = data['product-price'].strip(),
+                time_created = data['expense-date']
+            )
+            db.add(newExpense)
+            db.commit()
+        except AssertionError:
+            db.rollback()
+            return jsonify(message='Missing fields.'), 400
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return jsonify(message='Expense not added'), 500
     return redirect(request.referrer)
 
 # Add Cash
@@ -212,16 +227,14 @@ def add_cash():
 def update_expense():
     data = request.form 
     db = start_db_session()
-    monthly_bill = False
     if 'monthly-bill' in data:
-        monthly_bill = True
+        pass
     try:
         db.query(Product).filter(Product.id == data['product-id']).update({
             'description': data['product-name'].strip(),
             'tag_id': data['product-category'],
             'user_id': session['user_id'],
             'amount': data['product-price'].strip(),
-            'monthly_bill': monthly_bill,
             'time_created': data['expense-date-current']
         })
         db.commit()

@@ -59,6 +59,9 @@
         font-size: 1.1em;
         color: $offWhite;
     }
+    .relevant-graph-tags:hover, .relevant-graph-tags:active {
+        color: white;
+    }
     .tag-color-square {
         margin: 0 5px;
         border-radius: 8px;

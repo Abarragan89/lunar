@@ -8,7 +8,6 @@ class Product(Base):
     __tablename__ = 'products'
     id = Column(Integer, primary_key=True)
     description = Column(String(50), nullable=False, default='')
-    monthly_bill = Column(Boolean, nullable=True)
     amount = Column(Numeric(precision=15, scale=2), nullable=False)
     user_id = Column(Integer, ForeignKey('users.id', ondelete='CASCADE'), nullable=False)
     tag_id = Column(Integer, ForeignKey('tags.id', ondelete='CASCADE'), nullable=False)
