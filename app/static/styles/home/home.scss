@@ -2,6 +2,7 @@
 
 #home-page {
     text-align: center;
+    margin-top: 40px;
 
     p {
         font-size: .8em;
@@ -56,6 +57,7 @@
     .relevant-graph-tags {
         margin-right: 15px;
         font-size: 1.1em;
+        color: $offWhite;
     }
     .tag-color-square {
         margin: 0 5px;
@@ -76,17 +78,18 @@
 
 
 .activity-link {
-    // color: $offWhite;
     text-align: center;
     align-items: center;
     justify-items: center;
-    border: 1px solid $gray;
     border-radius: 3px;
     margin-bottom: 10px;
     margin-right: 5%;
+    font-size: 1.05em;
+    color: $offWhite;
+    background-image: linear-gradient(90g, 'red', 'yellow');
     margin-left: 5%;
     padding: 5px 10px;
-    box-shadow: rgba(0, 0, 0, 0.635) 1.95px 1.95px 2.6px;
+    box-shadow: $secondaryColor 0px 30px 60px -12px inset, $secondaryColor 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 
     .activity-link-tag, .activity-link-deposit {
         font-size: 1.2em;
@@ -102,4 +105,14 @@
             font-style: italic;
         }
     }
+}
+
+.activity-link:hover {
+    box-shadow: $tertiaryColor 0px 30px 60px -12px inset, $tertiaryColor 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    cursor: pointer;
+}
+
+.activity-link:active {
+    box-shadow: $accentColor 0px 30px 60px -12px inset, $accentColor 0px 18px 36px -18px inset;
+    color: white;
 }

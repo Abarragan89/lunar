@@ -61,6 +61,7 @@ a {
 nav {
   position: fixed;
   width: 100%;
+  color: $offWhite;
 	top: 0;
   align-items: center;
   background-color: $secondaryColor;
@@ -222,7 +223,8 @@ menu {
   bottom: 0;
   border-top: 1px solid $tertiaryColor;
   background-color: $primaryColor;
-  box-shadow: 0px 0px 15px rgb(8, 8, 8);
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
+
 }
 
 menu p {
@@ -236,7 +238,7 @@ menu p:hover {
   cursor: pointer;
 }
 menu p:active {
-  background-color: $accentColor;
+  background-color: $secondaryColor;
 }
 
 menu p:not(:first-child) {

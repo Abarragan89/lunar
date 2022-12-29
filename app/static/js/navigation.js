@@ -113,9 +113,15 @@ function createMainMenuElements() {
     navCategoryDiv.insertAdjacentElement('afterEnd', logoutBtn)
 
     // History Link
+    // Get current date so link goes straight to current month and year
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = today.getMonth() + 1;
+
     const historyBtn = document.createElement('a');
     historyBtn.textContent = 'History';
     historyBtn.classList.add('main-nav-item');
+    historyBtn.href = `/history/${year}-${month}`
     historyBtn.setAttribute('id', 'history-nav-btn');
     navCategoryDiv.insertAdjacentElement('afterEnd', historyBtn);
 }

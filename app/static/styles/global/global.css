@@ -58,9 +58,10 @@ a {
 nav {
   position: fixed;
   width: 100%;
+  color: rgb(228, 240, 239);
   top: 0;
   align-items: center;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 #nav-items-main-div {
@@ -298,7 +299,7 @@ nav {
 
 .nav-category-items:hover {
   cursor: pointer;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 #nav-categories-div {
@@ -529,12 +530,12 @@ nav {
 
 .main-nav-item:hover {
   cursor: pointer;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 #nav-categories-div a:hover {
   cursor: pointer;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 #hamburger {
@@ -606,7 +607,7 @@ nav {
 
 .button-30:active {
   box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px -3px, rgba(0, 0, 0, 0.14) 0 8px 10px 1px, rgba(0, 0, 0, 0.12) 0 3px 14px 2px;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 menu {
@@ -615,7 +616,7 @@ menu {
   bottom: 0;
   border-top: 1px solid #4FBDBA;
   background-color: #031920;
-  box-shadow: 0px 0px 15px rgb(8, 8, 8);
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
 }
 
 menu p {
@@ -631,7 +632,7 @@ menu p:hover {
 }
 
 menu p:active {
-  background-color: #6bd0d2;
+  background-color: rgb(13, 90, 102);
 }
 
 menu p:not(:first-child) {

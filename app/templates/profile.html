@@ -13,13 +13,20 @@
           Profile
         </span>
       </h1>
+    
+    <div class="flex-box-sa">
+      <div class="flex-box-sa user-profile">
+          <div class="flex-box-col-se">
+              <p>Name: <span>{{user_data.username}}</span></p>
+              <p>Salary:<span>${{salaries[0]['salary_amount']}}</span></p>
+          </div>
+          <p id="edit-profile-btn">Edit</p>
+      </div>
 
-    <div class="flex-box-sa user-profile">
-        <div class="flex-box-col-se">
-            <p>Name: <span>{{user_data.username}}</span></p>
-            <p>Salary:<span>${{salaries[0]['salary_amount']}}</span></p>
-        </div>
-        <p id="edit-profile-btn">Edit</p>
+      <form action="">
+        <label for="dark-light-mode">Dark/Light</label>
+        <input type="checkbox" id="dark-light-mode" name="dark-light-mode">
+      </form>
     </div>
     
     

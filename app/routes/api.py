@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
-from app.models import User, Tag, Product, Cash, Salary
+from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge
 from app.db import start_db_session
 
 bp = Blueprint('api', __name__, url_prefix='/api')

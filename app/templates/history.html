@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% block head %}
+
+<title>History</title>
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/history/history.css')}}">
+{% endblock %} {% block body %}
+
+<main id="history-main">
+  <input type="month" max="{{current_year}}-{{current_month}}" value="{{yearLookUp}}-{{monthLookUp}}" id="choose-month">
+
+  <h2>Salary: ${{salary.salary_amount}}</h2>
+</main>
+
+
+<script src="{{url_for('static', filename='/js/history.js')}}"></script>
+{% endblock %}
+
+

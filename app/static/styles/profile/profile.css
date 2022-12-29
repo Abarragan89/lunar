@@ -9,7 +9,8 @@
   margin-bottom: 40px;
 }
 #profile-main .user-profile p {
-  font-size: 1.2em;
+  font-size: 1.33em;
+  margin-bottom: 20px;
 }
 #profile-main .user-profile p span {
   color: #6bd0d2;

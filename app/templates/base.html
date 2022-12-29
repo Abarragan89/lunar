@@ -20,21 +20,20 @@
     {% include 'includes/edit-expense-modal.html' %}
 
     {% if loggedIn %}
-
     <div id="nav-menu-underlay"></div>
-
     <div>
         <nav class='flex-box-sb'>
-            <h1 class='ml-4'>Logo</h1>
+            <a href="/">
+                <h1 class='ml-4'>Lunar</h1>
+            </a>
             <div id="nav-items-main-div" tabindex="0" class="flex-box-col-sb nav-links">
-                <div data-all-tags="{{tags|map(attribute='tag_name')|join(', ')}}" data-all-tags-colors="{{tags|map(attribute='tag_color')|join(', ')}} "id="nav-categories-div">
+                <div data-all-tags="{{tags|map(attribute='tag_name')|join(', ')}}" data-all-tags-colors="{{tags|map(attribute='tag_color')|join(', ')}}" id="nav-categories-div">
                 </div>
             </div>
             <i class="fa fa-bars" id="hamburger"></i>
         </nav>
     </div>
     {% endif %}
-
     {% block body %} 
     
     {% endblock %}
