@@ -5,7 +5,7 @@
               Edit Monthly Charge
             </span>
           </h2>
-          <form action="/api/edit-monthly-charge" method="POST">
+          
             <select name="monthly-category" id="current-monthly-tag" required>
               <option selected disabled >Pick a category</option>
               {% for tag in tags%}
@@ -16,26 +16,17 @@
               <p>{{expense.description}}</p>
               {% endfor %}
             </select> <br>
-            
             <span class="input-symbol-dollar">
               <input type="number" name="monthly-price" min="0" id="current-monthly-price" step="0.01" placeholder="amount" autocomplete="off" required />
             </span>
-      
-      
             <input type="hidden" name="monthly-id" id="monthly-id">
-      
             <input type="text" name="monthly-name" maxlength="50" id="current-monthly-name" placeholder="Description(optional)" />
             <input type="date" id="monthly-date-current" name="monthly-date-current" required><br>
-        
 
-            <div class="flex-box-sa">
-              <button type="submit" class="button-30">Update</button>
-            </form>
-
-            <form action="/api/delete-monthly-charge" method="POST">
-              <button type="submit" class="button-30 delete-btn">Delete</button>
-              <input type="hidden" name="monthly-id" id="delete-monthly-data">
-            </form>
-          </div>
+            <div class="flex-box-se">
+              <button class="button-30" id="update-monthly-btn">Update</button>
+              <button class="button-30 delete-btn" id="remove-monthly-btn">Remove</button>
+              <input type="hidden" name="monthly-id" id="stop-monthly-data">
+            </div>
     </div>
 </div>

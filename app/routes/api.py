@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
-from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge
+from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges
 from app.db import start_db_session
 
 bp = Blueprint('api', __name__, url_prefix='/api')
@@ -137,7 +137,7 @@ def add_category():
     # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
     h = data['category-color'][1:]
     colorTuple = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
-    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, .4)'
+    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, .3)'
 
     try:
         newTag = Tag(
@@ -222,29 +222,52 @@ def add_cash():
         return jsonify(message='Cash not added'), 500
     return redirect(request.referrer)
 
+
 # Update Expense
 @bp.route('/update-expense', methods=['POST'])
 def update_expense():
     data = request.form 
     db = start_db_session()
     if 'monthly-bill' in data:
-        pass
-    try:
-        db.query(Product).filter(Product.id == data['product-id']).update({
-            'description': data['product-name'].strip(),
-            'tag_id': data['product-category'],
-            'user_id': session['user_id'],
-            'amount': data['product-price'].strip(),
-            'time_created': data['expense-date-current']
-        })
-        db.commit()
-    except AssertionError:
-        db.rollback()
-        return jsonify(message='Missing fields.'), 400
-    except:
-        db.rollback()
-        return jsonify(message='Expense not updated'), 500
-    return redirect(request.referrer)
+        try:
+            newMonthly = MonthlyCharge(
+                description = data['product-name'].strip(),
+                tag_id = data['product-category'],
+                user_id = session['user_id'],
+                amount = data['product-price'].strip(),
+                time_created = data['expense-date-current']
+            )
+            db.add(newMonthly)
+            db.commit()
+
+            db.query(Product).filter(Product.id == data['product-id']).delete()
+            db.commit()
+        except AssertionError:
+            db.rollback()
+            return jsonify(message='Missing fields.'), 400
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return jsonify(message='Expense not added'), 500
+        return redirect(request.referrer)
+    else:
+        try:
+            db.query(Product).filter(Product.id == data['product-id']).update({
+                'description': data['product-name'].strip(),
+                'tag_id': data['product-category'],
+                'user_id': session['user_id'],
+                'amount': data['product-price'].strip(),
+                'time_created': data['expense-date-current']
+            })
+            db.commit()
+        except AssertionError:
+            db.rollback()
+            return jsonify(message='Missing fields.'), 400
+        except Exception as e:
+            print(e)
+            db.rollback()
+            return jsonify(message='Expense not updated'), 500
+        return redirect(request.referrer)
 
 #Delete Expense
 @bp.route('/delete-expense', methods=['POST'])
@@ -305,9 +328,14 @@ def edit_category():
     print('category color', data['category-color'])
     print('category name', data['category-name'])
 
+    # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
+    h = data['category-color'][1:]
+    colorTuple = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
+    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, .3)'
+
     try:
         current_tag = db.query(Tag).filter(Tag.id == data['category-id']).one()
-        current_tag.tag_color = data['category-color'].strip()
+        current_tag.tag_color = adjust_color
         current_tag.tag_name = data['category-name'].strip()
         db.commit()
     except AssertionError:
@@ -332,11 +360,6 @@ def delete_category():
         return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
 
-# Add new salary
-@bp.route('/add-salary', methods=['POST'])
-def add_salary():
-    db = start_db_session()
-    data = request.form
 
 # Update user data
 @bp.route('/update-user-info', methods=['POST'])
@@ -378,8 +401,10 @@ def update_user():
         return jsonify(message='User info not updated'), 500
     return redirect(request.referrer)
 
-# Update Monthly Bill
-@bp.route('/edit-monthly-charge', methods=['POST'])
+
+
+# Update Monthly Bill (completely change history)
+@bp.route('/complete-edit-monthly-charge', methods=['POST'])
 def edit_monthly_charge():
     data = request.form
     db = start_db_session()
@@ -387,12 +412,14 @@ def edit_monthly_charge():
     monthly_tag = data['monthly-category']
     monthly_price = data['monthly-price']
     monthly_description = data['monthly-name']
+    monthly_start_date = data['monthly-date']
     try:
         db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).update({
             'description': monthly_description.strip(),
             'amount': monthly_price.strip(),
             'user_id': session['user_id'],
-            'tag_id': monthly_tag
+            'tag_id': monthly_tag,
+            'time_created': monthly_start_date
         })
         db.commit()
     except Exception as e:
@@ -400,10 +427,88 @@ def edit_monthly_charge():
     return redirect(request.referrer)
 
 
+# Update Monthly Charge (update moving forward)
+@bp.route('/update-edit-monthly-charge', methods=['POST'])
+def update_monthly_charge():
+    data = request.form
+    db = start_db_session()
+    monthly_id = data['monthly-id']
+    monthly_tag = data['monthly-category']
+    monthly_price = data['monthly-price'].strip()
+    monthly_description = data['monthly-name'].strip()
+    monthly_start_date = data['monthly-date']
+
+    try:
+        # get the year and month to create a number that will be used to query in history
+        expired_monthly = db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).one()
+
+        expired_year = str(expired_monthly.time_created.year)
+        expired_month = str(expired_monthly.time_created.month)
+        expiration_limit_string = expired_year + expired_month
+
+        # create new expired monthly based on old monthly charge
+        new_expired_monthly = ExpiredCharges(
+            description = expired_monthly.description,
+            amount = expired_monthly.amount,
+            tag_id = expired_monthly.tag_id,
+            user_id = session['user_id'],
+            expiration_limit = int(expiration_limit_string)
+        )
+        db.add(new_expired_monthly)
+        # delete old monthly charge from table. 
+        db.delete(expired_monthly)
+        db.commit()
+
+
+        # create new current monthly charge
+        newMonthly = MonthlyCharge(
+            description = monthly_description,
+            tag_id = monthly_tag,
+            user_id = session['user_id'],
+            amount = monthly_price,
+            time_created = monthly_start_date
+            )
+        db.add(newMonthly)
+        db.commit()
+    except Exception as e:
+        print('===============eeee', e)
+    return redirect(request.referrer)
+
 # Stop Monthly Bill
-@bp.route('/api/stop-monthly-charge')
+@bp.route('/stop-monthly-charge', methods=['POST'])
 def stop_monthly_charge():
-    pass
+    data = request.form
+    db = start_db_session()
+    monthly_id = data['monthly-id']
+
+    try:
+        # get the year and month to create a number that will be used to query in history
+        expired_monthly = db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).one()
+
+        expired_year = str(expired_monthly.time_created.year)
+        expired_month = str(expired_monthly.time_created.month)
+        expiration_limit_string = expired_year + expired_month
+
+        # create new expired monthly based on old monthly charge
+        new_expired_charge = ExpiredCharges(
+            description = expired_monthly.description,
+            amount = expired_monthly.amount,
+            tag_id = expired_monthly.tag_id,
+            user_id = session['user_id'],
+            expiration_limit = int(expiration_limit_string)
+        )
+        db.add(new_expired_charge)
+        db.commit()
+
+        # delete old monthly charge from table. 
+        db.delete(expired_monthly)
+        db.commit()
+
+    except Exception as e:
+        print('============================23', e)
+    return redirect(request.referrer)
+
+
 
 # Delete Monthly Bill
 @bp.route('/delete-monthly-charge', methods=['POST'])
@@ -414,6 +519,7 @@ def delete_monthly_charge():
         db.query(MonthlyCharge).filter(MonthlyCharge.id == data['monthly-id']).delete()
         db.commit()
     except Exception as e:
+        print(e)
         db.rollback()
         return jsonify(message='Expense not deleted'), 500
     return redirect(request.referrer)

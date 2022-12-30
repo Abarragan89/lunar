@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect
 from sqlalchemy import extract, desc
-from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge
+from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, Expired_Charges
 from app.db import start_db_session
 import datetime
 from sqlalchemy.sql import func
@@ -100,13 +100,27 @@ def dashboard():
         user_cash = 0 if user_cash[0][0] is None else round(user_cash[0][0], 2)
 
     # Get data for the charts
-    allMonthlyExpenses = db.query(Tag.tag_name, Tag.tag_color, Product.amount
+    allMonthlyPurchases = db.query(Tag.tag_name, Tag.tag_color, Product.amount
         ).filter(Product.user_id == user_id
         ).filter(extract('month', Product.time_created)==current_month
         ).filter(extract('year', Product.time_created)==current_year
         ).join(Tag
         ).all()
     
+    # This is for monthly charges mixed with purchases. Format has to be idential with the one above(can refactor this)
+    monthly_charges_data_wheel = db.query(Tag.tag_name, Tag.tag_color, MonthlyCharge.amount
+        ).filter(MonthlyCharge.user_id == session['user_id']
+        ).join(Tag
+        ).all()
+    
+    # Change this query to just getting monthly charges to display on 'monthly charges'
+    monthly_charges = db.query(MonthlyCharge.time_created, MonthlyCharge.amount, MonthlyCharge.description, Tag.tag_name, Tag.id, MonthlyCharge.id
+        ).filter(MonthlyCharge.user_id == session['user_id']
+        ).join(Tag
+        ).all()
+    
+    allMonthlyExpenses = allMonthlyPurchases + monthly_charges_data_wheel
+
     # Create a chartData object to remove repeated Tags in products, and add up the total in products
     chartData = {}
     for expense in allMonthlyExpenses:
@@ -121,11 +135,6 @@ def dashboard():
     tag_total = [float(item['product_amount']) for item in values]
     relevant_tag_colors = [item['tag_color'] for item in values]
 
-    # Change this query to just getting monthly charges
-    user_category = db.query(MonthlyCharge.time_created, MonthlyCharge.amount, MonthlyCharge.description, Tag.tag_name, Tag.id, MonthlyCharge.id
-        ).filter(MonthlyCharge.user_id == session['user_id']
-        ).join(Tag
-        ).all()
     
     return render_template (
         'dashboard.html',
@@ -135,7 +144,7 @@ def dashboard():
         total_monthly_expenses=total_monthly_expenses,
         user_data=user_data,
         salaries=salaries,
-        category_data=user_category,
+        category_data=monthly_charges,
         auto_deductions=auto_deductions,
         days_until_first=days_until_first_data,
         user_cash=user_cash,

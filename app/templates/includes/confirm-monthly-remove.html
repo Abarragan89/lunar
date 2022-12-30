@@ -1,0 +1,31 @@
+<div class="modal-container" id="confirm-monthly-remove">
+    <div class="modal">
+        <h2 class='section-heading modal-heading'>
+            <span>
+              Confirm
+            </span>
+          </h2>
+          <br>
+          <form action="api/stop-monthly-charge", method="POST">
+            <p>Would you like to remove the charge but keep it's history?</p>
+            <input type="hidden" name="monthly-id" id="confirm-monthly-remove-id-complete">
+            <input type="hidden" name="monthly-category" id="confirm-monthly-remove-category-complete">
+            <input type="hidden" name="monthly-price" id="confirm-monthly-remove-price-complete">
+            <input type="hidden" name="monthly-name" id="confirm-monthly-remove-description-complete">
+            <input type="hidden" name="monthly-date" id="confirm-monthly-remove-date-complete">
+            <button type="submit" class="button-30">Remove and keep history</button>
+          </form>
+          <br>
+          <p>OR</p>
+          <br>
+          <form action="api/delete-monthly-charge", method="POST">
+            <p>Would you like to remove the charge and erase all past charges?</p>
+            <input type="hidden" name="monthly-id" id="confirm-monthly-delete-id">
+            <input type="hidden" name="monthly-category" id="confirm-monthly-delete-category">
+            <input type="hidden" name="monthly-price" id="confirm-monthly-delete-price">
+            <input type="hidden" name="monthly-name" id="confirm-monthly-delete-description">
+            <input type="hidden" name="monthly-date" id="confirm-monthly-delete-date">
+            <button type="submit" class="button-30">Delete and erase all history</button>
+          </form>
+    </div>
+</div>
