@@ -1,0 +1,27 @@
+<div class="modal-container" id="confirm-salary-edit">
+    <div class="modal">
+        <h2 class='section-heading modal-heading'>
+            <span>
+              Confirm
+            </span>
+          </h2>
+          <br>
+        <form action="api/update-user-salary", method="POST">
+            <p>Would you like to add this new salary and delete the current salaries history?</p>
+            <input type="hidden" name="new_salary" id="new_salary_update">
+            <input type="hidden" name="new_salary_date" id="new_salary_date_update">
+            <input type="hidden" name="current-salary-id" value="{{salaries[0]['id']}}">
+            <button type="submit" class="button-30">Add new salary and remember current</button>
+        </form>
+        <br>
+          <p>OR</p>
+          <br>
+          <form action="api/update-user-salary", method="POST">
+              <p>Would you like to add this new salary and keep the current salary in your past salaries.</p>
+              <input type="hidden" name="new_salary" id="new_salary_update_delete">
+              <input type="hidden" name="new_salary_date" id="new_salary_date_update_delete">
+              <input type="hidden" name="erase_history" value="true">
+            <button type="submit" class="button-30">Add new salary and erase current</button>
+          </form>
+    </div>
+</div>

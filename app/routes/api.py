@@ -324,9 +324,6 @@ def delete_deposit():
 def edit_category():
     data = request.form 
     db = start_db_session()
-    print('category id', data['category-id'])
-    print('category color', data['category-color'])
-    print('category name', data['category-name'])
 
     # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
     h = data['category-color'][1:]
@@ -360,10 +357,9 @@ def delete_category():
         return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
 
-
-# Update user data
-@bp.route('/update-user-info', methods=['POST'])
-def update_user():
+# Update user name
+@bp.route('/update-user-name', methods=['POST'])
+def update_user_name():
     data = request.form
     db = start_db_session()
     try:
@@ -371,36 +367,54 @@ def update_user():
         user_data.username = data['new_username'].strip()
 
         db.commit()
-        if data['new_salary_date'] and data['new_salary']:
-            # check to see if a salary in that month and year is already present
-            # extract the month and year from the salary date
-            month = data['new_salary_date'].split('-')[1]
-            year = data['new_salary_date'].split('-')[0]
-            try:
-                salaryExists = db.query(Salary
-                    ).filter(Salary.user_id == user_data.id
-                    ).filter(sqlalchemy.extract('month', Salary.time_created) == month
-                    ).filter(sqlalchemy.extract('year', Salary.time_created) == year
-                    ).one()
-                salaryExists.salary_amount = data['new_salary']
-                db.commit()
-            except:
-                newSalary = Salary (
-                    salary_amount = data['new_salary'].strip(),
-                    user_id = user_data.id,
-                    time_created = data['new_salary_date'] + '-1'
-                )
-                db.add(newSalary)
-                db.commit()
-    except AssertionError:
-        db.rollback()
-        return jsonify(message='Missing fields.'), 400
-    except Exception as e:
-        print(e)
-        db.rollback()
-        return jsonify(message='User info not updated'), 500
+    except:
+        pass
     return redirect(request.referrer)
 
+
+
+
+# Update user salary
+@bp.route('/update-user-salary', methods=['POST'])
+def update_user():
+    data = request.form
+    db = start_db_session()
+
+    # check to see if a salary in that month and year is already present. If it is, override it.
+    # extract the month and year from the salary date
+    month = data['new_salary_date'].split('-')[1]
+    year = data['new_salary_date'].split('-')[0]
+
+    try:
+        salaryExists = db.query(Salary
+            ).filter(Salary.user_id == session['user_id']
+            ).filter(sqlalchemy.extract('month', Salary.time_created) == month
+            ).filter(sqlalchemy.extract('year', Salary.time_created) == year
+            ).one()
+        salaryExists.salary_amount = data['new_salary']
+        db.commit()
+        return redirect(request.referrer)
+    except Exception as e:
+        print('============================================',e)
+
+    # This try will only run if the other one fails
+    try:
+        newSalary = Salary (
+            salary_amount = data['new_salary'].strip(),
+            user_id = session['user_id'],
+            # I need '-1' since the date back is only Year and month. '-1' makes it the first
+            time_created = data['new_salary_date'] + '-1'
+        )
+        db.add(newSalary)
+        # Delete current salary if user wants to erase history
+        if 'erase_history' in data:
+            db.query(Salary).filter(Salary.id == data['current-salary-id']).delete()
+        
+        db.commit()
+    except Exception as e:
+        print('====================== in keep history', e)
+
+    return redirect(request.referrer)
 
 
 # Update Monthly Bill (completely change history)
