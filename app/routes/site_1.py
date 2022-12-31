@@ -249,6 +249,11 @@ def history(yearMonth):
             ).filter(extract('month', Product.time_created) == monthLookUp
             ).filter(extract('year', Product.time_created) == yearLookUp
             ).all()
+        all_cash = db.query(func.sum(Cash.amount).label("total_value")
+            ).filter(Cash.user_id == user_id
+            ).filter(extract('month', Cash.time_created) == monthLookUp
+            ).filter(extract('year', Cash.time_created) == yearLookUp
+            ).all()
         past_expired_charges = db.query(func.sum(ExpiredCharges.amount).label("total_value")
             ).filter(ExpiredCharges.user_id == user_id
             ).filter(ExpiredCharges.expiration_limit > date_limit_int
@@ -259,7 +264,7 @@ def history(yearMonth):
             ).filter(MonthlyCharge.start_date <= date_limit_int).filter()
         
         expired_charges = db.query(ExpiredCharges.time_created, ExpiredCharges.amount, 
-            ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.expiration_limit, ExpiredCharges.start_date
+            ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.start_date, ExpiredCharges.expiration_limit
         ).filter(ExpiredCharges.user_id == session['user_id']
         ).filter(ExpiredCharges.expiration_limit > date_limit_int
         ).filter(ExpiredCharges.start_date <= date_limit_int
@@ -276,10 +281,9 @@ def history(yearMonth):
     except Exception as e:
         print('============================salary', e)
 
-    print('============================= expiredcharges')
-
     # set defaults to query objects in case they come up empty
     salary = 0 if salary is None else salary.salary_amount
+    all_cash = 0 if all_cash[0].total_value is None else all_cash[0].total_value
     past_expired_charges = 0 if past_expired_charges[0].total_value is None else past_expired_charges[0].total_value
     any_current_monthly = 0 if any_current_monthly[0].total_value is None else any_current_monthly[0].total_value
     all_purchases = 0 if all_purchases[0].total_value is None else all_purchases[0].total_value
@@ -297,5 +301,6 @@ def history(yearMonth):
         total_monthly_expenses=total_monthly_expenses,
         all_purchases=all_purchases,
         expired_charges=expired_charges,
-        active_monthly_charges=active_monthly_charges
+        active_monthly_charges=active_monthly_charges,
+        all_cash=all_cash
     )

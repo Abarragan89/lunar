@@ -1,7 +1,4 @@
 /* GLOBAL COLORS AND FONTS*/
-#history-main {
-  margin-top: 20px;
-}
 #history-main input[type=month] {
   background-color: rgb(13, 90, 102);
   border: none;
@@ -9,7 +6,13 @@
   margin: 0 auto;
   margin-bottom: 20px;
   padding: 3px 2px;
-  border-radius: 3px;
+  border-radius: 0px 3px 3px 0;
+}
+#history-main .positive-money {
+  color: #6bd0d2;
+}
+#history-main .negative-money {
+  color: rgb(204, 5, 5);
 }
 #history-main .monthly-calculation {
   display: flex;
@@ -20,9 +23,25 @@
   margin: 0 auto;
 }
 #history-main .monthly-calculation div h2 {
-  font-size: 1.2rem;
-  margin-right: 40px;
+  font-size: 0.95rem;
 }
-#history-main .monthly-calculation div:first-child {
-  align-items: flex-end;
+#history-main .monthly-calculation .money-col {
+  border-bottom: 1px solid rgb(228, 240, 239);
+}
+#history-main .monthly-calculation .money-labels {
+  justify-content: flex-start;
+}
+#history-main h4 {
+  font-size: 1.2rem;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  text-align: right;
+  margin-right: 30px;
+}
+#history-main .ending-balance {
+  margin-left: 10px;
+}
+#history-main .monthly-time-line {
+  font-size: 0.8em;
+  font-style: italic;
 }/*# sourceMappingURL=history.css.map */

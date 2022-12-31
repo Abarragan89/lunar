@@ -1,6 +1,10 @@
 {% extends 'base.html' %} {% block head %}
 
 <title>History</title>
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='/styles/home/home.css')}}"
+/>
 <link rel="stylesheet" href="{{url_for('static', filename='/styles/history/history.css')}}">
 {% endblock %} {% block body %}
 
@@ -14,69 +18,111 @@
   <input type="month" max="{{current_year}}-{{current_month}}" value="{{yearLookUp}}-{{monthLookUp}}" id="choose-month">
 
   <div class="monthly-calculation">
-    <div class="flex-box-col-sa">
+    <div class="flex-box-col-sa money-labels">
       <h2>Salary:</h2>
-      <h2>Monthly Charges:</h2>
-      <h2>Purchases:</h2>
+      <h2>Cash:</h2>
     </div>
     <div class="flex-box-col-sa">
-      <h2>${{salary}}</h2>
-      <h2>${{total_monthly_expenses}}</h2>
-      <h2>${{all_purchases}}</h2>
+      <div class="flex-box-col-sa positive-money">
+        <h2>${{salary}}</h2>
+        <h2 class="money-col">${{all_cash}}</h2>
+      </div>
+      <h2 class="positive-money">${{salary + all_cash}}</h2>
+    </div>
+
+
+    <div class="flex-box-col-sa money-labels">
+      <h2>Charges:</h2>
+      <h2>Purchases:</h2>
+    </div>
+    <div class="flex-box-col-sa negative-money">
+      <h2>-${{total_monthly_expenses}}</h2>
+      <h2 class="money-col">-${{all_purchases}}</h2>
+      <h2>${{total_monthly_expenses + all_purchases}}</h2>
     </div>
   </div>
 
 
-  <h1>Expired Charges</h1>
-  {% for data in expired_charges %}
-  <a class="edit-monthly-charge-btn">
-    <div class="flex-box-sb activity-link" data-type="expense">
+  {% if (salary + all_cash) > (total_monthly_expenses + all_purchases)%}
+  <h4>Ending Balance: <span class="positive-money">${{(salary + all_cash) - (total_monthly_expenses + all_purchases)}}</span></h4>
+  {% else %}
+  <h4>Ending Blance: <span class="ending-balance negative-money">-${{(total_monthly_expenses + all_purchases) - (salary + all_cash)}}</span></h4>
+  {% endif %}
 
-        <div class='flex-box-col-se date-div'
-        data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
-          <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
-          <p>{{ data[0].year}}</p>
-        </div>
-        <div class="flex-box-col-sa activity-link-description">
-          <p
-            class="activity-link-tag"
-            data-monthly-id="{{data[5]}}"
-            data-monthly-tag-id="{{data[4]}}"
-          >
-            {{ data[3] }}
-          </p>
-          <p> Start Date: {{data[7]}}</p>
-          <p>Expiration date: {{data[6]}}</p>
-        </div>
-        <p>${{ data[1] }}</p>
-    </div>
-  </a>
-  {% endfor %}
 
-  <h1>Active Charges</h1>
-  {% for data in active_monthly_charges %}
-  <a class="edit-monthly-charge-btn">
-    <div class="flex-box-sb activity-link" data-type="expense">
 
-        <div class='flex-box-col-se date-div'
-        data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
-          <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
-          <p>{{ data[0].year}}</p>
-        </div>
-        <div class="flex-box-col-sa activity-link-description">
-          <p
-            class="activity-link-tag"
-            data-monthly-id="{{data[5]}}"
-            data-monthly-tag-id="{{data[4]}}"
-          >
-            {{ data[3] }}
-          </p>
-          <p> start_date: {{data[6]}}</p>
-        </div>
-        <p>${{ data[1] }}</p>
-    </div>
-  </a>
-  {% endfor %}
+  <h2 class='section-heading page-heading'>
+    <span>
+      Charges
+    </span>
+  </h2>
+  {% if expired_charges|length > 0 %}
+  <div class="main-activity-div">
+    {% for data in expired_charges %}
+    <a class="edit-monthly-charge-btn">
+      <div class="activity-link" data-type="expense">
+
+          <div class="flex-box-col-sb activity-link-description">
+
+            <div class="flex-box-sb">
+              <p
+                class="activity-link-tag"
+                data-monthly-id="{{data[5]}}"
+                data-monthly-tag-id="{{data[4]}}"
+                data-description="{{data[2]}}"
+              >
+                {{ data[3] }}
+              </p>
+              <p>${{ data[1] }}</p>
+            </div>
+            <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            </div>
+            <div class="flex-box-sb monthly-time-line">
+              <p>start date: {{ data[0].strftime('%-m')}}/{{ data[0].year}}</p>
+              <p>end date: {{convertExpirationDate(data[7])}}</p>
+            </div>
+          </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+  {% if active_monthly_charges|length > 0 %}
+  <div class="main-activity-div">
+    {% for data in active_monthly_charges %}
+    <a class="edit-monthly-charge-btn">
+      <div class="activity-link" data-type="expense">
+
+          <div class="flex-box-col-sb activity-link-description">
+
+            <div class="flex-box-sb">
+              <p
+                class="activity-link-tag"
+                data-monthly-id="{{data[5]}}"
+                data-monthly-tag-id="{{data[4]}}"
+                data-description="{{data[2]}}"
+              >
+                {{ data[3] }}
+              </p>
+              <p>${{ data[1] }}</p>
+            </div>
+            <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            </div>
+            <div class="flex-box-sb monthly-time-line">
+              <p>start date: {{ data[0].strftime('%-m')}}/{{ data[0].year}}</p>
+              <p>currently active</p>
+            </div>
+          </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+
 </main>
 
 

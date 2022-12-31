@@ -22,6 +22,10 @@ def rgbaToRgb(rgba):
     color_nums = rgba[rgba.find("(")+1:rgba.find(")")].split(',')
     return '#%02x%02x%02x' % (int(color_nums[0]), int(color_nums[1]), int(color_nums[2]))
 
+def convertExpirationDate(int):
+    string_int = str(int)
+    return f"{string_int[4:]}/{string_int[:4]}"
+
 
 def create_app():
     # set up app config
@@ -39,6 +43,7 @@ def create_app():
  
     app.jinja_env.globals.update(rgbaToRgb=rgbaToRgb)
     app.jinja_env.globals.update(format_date_ending=format_date_ending)
+    app.jinja_env.globals.update(convertExpirationDate=convertExpirationDate)
 
     
     return app
