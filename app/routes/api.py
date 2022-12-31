@@ -1,9 +1,15 @@
 from flask import Blueprint, request, jsonify, session, redirect, render_template
 import sqlalchemy
+import datetime
 from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges
 from app.db import start_db_session
 
 bp = Blueprint('api', __name__, url_prefix='/api')
+
+
+today = datetime.datetime.now()
+current_month = today.month
+current_year = today.year
 
 # Sign up 
 @bp.route('/signup', methods=['POST'])
@@ -160,6 +166,8 @@ def add_category():
 def add_expense():
     data = request.form
     db = start_db_session()
+    start_date = data['expense-date']
+    expiration_limit = int(str(start_date.split('-')[0]) + str(start_date.split('-')[1]))
 
     if 'monthly-bill' in data:
         try:
@@ -168,7 +176,8 @@ def add_expense():
                 tag_id = data['product-category'],
                 user_id = session['user_id'],
                 amount = data['product-price'].strip(),
-                time_created = data['expense-date']
+                time_created = data['expense-date'],
+                start_date = expiration_limit
             )
             db.add(newMonthly)
             db.commit()
@@ -176,7 +185,7 @@ def add_expense():
             db.rollback()
             return jsonify(message='Missing fields.'), 400
         except Exception as e:
-            print(e)
+            print('===========================================', e)
             db.rollback()
             return jsonify(message='Expense not added'), 500
         return redirect(request.referrer)
@@ -228,14 +237,18 @@ def add_cash():
 def update_expense():
     data = request.form 
     db = start_db_session()
+    start_date = data['expense-date-current']
+
     if 'monthly-bill' in data:
         try:
+            expiration_limit = int(str(start_date.split('-')[0]) + str(start_date.split('-')[1]))
             newMonthly = MonthlyCharge(
                 description = data['product-name'].strip(),
                 tag_id = data['product-category'],
                 user_id = session['user_id'],
                 amount = data['product-price'].strip(),
-                time_created = data['expense-date-current']
+                time_created = data['expense-date-current'],
+                start_date = expiration_limit
             )
             db.add(newMonthly)
             db.commit()
@@ -358,7 +371,7 @@ def delete_category():
     return redirect('/')
 
 # Update user name
-@bp.route('/update-user-name', methods=['POST'])
+@bp.route('/update-username', methods=['POST'])
 def update_user_name():
     data = request.form
     db = start_db_session()
@@ -367,11 +380,9 @@ def update_user_name():
         user_data.username = data['new_username'].strip()
 
         db.commit()
-    except:
-        pass
+    except Exception as e:
+        print('=========================username', e)
     return redirect(request.referrer)
-
-
 
 
 # Update user salary
@@ -392,6 +403,9 @@ def update_user():
             ).filter(sqlalchemy.extract('year', Salary.time_created) == year
             ).one()
         salaryExists.salary_amount = data['new_salary']
+        # erase old salary if needed
+        if 'erase_history' in data:
+            old_salary = db.query(Salary).filter(Salary.id == data['current-salary-id']).delete()
         db.commit()
         return redirect(request.referrer)
     except Exception as e:
@@ -408,12 +422,11 @@ def update_user():
         db.add(newSalary)
         # Delete current salary if user wants to erase history
         if 'erase_history' in data:
-            db.query(Salary).filter(Salary.id == data['current-salary-id']).delete()
-        
+            print('-================================= hellow im in here')
+            old_salary = db.query(Salary).filter(Salary.id == data['current-salary-id']).delete()
         db.commit()
     except Exception as e:
         print('====================== in keep history', e)
-
     return redirect(request.referrer)
 
 
@@ -427,12 +440,15 @@ def edit_monthly_charge():
     monthly_price = data['monthly-price']
     monthly_description = data['monthly-name']
     monthly_start_date = data['monthly-date']
+    start_date = int(str(monthly_start_date.split('-')[0]) + str(monthly_start_date.split('-')[1]))
+
     try:
         db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).update({
             'description': monthly_description.strip(),
             'amount': monthly_price.strip(),
             'user_id': session['user_id'],
             'tag_id': monthly_tag,
+            'start_date': start_date,
             'time_created': monthly_start_date
         })
         db.commit()
@@ -452,13 +468,16 @@ def update_monthly_charge():
     monthly_description = data['monthly-name'].strip()
     monthly_start_date = data['monthly-date']
 
+    # This is the limit that will be placed on the expired charge. Only query less than this in history
+    # This will also be the start date of the new monthly charge. From this date forward. greater than or equal to
+    expiration_limit = int(str(monthly_start_date.split('-')[0]) + str(monthly_start_date.split('-')[1]))
+
     try:
-        # get the year and month to create a number that will be used to query in history
+        # get the data from the old monthly charge to make an expired charge
         expired_monthly = db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).one()
 
-        expired_year = str(expired_monthly.time_created.year)
-        expired_month = str(expired_monthly.time_created.month)
-        expiration_limit_string = expired_year + expired_month
+        start_date = int(str(expired_monthly.time_created.year) + str(expired_monthly.time_created.month))
+        print('============================= start date', type(start_date))
 
         # create new expired monthly based on old monthly charge
         new_expired_monthly = ExpiredCharges(
@@ -466,7 +485,8 @@ def update_monthly_charge():
             amount = expired_monthly.amount,
             tag_id = expired_monthly.tag_id,
             user_id = session['user_id'],
-            expiration_limit = int(expiration_limit_string)
+            expiration_limit = expiration_limit,
+            start_date = start_date
         )
         db.add(new_expired_monthly)
         # delete old monthly charge from table. 
@@ -480,6 +500,7 @@ def update_monthly_charge():
             tag_id = monthly_tag,
             user_id = session['user_id'],
             amount = monthly_price,
+            start_date = expiration_limit,
             time_created = monthly_start_date
             )
         db.add(newMonthly)
@@ -494,14 +515,12 @@ def stop_monthly_charge():
     data = request.form
     db = start_db_session()
     monthly_id = data['monthly-id']
+    expiration_limit = data['expiration-limit-date']
+    expiration_limit = int(expiration_limit.split('-')[0] + expiration_limit.split('-')[1])
 
     try:
-        # get the year and month to create a number that will be used to query in history
         expired_monthly = db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).one()
-
-        expired_year = str(expired_monthly.time_created.year)
-        expired_month = str(expired_monthly.time_created.month)
-        expiration_limit_string = expired_year + expired_month
+        start_date = int(str(expired_monthly.time_created.year) + str(expired_monthly.time_created.strftime('%m')))
 
         # create new expired monthly based on old monthly charge
         new_expired_charge = ExpiredCharges(
@@ -509,7 +528,8 @@ def stop_monthly_charge():
             amount = expired_monthly.amount,
             tag_id = expired_monthly.tag_id,
             user_id = session['user_id'],
-            expiration_limit = int(expiration_limit_string)
+            expiration_limit = expiration_limit,
+            start_date = start_date
         )
         db.add(new_expired_charge)
         db.commit()
@@ -517,7 +537,6 @@ def stop_monthly_charge():
         # delete old monthly charge from table. 
         db.delete(expired_monthly)
         db.commit()
-
     except Exception as e:
         print('============================23', e)
     return redirect(request.referrer)

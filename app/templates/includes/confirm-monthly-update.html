@@ -5,19 +5,7 @@
               Confirm
             </span>
           </h2>
-          <form action="api/complete-edit-monthly-charge", method="POST">
-            <p>Would you like to change the entire history of this monthly charge?</p>
-            <input type="hidden" name="monthly-id" id="confirm-monthly-update-id-complete">
-            <input type="hidden" name="monthly-category" id="confirm-monthly-update-category-complete">
-            <input type="hidden" name="monthly-price" id="confirm-monthly-update-price-complete">
-            <input type="hidden" name="monthly-name" id="confirm-monthly-update-description-complete">
-            <input type="hidden" name="monthly-date" id="confirm-monthly-update-date-complete">
-            <button type="submit" class="button-30">Update Entire History</button>
-          </form>
-          <br>
-          <p>OR</p>
-          <br>
-          <form action="api/update-edit-monthly-charge", method="POST">
+          <form action="{{base_url}}/api/update-edit-monthly-charge", method="POST">
             <p>Would you like to keep the history of this charge and update moving forward?</p>
             <input type="hidden" name="monthly-id" id="confirm-monthly-update-id">
             <input type="hidden" name="monthly-category" id="confirm-monthly-update-category">
@@ -25,6 +13,18 @@
             <input type="hidden" name="monthly-name" id="confirm-monthly-update-description">
             <input type="hidden" name="monthly-date" id="confirm-monthly-update-date">
             <button type="submit" class="button-30">Update Moving Forward</button>
+          </form>
+          <br>
+          <p>OR</p>
+          <br>
+          <form action="{{base_url}}/api/complete-edit-monthly-charge", method="POST">
+            <p>Would you like to change the entire history of this monthly charge?</p>
+            <input type="hidden" name="monthly-id" id="confirm-monthly-update-id-complete">
+            <input type="hidden" name="monthly-category" id="confirm-monthly-update-category-complete">
+            <input type="hidden" name="monthly-price" id="confirm-monthly-update-price-complete">
+            <input type="hidden" name="monthly-name" id="confirm-monthly-update-description-complete">
+            <input type="hidden" name="monthly-date" id="confirm-monthly-update-date-complete">
+            <button type="submit" class="button-30">Update Entire History</button>
           </form>
     </div>
 </div>

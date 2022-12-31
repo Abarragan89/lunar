@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect
 from sqlalchemy import extract, desc
-from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, Expired_Charges
+from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges
 from app.db import start_db_session
 import datetime
 from sqlalchemy.sql import func
@@ -226,7 +226,10 @@ def history(yearMonth):
     monthLookUp = yearMonth.split('-')[1]
     is_loggedin = session.get('loggedIn')
     user_id = session['user_id']
-    
+
+    # combine the year and month to create an integer to compare to expiration limit
+    date_limit_int = int(str(yearLookUp) + str(monthLookUp))
+    print('date limit===============', date_limit_int)
     db = start_db_session()
     # need to get tags for the navbar
     allTags = (
@@ -239,9 +242,50 @@ def history(yearMonth):
             ).filter(Salary.user_id == user_id
             ).filter(extract('month', Salary.time_created) == monthLookUp
             ).filter(extract('year', Salary.time_created) == yearLookUp
-            ).one()
-    except:
-        salary = None
+            ).first()
+        # get all summed up values of monthly charges and purchases for the month     
+        all_purchases = db.query(func.sum(Product.amount).label("total_value")
+            ).filter(Product.user_id == user_id
+            ).filter(extract('month', Product.time_created) == monthLookUp
+            ).filter(extract('year', Product.time_created) == yearLookUp
+            ).all()
+        past_expired_charges = db.query(func.sum(ExpiredCharges.amount).label("total_value")
+            ).filter(ExpiredCharges.user_id == user_id
+            ).filter(ExpiredCharges.expiration_limit > date_limit_int
+            ).filter(ExpiredCharges.start_date <= date_limit_int
+            ).all()
+        any_current_monthly = db.query(func.sum(MonthlyCharge.amount).label("total_value")
+            ).filter(MonthlyCharge.user_id == user_id
+            ).filter(MonthlyCharge.start_date <= date_limit_int).filter()
+        
+        expired_charges = db.query(ExpiredCharges.time_created, ExpiredCharges.amount, 
+            ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.expiration_limit, ExpiredCharges.start_date
+        ).filter(ExpiredCharges.user_id == session['user_id']
+        ).filter(ExpiredCharges.expiration_limit > date_limit_int
+        ).filter(ExpiredCharges.start_date <= date_limit_int
+        ).join(Tag
+        ).all()
+
+        active_monthly_charges = db.query(MonthlyCharge.time_created, MonthlyCharge.amount, 
+            MonthlyCharge.description, Tag.tag_name, Tag.id, MonthlyCharge.id, MonthlyCharge.start_date
+        ).filter(MonthlyCharge.user_id == session['user_id']
+        ).filter(MonthlyCharge.start_date <= date_limit_int
+        ).join(Tag
+        ).all()
+        
+    except Exception as e:
+        print('============================salary', e)
+
+    print('============================= expiredcharges')
+
+    # set defaults to query objects in case they come up empty
+    salary = 0 if salary is None else salary.salary_amount
+    past_expired_charges = 0 if past_expired_charges[0].total_value is None else past_expired_charges[0].total_value
+    any_current_monthly = 0 if any_current_monthly[0].total_value is None else any_current_monthly[0].total_value
+    all_purchases = 0 if all_purchases[0].total_value is None else all_purchases[0].total_value
+    # Add up expired and any current monthly to get total monthly expenses
+    total_monthly_expenses = past_expired_charges + any_current_monthly
+
     return render_template('history.html',
         loggedIn=is_loggedin,
         tags=allTags,
@@ -249,5 +293,9 @@ def history(yearMonth):
         yearLookUp=yearLookUp,
         monthLookUp=monthLookUp,
         current_month=current_month,
-        current_year=current_year
+        current_year=current_year,
+        total_monthly_expenses=total_monthly_expenses,
+        all_purchases=all_purchases,
+        expired_charges=expired_charges,
+        active_monthly_charges=active_monthly_charges
     )

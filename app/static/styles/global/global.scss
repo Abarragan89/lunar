@@ -38,7 +38,7 @@ a {
   border-bottom: 1px solid $gray;
   font-size: 1.7em;
   line-height: .017rem;
-  margin: 43px 0 15px;
+  margin: 20px 0 15px;
   padding: 0;
   text-align: center;
   width: 100%;
@@ -60,10 +60,13 @@ a {
 }
 
 // Home Button
-.fa-house {
+.fa-pencil {
   color: $gray;
-  font-size: 1.4em;
-  padding-top: 15px;
+  font-size: .95rem;
+  margin-left: 20px;
+}
+.fa-house {
+  font-size: 1.5rem;
   margin-left: 15px;
 }
 
@@ -73,7 +76,7 @@ nav {
   color: $offWhite;
 	top: 0;
   align-items: center;
-  background-color: $secondaryColor;
+  // background-color: $secondaryColor;
 }
 
 #nav-items-main-div {
@@ -158,9 +161,18 @@ nav {
 }
 
 #hamburger {
+  position: fixed;
+  top: 20px;
+  right: -10px;
   font-size: 1.5em;
   margin-right: 10px;
   color: $offWhite;
+  background-color: $secondaryColor;
+  padding: 5px 10px 5px 5px;
+  border-radius: 8px 0 0 8px;
+  transition: 0.15s;
+  z-index: 999;
+
 }
 #hamburger:hover {
   cursor: pointer;

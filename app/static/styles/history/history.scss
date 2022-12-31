@@ -1,3 +1,33 @@
+@import '../utilities/variables.scss';
+
 #history-main {
-    margin-top: 40px;
+    margin-top: 20px;
+
+    input[type="month"] {
+        background-color: $secondaryColor;
+        border: none;
+        color-scheme: dark;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding: 3px 2px;
+        border-radius: 3px;
+
+    }
+
+    .monthly-calculation {
+        display: flex;
+        div {
+            text-align: center;
+            align-items: flex-end;
+            margin: 0 auto;
+
+            h2 {
+                font-size: 1.2rem;
+                margin-right: 40px;
+            }
+        }
+        div:first-child {
+            align-items: flex-end;
+        }
+    }
 }

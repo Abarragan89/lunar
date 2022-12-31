@@ -1,3 +1,28 @@
+/* GLOBAL COLORS AND FONTS*/
 #history-main {
-  margin-top: 40px;
+  margin-top: 20px;
+}
+#history-main input[type=month] {
+  background-color: rgb(13, 90, 102);
+  border: none;
+  color-scheme: dark;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 3px 2px;
+  border-radius: 3px;
+}
+#history-main .monthly-calculation {
+  display: flex;
+}
+#history-main .monthly-calculation div {
+  text-align: center;
+  align-items: flex-end;
+  margin: 0 auto;
+}
+#history-main .monthly-calculation div h2 {
+  font-size: 1.2rem;
+  margin-right: 40px;
+}
+#history-main .monthly-calculation div:first-child {
+  align-items: flex-end;
 }/*# sourceMappingURL=history.css.map */

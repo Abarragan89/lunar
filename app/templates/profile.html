@@ -9,22 +9,28 @@
 
 <main id='profile-main'>
     <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
-    <h1 class='section-heading page-heading'>
+    <h2 class='section-heading page-heading'>
         <span>
           Profile
         </span>
-      </h1>
+    </h2>
     
     <div class="flex-box-sa">
       <div class="flex-box-sa user-profile">
           <div class="flex-box-col-se">
             <div class="flex-box-se">
-              <p>Name: <span>{{user_data.username}}</span></p>
-              <p><i class="fa-sharp fa-solid fa-pencil"></i></p>
+              <form id="update-username-form" action="api/update-username" method="POST">
+                  <div class="flex-box-se">
+                  <p>Name:</p>
+                  <input type="text" name="new_username" id="change-username-input" value="{{user_data.username}}" disabled>
+                </div>
+                </form>
+              <p id="edit-username-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
             </div>
             <div class="flex-box-se">
-              <p>Salary:<span>${{salaries[0]['salary_amount']}}</span></p>
-              <p id="edit-profile-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
+              <p>Salary:</p>
+              <p>${{salaries[0]['salary_amount']}}</p>
+              <p id="edit-salary-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
             </div>
           </div>
       </div>

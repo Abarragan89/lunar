@@ -5,9 +5,78 @@
 {% endblock %} {% block body %}
 
 <main id="history-main">
+  <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
+  <h2 class='section-heading page-heading'>
+    <span>
+      History
+    </span>
+  </h2>
   <input type="month" max="{{current_year}}-{{current_month}}" value="{{yearLookUp}}-{{monthLookUp}}" id="choose-month">
 
-  <h2>Salary: ${{salary.salary_amount}}</h2>
+  <div class="monthly-calculation">
+    <div class="flex-box-col-sa">
+      <h2>Salary:</h2>
+      <h2>Monthly Charges:</h2>
+      <h2>Purchases:</h2>
+    </div>
+    <div class="flex-box-col-sa">
+      <h2>${{salary}}</h2>
+      <h2>${{total_monthly_expenses}}</h2>
+      <h2>${{all_purchases}}</h2>
+    </div>
+  </div>
+
+
+  <h1>Expired Charges</h1>
+  {% for data in expired_charges %}
+  <a class="edit-monthly-charge-btn">
+    <div class="flex-box-sb activity-link" data-type="expense">
+
+        <div class='flex-box-col-se date-div'
+        data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+          <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+          <p>{{ data[0].year}}</p>
+        </div>
+        <div class="flex-box-col-sa activity-link-description">
+          <p
+            class="activity-link-tag"
+            data-monthly-id="{{data[5]}}"
+            data-monthly-tag-id="{{data[4]}}"
+          >
+            {{ data[3] }}
+          </p>
+          <p> Start Date: {{data[7]}}</p>
+          <p>Expiration date: {{data[6]}}</p>
+        </div>
+        <p>${{ data[1] }}</p>
+    </div>
+  </a>
+  {% endfor %}
+
+  <h1>Active Charges</h1>
+  {% for data in active_monthly_charges %}
+  <a class="edit-monthly-charge-btn">
+    <div class="flex-box-sb activity-link" data-type="expense">
+
+        <div class='flex-box-col-se date-div'
+        data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+          <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+          <p>{{ data[0].year}}</p>
+        </div>
+        <div class="flex-box-col-sa activity-link-description">
+          <p
+            class="activity-link-tag"
+            data-monthly-id="{{data[5]}}"
+            data-monthly-tag-id="{{data[4]}}"
+          >
+            {{ data[3] }}
+          </p>
+          <p> start_date: {{data[6]}}</p>
+        </div>
+        <p>${{ data[1] }}</p>
+    </div>
+  </a>
+  {% endfor %}
 </main>
 
 
