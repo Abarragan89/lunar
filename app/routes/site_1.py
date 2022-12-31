@@ -264,7 +264,7 @@ def history(yearMonth):
             ).filter(MonthlyCharge.start_date <= date_limit_int).filter()
         
         expired_charges = db.query(ExpiredCharges.time_created, ExpiredCharges.amount, 
-            ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.start_date, ExpiredCharges.expiration_limit
+            ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.start_date, ExpiredCharges.expiration_limit, ExpiredCharges.start_date
         ).filter(ExpiredCharges.user_id == session['user_id']
         ).filter(ExpiredCharges.expiration_limit > date_limit_int
         ).filter(ExpiredCharges.start_date <= date_limit_int

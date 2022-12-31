@@ -557,4 +557,46 @@ def delete_monthly_charge():
         return jsonify(message='Expense not deleted'), 500
     return redirect(request.referrer)
 
+# Update Expired Charges
+@bp.route('/update-expired-charge', methods=['POST'])
+def update_expired_charge():
+    data = request.form
+    db = start_db_session()
+
+    category_id = data['monthly-category']
+    expired_price = data['monthly-price']
+    expired_description = data['monthly-name']
+    expired_id = data['expired-id']
+    start_date = data['start-date']
+    end_date = data['end-date']
+    # need to change the dates to an integer so we can query easier
+    start_date = int(start_date.split('-')[0] + start_date.split('-')[1])
+    end_date = int(end_date.split('-')[0] + end_date.split('-')[1])
+
+    try:
+        db.query(ExpiredCharges).filter(ExpiredCharges.id == expired_id).update({
+            'description': expired_description,
+            'amount': expired_price,
+            'user_id': session['user_id'],
+            'tag_id': category_id,
+            'expiration_limit': end_date,
+            'start_date': start_date
+        })
+        db.commit()
+    except Exception as e:
+        print('======================= updating expired charge', e)
+    return redirect(request.referrer)
     
+# Delete Expired Charge
+@bp.route('/delete-expired-charge', methods=['POST'])
+def delete_expired_charge():
+    data = request.form
+    db = start_db_session()
+    try:
+        db.query(ExpiredCharges).filter(ExpiredCharges.id == data['expired-id']).delete()
+        db.commit()
+    except Exception as e:
+        print(e)
+        db.rollback()
+        return jsonify(message='Expense not deleted'), 500
+    return redirect(request.referrer)

@@ -8,6 +8,9 @@
 <link rel="stylesheet" href="{{url_for('static', filename='/styles/history/history.css')}}">
 {% endblock %} {% block body %}
 
+{% include 'includes/edit-expired-charge-modal.html'%}
+
+
 <main id="history-main">
   <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
   <h2 class='section-heading page-heading'>
@@ -59,16 +62,16 @@
   {% if expired_charges|length > 0 %}
   <div class="main-activity-div">
     {% for data in expired_charges %}
-    <a class="edit-monthly-charge-btn">
-      <div class="activity-link" data-type="expense">
+    <a class="edit-expired-charge-btn">
+      <div class="activity-link">
 
           <div class="flex-box-col-sb activity-link-description">
 
             <div class="flex-box-sb">
               <p
                 class="activity-link-tag"
-                data-monthly-id="{{data[5]}}"
-                data-monthly-tag-id="{{data[4]}}"
+                data-expired-id="{{data[5]}}"
+                data-expired-tag-id="{{data[4]}}"
                 data-description="{{data[2]}}"
               >
                 {{ data[3] }}
@@ -78,7 +81,7 @@
             <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
             </div>
             <div class="flex-box-sb monthly-time-line">
-              <p>start date: {{ data[0].strftime('%-m')}}/{{ data[0].year}}</p>
+              <p>start date: {{ convertExpirationDate(data[8])}}</p>
               <p>end date: {{convertExpirationDate(data[7])}}</p>
             </div>
           </div>
@@ -127,6 +130,7 @@
 
 
 <script src="{{url_for('static', filename='/js/history.js')}}"></script>
+
 {% endblock %}
 
 
