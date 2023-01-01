@@ -11,9 +11,6 @@
                 {% for tag in tags%}
                 <option value="{{tag.id}}">{{tag.tag_name}}</option>
                 {% endfor %}
-                {% for expense in expenses %}
-                <p>{{expense.description}}</p>
-                {% endfor %}
               </select>
               <div>
                 <span class="input-symbol-dollar">
@@ -22,12 +19,10 @@
               </div>
             </div>
 
-
-
             <input type="hidden" name="monthly-id" id="monthly-id">
-            <input type="text" name="monthly-name" maxlength="50" id="current-monthly-name" placeholder="Description(optional)" />
+            <textarea type="text" name="monthly-name" maxlength="50" id="current-monthly-name" placeholder="Description(optional)"></textarea>
             <div class="flex-box-se start-date-modal">
-              <label for="monthly-date-current">start date:</label>
+              <label for="monthly-date-current">Start Date:</label>
               <input type="month" id="monthly-date-current" name="monthly-date-current" required><br>
 
             </div>

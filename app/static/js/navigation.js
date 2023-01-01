@@ -123,12 +123,14 @@ function createMainMenuElements() {
     // Get current date so link goes straight to current month and year
     const today = new Date();
     const year = today.getFullYear();
-    const month = today.getMonth() + 1;
+    let month = today.getMonth() + 1;
+    month = month.toString()
+
 
     const historyBtn = document.createElement('a');
     historyBtn.textContent = 'History';
     historyBtn.classList.add('main-nav-item');
-    historyBtn.href = `/history/${year}-${month}`
+    historyBtn.href = `/history/${year}-${month.padStart(2, '0')}`
     historyBtn.setAttribute('id', 'history-nav-btn');
     navCategoryDiv.insertAdjacentElement('afterEnd', historyBtn);
 }

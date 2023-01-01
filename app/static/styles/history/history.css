@@ -1,4 +1,7 @@
 /* GLOBAL COLORS AND FONTS*/
+#history-main {
+  margin-top: 20px;
+}
 #history-main input[type=month] {
   background-color: rgb(13, 90, 102);
   border: none;

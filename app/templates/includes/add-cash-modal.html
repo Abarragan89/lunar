@@ -6,12 +6,20 @@
         </span>
       </h2>
       <form action="/api/add-cash" method="POST">
-        <span class="input-symbol-dollar">
-          <input type="number" name="amount" min="0" class="input-amount-modal" placeholder="Amount" step="0.01"/>
-        </span>
-        <input type="text" name="money-description" maxlength="50" placeholder="Description(optional)" />
-        <input type="date" id="add-cash-date" name="add-cash-date" required><br>
+
+        <div class="flex-box-sb">
+          <div>
+            <span class="input-symbol-dollar">
+              <input type="number" name="amount" min="0" class="input-amount-modal" placeholder="Amount" step="0.01"/>
+            </span>
+          </div>
+          <input type="date" id="add-cash-date" name="add-cash-date" required>
+        </div>
+
+        <textarea type="text" name="money-description" maxlength="50" placeholder="Description(optional)"></textarea>
         <button type="submit" class="button-30">Add</button>
+
+
       </form>
     </div>
 </div>

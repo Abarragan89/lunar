@@ -7,6 +7,8 @@
           </h2>
 
           <form action="/api/update-expired-charge", method="POST">
+
+            <div class="flex-box-sb">
               <select name="monthly-category" id="current-expired-tag" required>
                 <option selected disabled >Pick a category</option>
                 {% for tag in tags%}
@@ -17,20 +19,24 @@
                 <p>{{expense.description}}</p>
                 {% endfor %}
               </select> <br>
-              <span class="input-symbol-dollar">
-                <input type="number" name="monthly-price" min="0" id="current-expired-price" step="0.01" placeholder="amount" autocomplete="off" required />
-              </span>
-              <input type="text" name="monthly-name" maxlength="50" id="current-expired-name" placeholder="Description(optional)"/> <br>
-              <div class="flex-box-sa expired-date-form">
-                  <label for="start-date">Start Date:</label>
+              <div>
+                <span class="input-symbol-dollar">
+                  <input type="number" name="monthly-price" min="0" id="current-expired-price" step="0.01" placeholder="amount" autocomplete="off" required />
+                </span>
+              </div>
+            </div>
+
+            <div class="flex-box-sa expired-date-form">
+              <label for="start-date">Start Date:</label>
                   <input type="month" id="start-date" name="start-date" required><br>
-              </div>
+                </div>
               <div class="flex-box-sa expired-date-form">
-                  <label for="end-date">End Date:</label>
+                  <label for="end-date">Last Payment:</label>
                   <input type="month" id="end-date" name="end-date" required>
-              </div>
-              <input type="hidden" name="expired-id" id="expired-id">
-  
+                </div>
+                <input type="hidden" name="expired-id" id="expired-id">
+                
+              <textarea type="text" name="monthly-name" maxlength="50" id="current-expired-name" placeholder="Description(optional)"></textarea>
               <div class="flex-box-se">
                 <button type="submit" class="button-30" id="update-expired-btn">Update</button>
           </form>

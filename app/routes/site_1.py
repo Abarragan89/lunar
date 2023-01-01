@@ -9,7 +9,7 @@ from .helper_functions import days_until_first
 # Global varialbes that help filter relevant data
 days_until_first_data = days_until_first()
 today = datetime.datetime.now()
-current_month = today.month
+current_month = today.strftime('%m')
 current_year = today.year
 
 # Create Blueprint
@@ -256,7 +256,7 @@ def history(yearMonth):
             ).all()
         past_expired_charges = db.query(func.sum(ExpiredCharges.amount).label("total_value")
             ).filter(ExpiredCharges.user_id == user_id
-            ).filter(ExpiredCharges.expiration_limit > date_limit_int
+            ).filter(ExpiredCharges.expiration_limit >= date_limit_int
             ).filter(ExpiredCharges.start_date <= date_limit_int
             ).all()
         any_current_monthly = db.query(func.sum(MonthlyCharge.amount).label("total_value")
@@ -266,7 +266,7 @@ def history(yearMonth):
         expired_charges = db.query(ExpiredCharges.time_created, ExpiredCharges.amount, 
             ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.start_date, ExpiredCharges.expiration_limit, ExpiredCharges.start_date
         ).filter(ExpiredCharges.user_id == session['user_id']
-        ).filter(ExpiredCharges.expiration_limit > date_limit_int
+        ).filter(ExpiredCharges.expiration_limit >= date_limit_int
         ).filter(ExpiredCharges.start_date <= date_limit_int
         ).join(Tag
         ).all()

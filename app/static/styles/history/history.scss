@@ -1,6 +1,7 @@
 @import '../utilities/variables.scss';
 
 #history-main {
+    margin-top: 20px;
     input[type="month"] {
         background-color: $secondaryColor;
         border: none;

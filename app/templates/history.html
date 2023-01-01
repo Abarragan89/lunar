@@ -82,7 +82,7 @@
             </div>
             <div class="flex-box-sb monthly-time-line">
               <p>start date: {{ convertExpirationDate(data[8])}}</p>
-              <p>end date: {{convertExpirationDate(data[7])}}</p>
+              <p>last payment: {{convertExpirationDate(data[7])}}</p>
             </div>
           </div>
       </div>
@@ -92,14 +92,11 @@
   {% endif %}
 
 
-
-
   {% if active_monthly_charges|length > 0 %}
   <div class="main-activity-div">
     {% for data in active_monthly_charges %}
     <a class="edit-monthly-charge-history-btn">
       <div class="activity-link" data-type="expense">
-
           <div class="flex-box-col-sb activity-link-description">
 
             <div class="flex-box-sb">
