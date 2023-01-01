@@ -130,9 +130,9 @@
       <div class="flex-box-sb activity-link" data-type="expense">
 
           <div class='flex-box-col-se date-div'
-          data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
-            <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
-            <p>{{ data[0].year}}</p>
+          data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}">
+            <p>start date:</p>
+            <p>{{convertExpirationDate(data[6])}}</p>
           </div>
           <div class="flex-box-col-sa activity-link-description">
             <p

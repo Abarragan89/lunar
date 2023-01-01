@@ -114,7 +114,7 @@ def dashboard():
         ).all()
     
     # Change this query to just getting monthly charges to display on 'monthly charges'
-    monthly_charges = db.query(MonthlyCharge.time_created, MonthlyCharge.amount, MonthlyCharge.description, Tag.tag_name, Tag.id, MonthlyCharge.id
+    monthly_charges = db.query(MonthlyCharge.time_created, MonthlyCharge.amount, MonthlyCharge.description, Tag.tag_name, Tag.id, MonthlyCharge.id, MonthlyCharge.start_date
         ).filter(MonthlyCharge.user_id == session['user_id']
         ).join(Tag
         ).all()

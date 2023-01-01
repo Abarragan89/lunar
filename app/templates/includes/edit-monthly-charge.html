@@ -2,26 +2,35 @@
     <div class="modal">
         <h2 class='section-heading modal-heading'>
             <span>
-              Edit Monthly Charge
+              Edit Charge
             </span>
           </h2>
-          
-            <select name="monthly-category" id="current-monthly-tag" required>
-              <option selected disabled >Pick a category</option>
-              {% for tag in tags%}
-              <option value="{{tag.id}}">{{tag.tag_name}}</option>
-              {% endfor %}
-              
-              {% for expense in expenses %}
-              <p>{{expense.description}}</p>
-              {% endfor %}
-            </select> <br>
-            <span class="input-symbol-dollar">
-              <input type="number" name="monthly-price" min="0" id="current-monthly-price" step="0.01" placeholder="amount" autocomplete="off" required />
-            </span>
+            <div class="flex-box-sb">
+              <select name="monthly-category" id="current-monthly-tag" required>
+                <option selected disabled >Pick a category</option>
+                {% for tag in tags%}
+                <option value="{{tag.id}}">{{tag.tag_name}}</option>
+                {% endfor %}
+                {% for expense in expenses %}
+                <p>{{expense.description}}</p>
+                {% endfor %}
+              </select>
+              <div>
+                <span class="input-symbol-dollar">
+                  <input type="number" name="monthly-price" min="0" id="current-monthly-price" step="0.01" placeholder="amount" autocomplete="off" required />
+                </span>
+              </div>
+            </div>
+
+
+
             <input type="hidden" name="monthly-id" id="monthly-id">
             <input type="text" name="monthly-name" maxlength="50" id="current-monthly-name" placeholder="Description(optional)" />
-            <input type="date" id="monthly-date-current" name="monthly-date-current" required><br>
+            <div class="flex-box-se start-date-modal">
+              <label for="monthly-date-current">start date:</label>
+              <input type="month" id="monthly-date-current" name="monthly-date-current" required><br>
+
+            </div>
 
             <div class="flex-box-se">
               <button class="button-30" id="update-monthly-btn">Update</button>

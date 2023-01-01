@@ -124,7 +124,7 @@ function fillEditMonthlyFields(row) {
     document.getElementById('current-monthly-tag').value = currentProductTagId;
     document.getElementById('current-monthly-name').value = currentProductName;
     document.getElementById('monthly-id').value = currentProductId;
-    document.getElementById('monthly-date-current').setAttribute('max', `${year}-${month}-${day}`);
+    document.getElementById('monthly-date-current').setAttribute('max', `${year}-${month}`);
     document.getElementById('monthly-date-current').setAttribute('value', current_date);
     document.getElementById('stop-monthly-data').value = currentProductId;
 

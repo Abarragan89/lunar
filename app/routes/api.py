@@ -405,7 +405,7 @@ def update_user():
         salaryExists.salary_amount = data['new_salary']
         # erase old salary if needed
         if 'erase_history' in data:
-            old_salary = db.query(Salary).filter(Salary.id == data['current-salary-id']).delete()
+            db.query(Salary).filter(Salary.id == data['current-salary-id']).delete()
         db.commit()
         return redirect(request.referrer)
     except Exception as e:
@@ -449,7 +449,6 @@ def edit_monthly_charge():
             'user_id': session['user_id'],
             'tag_id': monthly_tag,
             'start_date': start_date,
-            'time_created': monthly_start_date
         })
         db.commit()
     except Exception as e:
@@ -470,14 +469,15 @@ def update_monthly_charge():
 
     # This is the limit that will be placed on the expired charge. Only query less than this in history
     # This will also be the start date of the new monthly charge. From this date forward. greater than or equal to
-    expiration_limit = int(str(monthly_start_date.split('-')[0]) + str(monthly_start_date.split('-')[1]))
+    start_date = int(str(monthly_start_date.split('-')[0]) + str(monthly_start_date.split('-')[1]))
 
     try:
         # get the data from the old monthly charge to make an expired charge
         expired_monthly = db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).one()
 
-        start_date = int(str(expired_monthly.time_created.year) + str(expired_monthly.time_created.month))
-        print('============================= start date', type(start_date))
+        expiration_date = int(str(expired_monthly.start_date)[:3] + str(expired_monthly.start_date)[3:])
+        
+        print('============================= start date', start_date)
 
         # create new expired monthly based on old monthly charge
         new_expired_monthly = ExpiredCharges(
@@ -485,14 +485,13 @@ def update_monthly_charge():
             amount = expired_monthly.amount,
             tag_id = expired_monthly.tag_id,
             user_id = session['user_id'],
-            expiration_limit = expiration_limit,
-            start_date = start_date
+            expiration_limit = start_date,
+            start_date = expiration_date
         )
         db.add(new_expired_monthly)
         # delete old monthly charge from table. 
         db.delete(expired_monthly)
         db.commit()
-
 
         # create new current monthly charge
         newMonthly = MonthlyCharge(
@@ -500,14 +499,15 @@ def update_monthly_charge():
             tag_id = monthly_tag,
             user_id = session['user_id'],
             amount = monthly_price,
-            start_date = expiration_limit,
-            time_created = monthly_start_date
+            start_date = start_date
             )
         db.add(newMonthly)
         db.commit()
     except Exception as e:
         print('===============eeee', e)
     return redirect(request.referrer)
+
+
 
 # Stop Monthly Bill
 @bp.route('/stop-monthly-charge', methods=['POST'])
@@ -592,6 +592,7 @@ def update_expired_charge():
 def delete_expired_charge():
     data = request.form
     db = start_db_session()
+    print('=================== delete expire', data['expired-id'])
     try:
         db.query(ExpiredCharges).filter(ExpiredCharges.id == data['expired-id']).delete()
         db.commit()

@@ -32,11 +32,12 @@
               <input type="hidden" name="expired-id" id="expired-id">
   
               <div class="flex-box-se">
-                <button class="button-30" id="update-expired-btn">Update</button>
-              </form>
-                <form action="/api/delete-expired-charge"></form>
-                <input type="hidden" name="expired-id" id="expired-id">
-                <button type="submit" class="button-30 delete-btn" id="remove-expired-btn">Remove</button>
+                <button type="submit" class="button-30" id="update-expired-btn">Update</button>
+          </form>
+                <form action="/api/delete-expired-charge" method="POST">
+                  <input type="hidden" name="expired-id" id="expired-id-delete">
+                  <button type="submit" class="button-30 delete-btn" id="remove-expired-btn">Remove</button>
+                </form>
               </div>
             </div>
 </div>
