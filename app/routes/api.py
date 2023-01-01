@@ -538,7 +538,7 @@ def stop_monthly_charge():
         db.delete(expired_monthly)
         db.commit()
     except Exception as e:
-        print('============================23', e)
+        print('============================23232323323223', e)
     return redirect(request.referrer)
 
 
