@@ -49,6 +49,7 @@ def dashboard():
     allTags = (
         db.query(Tag)
         .filter(Tag.user_id == user_id)
+        .filter(Tag.active == True)
         .all()
     )
     # Get all purchases with joined with tags for activity display will be mixed with deposit data
@@ -56,7 +57,7 @@ def dashboard():
         ).filter(Product.user_id == user_id
         ).join(Tag
         ).order_by(desc(Product.time_created)
-        ).limit(10).all()
+        ).limit(7).all()
     
     # Get last 20 cash addition to display
     add_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description, Cash.id
@@ -165,19 +166,33 @@ def profile():
     user_data = db.query(User).filter(User.id == session['user_id']).one()
     salaries = db.query(Salary).filter(Salary.user_id == user_id).order_by(desc(Salary.time_created)).all()
 
-    
     allTags = (
         db.query(Tag)
         .filter(Tag.user_id == user_id)
+        .filter(Tag.active == True)
         .all()
     )
-    
+
+    all_active_categories = (
+        db.query(Tag)
+        .filter(Tag.user_id == user_id)
+        .filter(Tag.active == True)
+        .all()
+    )
+    all_inactive_categories = (
+        db.query(Tag)
+        .filter(Tag.user_id == user_id)
+        .filter(Tag.active == False)
+        .all()
+    )
     return render_template('profile.html',
         user_data=user_data, 
         salaries=salaries,
         loggedIn=is_loggedin,
         tags = allTags, 
-        today=today
+        today=today,
+        all_active_categories=all_active_categories,
+        all_inactive_categories=all_inactive_categories
     )
 
 # Load the Category Page and Data
@@ -209,9 +224,10 @@ def categories(categoryName):
     allTags = (
         db.query(Tag)
         .filter(Tag.user_id == user_id)
+        .filter(Tag.active == True)
         .all()
     )
-
+    totalAmountSpend = 0 if totalAmountSpend is None else totalAmountSpend
     return render_template('categories.html',
         loggedIn=is_loggedin,
         category=category,
@@ -234,6 +250,7 @@ def history(yearMonth):
     allTags = (
         db.query(Tag)
         .filter(Tag.user_id == user_id)
+        .filter(Tag.active == True)
         .all()
     )
     try:

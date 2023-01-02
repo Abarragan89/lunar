@@ -1,4 +1,4 @@
-<div class="modal-container" id="edit-category">
+<div class="modal-container" id="edit-category-in-profile">
     <div class="modal">
       <h2 class='section-heading modal-heading'>
         <span>
@@ -6,7 +6,7 @@
         </span>
       </h2>
       {% for tag in tags %}
-      {% if tag.tag_name == category.tag_name %}
+
         <form id='category-form' action="/api/edit-category" method="POST">
           <input type="text" name="category-name" maxlength="50" id="category-name" value="{{tag.tag_name}}" required/>
           <p class="error-msg" id="error-msg">
@@ -26,7 +26,6 @@
             <button type="button" class="button-30 delete-btn" id="remove-category-btn">Delete</button>          
         </div>
           
-      {% endif %}
       {% endfor %}
 
 

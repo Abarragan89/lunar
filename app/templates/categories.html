@@ -1,49 +1,61 @@
 {% extends 'base.html' %} {% block head %}
 <link rel="stylesheet" href="{{url_for('static', filename='/styles/categories/categories.css')}}">
-
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='/styles/home/home.css')}}"
+/>
 <title>Categories</title>
 
 {% include 'includes/edit-category-modal.html' %}
+{% include 'includes/confirm-category-removal.html' %}
 
 {% endblock %} {% block body %}
 
 
-<main data-set-loggedIn="true" id="main-categories">
+<main data-set-loggedIn="true" id="main-categories-div">
     <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
     <h2 class='section-heading page-heading'>
         <span>
           Categories
         </span>
       </h2>
-    <div class="flex-box-sa">
+    <div class="flex-box-sa category-heading-div">
         <div class="flex-box-col-se">
-            <p><span data-color='black' class="color-block"></span>{{category.tag_name}}</p>
-            <p>Amount Spent: ${{total}}</p>
+            <p id="category-label-in-category-page">{{category.tag_name}} <span class="color-block" style="background:{{category.tag_color}}"></span></p> 
+            
+            <p >Amount Spent: <span class="total-amount-category"> -${{total}}</span></p>
         </div>
         <div class="flex-box-col-se">
-            <a href="#" id="edit-category-btn">Edit</a>
+            <a href="#" id="edit-category-btn" class="button-30">Edit</a>
         </div>
     </div>
 
-    {% for data in allExpenses %}
-        <a href="#" class="edit-activity-btn" id="activity{{n}}">
-            <div class="flex-box-sa" data-type="edit-in-categories">
-                <div class='flex-box-col-se date-div'
-                data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
-            <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
-            <p>{{ data[0].year}}</p>
-            </div>
-            <div class="flex-box-col-sa">
-                <p data-product-id="{{data[5]}}" data-tag-id="{{data[4]}}">
-                {{ data[3] }}
+    
+    <div class="main-activity-div">
+        {% for data in allExpenses %}
+        <a class="edit-activity-btn">
+          <div class="flex-box-sb activity-link" data-type="expense">
+              <div class='flex-box-col-se date-div'
+              data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+                <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+                <p>{{ data[0].year}}</p>
+              </div>
+              <div class="flex-box-col-sa activity-link-description">
+                <p
+                  class="activity-link-tag"
+                  data-product-id="{{data[5]}}"
+                  data-tag-id="{{data[4]}}"
+                >
+                  {{ data[3] }}
                 </p>
-                <p>{{ data[2] }}</p>
-            </div>
-                <p>${{ data[1] }}</p>
-            </div>
-            </div>
+                <p class="expense-description">{{ data[2] }}</p>
+              </div>
+              <p>${{ data[1] }}</p>
+          </div>
         </a>
-    {% endfor%} 
+        {% endfor%} 
+    </div>
+
 </main>
 <script src="{{url_for('static', filename='/js/edit-category.js')}}"></script>
 

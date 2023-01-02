@@ -1,0 +1,21 @@
+<div class="modal-container" id="confirm-category-remove">
+    <div class="modal">
+        <h2 class='section-heading modal-heading'>
+            <span>
+              Confirm
+            </span>
+          </h2>
+          <br>
+          <form action="{{base_url}}/api/inactivate-category", method="POST">
+            <p>Warning: deleting a category will erase all associated purchases. Instead, you can make this category inactive while keeping all of it's history(recommended)</p>
+            <input type="hidden" value="{{category.id}}" name="category-id">
+            <button type="submit" class="button-30">Inactive Category</button>
+          </form>
+          <br>
+          <p>OR</p>
+          <form action="{{base_url}}/api/delete-category", method="POST">
+            <input type="hidden" value="{{category.id}}" name="category-id">
+            <button type="submit" class="button-30 delete-btn">Delete Category</button>
+          </form>
+    </div>
+</div>

@@ -1,3 +1,23 @@
-#main-categories {
+/* GLOBAL COLORS AND FONTS*/
+#main-categories-div {
   margin-top: 20px;
+}
+#main-categories-div .category-heading-div {
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  align-items: baseline;
+  color: rgb(228, 240, 239);
+}
+#main-categories-div .category-heading-div #category-label-in-category-page {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+#main-categories-div .category-heading-div .total-amount-category {
+  color: rgb(204, 5, 5);
+}
+#main-categories-div .category-heading-div .color-block {
+  height: 13px;
+  width: 15px;
+  padding-left: 30px;
+  display: inline-block;
 }/*# sourceMappingURL=categories.css.map */

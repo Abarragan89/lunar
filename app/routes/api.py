@@ -358,6 +358,21 @@ def edit_category():
     return redirect(f"/categories/{data['category-name']}")
 
 
+# Inactivate Category
+@bp.route('/inactivate-category', methods=['POST'])
+def inactivate_category():
+    db = start_db_session()
+    data = request.form
+    try:
+        category = db.query(Tag).filter(Tag.id == data['category-id']).one()
+        category.active = False
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='Deposit not deleted'), 500
+    return redirect('/')
+
+
 # Delete Category
 @bp.route('/delete-category', methods=['POST'])
 def delete_category():
@@ -368,7 +383,7 @@ def delete_category():
         db.commit()
     except:
         db.rollback()
-        return jsonify(message='Deposit not deleted'), 500
+        return jsonify(message='category not deleted'), 500
     return redirect('/')
 
 # Update user name

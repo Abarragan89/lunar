@@ -1,3 +1,29 @@
-#main-categories {
+@import '../utilities/variables.scss';
+
+#main-categories-div{
+
     margin-top: 20px;
+
+    .category-heading-div {
+        margin-bottom: 30px;
+        font-size: 1.1rem;
+        align-items: baseline;
+        color: $offWhite;
+
+        #category-label-in-category-page {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+        }
+
+        .total-amount-category {
+            color: $redMsg;
+        }
+        .color-block {
+            height: 13px;
+            width: 15px;
+            padding-left: 30px;
+            display: inline-block;
+        }
+
+    }
 }

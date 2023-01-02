@@ -48,16 +48,13 @@ document.querySelector('#confirm-salary-edit').addEventListener('click', (e) => 
 })
 
 
-
-
-
 // Getting data from inital inputs and hiding it in the confirmation modal
 function fillUpdateUserFields() {
     document.getElementById('new_salary_update').value = document.getElementById('new_salary').value
     document.getElementById('new_salary_date_update').value = document.getElementById('new_salary_date').value
     document.getElementById('new_salary_update_delete').value = document.getElementById('new_salary').value
     document.getElementById('new_salary_date_update_delete').value = document.getElementById('new_salary_date').value
-
+    
 }
 
 
@@ -72,3 +69,19 @@ document.getElementById('edit-username-btn').addEventListener('click', function(
 document.getElementById('change-username-input').addEventListener('blur', function() {
     document.getElementById('update-username-form').submit()
 })
+
+
+// modal to edit categories
+category_rows = document.querySelectorAll('.edit-category-btn');
+category_rows.forEach((row) => {
+    row.addEventListener('click', () => {
+        showModal('edit-category-in-profile')
+    })
+})
+
+// document.querySelector('#edit-salary-modal').addEventListener('click', (e) => {
+//     const isOutside = e.target.closest('.modal');
+//     if (!isOutside) {
+//         closeModal('edit-salary-modal');
+//     }
+// })
