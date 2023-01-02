@@ -80,7 +80,6 @@
 }
 
 .main-activity-div {
-    margin-bottom: 110px;
     
     .activity-link {
         text-align: center;
@@ -111,6 +110,9 @@
                 line-height: .9rem;
                 font-style: italic;
             }
+        }
+        #currently-active-text-monthly {
+            color: $accentColor;
         }
     }
     

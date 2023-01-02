@@ -244,22 +244,22 @@ def history(yearMonth):
             ).filter(extract('year', Salary.time_created) == yearLookUp
             ).first()
         # get all summed up values of monthly charges and purchases for the month     
-        all_purchases = db.query(func.sum(Product.amount).label("total_value")
+        all_purchases_total = db.query(func.sum(Product.amount).label("total_value")
             ).filter(Product.user_id == user_id
             ).filter(extract('month', Product.time_created) == monthLookUp
             ).filter(extract('year', Product.time_created) == yearLookUp
             ).all()
-        all_cash = db.query(func.sum(Cash.amount).label("total_value")
+        all_cash_total = db.query(func.sum(Cash.amount).label("total_value")
             ).filter(Cash.user_id == user_id
             ).filter(extract('month', Cash.time_created) == monthLookUp
             ).filter(extract('year', Cash.time_created) == yearLookUp
             ).all()
-        past_expired_charges = db.query(func.sum(ExpiredCharges.amount).label("total_value")
+        past_expired_charges_total = db.query(func.sum(ExpiredCharges.amount).label("total_value")
             ).filter(ExpiredCharges.user_id == user_id
             ).filter(ExpiredCharges.expiration_limit >= date_limit_int
             ).filter(ExpiredCharges.start_date <= date_limit_int
             ).all()
-        any_current_monthly = db.query(func.sum(MonthlyCharge.amount).label("total_value")
+        any_current_monthly_total = db.query(func.sum(MonthlyCharge.amount).label("total_value")
             ).filter(MonthlyCharge.user_id == user_id
             ).filter(MonthlyCharge.start_date <= date_limit_int).filter()
         
@@ -277,18 +277,35 @@ def history(yearMonth):
         ).filter(MonthlyCharge.start_date <= date_limit_int
         ).join(Tag
         ).all()
+
+        all_purchases = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
+            ).filter(Product.user_id == user_id
+            ).filter(extract('month', Product.time_created) == monthLookUp
+            ).filter(extract('year', Product.time_created) == yearLookUp
+            ).join(Tag
+            ).all()
+        
+        added_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description, Cash.id
+        ).filter(Cash.user_id == user_id
+        ).filter(extract('month', Product.time_created) == monthLookUp
+        ).filter(extract('year', Product.time_created) == yearLookUp
+        ).order_by(desc(Cash.time_created)
+        ).all()
+
         
     except Exception as e:
         print('============================salary', e)
 
     # set defaults to query objects in case they come up empty
     salary = 0 if salary is None else salary.salary_amount
-    all_cash = 0 if all_cash[0].total_value is None else all_cash[0].total_value
-    past_expired_charges = 0 if past_expired_charges[0].total_value is None else past_expired_charges[0].total_value
-    any_current_monthly = 0 if any_current_monthly[0].total_value is None else any_current_monthly[0].total_value
-    all_purchases = 0 if all_purchases[0].total_value is None else all_purchases[0].total_value
+    all_cash_total = 0 if all_cash_total[0].total_value is None else all_cash_total[0].total_value
+    past_expired_charges_total = 0 if past_expired_charges_total[0].total_value is None else past_expired_charges_total[0].total_value
+    any_current_monthly_total = 0 if any_current_monthly_total[0].total_value is None else any_current_monthly_total[0].total_value
+    all_purchases_total = 0 if all_purchases_total[0].total_value is None else all_purchases_total[0].total_value
     # Add up expired and any current monthly to get total monthly expenses
-    total_monthly_expenses = past_expired_charges + any_current_monthly
+    total_monthly_expenses = past_expired_charges_total + any_current_monthly_total
+
+
 
     return render_template('history.html',
         loggedIn=is_loggedin,
@@ -299,8 +316,10 @@ def history(yearMonth):
         current_month=current_month,
         current_year=current_year,
         total_monthly_expenses=total_monthly_expenses,
+        all_purchases_total=all_purchases_total,
         all_purchases=all_purchases,
         expired_charges=expired_charges,
         active_monthly_charges=active_monthly_charges,
-        all_cash=all_cash
+        all_cash_total=all_cash_total,
+        added_cash_data=added_cash_data
     )

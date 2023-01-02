@@ -176,10 +176,6 @@ function fillEditDepositFields(row) {
     document.getElementById('delete-deposit-data').value = currentCashId;
 }
 
-function fillMonthlyBillFields(rows) {
-
-}
-
 
 // Change transition speed of modals when hovering over button
 // This is so modals don't briefly show before they are called

@@ -69,9 +69,6 @@
   margin-bottom: 30px;
 }
 
-.main-activity-div {
-  margin-bottom: 110px;
-}
 .main-activity-div .activity-link {
   text-align: center;
   align-items: center;
@@ -99,6 +96,9 @@
   padding: 0 15px;
   line-height: 0.9rem;
   font-style: italic;
+}
+.main-activity-div .activity-link #currently-active-text-monthly {
+  color: #6bd0d2;
 }
 .main-activity-div .activity-link:hover {
   box-shadow: #4FBDBA 0px 30px 60px -12px inset, #4FBDBA 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;

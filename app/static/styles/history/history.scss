@@ -2,14 +2,19 @@
 
 #history-main {
     margin-top: 20px;
-    input[type="month"] {
+    #choose-month {
+        position: sticky;
+        top: 0;
         background-color: $secondaryColor;
+        font-weight: 900;
         border: none;
         color-scheme: dark;
         margin: 0 auto;
         margin-bottom: 20px;
-        padding: 3px;
+        padding: 5px 4px;
         border-radius: 0px 3px 3px 0;
+        border: 1.5px solid $accentColor;
+        border-left: none;
     }
     .positive-money {
         color: $accentColor;

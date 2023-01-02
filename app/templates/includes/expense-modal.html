@@ -10,7 +10,7 @@
       <form action="/api/add-expense" method="POST">
         <div class="flex-box-sb">
           <select name="product-category" required>
-            <option selected disabled >Pick a category</option>
+            <option value="">Pick a category</option>
             {% for tag in tags%}
             <option value="{{tag.id}}">{{tag.tag_name}}</option>
             {% endfor %}

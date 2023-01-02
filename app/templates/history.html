@@ -28,9 +28,9 @@
     <div class="flex-box-col-sa">
       <div class="flex-box-col-sa positive-money">
         <h2>${{salary}}</h2>
-        <h2 class="money-col">${{all_cash}}</h2>
+        <h2 class="money-col">${{all_cash_total}}</h2>
       </div>
-      <h2 class="positive-money">${{salary + all_cash}}</h2>
+      <h2 class="positive-money">${{salary + all_cash_total}}</h2>
     </div>
 
 
@@ -40,25 +40,59 @@
     </div>
     <div class="flex-box-col-sa negative-money">
       <h2>-${{total_monthly_expenses}}</h2>
-      <h2 class="money-col">-${{all_purchases}}</h2>
-      <h2>${{total_monthly_expenses + all_purchases}}</h2>
+      <h2 class="money-col">-${{all_purchases_total}}</h2>
+      <h2>${{total_monthly_expenses + all_purchases_total}}</h2>
     </div>
   </div>
 
 
-  {% if (salary + all_cash) > (total_monthly_expenses + all_purchases)%}
-  <h4>Ending Balance: <span class="positive-money">${{(salary + all_cash) - (total_monthly_expenses + all_purchases)}}</span></h4>
+  {% if (salary + all_cash_total) > (total_monthly_expenses + all_purchases_total)%}
+  <h4>Ending Balance: <span class="positive-money">${{(salary + all_cash_total) - (total_monthly_expenses + all_purchases_total)}}</span></h4>
   {% else %}
-  <h4>Ending Blance: <span class="ending-balance negative-money">-${{(total_monthly_expenses + all_purchases) - (salary + all_cash)}}</span></h4>
+  <h4>Ending Blance: <span class="ending-balance negative-money">-${{(total_monthly_expenses + all_purchases_total) - (salary + all_cash_total)}}</span></h4>
   {% endif %}
 
 
 
-  <h2 class='section-heading page-heading'>
+  <h2 class='section-heading'>
     <span>
       Charges
     </span>
   </h2>
+
+  {% if active_monthly_charges|length > 0 %}
+  <div class="main-activity-div">
+    {% for data in active_monthly_charges %}
+    <a class="edit-monthly-charge-history-btn">
+      <div class="activity-link" data-type="expense">
+          <div class="flex-box-col-sb activity-link-description">
+
+            <div class="flex-box-sb">
+              <p
+                class="activity-link-tag"
+                data-monthly-id="{{data[5]}}"
+                data-monthly-tag-id="{{data[4]}}"
+                data-description="{{data[2]}}"
+              >
+                {{ data[3] }}
+              </p>
+              <p>${{ data[1] }}</p>
+            </div>
+            <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            </div>
+            <div class="flex-box-sb monthly-time-line">
+              <p>start date: {{ convertExpirationDate(data[6])}}</p>
+              <p id="currently-active-text-monthly">currently active</p>
+            </div>
+          </div>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+
+
   {% if expired_charges|length > 0 %}
   <div class="main-activity-div">
     {% for data in expired_charges %}
@@ -91,43 +125,66 @@
   </div>
   {% endif %}
 
-
-  {% if active_monthly_charges|length > 0 %}
+  <h2 class='section-heading'>
+    <span>
+      Purchases
+    </span>
+  </h2>
   <div class="main-activity-div">
-    {% for data in active_monthly_charges %}
-    <a class="edit-monthly-charge-history-btn">
-      <div class="activity-link" data-type="expense">
-          <div class="flex-box-col-sb activity-link-description">
-
-            <div class="flex-box-sb">
-              <p
-                class="activity-link-tag"
-                data-monthly-id="{{data[5]}}"
-                data-monthly-tag-id="{{data[4]}}"
-                data-description="{{data[2]}}"
-              >
-                {{ data[3] }}
-              </p>
-              <p>${{ data[1] }}</p>
-            </div>
-            <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
-            </div>
-            <div class="flex-box-sb monthly-time-line">
-              <p>start date: {{ convertExpirationDate(data[6])}}</p>
-              <p>currently active</p>
-            </div>
+    {% for data in all_purchases %}
+    <a class="edit-activity-btn">
+      <div class="flex-box-sb activity-link" data-type="expense">
+          <div class='flex-box-col-se date-div'
+          data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+            <p>{{ data[0].year}}</p>
           </div>
+          <div class="flex-box-col-sa activity-link-description">
+            <p
+              class="activity-link-tag"
+              data-product-id="{{data[5]}}"
+              data-tag-id="{{data[4]}}"
+            >
+              {{ data[3] }}
+            </p>
+            <p class="expense-description">{{ data[2] }}</p>
+          </div>
+          <p>${{ data[1] }}</p>
       </div>
     </a>
-    {% endfor %}
+    {% endfor%} 
   </div>
-  {% endif %}
 
+
+
+  <h2 class='section-heading'>
+    <span>
+      Cash Added
+    </span>
+  </h2>
+  <div class="main-activity-div">
+    {% for data in added_cash_data %}
+    <a class="edit-activity-btn">
+      <div class="flex-box-sb activity-link" data-type="deposit">
+          <div class='flex-box-col-se date-div'
+          data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
+            <p>{{ data[0].strftime('%b') }} {{ data[0].day }}</p>
+            <p>{{ data[0].year}}</p>
+          </div>
+          <div class="flex-box-col-sa activity-link-description">
+            <p class="activity-link-deposit" data-cash-id="{{data[3]}}">Deposit</p>
+            <p class="expense-description">{{ data[2] }}</p>
+          </div>
+          <p>${{ data[1] }}</p>
+      </div>
+    </a>
+    {% endfor%} 
+  </div>
+
+  
 
 
 </main>
-
-
 <script src="{{url_for('static', filename='/js/history.js')}}"></script>
 
 {% endblock %}

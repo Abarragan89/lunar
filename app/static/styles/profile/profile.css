@@ -42,4 +42,13 @@
 }
 #profile-main .edit-pencil-btn:hover, #profile-main .edit-pencil-btn:active {
   color: rgb(228, 240, 239);
+}
+
+#new_salary {
+  width: 120px;
+  margin-bottom: 20px;
+}
+
+#new_salary_date {
+  margin-top: 10px;
 }/*# sourceMappingURL=profile.css.map */

@@ -12,7 +12,6 @@ html, body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  overflow: auto;
   background-color: #031920;
   color: rgb(199, 195, 195);
   padding-bottom: 30px;
@@ -35,7 +34,7 @@ a {
 
 .section-heading {
   border-bottom: 1px solid rgb(199, 195, 195);
-  font-size: 1.7em;
+  font-size: 1.4rem;
   line-height: 0.017rem;
   margin: 35px 0 15px;
   padding: 0;
@@ -50,6 +49,8 @@ a {
 
 .page-heading {
   margin-top: 15px;
+  font-size: 1.7rem;
+  letter-spacing: 1.2px;
 }
 
 #nav-menu-underlay {
@@ -71,12 +72,48 @@ a {
   margin-left: 15px;
 }
 
-nav {
+#main-nav {
+  transition: 0.15s;
+  align-items: baseline;
+}
+
+.main-nav-open {
   position: fixed;
-  width: 100%;
   color: rgb(228, 240, 239);
-  top: 0;
   align-items: center;
+  transition: 0.15s;
+  top: 0;
+  left: 0;
+}
+
+.main-nav-closed {
+  position: absolute;
+  color: rgb(228, 240, 239);
+  align-items: center;
+  width: 5%;
+  height: 100%;
+  top: 13px;
+  left: 92vw;
+  transition: 0.15s;
+}
+
+#hamburger {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  font-size: 1.5em;
+  color: white;
+  background-color: rgb(13, 90, 102);
+  padding: 5px 10px 5px 5px;
+  border-radius: 8px 0 0 8px;
+  transition: 0.15s;
+  z-index: 999;
+  border: 1.5px solid #6bd0d2;
+  border-right-color: none;
+}
+
+#hamburger:hover {
+  cursor: pointer;
 }
 
 #nav-items-main-div {
@@ -84,9 +121,10 @@ nav {
   pointer-events: none;
   background-color: rgba(11, 30, 30, 0.962);
   position: absolute;
-  width: 100%;
   top: 31px;
   transition: 0.15s all;
+  padding: 10px 0;
+  z-index: 999;
 }
 
 @-webkit-keyframes slideInRight {
@@ -553,24 +591,6 @@ nav {
   background-color: rgb(13, 90, 102);
 }
 
-#hamburger {
-  position: fixed;
-  top: 20px;
-  right: -10px;
-  font-size: 1.5em;
-  margin-right: 10px;
-  color: rgb(228, 240, 239);
-  background-color: rgb(13, 90, 102);
-  padding: 5px 10px 5px 5px;
-  border-radius: 8px 0 0 8px;
-  transition: 0.15s;
-  z-index: 999;
-}
-
-#hamburger:hover {
-  cursor: pointer;
-}
-
 /* CSS */
 .button-30 {
   align-items: center;
@@ -609,11 +629,11 @@ nav {
 }
 
 .button-30:hover {
-  box-shadow: rgba(0, 0, 0, 0.2) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
+  box-shadow: rgba(0, 0, 0, 0.648) 0 2px 4px -1px, rgba(0, 0, 0, 0.14) 0 4px 5px 0, rgba(0, 0, 0, 0.12) 0 1px 10px 0;
 }
 
 .button-30:disabled {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: rgba(10, 106, 85, 0.12);
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 0, rgba(0, 0, 0, 0.14) 0 0 0 0, rgba(0, 0, 0, 0.12) 0 0 0 0;
   color: rgba(0, 0, 0, 0.37);
   cursor: default;
