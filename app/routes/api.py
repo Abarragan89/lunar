@@ -37,17 +37,17 @@ def signup():
 
         # Add default tags and colors
         tag_colors =[
-                'rgba(255, 0, 0, 1)', 
-                'rgba(255, 140, 0, 1)',
-                'rgba(212, 255, 0, 1)', 
-                'rgba(26, 255, 0, 1)', 
-                'rgba(0, 255, 162, 1)',  
-                'rgba(0, 191, 255, 1)',
-                'rgba(0, 68, 255, 1)',
-                'rgba(38, 0, 255, 1)',
-                'rgba(153, 0, 255, 1)',
-                'rgba(255, 0, 234, 1)',
-                'rgba(255, 0, 64, 1)'
+                'rgb(255, 0, 0)', 
+                'rgb(255, 140, 0)',
+                'rgb(212, 255, 0)', 
+                'rgb(26, 255, 0)', 
+                'rgb(0, 255, 162)',  
+                'rgb(0, 191, 255)',
+                'rgb(0, 68, 255)',
+                'rgb(38, 0, 255)',
+                'rgb(153, 0, 255)',
+                'rgb(255, 0, 234)',
+                'rgb(255, 0, 64)'
                 ]
         # give user basic categories
         tag_names = [
@@ -143,7 +143,7 @@ def add_category():
     # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
     h = data['category-color'][1:]
     colorTuple = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
-    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, 1)'
+    adjust_color = f'rgb({colorTuple[0]},{colorTuple[1]},{colorTuple[2]})'
 
     try:
         newTag = Tag(
@@ -338,11 +338,10 @@ def edit_category():
     data = request.form 
     db = start_db_session()
 
-    # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
-    # update, I changed the opacity back up to 1. I may like it better and keep it this way
+    # change hexdecimal into rgb
     h = data['category-color'][1:]
     colorTuple = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
-    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, 1)'
+    adjust_color = f'rgb({colorTuple[0]},{colorTuple[1]},{colorTuple[2]})'
 
     try:
         current_tag = db.query(Tag).filter(Tag.id == data['category-id']).one()
@@ -355,7 +354,7 @@ def edit_category():
     except:
         db.rollback()
         return jsonify(message='Tag not updated'), 500
-    return redirect(f"/categories/{data['category-name']}")
+    return redirect(request.referrer)
 
 
 # Inactivate Category
@@ -372,6 +371,35 @@ def inactivate_category():
         return jsonify(message='Deposit not deleted'), 500
     return redirect('/')
 
+# Inactivate Category in profile
+@bp.route('/inactivate-category-in-profile', methods=['POST'])
+def inactivate_category_in_profile():
+    db = start_db_session()
+    data = request.form
+    try:
+        category = db.query(Tag).filter(Tag.id == data['category-id']).one()
+        category.active = False
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='Deposit not deleted'), 500
+    return redirect(request.referrer)
+
+
+# Reactivate Category
+@bp.route('/reactive-category', methods=['POST'])
+def reactivate_category():
+    db = start_db_session()
+    data = request.form
+
+    try:
+        category = db.query(Tag).filter(Tag.id == data['category-id']).one()
+        category.active = True
+        db.commit()
+    except Exception as e:
+        print('========== trying to activate category', e)
+    return redirect(request.referrer)
+
 
 # Delete Category
 @bp.route('/delete-category', methods=['POST'])
@@ -385,6 +413,19 @@ def delete_category():
         db.rollback()
         return jsonify(message='category not deleted'), 500
     return redirect('/')
+
+# Delete Category in Profile
+@bp.route('/delete-category-in-profile', methods=['POST'])
+def delete_category_in_profile():
+    db = start_db_session()
+    data = request.form
+    try:
+        db.query(Tag).filter(Tag.id == data['category-id']).delete()
+        db.commit()
+    except:
+        db.rollback()
+        return jsonify(message='category not deleted'), 500
+    return redirect(request.referrer)
 
 # Update user name
 @bp.route('/update-username', methods=['POST'])

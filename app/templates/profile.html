@@ -8,6 +8,8 @@
 {% include 'includes/confirm-new-salary.html' %}
 
 {% include 'includes/edit-category-in-profile.html' %}
+{% include 'includes/confirm-category-removal-profile.html' %}
+{% include 'includes/reactivate-category.html' %}
 
 <main id='profile-main'>
     <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
@@ -53,7 +55,7 @@
     <a href="#" class="edit-category-btn">
       <p
       data-tag-id="{{active.id}}"
-      data-tag-color="{{active.tag_color}}"
+      data-tag-color="{{ rgbToHex(active.tag_color)}}"
       >{{active.tag_name}}</p>
     </a>
     {% endfor %}
@@ -65,8 +67,8 @@
       </span>
     </h2>
     {% for inactive in all_inactive_categories %}
-    <a href="#" class="edit-category-btn">
-      <p data-status="{{inactive.active}}">{{inactive.tag_name}}</p>
+    <a href="#" class="edit-inactive-category-btn">
+      <p data-tag-id="{{inactive.id}}">{{inactive.tag_name}}</p>
     </a>
     {% endfor %}
 

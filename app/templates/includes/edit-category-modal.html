@@ -15,7 +15,7 @@
           </p>
           <br />
           <label for="">Color</label>
-          <input type="color" value="{{ rgbaToRgb(tag.tag_color)}}" name="category-color" required/>
+          <input type="color" value="{{rgbToHex(tag.tag_color)}}" name="category-color" required/>
           <br />
           <input type="hidden" value="{{tag.id}}" name="category-id">
 

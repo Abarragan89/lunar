@@ -5,30 +5,25 @@
           Edit Category
         </span>
       </h2>
-      {% for tag in tags %}
-
         <form id='category-form' action="/api/edit-category" method="POST">
-          <input type="text" name="category-name" maxlength="50" id="category-name" value="{{tag.tag_name}}" required/>
+          <input type="text" name="category-name" maxlength="50" id="category-name-in-profile" required/>
           <p class="error-msg" id="error-msg">
             Only alphnumeric, '-', '_', and spaces are allowed
             Category names must be unique.
           </p>
           <br />
           <label for="">Color</label>
-          <input type="color" value="{{ rgbaToRgb(tag.tag_color)}}" name="category-color" required/>
+          <input type="color" name="category-color" id="category-color-in-profile" required/>
           <br />
-          <input type="hidden" value="{{tag.id}}" name="category-id">
+          <input type="hidden" name="category-id" id="category-id-in-profile">
 
           <div class="flex-box-sa">
             <button type="submit" class="button-30">Update</button>
         </form>
   
-            <button type="button" class="button-30 delete-btn" id="remove-category-btn">Delete</button>          
+            <button type="button" class="button-30 delete-btn" id="remove-category-btn-profile">Delete</button>          
         </div>
-          
-      {% endfor %}
-
-
+        
     </div>
 </div>
 </div>

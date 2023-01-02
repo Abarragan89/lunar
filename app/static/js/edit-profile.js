@@ -76,12 +76,59 @@ category_rows = document.querySelectorAll('.edit-category-btn');
 category_rows.forEach((row) => {
     row.addEventListener('click', () => {
         showModal('edit-category-in-profile')
+        fillRowsInEditCategoryProfile(row)
     })
 })
 
-// document.querySelector('#edit-salary-modal').addEventListener('click', (e) => {
-//     const isOutside = e.target.closest('.modal');
-//     if (!isOutside) {
-//         closeModal('edit-salary-modal');
-//     }
-// })
+document.querySelector('#edit-category-in-profile').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('edit-category-in-profile');
+    }
+})
+
+function fillRowsInEditCategoryProfile(row) {
+    // Get category data to fill in form
+    const categoryId = row.children[0].getAttribute('data-tag-id')
+    const categoryColor = row.children[0].getAttribute('data-tag-color')
+    const categoryName = row.children[0].textContent
+    // populate for with category data
+    document.getElementById('category-id-in-profile').value = categoryId
+    document.getElementById('category-color-in-profile').value = categoryColor
+    document.getElementById('category-name-in-profile').value = categoryName
+    // removal options set
+    document.getElementById('make-inactive-id').value = categoryId
+    document.getElementById('delete-category-id').value = categoryId
+}
+
+
+document.getElementById('remove-category-btn-profile').addEventListener('click', () => {
+    showModal('confirm-category-remove-profile');
+})
+
+document.querySelector('#confirm-category-remove-profile').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('confirm-category-remove-profile');
+    }
+})
+
+
+// event listeners for the inactive categories
+inactive_categories = document.querySelectorAll('.edit-inactive-category-btn');
+inactive_categories.forEach((row) => {
+    row.addEventListener('click', () => {
+        categoryId = row.children[0].getAttribute('data-tag-id')
+        console.log(categoryId)
+        document.getElementById('make-category-active-id').value = categoryId
+        showModal('reactivate-category')
+    })
+})
+
+document.querySelector('#reactivate-category').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('reactivate-category');
+    }
+})
+
