@@ -53,6 +53,58 @@
   <h4>Ending Blance: <span class="ending-balance negative-money">-${{(total_monthly_expenses + all_purchases_total) - (salary + all_cash_total)}}</span></h4>
   {% endif %}
 
+  <div class='current-data-graph-div flex-box-col-sa'>
+    <div class='flex-box-sa-wrap'>
+      {% for num in range( relevant_tag_colors | length )%}
+       <a href="/categories/{{relevant_tag_names[num]}}">
+         <p class="relevant-graph-tags"><span class="tag-color-square" data-color="{{relevant_tag_colors[num]}}"></span>{{relevant_tag_names[num]}}</p>
+       </a>
+      {% endfor %}
+    </div>
+    <canvas id="pieChartHistory" width="200" height="200"></canvas>
+  </div>
+  <script>
+    const ctx = document.getElementById('pieChartHistory').getContext('2d')
+    const pieChart = new Chart(ctx, {
+      type: 'pie', 
+      data: {
+        
+        datasets: [
+          {
+            data: {{ values | safe }},
+            backgroundColor: {{ relevant_tag_colors | safe}},
+            borderWidth: 1,
+            borderColor: "black"
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        tooltips: {
+          enabled: true,
+          callbacks: {
+              label: function(tooltipItem, data) {
+                const item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                return `$${item}`
+              }
+          } 
+        }
+      }
+  });
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   <h2 class='section-heading'>

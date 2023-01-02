@@ -229,7 +229,6 @@ def history(yearMonth):
 
     # combine the year and month to create an integer to compare to expiration limit
     date_limit_int = int(str(yearLookUp) + str(monthLookUp))
-    print('date limit===============', date_limit_int)
     db = start_db_session()
     # need to get tags for the navbar
     allTags = (
@@ -305,7 +304,43 @@ def history(yearMonth):
     # Add up expired and any current monthly to get total monthly expenses
     total_monthly_expenses = past_expired_charges_total + any_current_monthly_total
 
+    try:
+         # Get data for the charts
+        allMonthlyPurchases = db.query(Tag.tag_name, Tag.tag_color, Product.amount
+            ).filter(Product.user_id == user_id
+            ).filter(extract('month', Product.time_created)==monthLookUp
+            ).filter(extract('year', Product.time_created)==yearLookUp
+            ).join(Tag
+            ).all()
+        
+        # This is for monthly charges mixed with purchases. Format has to be idential with the one above(can refactor this)
+        monthly_charges_data_wheel = db.query(Tag.tag_name, Tag.tag_color, MonthlyCharge.amount
+            ).filter(MonthlyCharge.user_id == session['user_id']
+            ).filter(extract('month', Product.time_created)==monthLookUp
+            ).filter(extract('year', Product.time_created)==yearLookUp
+            ).join(Tag
+            ).all()
+    
+        
+        allMonthlyExpenses = allMonthlyPurchases + monthly_charges_data_wheel
 
+        # Create a chartData object to remove repeated Tags in products, and add up the total in products
+        chartData = {}
+        for expense in allMonthlyExpenses:
+            if expense[0] in chartData:
+                chartData[expense[0]]['product_amount'] += expense[2]
+            else:
+                chartData[expense[0]] = {'tag_color': expense[1], 'product_amount': expense[2]} 
+        
+        # Getting data from dictionary to get three distinct lists with relevant data to pass
+        values = chartData.values()
+        relevant_tag_names = [ tag_name for tag_name in chartData.keys()]
+        tag_total = [float(item['product_amount']) for item in values]
+        relevant_tag_colors = [item['tag_color'] for item in values]
+
+    except Exception as e:
+            print('trying to get history ==============',e) 
+        
 
     return render_template('history.html',
         loggedIn=is_loggedin,
@@ -321,5 +356,9 @@ def history(yearMonth):
         expired_charges=expired_charges,
         active_monthly_charges=active_monthly_charges,
         all_cash_total=all_cash_total,
-        added_cash_data=added_cash_data
+        added_cash_data=added_cash_data,
+        # Chart Data:
+        relevant_tag_names=relevant_tag_names,
+        values=tag_total,
+        relevant_tag_colors=relevant_tag_colors
     )

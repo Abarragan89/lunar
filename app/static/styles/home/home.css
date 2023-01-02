@@ -51,22 +51,25 @@
   font-size: 1.1em;
   color: rgb(228, 240, 239);
 }
-#dashboard .relevant-graph-tags:hover, #dashboard .relevant-graph-tags:active {
-  color: white;
-}
-#dashboard .tag-color-square {
-  margin: 0 5px;
-  border-radius: 8px;
-  width: 7px;
-  height: 7px;
-  display: inline-block;
-}
-#dashboard .current-data-graph-div {
+
+.current-data-graph-div {
   align-items: center;
   margin: 0 5% 20px;
   border-radius: 3px;
   padding-bottom: 20px;
   margin-bottom: 30px;
+}
+
+.relevant-graph-tags:hover, .relevant-graph-tags:active {
+  color: white;
+}
+
+.tag-color-square {
+  margin: 0 5px;
+  border-radius: 8px;
+  width: 7px;
+  height: 7px;
+  display: inline-block;
 }
 
 .main-activity-div .activity-link {

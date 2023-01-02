@@ -59,25 +59,26 @@
         font-size: 1.1em;
         color: $offWhite;
     }
-    .relevant-graph-tags:hover, .relevant-graph-tags:active {
-        color: white;
-    }
-    .tag-color-square {
-        margin: 0 5px;
-        border-radius: 8px;
-        width: 7px;
-        height: 7px;
-        display: inline-block;
-    }
-    .current-data-graph-div {
-        align-items: center;
-        margin: 0 5% 20px;
-        border-radius: 3px;
-        padding-bottom: 20px;
-        margin-bottom: 30px;
-    }
-
 }
+// this is graph data that should be available to all pages for all pie charts
+.current-data-graph-div {
+    align-items: center;
+    margin: 0 5% 20px;
+    border-radius: 3px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+.relevant-graph-tags:hover, .relevant-graph-tags:active {
+    color: white;
+}
+.tag-color-square {
+    margin: 0 5px;
+    border-radius: 8px;
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+}
+
 
 .main-activity-div {
     
