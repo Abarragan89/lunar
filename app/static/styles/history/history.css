@@ -5,10 +5,9 @@
 #history-main #choose-month {
   position: -webkit-sticky;
   position: sticky;
-  top: 0;
+  top: 13px;
   background-color: rgb(13, 90, 102);
   font-weight: 900;
-  border: none;
   color-scheme: dark;
   margin: 0 auto;
   margin-bottom: 20px;

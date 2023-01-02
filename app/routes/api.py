@@ -37,17 +37,17 @@ def signup():
 
         # Add default tags and colors
         tag_colors =[
-                'rgba(255, 0, 0, 0.407)', 
-                'rgba(255, 140, 0, 0.407)',
-                'rgba(212, 255, 0, 0.407)', 
-                'rgba(26, 255, 0, 0.407)', 
-                'rgba(0, 255, 162, 0.407)',  
-                'rgba(0, 191, 255, 0.407)',
-                'rgba(0, 68, 255, 0.407)',
-                'rgba(38, 0, 255, 0.407)',
-                'rgba(153, 0, 255, 0.407)',
-                'rgba(255, 0, 234, 0.407)',
-                'rgba(255, 0, 64, 0.407)'
+                'rgba(255, 0, 0, 1)', 
+                'rgba(255, 140, 0, 1)',
+                'rgba(212, 255, 0, 1)', 
+                'rgba(26, 255, 0, 1)', 
+                'rgba(0, 255, 162, 1)',  
+                'rgba(0, 191, 255, 1)',
+                'rgba(0, 68, 255, 1)',
+                'rgba(38, 0, 255, 1)',
+                'rgba(153, 0, 255, 1)',
+                'rgba(255, 0, 234, 1)',
+                'rgba(255, 0, 64, 1)'
                 ]
         # give user basic categories
         tag_names = [
@@ -143,7 +143,7 @@ def add_category():
     # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
     h = data['category-color'][1:]
     colorTuple = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
-    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, .3)'
+    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, 1)'
 
     try:
         newTag = Tag(
@@ -339,9 +339,10 @@ def edit_category():
     db = start_db_session()
 
     # lower the alpha in the tag color. Make color into rgba then lower the alpha to .4
+    # update, I changed the opacity back up to 1. I may like it better and keep it this way
     h = data['category-color'][1:]
     colorTuple = tuple(int(h[i:i+2], 16) for i in (0, 2, 4))
-    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, .3)'
+    adjust_color = f'rgba({colorTuple[0]},{colorTuple[1]},{colorTuple[2]}, 1)'
 
     try:
         current_tag = db.query(Tag).filter(Tag.id == data['category-id']).one()

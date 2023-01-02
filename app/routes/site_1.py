@@ -287,8 +287,8 @@ def history(yearMonth):
         
         added_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description, Cash.id
         ).filter(Cash.user_id == user_id
-        ).filter(extract('month', Product.time_created) == monthLookUp
-        ).filter(extract('year', Product.time_created) == yearLookUp
+        ).filter(extract('month', Cash.time_created) == monthLookUp
+        ).filter(extract('year', Cash.time_created) == yearLookUp
         ).order_by(desc(Cash.time_created)
         ).all()
 

@@ -12,7 +12,6 @@
 
 html, body {
 height: fit-content;
-// overflow: auto;
 background-color: $primaryColor;
 color: $gray;
 padding-bottom: 30px;
@@ -36,7 +35,7 @@ a {
 ///////////////////// Section Heading Titles ///////////////////
 .section-heading {
   border-bottom: 1px solid $gray;
-  font-size: 1.4rem;
+  font-size: 1.7em;
   line-height: .017rem;
   margin: 35px 0 15px;
   padding: 0;
@@ -51,8 +50,6 @@ a {
 }
 .page-heading {
   margin-top: 15px;
-  font-size: 1.7rem;
-  letter-spacing: 1.2px;
   
 }
 
@@ -72,52 +69,16 @@ a {
   margin-left: 20px;
 }
 .fa-house {
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   margin-left: 15px;
 }
 
-#main-nav {
-  transition: .15s;
-  align-items: baseline;
-}
-
-.main-nav-open {
+nav {
   position: fixed;
+  width: 100%;
   color: $offWhite;
+	top: 0;
   align-items: center;
-  transition: 0.15s;
-  top: 0;
-  left: 0;
-}
-
-.main-nav-closed {
-  position: absolute;
-  color: $offWhite;
-  align-items: center;
-  width: 5%;
-  height: 100%;
-  top: 13px;
-  left: 92vw;
-  transition: 0.15s
-}
-
-#hamburger {
-  position: sticky;
-  position: -webkit-sticky;
-  top: 0;
-  font-size: 1.5em;
-  color: white;
-  background-color: $secondaryColor;
-  padding: 5px 10px 5px 5px;
-  border-radius: 8px 0 0 8px;
-  transition: 0.15s;
-  z-index: 999;
-  border: 1.5px solid $accentColor;
-  border-right-color: none;
-}
-
-#hamburger:hover {
-  cursor: pointer;
 }
 
 #nav-items-main-div {
@@ -125,11 +86,10 @@ a {
   pointer-events: none;
   background-color: rgba(11, 30, 30, 0.962);
   position: absolute;
-  // width: 100%;
-  top: 31px;
+  width: 100%;
+  top: 35px;
+  padding: 5px 0;
   transition: .15s all;
-  padding: 10px 0;
-  z-index: 999;
 }
 
 @keyframes slideInRight {
@@ -203,6 +163,25 @@ a {
   background-color: $secondaryColor;
 }
 
+#hamburger {
+  position: fixed;
+  top: 13px;
+  right: -10px;
+  font-size: 1.5em;
+  margin-right: 10px;
+  color: $offWhite;
+  background-color: $secondaryColor;
+  padding: 5px 10px 5px 5px;
+  border-radius: 8px 0 0 8px;
+  transition: 0.15s;
+  z-index: 999;
+  border: 1.5px solid $accentColor;
+  border-right: none;
+
+}
+#hamburger:hover {
+  cursor: pointer;
+}
 
 ////////// Main button class ////////////////////
 /* CSS */
@@ -239,11 +218,11 @@ a {
 }
 
 .button-30:hover {
-  box-shadow: rgba(0, 0, 0, 0.648) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
+  box-shadow: rgba(0, 0, 0, .2) 0 2px 4px -1px, rgba(0, 0, 0, .14) 0 4px 5px 0, rgba(0, 0, 0, .12) 0 1px 10px 0;
 }
 
 .button-30:disabled {
-  background-color: rgba(10, 106, 85, 0.12);
+  background-color: rgba(0, 0, 0, .12);
   box-shadow: rgba(0, 0, 0, .2) 0 0 0 0, rgba(0, 0, 0, .14) 0 0 0 0, rgba(0, 0, 0, .12) 0 0 0 0;
   color: rgba(0, 0, 0, .37);
   cursor: default;
@@ -543,13 +522,4 @@ menu p:not(:first-child) {
   margin-bottom: 9px;
 }
 
-
-
-#temporary-block {
-  width: 50px;
-  display: block;
-  margin: 0 auto;
-  color: rgba(255, 255, 255, 0);
-  background-color: rgba(255, 0, 64, 0.407);
-}
 
