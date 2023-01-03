@@ -19,28 +19,21 @@ def signup():
     data = request.form
     try:
         # Make new user
-        newUser = TempUser(
-            username = data['username'].strip(),
-            username_lowercase = data['username'].lower().strip(),
-            email = data['email'].strip(),
-            password = data['password'].strip(),
-            salary_amount = data['monthly-income']
-        )
-        db.add(newUser)
-        db.commit()
+        user_exists = db.query(User).filter(User.email == data['email'].strip()).first()
+
+        if user_exists:
+            db.rollback()
+            return render_template('signup-fail.html', 
+                error='Email is already taken.',
+                username = data['username'].strip(),
+                email = data['email'].strip(),
+                monthly_income = data['monthly-income'].strip()
+                )
     except AssertionError:
         db.rollback()
         print('assertion error')
         return render_template('signup-fail.html', 
             error='Please fill in all fields.',
-            username = data['username'].strip(),
-            email = data['email'].strip(),
-            monthly_income = data['monthly-income'].strip()
-            )
-    except sqlalchemy.exc.IntegrityError:
-        db.rollback()
-        return render_template('signup-fail.html', 
-            error='Email is already taken.',
             username = data['username'].strip(),
             email = data['email'].strip(),
             monthly_income = data['monthly-income'].strip()
@@ -54,12 +47,24 @@ def signup():
             email = data['email'].strip(),
             monthly_income = data['monthly-income'].strip()
             )
+    try: 
+        # Make new user
+        newUser = TempUser(
+            username = data['username'].strip(),
+            username_lowercase = data['username'].lower().strip(),
+            email = data['email'].strip(),
+            password = data['password'].strip(),
+            salary_amount = data['monthly-income']
+        )
+        db.add(newUser)
+        db.commit()
 
-
-    # if successful send verification email
-    msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
-    msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url}/verify_account/{newUser.id}\n -Lunar"
-    current_app.mail.send(msg)
+        if newUser:
+            msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
+            msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url}/verify_account/{newUser.id}\n -Lunar"
+            current_app.mail.send(msg)
+    except Exception as e:
+        print('=====================', e)
 
     return render_template('signup_check_email.html')
 
