@@ -15,8 +15,8 @@ current_year = today.year
 # Create Blueprint
 bp = Blueprint('site', __name__)
 
-@bp.route('/api/signup/verify_account/<user_id>')
-def verify_account(user_id):
+@bp.route('/api/signup/verify_account/<query_string>/<user_id>')
+def verify_account(query_string, user_id):
     return render_template('verify_account.html')
 
 

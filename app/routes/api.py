@@ -4,13 +4,14 @@ import datetime
 from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges, TempUser
 from app.db import start_db_session
 from flask_mail import Message
+import random
+import string
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 today = datetime.datetime.now()
 current_month = today.month
 current_year = today.year
-
 
 # Sign up
 @bp.route('/signup', methods=['POST'])
@@ -58,14 +59,22 @@ def signup():
         )
         db.add(newUser)
         db.commit()
-
         if newUser:
+            #make has string for url
+            random_num_list = [num for num in range(48, 58)] + [num for num in range(65, 91)] + [num for num in range(97, 123)]
+            query_part_1 = ''
+            for _ in range(1,10):
+                query_part_1 += chr(random_num_list[random.randint(0, len(random_num_list)-1)])
+            query_part_2 = ''
+            for _ in range(1,10):
+                query_part_2 += chr(random_num_list[random.randint(0, len(random_num_list)-1)])
+
+
             msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
-            msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url}/verify_account/{newUser.id}\n -Lunar"
+            msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url}/verify_account/{query_part_1}/{query_part_2}{newUser.id}\n -Lunar"
             current_app.mail.send(msg)
     except Exception as e:
         print('=====================', e)
-
     return render_template('signup_check_email.html')
 
 

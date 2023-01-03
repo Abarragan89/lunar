@@ -6,7 +6,7 @@
   margin-bottom: 40px;
 }
 #profile-main .user-profile p {
-  font-size: 1.33em;
+  font-size: 1.33rem;
   margin-bottom: 15px;
   margin-right: 10px;
 }
@@ -15,7 +15,7 @@
 }
 #profile-main .user-profile input:disabled {
   height: 25px;
-  font-size: 1.2em;
+  font-size: 1.33rem;
   width: 100px;
   color: #6bd0d2;
   background-color: #031920;
@@ -24,7 +24,7 @@
 #profile-main .user-profile input {
   height: 25px;
   padding: 2px 3px;
-  font-size: 1.2em;
+  font-size: 1.2rem;
   width: 100px;
   color: black;
   background-color: rgb(199, 195, 195);
@@ -35,7 +35,7 @@
   padding: 0;
   height: 0;
   color: rgb(199, 195, 195);
-  font-size: 1.4em;
+  font-size: 1.4rem;
 }
 #profile-main .edit-pencil-btn:hover {
   cursor: pointer;
