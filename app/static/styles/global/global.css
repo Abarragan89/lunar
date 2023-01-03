@@ -34,13 +34,14 @@ a {
 
 .section-heading {
   border-bottom: 1px solid rgb(199, 195, 195);
-  font-size: 1.7em;
+  font-size: 1.45rem;
   line-height: 0.017rem;
   margin: 35px 0 15px;
   padding: 0;
   text-align: center;
   width: 100%;
   margin-bottom: 30px;
+  letter-spacing: 0.05em;
 }
 .section-heading span {
   background-color: #031920;
@@ -49,6 +50,8 @@ a {
 
 .page-heading {
   margin-top: 15px;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
 }
 
 #nav-menu-underlay {
