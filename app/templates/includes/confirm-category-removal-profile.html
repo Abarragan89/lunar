@@ -1,0 +1,21 @@
+<div class="modal-container" id="confirm-category-remove-profile">
+    <div class="modal">
+        <h2 class='section-heading modal-heading'>
+            <span>
+              Confirm
+            </span>
+          </h2>
+          <br>
+          <form action="{{base_url}}/api/inactivate-category-in-profile", method="POST">
+            <p>Warning: deleting a category will erase all associated purchases. Instead, you can make this category inactive while keeping all of it's history(recommended)</p>
+            <input type="hidden" name="category-id" id="make-inactive-id">
+            <button type="submit" class="button-30">Inactive Category</button>
+          </form>
+          <br>
+          <p>OR</p>
+          <form action="{{base_url}}/api/delete-category-in-profile", method="POST">
+            <input type="hidden" name="category-id" id="delete-category-id">
+            <button type="submit" class="button-30 delete-btn">Delete Category</button>
+          </form>
+    </div>
+</div>

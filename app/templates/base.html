@@ -4,11 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{url_for('static', filename='/styles/utilities/variables.css')}}">
     
     <link rel="stylesheet" href="{{url_for('static', filename='/styles/global/global.css')}}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+    
+    
+    
     {% block head %} {% endblock %}
 </head>
 <body>
@@ -18,23 +27,24 @@
     {% include 'includes/category-modal.html' %}
     {% include 'includes/edit-deposit-modal.html' %}
     {% include 'includes/edit-expense-modal.html' %}
+    {% include 'includes/edit-monthly-charge.html' %}
+    {% include 'includes/confirm-monthly-update.html' %}
+    {% include 'includes/confirm-monthly-remove.html'%}
+    
 
+            
     {% if loggedIn %}
-
     <div id="nav-menu-underlay"></div>
-
     <div>
-        <nav class='flex-box-sb'>
-            <h1 class='ml-4'>Logo</h1>
+        <nav class="flex-box-sb main-nav-closed" id="main-nav">
             <div id="nav-items-main-div" tabindex="0" class="flex-box-col-sb nav-links">
-                <div data-all-tags="{{tags|map(attribute='tag_name')|join(', ')}}" data-all-tags-colors="{{tags|map(attribute='tag_color')|join(', ')}} "id="nav-categories-div">
+                <div data-all-tags="{{tags|map(attribute='tag_name')|join(', ')}}" data-all-tags-colors="{{tags|map(attribute='tag_color')|join(', ')}}" id="nav-categories-div">
                 </div>
             </div>
-            <i class="fa fa-bars" id="hamburger"></i>
+            <i id="hamburger"class="fa-solid fa-arrow-left"></i>
         </nav>
     </div>
     {% endif %}
-
     {% block body %} 
     
     {% endblock %}
@@ -49,6 +59,7 @@
 
     <script src="{{url_for('static', filename='/js/modal.js')}}"></script>
     <script src="{{url_for('static', filename='/js/navigation.js')}}"></script>
+    <script src="{{url_for('static', filename='/js/update-monthly.js')}}"></script>
     
     {% endif %}
     

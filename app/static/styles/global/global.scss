@@ -12,14 +12,14 @@
 
 html, body {
 height: fit-content;
-overflow: auto;
 background-color: $primaryColor;
 color: $gray;
 padding-bottom: 30px;
 }
 
 body {
-    line-height: 1.3;
+    font-family: $primaryFont;
+    line-height: 1.2;
     -webkit-font-smoothing: antialiased;
   }
 
@@ -35,18 +35,24 @@ a {
 ///////////////////// Section Heading Titles ///////////////////
 .section-heading {
   border-bottom: 1px solid $gray;
-  font-size: 1.7em;
+  font-size: 1.45rem;
   line-height: .017rem;
-  margin: 0 0 15px;
+  margin: 35px 0 15px;
   padding: 0;
   text-align: center;
   width: 100%;
   margin-bottom: 30px;
+  letter-spacing: .05em;
 
   span {
       background-color: $primaryColor;
       padding: 0 10px;
   }
+}
+.page-heading {
+  margin-top: 15px;
+  font-size: 1.8rem;
+  letter-spacing: .1em;
 }
 
 ////////////////// Navigation Bar //////////////////
@@ -58,13 +64,25 @@ a {
   background-color: #ffffff00;
 }
 
+// Home Button
+.fa-pencil {
+  color: $gray;
+  font-size: .95rem;
+  margin-left: 20px;
+}
+.fa-house {
+  font-size: 1.7rem;
+  margin-left: 15px;
+}
+
 nav {
   position: fixed;
   width: 100%;
+  color: $offWhite;
 	top: 0;
   align-items: center;
-  background-color: $secondaryColor;
 }
+
 #nav-items-main-div {
   right: -100vw;
   pointer-events: none;
@@ -72,6 +90,7 @@ nav {
   position: absolute;
   width: 100%;
   top: 35px;
+  padding: 5px 0;
   transition: .15s all;
 }
 
@@ -142,14 +161,24 @@ nav {
 
 #nav-categories-div a:hover {
   cursor: pointer;
-  // background-color: rgba(36, 34, 34, 0.721);
   background-color: $secondaryColor;
 }
 
 #hamburger {
+  position: fixed;
+  top: 13px;
+  right: -10px;
   font-size: 1.5em;
   margin-right: 10px;
   color: $offWhite;
+  background-color: $secondaryColor;
+  padding: 5px 10px 5px 5px;
+  border-radius: 8px 0 0 8px;
+  transition: 0.15s;
+  z-index: 999;
+  border: 1.5px solid $accentColor;
+  border-right: none;
+
 }
 #hamburger:hover {
   cursor: pointer;
@@ -167,8 +196,8 @@ nav {
   color: black;
   cursor: pointer;
   display: inline-flex;
-  font-size: .8rem;
-  font-weight: 500;
+  font-family: $primaryFont;
+  font-size: .9rem;
   height: 30px;
   justify-content: center;
   letter-spacing: .0892857em;
@@ -178,9 +207,9 @@ nav {
   overflow: visible;
   padding: 0 15px;
   position: relative;
+  font-weight: 900;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
   transition: box-shadow 300ms cubic-bezier(.4, 0, .2, 1);
   user-select: none;
   -webkit-user-select: none;
@@ -219,16 +248,17 @@ nav {
 menu {
   position: fixed;
   width: 100%;
-  bottom: 0;
+  bottom: -2px;
   border-top: 1px solid $tertiaryColor;
   background-color: $primaryColor;
-  box-shadow: 0px 0px 15px rgb(8, 8, 8);
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
+
 }
 
 menu p {
   color: $offWhite;
   width: 100%;
-  font-size: 1.15rem;
+  font-size: 1rem;
   text-align: center;
   padding: .6rem 0;
 }
@@ -236,18 +266,19 @@ menu p:hover {
   cursor: pointer;
 }
 menu p:active {
-  background-color: $accentColor;
+  background-color: $secondaryColor;
 }
 
 menu p:not(:first-child) {
   border-left: 1px solid $tertiaryColor;
 }
+
 //////// MODAL STYLES THAT OPEN WITH FOOTER MENU /////////
 .modal-container {
   display: none;
   background-color: rgba(0, 0, 0, 0.709);
   position: absolute;
-  z-index: 999;
+  z-index: 900;
   width: 100%;
   height: 250%;
   pointer-events: none;
@@ -258,89 +289,128 @@ menu p:not(:first-child) {
       border-radius: 4px;
       padding: 20px 10px;
       position: relative;
-      top: 80px;
+      top: 30px;
       background-color: $primaryColor;
       margin: 0 auto;
       color: white;
       border: 1px solid $accentColor;
-
-    .modal-heading {
-      margin: 15px 0;
-    }
-
-    #monthly-bill, #monthly-bill-edit {
-      margin: 10px 0px 0;
-      accent-color: $accentColor;
-    }
-
-    input, select {
+      
+      .modal-heading {
+        margin: 15px 0;
+      }
+      
+      #monthly-bill, #monthly-bill-edit {
+        margin: 10px 0px 0;
+        accent-color: $accentColor;
+      }
+      
+      input, select {
         background-color: $primaryColor;
         border: none;
         border-bottom: 1px solid $gray;
-        font-size: 1.2em;
+        font-size: 1.13em;
         color: $offWhite;
-        margin: 20px 40px 10px;
-        padding-left: 10px;
+        margin: 18px 10px 5px;
+        padding-left: 5px;
         color-scheme: dark;
         text-align: center;
       }
 
-    input:focus {
+      textarea {
+        background-color: $primaryColor;
+        border: 1px solid $secondaryColor;
+        width: 95%;
+        color: $offWhite;
+        border-radius:5px;
+        padding: 3px;
+        margin-top: 18px;
+        text-align: center;
+      }
+      
+      input:focus {
         outline: none;
         background-color: $primaryColor;
-    }
-    input:active {
+      }
+      input:active {
         outline: none;
         background-color: $primaryColor;
-    }
-    input:-webkit-autofill {
+      }
+      input:-webkit-autofill {
         -webkit-box-shadow: 0 0 0 1000px $primaryColor inset !important;
         -webkit-text-fill-color: $offWhite !important;
-    }
-    
-    .input-symbol-dollar {
+      }
+      input[type="number"] {
+        width: 80px;
+      }
+      
+      .add-expense-date {
+        align-items: flex-end;
+        margin-right: 15px;
+      }
+      .input-symbol-dollar {
         position: relative;
-    }
-    .input-symbol-dollar:before {
+      }
+      .input-symbol-dollar:before {
         font-size: 1.2em;
         position: absolute;
         top: -5px;
         content:"$";
-        left: 37px;
-    }
-    #current-product-price, #expense-amount-input, .input-amount-modal {
-      width: 100px;
+        left: 8px;
+      }
+      #current-product-price, #expense-amount-input, .input-amount-modal {
+        width: 80px;
+      }
+      
+      button {
+        margin-top: 20px;
+      }
+      #category-color-picker {
+        border: none;
+        margin: 15px 5px 0;
+        padding: 0;
+      }
+      .start-date-modal {
+        align-items: flex-end;
+        justify-content: center;
+        input{
+          width: 153px;
+        }
+        label {
+          font-size: 1.1rem;
+          padding-bottom: 5px;
+        }
+      }
+
+      .delete-btn {
+        background-color: $redBg;
+        color: $offWhite;
+      }
+      
+      .error-msg {
+        display: none;
+        text-align: center;
+        color: $redMsg;
+      }
+      #start-date, #end-date {
+        width: 120px;
+        font-size: 1rem;
+      }
+      .expired-date-form {
+        align-items: baseline;
+        justify-content: flex-end;
+      }
+
     }
 
-    button {
-      margin-top: 20px;
-    }
-    #category-color-picker {
-      border: none;
-      margin: 15px 5px 0;
-      padding: 0;
-    }
-
-    .delete-btn {
-      background-color: $redBg;
-      color: $offWhite;
-    }
-    .error-msg {
-      display: none;
-      text-align: center;
-      color: $redMsg;
   }
-
+  #add-expense-btn:hover .modal-container {
+    transition: .2s cubic-bezier(0, 0, 1, 1);
+  } 
+  
+  .show-modal {
+    display: block;
+    pointer-events: all;
   }
-}
-#add-expense-btn:hover .modal-container {
-  transition: .2s cubic-bezier(0, 0, 1, 1);
-} 
-
-.show-modal {
-  display: block;
-  pointer-events: all;
-}
 
 
 /* Utility classes */
@@ -453,13 +523,4 @@ menu p:not(:first-child) {
   margin-bottom: 9px;
 }
 
-
-
-#temporary-block {
-  width: 50px;
-  display: block;
-  margin: 0 auto;
-  color: rgba(255, 255, 255, 0);
-  background-color: rgba(255, 0, 64, 0.407);
-}
 

@@ -15,8 +15,11 @@ document.getElementById('add-cash-btn').addEventListener('click', () => {
 function getCurrentDate(id) {
     const today = new Date();
     const year = today.getFullYear();
-    const day = today.getDate();
-    const month = today.getMonth() + 1;
+    let day = today.getDate();
+    let month = today.getMonth() + 1;
+    month = String(month).padStart(2, '0')
+    day = String(day).padStart(2, '0')
+    console.log(year, today, day, month)
     document.getElementById(id).setAttribute('max', `${year}-${month}-${day}`);
     document.getElementById(id).setAttribute('value', `${year}-${month}-${day}`);
 }
@@ -40,6 +43,20 @@ activity_rows.forEach((row) => {
         }
     })
 })
+
+
+// Give each monthly row ability to open modal and call function to fill modal with data
+monthly_bill_rows = document.querySelectorAll('.edit-monthly-charge-btn');
+monthly_bill_rows.forEach((row) => {
+    row.addEventListener('click', () => {
+            showModal('edit-monthly-charge');
+            fillEditMonthlyFields(row);
+    })
+})
+
+
+
+
 
 // --- modal listeners to close --- //
 document.querySelector('#expense-modal').addEventListener('click', (e) => {
@@ -73,6 +90,12 @@ document.querySelector('#edit-deposit').addEventListener('click', (e) => {
         closeModal('edit-deposit');
     }
 })
+document.querySelector('#edit-monthly-charge').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('edit-monthly-charge');
+    }
+})
 
 // --- show / close function -- //
 function showModal(id) {
@@ -87,8 +110,28 @@ function closeModal(id) {
     document.body.scroll = "yes";
 }
 
-// Get and format date to restrict date chosen in update
+function fillEditMonthlyFields(row) {
+    const today = new Date();
+    const year = today.getFullYear();
+    const day = today.getDate();
+    const month = today.getMonth() + 1;
 
+    const currentProductTagId = row.children[0].children[1].children[0].getAttribute('data-monthly-tag-id');
+    const currentProductId = row.children[0].children[1].children[0].getAttribute('data-monthly-id');
+    const currentProductName = row.children[0].children[1].children[0].nextElementSibling.textContent;
+    let currentProductPrice = row.children[0].children[2].textContent;
+    currentProductPrice = currentProductPrice.slice(1);
+    const current_date = row.children[0].children[0].getAttribute('data-current-date');
+
+    document.getElementById('current-monthly-price').value = currentProductPrice;
+    document.getElementById('current-monthly-tag').value = currentProductTagId;
+    document.getElementById('current-monthly-name').value = currentProductName;
+    document.getElementById('monthly-id').value = currentProductId;
+    document.getElementById('monthly-date-current').setAttribute('max', `${year}-${month}`);
+    document.getElementById('monthly-date-current').setAttribute('value', current_date);
+    document.getElementById('stop-monthly-data').value = currentProductId;
+
+}
 function fillEditExpenseFields(row) {
     const today = new Date();
     const year = today.getFullYear();

@@ -13,8 +13,13 @@
     src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
     alt="screenshot of graph"
     />
+    {% if loggedIn %}
+    <a href="{{ url_for('site.dashboard')}}"><button class="button-30">dashbord</button></a>
+
+    {% else %}
     <a href="{{ url_for('site.signup')}}"><button class="button-30">Signup</button></a>
     <a href="{{ url_for('site.login')}}"><button class="button-30">Login</button></a>
+    {% endif %}
   </main>
   {% endblock %}
 </main>

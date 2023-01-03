@@ -4,44 +4,75 @@
 <link rel="stylesheet" href="{{url_for('static', filename='/styles/profile/profile.css')}}">
 {% endblock %} {% block body %}
 
-{% include 'includes/edit-user.html' %}
+{% include 'includes/edit-salary.html' %}
+{% include 'includes/confirm-new-salary.html' %}
+
+{% include 'includes/edit-category-in-profile.html' %}
+{% include 'includes/confirm-category-removal-profile.html' %}
+{% include 'includes/reactivate-category.html' %}
 
 <main id='profile-main'>
-    <a href="{{url_for('site.home')}}">Back</a>
-    <h1 class='section-heading page-heading'>
+    <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
+    <h2 class='section-heading page-heading'>
         <span>
           Profile
         </span>
-      </h1>
+    </h2>
+    
+    <div class="flex-box-sa">
+      <div class="flex-box-sa user-profile">
+          <div class="flex-box-col-se">
+            <div class="flex-box-se">
+              <form id="update-username-form" action="api/update-username" method="POST">
+                  <div class="flex-box-se">
+                  <p>Name:</p>
+                  <input type="text" name="new_username" id="change-username-input" value="{{user_data.username}}" disabled>
+                </div>
+                </form>
+              <p id="edit-username-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
+            </div>
+            <div class="flex-box-se">
+              <p>Salary:</p>
+              <p>${{salaries[0]['salary_amount']}}</p>
+              <p id="edit-salary-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
+            </div>
+          </div>
+      </div>
 
-    <div class="flex-box-sa user-profile">
-        <div class="flex-box-col-se">
-            <p>Name: <span>{{user_data.username}}</span></p>
-            <p>Salary:<span>${{salaries[0]['salary_amount']}}</span></p>
-        </div>
-        <p id="edit-profile-btn">Edit</p>
+      <form action="">
+        <label for="dark-light-mode">Dark/Light</label>
+        <input type="checkbox" id="dark-light-mode" name="dark-light-mode">
+      </form>
     </div>
-    
-    
+
     <h2 class='section-heading'>
-        <span>
-          Monthly Charges
-        </span>
-      </h2>
-    {% for category in category_data %}
-    <form action="api/delete-expense" method="POST" class='flex-box-sa'>
-        <div class="flex-box-col-sa">
-            <p>Tag: {{ category[1].tag_name }}</p>
-            <p>Name: {{ category[0].description }}</p>
-        </div>
-        <p>{{ category[0].amount }}</p>
-        <input type="hidden" value="{{category[0].id}}" name="product-id">
-        <input type="submit" value="Remove">
-    </form>
+      <span>
+        Active Categories
+      </span>
+    </h2>
+
+    {% for active in all_active_categories %}
+    <a href="#" class="edit-category-btn">
+      <p
+      data-tag-id="{{active.id}}"
+      data-tag-color="{{ rgbToHex(active.tag_color)}}"
+      >{{active.tag_name}}</p>
+    </a>
+    {% endfor %}
+
+
+    <h2 class='section-heading'>
+      <span>
+        Inactive Categories
+      </span>
+    </h2>
+    {% for inactive in all_inactive_categories %}
+    <a href="#" class="edit-inactive-category-btn">
+      <p data-tag-id="{{inactive.id}}">{{inactive.tag_name}}</p>
+    </a>
     {% endfor %}
 
 </main>
-
 <script src="{{url_for('static', filename='/js/edit-profile.js')}}"></script>
 
 {% endblock %}

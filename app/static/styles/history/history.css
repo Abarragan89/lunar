@@ -1,0 +1,57 @@
+/* GLOBAL COLORS AND FONTS*/
+#history-main {
+  margin-top: 20px;
+}
+#history-main #choose-month {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 13px;
+  background-color: rgb(13, 90, 102);
+  font-weight: 900;
+  color-scheme: dark;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 5px 4px;
+  border-radius: 0px 3px 3px 0;
+  border: 1.5px solid #6bd0d2;
+  border-left: none;
+}
+#history-main .positive-money {
+  color: #6bd0d2;
+}
+#history-main .negative-money {
+  color: rgb(204, 5, 5);
+}
+#history-main .monthly-calculation {
+  display: flex;
+}
+#history-main .monthly-calculation div {
+  text-align: center;
+  align-items: flex-end;
+  margin: 0 auto;
+}
+#history-main .monthly-calculation div h2 {
+  font-size: 0.95rem;
+}
+#history-main .monthly-calculation .money-col {
+  border-bottom: 1px solid rgb(228, 240, 239);
+}
+#history-main .monthly-calculation .money-labels {
+  justify-content: flex-start;
+}
+#history-main h4 {
+  font-size: 1.2rem;
+  margin-top: 25px;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  text-align: right;
+  padding-right: 30px;
+  border-bottom: 1px solid rgb(199, 195, 195);
+}
+#history-main .ending-balance {
+  margin-left: 10px;
+}
+#history-main .monthly-time-line {
+  font-size: 0.8em;
+  font-style: italic;
+}/*# sourceMappingURL=history.css.map */

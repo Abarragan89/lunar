@@ -12,14 +12,14 @@ html, body {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
-  overflow: auto;
   background-color: #031920;
   color: rgb(199, 195, 195);
   padding-bottom: 30px;
 }
 
 body {
-  line-height: 1.3;
+  font-family: "Roboto Condensed", sans-serif;
+  line-height: 1.2;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -34,17 +34,24 @@ a {
 
 .section-heading {
   border-bottom: 1px solid rgb(199, 195, 195);
-  font-size: 1.7em;
+  font-size: 1.45rem;
   line-height: 0.017rem;
-  margin: 0 0 15px;
+  margin: 35px 0 15px;
   padding: 0;
   text-align: center;
   width: 100%;
   margin-bottom: 30px;
+  letter-spacing: 0.05em;
 }
 .section-heading span {
   background-color: #031920;
   padding: 0 10px;
+}
+
+.page-heading {
+  margin-top: 15px;
+  font-size: 1.8rem;
+  letter-spacing: 0.1em;
 }
 
 #nav-menu-underlay {
@@ -55,12 +62,23 @@ a {
   background-color: rgba(255, 255, 255, 0);
 }
 
+.fa-pencil {
+  color: rgb(199, 195, 195);
+  font-size: 0.95rem;
+  margin-left: 20px;
+}
+
+.fa-house {
+  font-size: 1.7rem;
+  margin-left: 15px;
+}
+
 nav {
   position: fixed;
   width: 100%;
+  color: rgb(228, 240, 239);
   top: 0;
   align-items: center;
-  background-color: #35858B;
 }
 
 #nav-items-main-div {
@@ -70,6 +88,7 @@ nav {
   position: absolute;
   width: 100%;
   top: 35px;
+  padding: 5px 0;
   transition: 0.15s all;
 }
 
@@ -298,7 +317,7 @@ nav {
 
 .nav-category-items:hover {
   cursor: pointer;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 #nav-categories-div {
@@ -529,18 +548,28 @@ nav {
 
 .main-nav-item:hover {
   cursor: pointer;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 #nav-categories-div a:hover {
   cursor: pointer;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 #hamburger {
+  position: fixed;
+  top: 13px;
+  right: -10px;
   font-size: 1.5em;
   margin-right: 10px;
   color: rgb(228, 240, 239);
+  background-color: rgb(13, 90, 102);
+  padding: 5px 10px 5px 5px;
+  border-radius: 8px 0 0 8px;
+  transition: 0.15s;
+  z-index: 999;
+  border: 1.5px solid #6bd0d2;
+  border-right: none;
 }
 
 #hamburger:hover {
@@ -560,8 +589,8 @@ nav {
   color: black;
   cursor: pointer;
   display: inline-flex;
-  font-size: 0.8rem;
-  font-weight: 500;
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 0.9rem;
   height: 30px;
   justify-content: center;
   letter-spacing: 0.0892857em;
@@ -571,9 +600,9 @@ nav {
   overflow: visible;
   padding: 0 15px;
   position: relative;
+  font-weight: 900;
   text-align: center;
   text-decoration: none;
-  text-transform: uppercase;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
   -moz-user-select: none;
    -ms-user-select: none;
@@ -606,22 +635,22 @@ nav {
 
 .button-30:active {
   box-shadow: rgba(0, 0, 0, 0.2) 0 5px 5px -3px, rgba(0, 0, 0, 0.14) 0 8px 10px 1px, rgba(0, 0, 0, 0.12) 0 3px 14px 2px;
-  background-color: #35858B;
+  background-color: rgb(13, 90, 102);
 }
 
 menu {
   position: fixed;
   width: 100%;
-  bottom: 0;
+  bottom: -2px;
   border-top: 1px solid #4FBDBA;
   background-color: #031920;
-  box-shadow: 0px 0px 15px rgb(8, 8, 8);
+  box-shadow: 0px 0 10px rgba(0, 0, 0, 0.8);
 }
 
 menu p {
   color: rgb(228, 240, 239);
   width: 100%;
-  font-size: 1.15rem;
+  font-size: 1rem;
   text-align: center;
   padding: 0.6rem 0;
 }
@@ -631,7 +660,7 @@ menu p:hover {
 }
 
 menu p:active {
-  background-color: #6bd0d2;
+  background-color: rgb(13, 90, 102);
 }
 
 menu p:not(:first-child) {
@@ -642,7 +671,7 @@ menu p:not(:first-child) {
   display: none;
   background-color: rgba(0, 0, 0, 0.709);
   position: absolute;
-  z-index: 999;
+  z-index: 900;
   width: 100%;
   height: 250%;
   pointer-events: none;
@@ -653,7 +682,7 @@ menu p:not(:first-child) {
   border-radius: 4px;
   padding: 20px 10px;
   position: relative;
-  top: 80px;
+  top: 30px;
   background-color: #031920;
   margin: 0 auto;
   color: white;
@@ -670,11 +699,21 @@ menu p:not(:first-child) {
   background-color: #031920;
   border: none;
   border-bottom: 1px solid rgb(199, 195, 195);
-  font-size: 1.2em;
+  font-size: 1.13em;
   color: rgb(228, 240, 239);
-  margin: 20px 40px 10px;
-  padding-left: 10px;
+  margin: 18px 10px 5px;
+  padding-left: 5px;
   color-scheme: dark;
+  text-align: center;
+}
+.modal-container .modal textarea {
+  background-color: #031920;
+  border: 1px solid rgb(13, 90, 102);
+  width: 95%;
+  color: rgb(228, 240, 239);
+  border-radius: 5px;
+  padding: 3px;
+  margin-top: 18px;
   text-align: center;
 }
 .modal-container .modal input:focus {
@@ -689,6 +728,13 @@ menu p:not(:first-child) {
   -webkit-box-shadow: 0 0 0 1000px #031920 inset !important;
   -webkit-text-fill-color: rgb(228, 240, 239) !important;
 }
+.modal-container .modal input[type=number] {
+  width: 80px;
+}
+.modal-container .modal .add-expense-date {
+  align-items: flex-end;
+  margin-right: 15px;
+}
 .modal-container .modal .input-symbol-dollar {
   position: relative;
 }
@@ -697,10 +743,10 @@ menu p:not(:first-child) {
   position: absolute;
   top: -5px;
   content: "$";
-  left: 37px;
+  left: 8px;
 }
 .modal-container .modal #current-product-price, .modal-container .modal #expense-amount-input, .modal-container .modal .input-amount-modal {
-  width: 100px;
+  width: 80px;
 }
 .modal-container .modal button {
   margin-top: 20px;
@@ -710,6 +756,17 @@ menu p:not(:first-child) {
   margin: 15px 5px 0;
   padding: 0;
 }
+.modal-container .modal .start-date-modal {
+  align-items: flex-end;
+  justify-content: center;
+}
+.modal-container .modal .start-date-modal input {
+  width: 153px;
+}
+.modal-container .modal .start-date-modal label {
+  font-size: 1.1rem;
+  padding-bottom: 5px;
+}
 .modal-container .modal .delete-btn {
   background-color: rgb(158, 9, 9);
   color: rgb(228, 240, 239);
@@ -718,6 +775,14 @@ menu p:not(:first-child) {
   display: none;
   text-align: center;
   color: rgb(204, 5, 5);
+}
+.modal-container .modal #start-date, .modal-container .modal #end-date {
+  width: 120px;
+  font-size: 1rem;
+}
+.modal-container .modal .expired-date-form {
+  align-items: baseline;
+  justify-content: flex-end;
 }
 
 #add-expense-btn:hover .modal-container {
@@ -860,12 +925,4 @@ menu p:not(:first-child) {
 
 .mb-5 {
   margin-bottom: 9px;
-}
-
-#temporary-block {
-  width: 50px;
-  display: block;
-  margin: 0 auto;
-  color: rgba(255, 255, 255, 0);
-  background-color: rgba(255, 0, 64, 0.407);
 }/*# sourceMappingURL=global.css.map */

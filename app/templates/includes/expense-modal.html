@@ -8,32 +8,31 @@
       </h2>
       
       <form action="/api/add-expense" method="POST">
+        <div class="flex-box-sb">
+          <select name="product-category" required>
+            <option value="">Pick a category</option>
+            {% for tag in tags%}
+            <option value="{{tag.id}}">{{tag.tag_name}}</option>
+            {% endfor %}
+          </select> <br>
+          <div>
+            <span class="input-symbol-dollar">
+              <input type="number" name="product-price" min="0" step="0.01" id="expense-amount-input" placeholder="amount" autocomplete="off" required />
+            </span> 
+          </div>
+        </div>
 
-        <select name="product-category" required>
-          <option selected disabled >Pick a category</option>
-          {% for tag in tags%}
-          <option value="{{tag.id}}">{{tag.tag_name}}</option>
-          {% endfor %}
-
-          {% for expense in expenses %}
-          <p>{{expense.description}}</p>
-          {% endfor %}
-        </select> <br>
-
-        <span class="input-symbol-dollar">
-          <input type="number" name="product-price" min="0" step="0.01" id="expense-amount-input" placeholder="amount" autocomplete="off" required />
-        </span> 
-        
+        <div class="flex-box-sb add-expense-date">
+          <input type="date" id="expense-date" name="expense-date" required>
+          <div>
+            <input type="checkbox" name="monthly-bill" id="monthly-bill">
+            <label for="monthly-bill">Monthly</label> <br>
+          </div>
+        </div>
 
 
 
-        <input type="product-name" name="product-name" maxlength="50" placeholder="Description(optional)" autocomplete="off" />
-
-
-        <input type="date" id="expense-date" name="expense-date" required><br>
-
-        <input type="checkbox" name="monthly-bill" id="monthly-bill">
-        <label for="monthly-bill">Monthly Bill</label> <br>
+        <textarea type="product-name" name="product-name" maxlength="50" placeholder="Description(optional)" autocomplete="off"></textarea>
 
         <button type="submit" class="button-30"/>Add</button>
       </form>

@@ -1,0 +1,61 @@
+@import '../utilities/variables.scss';
+
+#history-main {
+    margin-top: 20px;
+
+    #choose-month {
+        position: sticky;
+        top: 13px;
+        background-color: $secondaryColor;
+        font-weight: 900;
+        color-scheme: dark;
+        margin: 0 auto;
+        margin-bottom: 20px;
+        padding: 5px 4px;
+        border-radius: 0px 3px 3px 0;
+        border: 1.5px solid $accentColor;
+        border-left: none;
+    }
+    .positive-money {
+        color: $accentColor;
+    }
+    .negative-money {
+        color: $redMsg;
+    }
+
+    .monthly-calculation {
+        display: flex;
+
+        div {
+            text-align: center;
+            align-items: flex-end;
+            margin: 0 auto;
+
+            h2 {
+                font-size: .95rem;
+            }
+        }
+        .money-col {
+            border-bottom: 1px solid $offWhite;
+        }
+        .money-labels {
+            justify-content: flex-start;
+        }
+    }
+    h4 {
+        font-size: 1.2rem;
+        margin-top: 25px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        text-align: right;
+        padding-right: 30px;
+        border-bottom: 1px solid $gray;
+    }
+    .ending-balance {
+        margin-left: 10px;
+    }
+    .monthly-time-line {
+        font-size: .8em;
+        font-style: italic;
+    }
+}

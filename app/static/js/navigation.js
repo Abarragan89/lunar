@@ -26,19 +26,56 @@ document.getElementById('nav-menu-underlay').addEventListener('click', (e) => {
 
 function closeMainMenu() {
     closeMainMenuElements()
+    document.getElementById('')
     document.getElementById('nav-menu-underlay').style.display = 'none'
     document.getElementById('nav-items-main-div').style.right = '-100vw';
     document.getElementById('nav-items-main-div').style.pointerEvents = 'none';
-    document.getElementById('hamburger').classList.remove('fa-solid', 'fa-x')
-    document.getElementById('hamburger').classList.add('fa', 'fa-bars')
+    document.getElementById('main-nav').classList.remove('main-nav-open')
+    document.getElementById('main-nav').classList.add('main-nav-closed')
+
+    if (/history/.test(window.location.href)) {
+        document.getElementById('choose-month').style.zIndex = '1'
+    }
+    if (/categories/.test(window.location.href)) {
+        document.getElementById('edit-category-btn').style.zIndex = '1'
+    }
+    document.getElementById('nav-items-main-div').style.width = '0'
+    document.getElementById('hamburger').classList.remove('fa-solid', 'fa-arrow-right')
+    document.getElementById('hamburger').classList.add('fa-solid', 'fa-arrow-left')
+    document.getElementById('hamburger').style.paddingRight = '10px';
+    document.getElementById('hamburger').style.top = '13px'
+    document.getElementById('hamburger').style.borderRadius = '8px 0px 0px 8px';
+
+
 }
 
 function openMainMenu() {
     document.getElementById('nav-menu-underlay').style.display = 'block'
     document.getElementById('nav-items-main-div').style.right = '0';
     document.getElementById('nav-items-main-div').style.pointerEvents = 'all';
-    document.getElementById('hamburger').classList.remove('fa', 'fa-bars')
-    document.getElementById('hamburger').classList.add('fa-solid', 'fa-x')
+
+    document.getElementById('main-nav').classList.remove('main-nav-closed')
+    document.getElementById('main-nav').classList.add('main-nav-open')
+
+    //  need the date input to sit behind the nav when opened and other buttons 
+    if (/history/.test(window.location.href)) {
+        document.getElementById('choose-month').style.zIndex = '-1'
+    }
+    if (/categories/.test(window.location.href)) {
+        document.getElementById('edit-category-btn').style.zIndex = '-1'
+    }
+
+
+
+
+
+
+    document.getElementById('nav-items-main-div').style.width = '100%'
+    document.getElementById('hamburger').classList.remove('fa-solid', 'fa-arrow-left')
+    document.getElementById('hamburger').classList.add('fa-solid', 'fa-arrow-right')
+    document.getElementById('hamburger').style.paddingRight = `${screen.width - 25}px `;
+    document.getElementById('hamburger').style.top = '0px'
+    document.getElementById('hamburger').style.borderRadius = '0';
     createMainMenuElements()
     addListenerToCategories()
 }
@@ -80,7 +117,6 @@ function addListenerToCategories() {
                 // Attach color to tags and tag to category div element
                 newLI.appendChild(newTagColor);
                 categoryDivEl.appendChild(newLI);
-                
             }
         }
     })
@@ -90,13 +126,21 @@ function addListenerToCategories() {
 function createMainMenuElements() {
     // Create and append the main menu items
     const navCategoryDiv = document.getElementById('nav-categories-div')
-
+    
+    // Dashboard Link
+    const dashboardBtn = document.createElement('a');
+    dashboardBtn.textContent = "Dashboard";
+    dashboardBtn.classList.add('main-nav-item');
+    dashboardBtn.href = '/dashboard';
+    navCategoryDiv.insertAdjacentElement('beforebegin', dashboardBtn);
+    
     // Profile Link
     const profileBtn = document.createElement('a');
     profileBtn.textContent = "Profile";
     profileBtn.classList.add('main-nav-item');
     profileBtn.href = '/profile';
     navCategoryDiv.insertAdjacentElement('beforebegin', profileBtn);
+
 
     // Category Link
     const categoryBtn = document.createElement('a');
@@ -113,9 +157,17 @@ function createMainMenuElements() {
     navCategoryDiv.insertAdjacentElement('afterEnd', logoutBtn)
 
     // History Link
+    // Get current date so link goes straight to current month and year
+    const today = new Date();
+    const year = today.getFullYear();
+    let month = today.getMonth() + 1;
+    month = month.toString()
+
+
     const historyBtn = document.createElement('a');
     historyBtn.textContent = 'History';
     historyBtn.classList.add('main-nav-item');
+    historyBtn.href = `/history/${year}-${month.padStart(2, '0')}`
     historyBtn.setAttribute('id', 'history-nav-btn');
     navCategoryDiv.insertAdjacentElement('afterEnd', historyBtn);
 }
@@ -126,6 +178,3 @@ function closeMainMenuElements() {
         navItem.remove()
     })
 }
-
-
-

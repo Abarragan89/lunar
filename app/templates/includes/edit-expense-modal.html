@@ -8,38 +8,34 @@
     </h2>
     <form action="/api/update-expense" method="POST">
       
-      
+    <div class="flex-box-sb">
       <select name="product-category" id="current-product-tag" required>
         <option selected disabled >Pick a category</option>
         {% for tag in tags%}
         <option value="{{tag.id}}">{{tag.tag_name}}</option>
         {% endfor %}
-        
-        {% for expense in expenses %}
-        <p>{{expense.description}}</p>
-        {% endfor %}
-      </select> <br>
-      
-      <span class="input-symbol-dollar">
-        <input type="number" name="product-price" min="0" id="current-product-price" step="0.01" placeholder="amount" value="{{ monthly_income }}" autocomplete="off" required />
-      </span>
+      </select>
+      <div>
+        <span class="input-symbol-dollar">
+          <input type="number" name="product-price" min="0" id="current-product-price" step="0.01" placeholder="amount" value="{{ monthly_income }}" autocomplete="off" required />
+        </span>
+      </div>
+    </div>
 
-
-      <input type="hidden" name="product-id" id="product-id">
-
-
-
-      <input type="text" name="product-name" maxlength="50" id="current-product-name" placeholder="Description(optional)" />
-
+    <input type="hidden" name="product-id" id="product-id">
+    <div class="flex-box-sb add-expense-date">
       <input type="date" id="expense-date-current" name="expense-date-current" required><br>
-  
-      <input type="checkbox" name="monthly-bill" id="monthly-bill-edit">
-      <label for="monthly-bill-edit">Monthly Bill</label>
-
-      <div class="flex-box-sa">
-        
-        <button type="submit" class="button-30">Update</button>
-      </form>
+      <div>
+        <input type="checkbox" name="monthly-bill" id="monthly-bill-edit">
+        <label for="monthly-bill-edit">Monthly</label>
+      </div>
+    </div>
+    
+    <textarea type="text" name="product-name" maxlength="50" id="current-product-name" placeholder="Description(optional)"></textarea>
+    <div class="flex-box-sa">
+      
+      <button type="submit" class="button-30">Update</button>
+    </form>
       
       <form action="/api/delete-expense" method="POST">
         <button type="submit" class="button-30 delete-btn">Delete</button>

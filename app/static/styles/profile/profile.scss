@@ -1,19 +1,56 @@
 @import '../utilities/variables.scss';
 
 #profile-main {
-    margin-top: 30px;
+    margin-top: 20px;
 
-    .page-heading {
-        margin-top: 30px;
-        
-    }
     .user-profile {
         margin-bottom: 40px;
         p {
-            font-size: 1.2em;
+            font-size: 1.33em;
+            margin-bottom: 15px;
+            margin-right: 10px;
         }
-        p span {
+        p:nth-child(2) {
             color: $accentColor;
         }
+        input:disabled {
+            height: 25px;
+            font-size: 1.2em;
+            width: 100px;
+            color: $accentColor;
+            background-color: $primaryColor;
+            border: none;
+        }
+        input {
+            height: 25px;
+            padding: 2px 3px;
+            font-size: 1.2em;
+            width: 100px;
+            color: black;
+            background-color: $gray;
+            border: none;
+        }
     }
+
+    .edit-pencil-btn {
+        border: 0;
+        padding: 0;
+        height: 0;
+        color: $gray;
+        font-size: 1.4em;
+    }
+    .edit-pencil-btn:hover {
+        cursor: pointer;
+    }
+    .edit-pencil-btn:hover, .edit-pencil-btn:active {
+        color: $offWhite;
+    }
+}
+
+#new_salary {
+    width: 120px;
+    margin-bottom: 20px;
+}
+#new_salary_date {
+    margin-top: 10px;
 }

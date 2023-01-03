@@ -1,6 +1,6 @@
 /* GLOBAL COLORS AND FONTS*/
 .login-signup-div {
-  border: 1px solid rgb(199, 195, 195);
+  border: 3px solid rgb(199, 195, 195);
   border-top: none;
   border-radius: 4px;
   text-align: center;
@@ -12,8 +12,9 @@
   width: fit-content;
 }
 .login-signup-div legend {
-  border-bottom: 1px solid rgb(199, 195, 195);
+  border-bottom: 3px solid rgb(199, 195, 195);
   font-size: 1.7em;
+  color: rgb(228, 240, 239);
   line-height: 0.017rem;
   margin: 20px 0 15px;
   padding: 0;

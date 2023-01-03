@@ -1,7 +1,7 @@
 @import '../utilities/variables.scss';
 
 .login-signup-div {
-    border: 1px solid $gray;
+    border: 3px solid $gray;
     border-top: none;
     border-radius: 4px;
     text-align: center;
@@ -11,8 +11,9 @@
     width: fit-content;
 
     legend {
-        border-bottom: 1px solid $gray;
+        border-bottom: 3px solid $gray;
         font-size: 1.7em;
+        color: $offWhite;
         line-height: .017rem;
         margin: 20px 0 15px;
         padding: 0;

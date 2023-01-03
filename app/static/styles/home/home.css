@@ -1,6 +1,7 @@
 /* GLOBAL COLORS AND FONTS*/
 #home-page {
   text-align: center;
+  margin-top: 20px;
 }
 #home-page p {
   font-size: 0.8em;
@@ -16,7 +17,7 @@
 }
 
 #dashboard {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 #dashboard .current-date {
   text-align: center;
@@ -48,15 +49,10 @@
 #dashboard .relevant-graph-tags {
   margin-right: 15px;
   font-size: 1.1em;
+  color: rgb(228, 240, 239);
 }
-#dashboard .tag-color-square {
-  margin: 0 5px;
-  border-radius: 8px;
-  width: 7px;
-  height: 7px;
-  display: inline-block;
-}
-#dashboard .current-data-graph-div {
+
+.current-data-graph-div {
   align-items: center;
   margin: 0 5% 20px;
   border-radius: 3px;
@@ -64,27 +60,54 @@
   margin-bottom: 30px;
 }
 
-.activity-link {
+.relevant-graph-tags:hover, .relevant-graph-tags:active {
+  color: white;
+}
+
+.tag-color-square {
+  margin: 0 5px;
+  border-radius: 8px;
+  width: 7px;
+  height: 7px;
+  display: inline-block;
+}
+
+.main-activity-div .activity-link {
   text-align: center;
   align-items: center;
   justify-items: center;
-  border: 1px solid rgb(199, 195, 195);
   border-radius: 3px;
   margin-bottom: 10px;
   margin-right: 5%;
+  font-size: 1.05em;
+  color: rgb(228, 240, 239);
   margin-left: 5%;
-  padding: 5px 10px;
-  box-shadow: rgba(0, 0, 0, 0.635) 1.95px 1.95px 2.6px;
+  padding: 3px 7px;
+  box-shadow: rgb(13, 90, 102) 0px 30px 60px -12px inset, rgb(13, 90, 102) 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
-.activity-link .activity-link-tag, .activity-link .activity-link-deposit {
-  font-size: 1.2em;
+.main-activity-div .activity-link .activity-link-tag, .main-activity-div .activity-link .activity-link-deposit {
+  font-size: 1.1em;
 }
-.activity-link .activity-link-description {
+.main-activity-div .activity-link .date-div {
+  font-size: 0.9rem;
+}
+.main-activity-div .activity-link .activity-link-description {
   flex: 1;
 }
-.activity-link .activity-link-description p:last-child {
+.main-activity-div .activity-link .activity-link-description .expense-description {
   font-size: 0.85rem;
   padding: 0 15px;
   line-height: 0.9rem;
   font-style: italic;
+}
+.main-activity-div .activity-link #currently-active-text-monthly {
+  color: #6bd0d2;
+}
+.main-activity-div .activity-link:hover {
+  box-shadow: #4FBDBA 0px 30px 60px -12px inset, #4FBDBA 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  cursor: pointer;
+}
+.main-activity-div .activity-link:active {
+  box-shadow: #6bd0d2 0px 30px 60px -12px inset, #6bd0d2 0px 18px 36px -18px inset;
+  color: white;
 }/*# sourceMappingURL=home.css.map */

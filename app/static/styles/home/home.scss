@@ -2,6 +2,7 @@
 
 #home-page {
     text-align: center;
+    margin-top: 20px;
 
     p {
         font-size: .8em;
@@ -22,7 +23,7 @@
 
 //  LOGGED IN STYLES
 #dashboard {
-    margin-top: 40px;
+    margin-top: 20px;
     .current-date {
         text-align: center;
         margin-top: 10px;
@@ -56,50 +57,74 @@
     .relevant-graph-tags {
         margin-right: 15px;
         font-size: 1.1em;
+        color: $offWhite;
     }
-    .tag-color-square {
-        margin: 0 5px;
-        border-radius: 8px;
-        width: 7px;
-        height: 7px;
-        display: inline-block;
-    }
-    .current-data-graph-div {
-        align-items: center;
-        margin: 0 5% 20px;
-        border-radius: 3px;
-        padding-bottom: 20px;
-        margin-bottom: 30px;
-    }
-
+}
+// this is graph data that should be available to all pages for all pie charts
+.current-data-graph-div {
+    align-items: center;
+    margin: 0 5% 20px;
+    border-radius: 3px;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+.relevant-graph-tags:hover, .relevant-graph-tags:active {
+    color: white;
+}
+.tag-color-square {
+    margin: 0 5px;
+    border-radius: 8px;
+    width: 7px;
+    height: 7px;
+    display: inline-block;
 }
 
 
-.activity-link {
-    // color: $offWhite;
-    text-align: center;
-    align-items: center;
-    justify-items: center;
-    border: 1px solid $gray;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    margin-right: 5%;
-    margin-left: 5%;
-    padding: 5px 10px;
-    box-shadow: rgba(0, 0, 0, 0.635) 1.95px 1.95px 2.6px;
+.main-activity-div {
+    
+    .activity-link {
+        text-align: center;
+        align-items: center;
+        justify-items: center;
+        border-radius: 3px;
+        margin-bottom: 10px;
+        margin-right: 5%;
+        font-size: 1.05em;
+        color: $offWhite;
+        margin-left: 5%;
+        padding: 3px 7px;
+        box-shadow: $secondaryColor 0px 30px 60px -12px inset, $secondaryColor 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    
+        .activity-link-tag, .activity-link-deposit {
+            font-size: 1.1em;
+        }
+        .date-div {
+            font-size: .9rem;
+        }
+    
+        .activity-link-description {
+            flex: 1;
 
-    .activity-link-tag, .activity-link-deposit {
-        font-size: 1.2em;
-    }
-
-    .activity-link-description {
-        flex: 1;
-
-        p:last-child {
-            font-size: .85rem;
-            padding: 0 15px;
-            line-height: .9rem;
-            font-style: italic;
+            .expense-description {
+                font-size: .85rem;
+                padding: 0 15px;
+                line-height: .9rem;
+                font-style: italic;
+            }
+        }
+        #currently-active-text-monthly {
+            color: $accentColor;
         }
     }
+    
+    .activity-link:hover {
+        box-shadow: $tertiaryColor 0px 30px 60px -12px inset, $tertiaryColor 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        cursor: pointer;
+    }
+    
+    .activity-link:active {
+        box-shadow: $accentColor 0px 30px 60px -12px inset, $accentColor 0px 18px 36px -18px inset;
+        color: white;
+    }
+
 }
