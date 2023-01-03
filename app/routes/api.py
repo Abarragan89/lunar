@@ -1,38 +1,98 @@
-from flask import Blueprint, request, jsonify, session, redirect, render_template
+from flask import Blueprint, request, jsonify, session, redirect, render_template, current_app
 import sqlalchemy
 import datetime
-from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges
+from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges, TempUser
 from app.db import start_db_session
+from flask_mail import Message
 
 bp = Blueprint('api', __name__, url_prefix='/api')
-
 
 today = datetime.datetime.now()
 current_month = today.month
 current_year = today.year
 
-# Sign up 
+
+# Sign up
 @bp.route('/signup', methods=['POST'])
 def signup():
     db = start_db_session()
     data = request.form
     try:
         # Make new user
-        newUser = User(
+        newUser = TempUser(
             username = data['username'].strip(),
             username_lowercase = data['username'].lower().strip(),
             email = data['email'].strip(),
             password = data['password'].strip(),
+            salary_amount = data['monthly-income']
+        )
+        db.add(newUser)
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        print('assertion error')
+        return render_template('signup-fail.html', 
+            error='Please fill in all fields.',
+            username = data['username'].strip(),
+            email = data['email'].strip(),
+            monthly_income = data['monthly-income'].strip()
+            )
+    except sqlalchemy.exc.IntegrityError:
+        db.rollback()
+        return render_template('signup-fail.html', 
+            error='Email is already taken.',
+            username = data['username'].strip(),
+            email = data['email'].strip(),
+            monthly_income = data['monthly-income'].strip()
+            )
+    except Exception as e:
+        print(e)
+        db.rollback()
+        return render_template('signup-fail.html', 
+            error='An error occurred. Please try again',
+            username = data['username'].strip(),
+            email = data['email'].strip(),
+            monthly_income = data['monthly-income'].strip()
+            )
+
+
+    # if successful send verification email
+    msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
+    msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url}/verify_account/{newUser.id}\n -Lunar"
+    current_app.mail.send(msg)
+
+    return render_template('signup_check_email.html')
+
+
+# Sign up Verified
+@bp.route('/signup_verified', methods=['POST'])
+def signup_verified():
+    db = start_db_session()
+    data = request.form
+    temp_user_id = data['user-id']
+    try:
+        # find temporary user
+        temp_user = db.query(TempUser).filter(TempUser.id == temp_user_id).one()
+
+        # Make new user from temp user
+        newUser = User(
+            username = temp_user.username,
+            username_lowercase = temp_user.username_lowercase,
+            email = temp_user.email,
+            password = temp_user.password
         )
         db.add(newUser)
         db.commit()
 
         # Add Salary Model
         newSalary = Salary (
-            salary_amount = data['monthly-income'].strip(),
+            salary_amount = temp_user.salary_amount,
             user_id = newUser.id
         )
         db.add(newSalary)
+        #delete temp user
+        db.commit()
+        db.delete(temp_user)
         db.commit()
 
         # Add default tags and colors
@@ -71,32 +131,8 @@ def signup():
             )
             db.add(newTag)
             db.commit()
-    except AssertionError:
-        db.rollback()
-        print('assertion error')
-        return render_template('signup-fail.html', 
-            error='Please fill in all fields.',
-            username = data['username'].strip(),
-            email = data['email'].strip(),
-            monthly_income = data['monthly-income'].strip()
-            )
-    except sqlalchemy.exc.IntegrityError:
-        db.rollback()
-        return render_template('signup-fail.html', 
-            error='Email is already taken.',
-            username = data['username'].strip(),
-            email = data['email'].strip(),
-            monthly_income = data['monthly-income'].strip()
-            )
     except Exception as e:
-        print(e)
-        db.rollback()
-        return render_template('signup-fail.html', 
-            error='An error occurred. Please try again',
-            username = data['username'].strip(),
-            email = data['email'].strip(),
-            monthly_income = data['monthly-income'].strip()
-            )
+        print('============== making new user', e)
 
     # create session
     session.clear()
@@ -658,3 +694,4 @@ def delete_expired_charge():
         db.rollback()
         return jsonify(message='Expense not deleted'), 500
     return redirect(request.referrer)
+

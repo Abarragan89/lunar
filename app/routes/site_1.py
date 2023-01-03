@@ -15,6 +15,10 @@ current_year = today.year
 # Create Blueprint
 bp = Blueprint('site', __name__)
 
+@bp.route('/api/signup/verify_account/<user_id>')
+def verify_account(user_id):
+    return render_template('verify_account.html')
+
 
 @bp.route('/')
 def home():
@@ -43,6 +47,8 @@ def dashboard():
     user_data = ''
     user_cash = 0
     salaries = 0
+    auto_deductions = 0
+
     db = start_db_session()
 
     # Get all tags

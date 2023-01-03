@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from app.routes import home, api
 from app.db import init_db
+from flask_mail import Mail
 
 load_dotenv()
 
@@ -34,17 +35,26 @@ def create_app():
     app.config.from_mapping(
         SECRET_KEY=os.getenv('SESSION_SECRET')
     )
-    
+
+    # Mail configurations
+    app.config['MAIL_SERVER']='smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = os.getenv('GOOGLE_USER')
+    app.config['MAIL_PASSWORD'] = os.getenv('GOOGLE_PASSWORD')
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
+    app.mail = Mail(app)
+
+
     #register routes
     app.register_blueprint(home)
     app.register_blueprint(api)
     init_db(app)
 
- 
+    # helper functions
     app.jinja_env.globals.update(rgbToHex=rgbToHex)
     app.jinja_env.globals.update(format_date_ending=format_date_ending)
     app.jinja_env.globals.update(convertExpirationDate=convertExpirationDate)
-
     
     return app
 
