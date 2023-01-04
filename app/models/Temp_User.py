@@ -7,8 +7,8 @@ class TempUser(Base):
     id = Column(Integer, primary_key=True)
     username_lowercase = Column(String(50))
     username = Column(String(50), nullable=False)
-    email = Column(String(50), nullable=False, unique=True)
-    password = Column(String(100), nullable=False)
+    email = Column(String(50), nullable=False)
+    unique_id = Column(String(50), nullable=False, unique=True)
     salary_amount = Column(Numeric(precision=15, scale=2), nullable=False)
     prefixes=['TEMPORARY']
 
@@ -16,9 +16,4 @@ class TempUser(Base):
     def validate_email(self, key, email):
         assert '@' in email
         return email
-    
-    @validates('password')
-    def validate_password(self, key, password):
-        assert len(password) > 5
-        return password
     

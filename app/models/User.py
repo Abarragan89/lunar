@@ -26,6 +26,6 @@ class User(Base):
     
     @validates('password')
     def validate_password(self, key, password):
-        assert len(password) > 5
+        assert len(password) >= 8
         return bcrypt.hashpw(password.encode('utf-8'), salt)
     

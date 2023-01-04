@@ -1,17 +1,15 @@
 from flask import Blueprint, request, jsonify, session, redirect, render_template, current_app
 import sqlalchemy
 import datetime
-from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges, TempUser
+from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges, TempUser, ConfirmationToken
 from app.db import start_db_session
 from flask_mail import Message
-import random
-import string
+import uuid
 
 bp = Blueprint('api', __name__, url_prefix='/api')
 
 today = datetime.datetime.now()
 current_month = today.month
-current_year = today.year
 
 # Sign up
 @bp.route('/signup', methods=['POST'])
@@ -49,29 +47,22 @@ def signup():
             monthly_income = data['monthly-income'].strip()
             )
     try: 
+        # make unique string
+        result = uuid.uuid4()
+        result = str(result.hex)
         # Make new user
         newUser = TempUser(
             username = data['username'].strip(),
             username_lowercase = data['username'].lower().strip(),
             email = data['email'].strip(),
-            password = data['password'].strip(),
+            unique_id = result,
             salary_amount = data['monthly-income']
         )
         db.add(newUser)
         db.commit()
         if newUser:
-            #make has string for url
-            random_num_list = [num for num in range(48, 58)] + [num for num in range(65, 91)] + [num for num in range(97, 123)]
-            query_part_1 = ''
-            for _ in range(1,10):
-                query_part_1 += chr(random_num_list[random.randint(0, len(random_num_list)-1)])
-            query_part_2 = ''
-            for _ in range(1,10):
-                query_part_2 += chr(random_num_list[random.randint(0, len(random_num_list)-1)])
-
-
             msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
-            msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url}/verify_account/{query_part_1}/{query_part_2}{newUser.id}\n -Lunar"
+            msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1] + request.base_url.split('/')[2]}/verify/{result}\n -Lunar"
             current_app.mail.send(msg)
     except Exception as e:
         print('=====================', e)
@@ -83,17 +74,19 @@ def signup():
 def signup_verified():
     db = start_db_session()
     data = request.form
-    temp_user_id = data['user-id']
+    temp_user_id = data['temp-user-unique-id']
+    user_password = data['user-password']
+
     try:
         # find temporary user
-        temp_user = db.query(TempUser).filter(TempUser.id == temp_user_id).one()
+        temp_user = db.query(TempUser).filter(TempUser.unique_id == temp_user_id).one()
 
         # Make new user from temp user
         newUser = User(
             username = temp_user.username,
             username_lowercase = temp_user.username_lowercase,
             email = temp_user.email,
-            password = temp_user.password
+            password = user_password
         )
         db.add(newUser)
         db.commit()
@@ -160,7 +153,7 @@ def signup_verified():
 @bp.route('/logout')
 def logout():
     session.clear()
-    return render_template('index.html')
+    return redirect('/')
 
 # Log In
 @bp.route('/login', methods=['POST'])
@@ -576,15 +569,19 @@ def update_monthly_charge():
 
     # This is the limit that will be placed on the expired charge. Only query less than this in history
     # This will also be the start date of the new monthly charge. From this date forward. greater than or equal to
-    start_date = int(str(monthly_start_date.split('-')[0]) + str(monthly_start_date.split('-')[1]))
+    new_charge_start_date = int(str(monthly_start_date.split('-')[0]) + str(monthly_start_date.split('-')[1]))
+
+    # the end date of the new expired charged needs to be 'new_charge_start_date' minus 1
+    new_expired_end_date = new_charge_start_date - 1
+    # need to check for double zeros in the end, if so, subtract year and make month 12
+    if new_expired_end_date % 100 == 0:
+        new_expired_end_date = int(str(int(monthly_start_date.split('-')[0]) - 1) + '12')
 
     try:
         # get the data from the old monthly charge to make an expired charge
         expired_monthly = db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).one()
-
         expiration_date = int(str(expired_monthly.start_date)[:3] + str(expired_monthly.start_date)[3:])
         
-        print('============================= start date', start_date)
 
         # create new expired monthly based on old monthly charge
         new_expired_monthly = ExpiredCharges(
@@ -592,7 +589,7 @@ def update_monthly_charge():
             amount = expired_monthly.amount,
             tag_id = expired_monthly.tag_id,
             user_id = session['user_id'],
-            expiration_limit = start_date,
+            expiration_limit = new_expired_end_date,
             start_date = expiration_date
         )
         db.add(new_expired_monthly)
@@ -606,7 +603,7 @@ def update_monthly_charge():
             tag_id = monthly_tag,
             user_id = session['user_id'],
             amount = monthly_price,
-            start_date = start_date
+            start_date = new_charge_start_date
             )
         db.add(newMonthly)
         db.commit()
@@ -647,7 +644,6 @@ def stop_monthly_charge():
     except Exception as e:
         print('============================23232323323223', e)
     return redirect(request.referrer)
-
 
 
 # Delete Monthly Bill
@@ -708,4 +704,64 @@ def delete_expired_charge():
         db.rollback()
         return jsonify(message='Expense not deleted'), 500
     return redirect(request.referrer)
+
+
+# Forgot password
+@bp.route('/forgot-password', methods=['POST'])
+def forgot_password():
+    data = request.form
+    user_email = data['email']
+    db =start_db_session()
+
+    result = uuid.uuid4()
+    result = str(result.hex)
+    user_exists = False
+    try:
+        user = db.query(User).filter(User.email == user_email).first()
+        if user:
+            user_exists=True
+            try: 
+                new_token = ConfirmationToken(
+                    unique_string = result,
+                    email = user_email
+                )
+                db.add(new_token)
+                db.commit()
+
+                msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
+                # wanted to get rid of the 'api/forgot-password' in the request url
+                msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1] + request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunar"
+                current_app.mail.send(msg)
+
+                return render_template('forgot_password_message.html', user_exists=user_exists)
+            except Exception as e:
+                print('=============================== maing token',e)
+    except Exception as e:
+        print(e)
+    return render_template('forgot_password_message.html', user_exists=user_exists)
+
+# Reset Password
+@bp.route('/reset-password', methods=['POST'])
+def reset_password_change():
+    data = request.form
+    db =start_db_session()
+
+    valid_token = data['validation-token']
+    print('validation-token', valid_token)
+    try:
+        find_token = db.query(ConfirmationToken).filter(ConfirmationToken.unique_string == valid_token).first()
+        if find_token:
+            find_user = db.query(User).filter(User.email == find_token.email).one()
+            find_user.password = data['new-password-confirm']
+            db.commit()        
+    except Exception as e:
+        print('========================',e)
+        return render_template('reset-password.html', success=False)
+    
+    return render_template('login.html')
+
+
+
+        
+
 

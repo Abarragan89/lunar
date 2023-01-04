@@ -15,9 +15,9 @@ current_year = today.year
 # Create Blueprint
 bp = Blueprint('site', __name__)
 
-@bp.route('/api/signup/verify_account/<query_string>/<user_id>')
-def verify_account(query_string, user_id):
-    return render_template('verify_account.html')
+@bp.route('/verify/<query_string>/')
+def verify_account(query_string):
+    return render_template('verify-account.html')
 
 
 @bp.route('/')
@@ -32,11 +32,15 @@ def home():
 
 @bp.route('/login')
 def login():
+    if session.get('loggedIn'):
+        return redirect('/dashboard')
     return render_template('login.html')
 
 
 @bp.route('/signup')
 def signup():
+    if session.get('loggedIn'):
+        return redirect('/dashboard')
     return render_template('signup.html')
 
 @bp.route('/dashboard')
@@ -385,3 +389,13 @@ def history(yearMonth):
         values=tag_total,
         relevant_tag_colors=relevant_tag_colors
     )
+
+
+@bp.route('/forgot-password')
+def forgot_password():
+    return render_template('forgot_password.html')
+
+
+@bp.route('/reset-password/<query_string>')
+def reset_password(query_string):
+    return render_template('reset-password.html')

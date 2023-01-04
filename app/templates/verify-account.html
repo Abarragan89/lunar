@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block head %}
+<title>Verify Account</title>
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/verify_account/verify_account.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/login/login.css')}}">
+{% endblock %} {% block body %}
+
+<main class="verify-main">
+  
+  <div class="login-signup-div">
+        <h2 class='section-heading page-heading'>
+            <span>
+              Veryfiy Account
+            </span>
+          </h2>
+        <form action="{{base_url}}/api/signup_verified", method="POST">
+            <input type="hidden" name="temp-user-unique-id" value="{{ request.url.split("/")[(request.url.split("/") | length) - 1]}}">
+            <input type="password" placeholder="Enter Password" name="user-password" minlength="8">
+            <button type="submit" class="button-30">Click Here to Verify</button>
+        </form>
+      </div>
+      
+</main>
+
+{% endblock %}
