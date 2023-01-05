@@ -739,7 +739,7 @@ menu p:not(:first-child) {
   -webkit-text-fill-color: rgb(228, 240, 239) !important;
 }
 .modal-container .modal input[type=number] {
-  width: 80px;
+  width: 94px;
 }
 .modal-container .modal .add-expense-date {
   align-items: flex-end;

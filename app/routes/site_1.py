@@ -269,11 +269,17 @@ def history(yearMonth):
         .all()
     )
     try: 
-        salary = db.query(Salary
+        salary = db.query(func.sum(Salary.salary_amount).label("total_salary_value")
             ).filter(Salary.user_id == user_id
-            ).filter(extract('month', Salary.time_created) >= monthLookUp
-            ).filter(extract('year', Salary.time_created) >= yearLookUp
+            ).filter(Salary.start_date <= date_limit_int
+            ).filter(Salary.last_payment >= date_limit_int
             ).first()
+        
+        include_active = db.query(ActiveSalary
+            ).filter(ActiveSalary.user_id == user_id
+            ).filter(ActiveSalary.start_date <= date_limit_int
+            ).first()
+        
         # get all summed up values of monthly charges and purchases for the month     
         all_purchases_total = db.query(func.sum(Product.amount).label("total_value")
             ).filter(Product.user_id == user_id
@@ -328,7 +334,14 @@ def history(yearMonth):
         print('============================salary', e)
 
     # set defaults to query objects in case they come up empty
-    salary = 0 if salary is None else salary.salary_amount
+    salary = 0 if salary.total_salary_value is None else salary.total_salary_value
+    if include_active:
+        salary = salary + include_active.salary_amount
+    
+    print('================include active', include_active)
+    
+    
+
     all_cash_total = 0 if all_cash_total[0].total_value is None else all_cash_total[0].total_value
     past_expired_charges_total = 0 if past_expired_charges_total[0].total_value is None else past_expired_charges_total[0].total_value
     any_current_monthly_total = 0 if any_current_monthly_total[0].total_value is None else any_current_monthly_total[0].total_value
@@ -378,6 +391,7 @@ def history(yearMonth):
         loggedIn=is_loggedin,
         tags=allTags,
         salary=salary,
+
         yearLookUp=yearLookUp,
         monthLookUp=monthLookUp,
         current_month=current_month,
@@ -410,9 +424,11 @@ def reset_password(query_string):
 def edit_all_salaries():
     db = start_db_session()
     user_id = session['user_id']
-
     all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
-
-
-
     return render_template('all-salaries.html', all_salaries=all_salaries, today=today)
+
+
+#redirection for user clearing out the calendar in history
+@bp.route('/history')
+def redirect_for_clear_history():
+    return redirect(f'/history/{current_year}-{current_month}')
