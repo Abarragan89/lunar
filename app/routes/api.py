@@ -505,9 +505,6 @@ def add_salary():
             # need to check for double zeros in the end, if so, subtract year and make month 12
             if old_salary_end_date % 100 == 0:
                 old_salary_end_date = int(str(int(new_salary_start_date.split('-')[0]) - 1) + '12')
-            
-            print('salary start ====================', salary_start)
-            print('old salary end date  ====================', old_salary_end_date)
             # Make new expired salary
             expired_salary = Salary(
                 salary_amount = old_salary.salary_amount,
@@ -534,14 +531,40 @@ def add_salary():
         print('====================== in keep history', e)
     return redirect(request.referrer)
 
-# delete Salary
+# stop active salary
+@bp.route('/stop-active-salary', methods=['POST'])
+def stop_user_salary():
+    data = request.form
+    db = start_db_session()
+    salary_id = data['salary-id']
+    expiration_date = data['expiration-limit-date']
+    salary_end_date = int(expiration_date.split('-')[0] + expiration_date.split('-')[1])
+
+    try:
+        old_salary = db.query(ActiveSalary).filter(ActiveSalary.id == salary_id).one()
+        new_expired_salary = Salary (
+            salary_amount = old_salary.salary_amount,
+            start_date = old_salary.start_date,
+            last_payment = salary_end_date,
+            user_id = session['user_id']
+        )
+        db.add(new_expired_salary)
+        db.delete(old_salary)
+        db.commit()
+    except Exception as e:
+        print('========== stopping salary', e)
+    
+    return redirect(request.referrer)
+
+
+# Delete Salary
 @bp.route('/delete-user-salary', methods=['POST'])
 def delete_user_salary():
     data = request.form
     db = start_db_session()
-    salary_id = data['salary-id-delete-data']
+    salary_id = data['salary-id']
     try:
-        if data['salary-is-active-delete'] == 'True':
+        if 'salary-is-active-delete' in data:
             db.query(ActiveSalary).filter(ActiveSalary.id == salary_id).delete()
             db.commit()
         else:
@@ -552,82 +575,46 @@ def delete_user_salary():
     return redirect(request.referrer)
 
 
-# Update user salary
-@bp.route('/edit-user-salary', methods=['POST'])
-def edit_user_salary():
+# Update Active user salary
+@bp.route('/edit-user-active-salary', methods=['POST'])
+def edit_user_active_salary():
     data = request.form
     db = start_db_session()
     user_id = session['user_id']
-    salary_start = int(data['salary-start-date-edit'].split('-')[0] + data['salary-start-date-edit'].split('-')[1])
-    todays_date = int(str(current_year) + str(current_month))
+    new_salary_start = int(data['active-salary-start-date-edit'].split('-')[0] + data['active-salary-start-date-edit'].split('-')[1])
+    new_monthly_income = data['new-active-monthly-income']
 
-    if data['salary-end-date-edit'] != '':
-        print('==================================== salary end date', type(data['salary-end-date-edit']))
-        new_salary_end = int(data['salary-end-date-edit'].split('-')[0] + data['salary-end-date-edit'].split('-')[1])
-
-    salary_id = data['salary-id']
-    new_monthly_income = data['new_monthly-income']
     try:
-        if 'make-active' in data:
-            # check to see if there is already an active salary
-            is_there_active = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).first()
-            if is_there_active:
-                # check to see if they have the same start time, if so, don't make a whole expired salary; only the price is dfferent
-                if is_there_active.start_date == salary_start:
-                    is_there_active.salary_amount = new_monthly_income
-                    db.commit()
-                    return redirect(request.referrer)
-                # or make expired charge. Need to make expiration date which is one less than start
-                old_salary_end_date = salary_start - 1
-                if old_salary_end_date % 100 == 0:
-                    old_salary_end_date = int(str(int(str(salary_start).split('-')[0]) - 1) + '12')
+        salary_to_update = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).one()
+        salary_to_update.start_date = new_salary_start
+        salary_to_update.salary_amount = new_monthly_income
+        db.commit()
 
-                new_expired_salary = Salary (
-                    salary_amount = is_there_active.salary_amount,
-                    start_date = is_there_active.start_date,
-                    last_payment = old_salary_end_date,
-                    user_id = user_id
-                )
-                db.add(new_expired_salary)
-                # delete old salary
-                db.delete(is_there_active)
-                db.commit()
-            # then we make a new active with data regardless of there was one already active. 
-            new_active_salary = ActiveSalary (
-                    salary_amount = new_monthly_income,
-                    start_date = salary_start,
-                    user_id = user_id
-                )
-            db.add(new_active_salary)
-            db.commit()
-            return redirect(request.referrer)
-        else:
-            # Check to see if this is an active charge turning into an inactive charge(search Active)
-            is_coming_from_active = db.query(ActiveSalary).filter(ActiveSalary.id == salary_id).first()
-            if is_coming_from_active:
-                # if so, make this expired salary and delete active salary
-                new_expired_salary = Salary (
-                    salary_amount = new_monthly_income,
-                    start_date = salary_start,
-                    last_payment = todays_date,
-                    user_id = user_id
-                )
-                db.add(new_expired_salary)
-                db.delete(is_coming_from_active)
-                db.commit()
-                return redirect(request.referrer)
-            else:
-                print('new data=========', new_monthly_income, salary_start, new_salary_end)
-                # OR just find the current salary in question and update it
-                salary_to_update = db.query(Salary).filter(Salary.id == salary_id).one()
-                salary_to_update.salary_amount = new_monthly_income
-                salary_to_update.start_date = salary_start
-                salary_to_update.last_payment = new_salary_end
-                db.commit()
     except Exception as e:
         print('====================== in keep history', e)
     return redirect(request.referrer)
+    
+# Update old user salary
+@bp.route('/edit-user-old-salary', methods=['POST'])
+def edit_user_old_salary():
 
+    data = request.form
+    db = start_db_session()
+    new_salary_start = int(data['salary-start-date-edit'].split('-')[0] + data['salary-start-date-edit'].split('-')[1])
+    new_salary_end = int(data['salary-end-date-edit'].split('-')[0] + data['salary-end-date-edit'].split('-')[1])
+    salary_id = data['salary-id-edit']
+    new_monthly_income = data['edit-salary-income']
+
+    try:
+        salary_to_update = db.query(Salary).filter(Salary.id == salary_id).one()
+        salary_to_update.start_date = new_salary_start
+        salary_to_update.last_payment = new_salary_end
+        salary_to_update.salary_amount = new_monthly_income
+        db.commit()
+
+    except Exception as e:
+        print('====================== in keep history', e)
+    return redirect(request.referrer)
 
 
 # Update Monthly Bill (completely change history)

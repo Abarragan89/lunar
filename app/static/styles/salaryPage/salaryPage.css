@@ -1,0 +1,37 @@
+/* GLOBAL COLORS AND FONTS*/
+#all-salaries-main {
+  margin-top: 20px;
+}
+#all-salaries-main .old-salary-div {
+  position: relative;
+  width: 80%;
+  margin-top: 50px;
+  padding-bottom: 10px;
+  border: 1px solid rgb(199, 195, 195);
+  border-top: none;
+}
+#all-salaries-main .old-salary-div legend {
+  border: none;
+  font-size: 1.35rem;
+  border-top: 1px solid rgb(199, 195, 195);
+}
+#all-salaries-main .old-salary-div span {
+  font-size: 1.25rem;
+  letter-spacing: 0.1rem;
+  color: rgb(199, 195, 195);
+}
+#all-salaries-main p:first-child {
+  font-size: 1rem;
+  letter-spacing: 0.08rem;
+}
+#all-salaries-main p:first-child span {
+  color: #6bd0d2;
+  font-size: 1rem;
+  letter-spacing: 0.08rem;
+}
+#all-salaries-main p:nth-child(2) {
+  position: absolute;
+  right: 15px;
+  top: 10px;
+  color: red;
+}/*# sourceMappingURL=salaryPage.css.map */

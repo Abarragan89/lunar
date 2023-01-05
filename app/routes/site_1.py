@@ -99,7 +99,7 @@ def dashboard():
     # Get User Data if logged in
     if 'user_id' in session:
         user_data = db.query(User).filter(User.id == user_id).one()
-        active_salary = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).one()
+        active_salary = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).first()
 
         # check if user has added extra monthly cash
         user_cash = db.query(func.sum(Cash.amount).label("total_value")
@@ -145,6 +145,9 @@ def dashboard():
     relevant_tag_names = [ tag_name for tag_name in chartData.keys()]
     tag_total = [float(item['product_amount']) for item in values]
     relevant_tag_colors = [item['tag_color'] for item in values]
+
+    # default active salary to zero if there is no active salary
+    active_salary = 0 if active_salary is None else active_salary.salary_amount
 
     
     return render_template (
@@ -401,3 +404,15 @@ def forgot_password():
 @bp.route('/reset-password/<query_string>')
 def reset_password(query_string):
     return render_template('reset-password.html')
+
+
+@bp.route('/edit-all-salaries')
+def edit_all_salaries():
+    db = start_db_session()
+    user_id = session['user_id']
+
+    all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+
+
+
+    return render_template('all-salaries.html', all_salaries=all_salaries, today=today)

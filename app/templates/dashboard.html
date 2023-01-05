@@ -14,24 +14,25 @@
   <div class="flex-box-sa money-day-countdown">
     <p>
       {% if total_monthly_expenses%}
-        {% if (total_monthly_expenses + auto_deductions) > (active_salary.salary_amount + user_cash)%}
+        {% if (total_monthly_expenses + auto_deductions) > (active_salary + user_cash)%}
         Over:<br />
         
         <span id="money-left-negative" 
           >-${{(total_monthly_expenses +
-          auto_deductions) - (active_salary.salary_amount + user_cash)}}</span
+          auto_deductions) - (active_salary + user_cash)}}</span
         >
         {% else %}
         Money Remaining:<br />
         <span id="money-left-positive"
-          >${{ (active_salary.salary_amount + user_cash) - (total_monthly_expenses +
+          >${{ (active_salary + user_cash) - (total_monthly_expenses +
           auto_deductions) }}</span
         >
         {% endif %}
       {% else %}
         Money Remaining:<br />
         <span id="money-left-positive"
-          >${{active_salary.salary_amount}}</span
+        
+          >${{active_salary + user_cash}}</span
         >
       {% endif %}
     </p>

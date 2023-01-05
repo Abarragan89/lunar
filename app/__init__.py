@@ -4,9 +4,11 @@ import os
 from app.routes import home, api
 from app.db import init_db
 from flask_mail import Mail
+from datetime import date
 
 load_dotenv()
 
+# Helper functions
 def format_date_ending(date):
     date_num = int(date)
     last_digit = date_num % 10
@@ -27,7 +29,19 @@ def convertExpirationDate(int):
     string_int = str(int)
     return f"{string_int[4:]}/{string_int[:4]}"
 
+def format_date(integer, option):
+    yearMonthString = str(integer)
+    salaryYear = int(yearMonthString[:4])
+    salaryMonth = int(yearMonthString[4:])
 
+    newDateTimeObj = date(year=salaryYear, month=salaryMonth, day=1)
+
+    if (option == 'monthName/year'):
+        return f'{newDateTimeObj.strftime("%b")}/{newDateTimeObj.strftime("%Y")}'
+
+
+
+# Creating App
 def create_app():
     # set up app config
     app = Flask(__name__, static_url_path='/')
@@ -55,6 +69,7 @@ def create_app():
     app.jinja_env.globals.update(rgbToHex=rgbToHex)
     app.jinja_env.globals.update(format_date_ending=format_date_ending)
     app.jinja_env.globals.update(convertExpirationDate=convertExpirationDate)
+    app.jinja_env.globals.update(format_date=format_date)
     
     return app
 

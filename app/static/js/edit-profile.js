@@ -1,23 +1,20 @@
 // edit profile modal logic
-document.getElementById('edit-salary-btn').addEventListener('click', () => {
-    showModal('edit-salary-modal');
-})
-
-document.querySelector('#edit-salary-modal').addEventListener('click', (e) => {
-    const isOutside = e.target.closest('.modal');
-    if (!isOutside) {
-        closeModal('edit-salary-modal');
+// Edit active salary listners
+document.getElementById('edit-active-salary-btn').addEventListener('click', function() {
+    if(this.previousElementSibling.textContent === 'none active') {
+        showModal('new-salary-modal')
+    } else {
+        showModal('edit-active-salary-modal');
     }
 })
 
-// modal to edit categories
-category_rows = document.querySelectorAll('.edit-category-btn');
-category_rows.forEach((row) => {
-    row.addEventListener('click', () => {
-        showModal('edit-category-in-profile')
-        fillRowsInEditCategoryProfile(row)
-    })
+document.querySelector('#edit-active-salary-modal').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('edit-active-salary-modal');
+    }
 })
+
 
 document.querySelector('#edit-category-in-profile').addEventListener('click', (e) => {
     const isOutside = e.target.closest('.modal');
@@ -53,33 +50,29 @@ document.querySelector('#confirm-category-remove-profile').addEventListener('cli
 })
 
 
-// event listeners for the inactive categories
-inactive_categories = document.querySelectorAll('.edit-inactive-category-btn');
-inactive_categories.forEach((row) => {
-    row.addEventListener('click', () => {
-        categoryId = row.children[0].getAttribute('data-tag-id')
-        document.getElementById('make-category-active-id').value = categoryId
-        showModal('reactivate-category')
-    })
-})
-
-document.querySelector('#reactivate-category').addEventListener('click', (e) => {
-    const isOutside = e.target.closest('.modal');
-    if (!isOutside) {
-        closeModal('reactivate-category');
-    }
-})
-
+// Modal listeners to add new salaries. 
 document.getElementById('new-salary-btn').addEventListener('click', function() {
-    showModal('add-new-salary-modal')
+    showModal('new-salary-modal')
 })
 
-document.querySelector('#add-new-salary-modal').addEventListener('click', (e) => {
+document.querySelector('#new-salary-modal').addEventListener('click', (e) => {
     const isOutside = e.target.closest('.modal');
     if (!isOutside) {
-        closeModal('add-new-salary-modal');
+        closeModal('new-salary-modal');
     }
 })
+
+document.getElementById('remove-current-salary-btn').addEventListener('click', (e) => {
+    showModal('confirm-salary-remove')
+})
+document.querySelector('#confirm-salary-remove').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('confirm-salary-remove');
+    }
+})
+
+
 
 //  Make salary date required if they enter a new salary. 
 document.querySelector('#new_salary').addEventListener('input', function() {
@@ -147,6 +140,14 @@ document.querySelector('#confirm-category-remove-profile').addEventListener('cli
     }
 })
 
+// modal to edit categories
+category_rows = document.querySelectorAll('.edit-category-btn');
+category_rows.forEach((row) => {
+    row.addEventListener('click', () => {
+        showModal('edit-category-in-profile')
+        fillRowsInEditCategoryProfile(row)
+    })
+})
 
 // event listeners for the inactive categories
 inactive_categories = document.querySelectorAll('.edit-inactive-category-btn');
@@ -166,36 +167,3 @@ document.querySelector('#reactivate-category').addEventListener('click', (e) => 
     }
 })
 
-// Event listeners for editing salary
-// Select option to auto populate the fields
-document.getElementById('salary-displayed').addEventListener('change', function() {
-    const salaryOptions = document.querySelectorAll('.salary-options')
-    salaryOptions.forEach((option) => {
-        // Get the option selected and use it's data attribute to populate fields
-        if (option.selected) {
-            currentSalaryId = option.dataset.salaryId;
-            currentSalaryAmount = option.dataset.salaryAmount;
-            currentSalaryStart = option.dataset.salaryStart;
-            currentSalaryEnd = option.dataset.salaryEnd;
-            currentSalaryIsActive = option.dataset.isActive;
-
-            // need to put a hypen in the date so it works in the date input
-            currentSalaryStart = `${currentSalaryStart.slice(0, 4)}-${currentSalaryStart.slice(4)}`
-            currentSalaryEnd = `${currentSalaryEnd.slice(0, 4)}-${currentSalaryEnd.slice(4)}`
-
-            document.getElementById('new-monthly-income-edit').value = currentSalaryAmount
-            document.getElementById('salary-start-date-edit').value = currentSalaryStart
-            document.getElementById('salary-end-date-edit').value = currentSalaryEnd
-            document.getElementById('salary-id-delete-data').value = currentSalaryId
-            document.getElementById('salary-is-active-delete').value =currentSalaryIsActive
-
-            // If it is the active salary, mark the checkbox
-            if (currentSalaryIsActive === "True") {
-                document.getElementById('make-active').checked = true;
-            } else {
-                document.getElementById('make-active').checked = false;
-            }
-
-        }
-    })
-})

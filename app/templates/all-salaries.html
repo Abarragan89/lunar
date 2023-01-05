@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block head %}
+
+<title>History</title>
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/login/login.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/profile/profile.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/salaryPage/salaryPage.css')}}">
+{% endblock %} {% block body %}
+
+{% include 'includes/edit-old-salary.html' %}
+
+<main id="all-salaries-main">
+  <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
+  <h2 class='section-heading page-heading'>
+    <span>
+      Past Incomes
+    </span>
+  </h2>
+
+    {% for salary in all_salaries%}
+        <div class="login-signup-div old-salary-div">
+            <legend>
+                <span>{{ format_date(salary.start_date, 'monthName/year')}} - {{ format_date(salary.last_payment, 'monthName/year')}}</span>
+            </legend>
+            <div>
+                <p>Monthly Income: <span>${{salary.salary_amount}}</span></p>
+                <p 
+                class="edit-old-salary-btn"
+                data-set-salary-id="{{salary.id}}"
+                data-set-salary-amount="{{salary.salary_amount}}"
+                data-set-salary-start="{{salary.start_date}}"
+                data-set-salary-end="{{salary.last_payment}}"
+                ><i class="fa-sharp fa-solid fa-pencil"></i></p>
+            </div>  
+        </div>
+    {% endfor %}
+  
+
+</main>
+<script scr="{{url_for('static', filename='/js/modal.js')}}"></script>
+<script src="{{url_for('static', filename='/js/edit-salaries.js')}}"></script>
+{% endblock %}
+
+
