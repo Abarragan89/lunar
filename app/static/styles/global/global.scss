@@ -70,9 +70,17 @@ a {
   font-size: .95rem;
   margin-left: 20px;
 }
+.fa-pencil:hover {
+  cursor: pointer;
+  color: $offWhite;
+}
 .fa-house {
   font-size: 1.7rem;
   margin-left: 15px;
+}
+.fa-house:hover {
+  cursor: pointer;
+  color: $offWhite;
 }
 
 nav {

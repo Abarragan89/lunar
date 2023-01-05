@@ -43,20 +43,66 @@
 #profile-main .edit-pencil-btn:hover, #profile-main .edit-pencil-btn:active {
   color: rgb(228, 240, 239);
 }
+#profile-main .salary-div {
+  height: 27px;
+}
+#profile-main #salary-start-date {
+  font-size: 0.9rem;
+  font-style: italic;
+  font-weight: 900;
+}
 
-#new_salary {
-  width: 120px;
+.make-active-div {
+  padding-left: 118px;
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+.make-active-div input {
+  width: 15px;
+  height: 15px;
+  accent-color: #6bd0d2;
+}
+
+#new-salary-btn {
+  background-color: rgb(13, 90, 102);
+  color: rgb(228, 240, 239);
+}
+
+.edit-salary-date-div {
+  align-items: baseline;
+}
+.edit-salary-date-div input {
+  width: 150px;
+}
+.edit-salary-date-div p {
+  padding-bottom: 3px;
+  font-size: 1rem;
+}
+
+#salary-displayed {
+  color: #6bd0d2;
+  font-weight: 900;
+  border: 1px solid #6bd0d2;
+  padding: 2px 4px;
+  min-width: 150px;
+  border-radius: 4px;
+}
+
+#new_salary, #new-monthly-income-edit {
+  width: 150px;
   margin-bottom: 20px;
 }
 
 #new_salary_date {
   margin-top: 10px;
+  width: 150px;
 }
 
 .active-categories p, .inactive-categories p {
   padding-bottom: 7px;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 900;
 }
 
 /* CSS */
@@ -115,7 +161,7 @@
   box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #6bd0d2 0 -3px 0 inset;
 }
 .active-categories p {
-  color: #6bd0d2;
+  color: rgb(228, 240, 239);
 }
 
 .inactive-categories {

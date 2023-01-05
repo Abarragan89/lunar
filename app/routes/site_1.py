@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session, redirect
 from sqlalchemy import extract, desc
-from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges
+from app.models import User, Tag, Product, Cash, Salary, MonthlyCharge, ExpiredCharges, ActiveSalary
 from app.db import start_db_session
 import datetime
 from sqlalchemy.sql import func
@@ -99,7 +99,7 @@ def dashboard():
     # Get User Data if logged in
     if 'user_id' in session:
         user_data = db.query(User).filter(User.id == user_id).one()
-        salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+        active_salary = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).one()
 
         # check if user has added extra monthly cash
         user_cash = db.query(func.sum(Cash.amount).label("total_value")
@@ -152,6 +152,7 @@ def dashboard():
         loggedIn=is_loggedin,
         tags=allTags,
         activity_data=activity_data,
+        active_salary=active_salary,
         total_monthly_expenses=total_monthly_expenses,
         user_data=user_data,
         salaries=salaries,
@@ -173,8 +174,15 @@ def profile():
     db = start_db_session()
     user_id = session.get('user_id')
     is_loggedin = session.get('loggedIn')
+
     user_data = db.query(User).filter(User.id == session['user_id']).one()
-    salaries = db.query(Salary).filter(Salary.user_id == user_id).order_by(desc(Salary.time_created)).all()
+
+    all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+
+    active_salary = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).first()
+    if active_salary:
+        all_salaries.insert(0, active_salary)
+    print('=============== all salaries', all_salaries)
 
     allTags = (
         db.query(Tag)
@@ -183,12 +191,6 @@ def profile():
         .all()
     )
 
-    all_active_categories = (
-        db.query(Tag)
-        .filter(Tag.user_id == user_id)
-        .filter(Tag.active == True)
-        .all()
-    )
     all_inactive_categories = (
         db.query(Tag)
         .filter(Tag.user_id == user_id)
@@ -197,11 +199,11 @@ def profile():
     )
     return render_template('profile.html',
         user_data=user_data, 
-        salaries=salaries,
+        all_salaries=all_salaries,
+        active_salary=active_salary,
         loggedIn=is_loggedin,
         tags = allTags, 
         today=today,
-        all_active_categories=all_active_categories,
         all_inactive_categories=all_inactive_categories
     )
 
@@ -237,7 +239,7 @@ def categories(categoryName):
         .filter(Tag.active == True)
         .all()
     )
-    totalAmountSpend = 0 if totalAmountSpend is None else totalAmountSpend
+    
     return render_template('categories.html',
         loggedIn=is_loggedin,
         category=category,
@@ -263,11 +265,11 @@ def history(yearMonth):
         .filter(Tag.active == True)
         .all()
     )
-    try:
+    try: 
         salary = db.query(Salary
             ).filter(Salary.user_id == user_id
-            ).filter(extract('month', Salary.time_created) == monthLookUp
-            ).filter(extract('year', Salary.time_created) == yearLookUp
+            ).filter(extract('month', Salary.time_created) >= monthLookUp
+            ).filter(extract('year', Salary.time_created) >= yearLookUp
             ).first()
         # get all summed up values of monthly charges and purchases for the month     
         all_purchases_total = db.query(func.sum(Product.amount).label("total_value")

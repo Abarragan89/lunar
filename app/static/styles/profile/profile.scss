@@ -45,21 +45,72 @@
     .edit-pencil-btn:hover, .edit-pencil-btn:active {
         color: $offWhite;
     }
+    .salary-div {
+        height: 27px;
+    }
+    #salary-start-date {
+        font-size: .9rem;
+        font-style: italic;
+        font-weight: 900;
+    }
 }
 
-#new_salary {
-    width: 120px;
-    margin-bottom: 20px;
+// Modal styles
+.make-active-div {
+    padding-left: 118px;
+    font-size: 1.1rem;
+    margin-right: 10px;
+    input {
+        width: 15px;
+        height: 15px;
+        accent-color: $accentColor;
+    }
 }
+#new-salary-btn {
+    background-color: $secondaryColor;
+    color: $offWhite
+}
+
+.edit-salary-date-div {
+    align-items: baseline;
+    input {
+        width: 150px;
+    }
+    p {
+        padding-bottom: 3px;
+        font-size: 1rem;
+    }
+}   
+
+#salary-displayed {
+    color: $accentColor;
+    font-weight: 900;
+    border: 1px solid $accentColor;
+    padding: 2px 4px;
+    min-width: 150px;
+    border-radius: 4px;
+}
+
+#new_salary, #new-monthly-income-edit {
+    width: 150px;
+    margin-bottom: 20px;
+
+}
+
 #new_salary_date {
     margin-top: 10px;
+    width: 150px;
 }
+
+
+
 
 .active-categories, .inactive-categories {
     p {
         padding-bottom: 7px;
         text-align: center;
-        font-size: .9rem;
+        font-size: .95rem;
+        font-weight: 900;
     }
 }
 
@@ -115,7 +166,7 @@
     box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, $accentColor 0 -3px 0 inset;
 
     p {
-        color: $accentColor;
+        color: $offWhite;
     }
 }
 .inactive-categories {

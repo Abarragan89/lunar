@@ -2,15 +2,85 @@
     <div class="modal">
       <h2 class='section-heading modal-heading'>
         <span>
-          Edit Salary
+          Edit Salaries
         </span>
       </h2>
+      <form action="api/edit-user-salary", method="POST">
 
-        <span class="input-symbol-dollar">
-          <input type="number" id="new_salary" maxlength="19" id="new_salary" placeholder="New Salary"/>
-        </span> 
-        <p>Salary start date:</p>
-        <input type="month" id="new_salary_date"> <br>
-        <button class="button-30" id="update-user-btn" disabled>Update</button>
+      <div class="flex-box-sa edit-salary-date-div">
+        <p>Incomes:</p>
+        <select 
+          name="salary-id" 
+          id="salary-displayed"
+          required
+        >
+        <option value="" selected disabled required>Select an income</option>
+          {% for salary in all_salaries%}
+          <option 
+          class="salary-options"
+          value="{{salary.id}}"
+          data-salary-id="{{salary.id}}"
+          data-salary-amount="{{salary.salary_amount}}"
+          data-salary-start="{{salary.start_date}}"
+          data-salary-end="{{salary.last_payment}}"
+          {% if salary.is_active%}
+          data-is-active="True"
+          >${{salary.salary_amount}} <em>active</em></option>
+
+          {% else %}
+          data-is-active="False"
+          >${{salary.salary_amount}}</option>
+
+          
+          {% endif %}
+          {% endfor %}
+        </select> 
+      </div>
+
+
+      <div class="flex-box-sa edit-salary-date-div">
+        <p>Edit Amount:</p>
+        <div>
+          <span class="input-symbol-dollar">
+            <input type="number" id="new-monthly-income-edit" name="new_monthly-income" step="0.01" required />
+          </span>      
+        </div>
+      </div>
+        <div class="flex-box-sa edit-salary-date-div">
+          <p>Start date:</p>
+          <input type="month" name="salary-start-date-edit" id="salary-start-date-edit" 
+          max="{{today.strftime("%Y")}}-{{today.strftime('%m')}}"
+          required>
+        </div>
+        <div class="flex-box-sa edit-salary-date-div">
+          <p>Last payday:</p>
+          <input type="month" name="salary-end-date-edit" id="salary-end-date-edit" 
+          max="{{today.strftime("%Y")}}-{{today.strftime('%m')}}"
+          >
+        </div>
+        <div class="flex-box-sa">
+          <p></p>
+          <div class="make-active-div">
+            <input type="checkbox" name="make-active" id="make-active">
+            <label for="make-active">Make Active</label> <br>
+          </div>
+        </div>
+        <div class="flex-box-sa">
+          <button class="button-30" type="submit">Update</button>
+        </form>
+
+
+
+        <form action="api/delete-user-salary" method="POST">
+          <input type="hidden" id="salary-is-active-delete" name="salary-is-active-delete">
+          <input type="hidden" id="salary-id-delete-data" name="salary-id-delete-data">
+          <button class="button-30 delete-btn" type="submit">Delete</button>
+        </form>
+
+
+      </div>
+        <p>Or</p>
+        <button id="new-salary-btn" class="button-30">Create new salary</button>
+
     </div>
 </div>

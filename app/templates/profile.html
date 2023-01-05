@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="{{url_for('static', filename='/styles/profile/profile.css')}}">
 {% endblock %} {% block body %}
 
-{% include 'includes/edit-salary.html' %}
-{% include 'includes/confirm-new-salary.html' %}
 
+{% include 'includes/edit-salary.html' %}
 {% include 'includes/edit-category-in-profile.html' %}
-{% include 'includes/confirm-category-removal-profile.html' %}
+{% include 'includes/new-salary.html' %}
 {% include 'includes/reactivate-category.html' %}
+{% include 'includes/confirm-category-removal-profile.html' %}
 
 <main id='profile-main'>
     <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
@@ -31,11 +31,18 @@
                 </form>
               <p id="edit-username-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
             </div>
-            <div class="flex-box-se">
-              <p>Salary:</p>
-              <p>${{salaries[0]['salary_amount']}}</p>
+            <div class="flex-box-sb salary-div">
+              <p>Income:</p>
+              {% if active_salary %}
+              <p>${{active_salary.salary_amount}}<span class="small-text">/month</span></p>
+              {% else %}
+              <p>none active</p>
+              {% endif %}
               <p id="edit-salary-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
             </div>
+            {% if active_salary %}
+            <p id="salary-start-date">since: {{(active_salary.start_date | string)[4:]}}/{{(active_salary.start_date | string)[:4]}}</p>
+            {% endif %}
           </div>
       </div>
 
@@ -51,7 +58,7 @@
       </span>
     </h2>
 
-    {% for active in all_active_categories %}
+    {% for active in tags %}
     <a href="#" class="edit-category-btn active-categories category-btns-profile">
       <p
       data-tag-id="{{active.id}}"

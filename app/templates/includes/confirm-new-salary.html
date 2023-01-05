@@ -10,7 +10,7 @@
             <p>Would you like to add this new salary and delete the current salaries history?</p>
             <input type="hidden" name="new_salary" id="new_salary_update">
             <input type="hidden" name="new_salary_date" id="new_salary_date_update">
-            <input type="hidden" name="current-salary-id" value="{{salaries[0]['id']}}">
+            <input type="hidden" name="current-salary-id" value="">
             <button type="submit" class="button-30">Add new salary and remember current</button>
         </form>
         <br>
@@ -21,7 +21,7 @@
               <input type="hidden" name="new_salary" id="new_salary_update_delete">
               <input type="hidden" name="new_salary_date" id="new_salary_date_update_delete">
               <input type="hidden" name="erase_history" value="true">
-              <input type="hidden" name="current-salary-id" value="{{salaries[0]['id']}}">
+              <input type="hidden" name="current-salary-id" value="">
             <button type="submit" class="button-30">Add new salary and erase current</button>
           </form>
     </div>

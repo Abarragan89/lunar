@@ -68,9 +68,19 @@ a {
   margin-left: 20px;
 }
 
+.fa-pencil:hover {
+  cursor: pointer;
+  color: rgb(228, 240, 239);
+}
+
 .fa-house {
   font-size: 1.7rem;
   margin-left: 15px;
+}
+
+.fa-house:hover {
+  cursor: pointer;
+  color: rgb(228, 240, 239);
 }
 
 nav {
