@@ -4,22 +4,22 @@
 <link rel="stylesheet" href="{{url_for('static', filename='/styles/profile/profile.css')}}">
 {% endblock %} {% block body %}
 
-{% include 'includes/edit-salary.html' %}
-{% include 'includes/confirm-new-salary.html' %}
-
 {% include 'includes/edit-category-in-profile.html' %}
-{% include 'includes/confirm-category-removal-profile.html' %}
 {% include 'includes/reactivate-category.html' %}
+{% include 'includes/confirm-category-removal-profile.html' %}
+{% include 'includes/edit-active-salary.html'%}
+{% include 'includes/new-salary.html' %}
+{% include 'includes/confirm-salary-removal.html' %}
 
 <main id='profile-main'>
-    <a href="{{url_for('site.home')}}"><i class="fa-solid fa-house"></i></a>
+    <a href="{{url_for('site_dashboard.dashboard')}}"><i class="fa-solid fa-house"></i></a>
     <h2 class='section-heading page-heading'>
         <span>
           Profile
         </span>
     </h2>
     
-    <div class="flex-box-sa">
+    <div class="flex-box-sa user-info-section-profile">
       <div class="flex-box-sa user-profile">
           <div class="flex-box-col-se">
             <div class="flex-box-se">
@@ -31,19 +31,32 @@
                 </form>
               <p id="edit-username-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
             </div>
-            <div class="flex-box-se">
-              <p>Salary:</p>
-              <p>${{salaries[0]['salary_amount']}}</p>
-              <p id="edit-salary-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
+            <div class="flex-box-sb salary-div">
+              <p>Income:</p>
+              {% if active_salary %}
+              <p>${{active_salary.salary_amount}}<span class="small-text">/month</span></p>
+              {% else %}
+              <p>none active</p>
+              {% endif %}
+              <p id="edit-active-salary-btn"><i class="fa-sharp fa-solid fa-pencil"></i></p>
             </div>
+            {% if active_salary %}
+            <p id="salary-start-date">since: {{(active_salary.start_date | string)[4:]}}/{{(active_salary.start_date | string)[:4]}}</p>
+            {% endif %}
           </div>
       </div>
 
-      <form action="">
-        <label for="dark-light-mode">Dark/Light</label>
-        <input type="checkbox" id="dark-light-mode" name="dark-light-mode">
-      </form>
+      <div class="flex-box-col-se">
+        <form action="">
+          <label for="dark-light-mode">Dark/Light</label>
+          <input type="checkbox" id="dark-light-mode" name="dark-light-mode">
+        </form>
+
+        <a href="{{url_for('site_profile.edit_all_salaries')}}" id="view-previous-salaries-btn">edit past salaries</a>
+
+      </div>
     </div>
+    
 
     <h2 class='section-heading'>
       <span>
@@ -51,8 +64,8 @@
       </span>
     </h2>
 
-    {% for active in all_active_categories %}
-    <a href="#" class="edit-category-btn">
+    {% for active in tags %}
+    <a href="#" class="edit-category-btn active-categories category-btns-profile">
       <p
       data-tag-id="{{active.id}}"
       data-tag-color="{{ rgbToHex(active.tag_color)}}"
@@ -67,7 +80,7 @@
       </span>
     </h2>
     {% for inactive in all_inactive_categories %}
-    <a href="#" class="edit-inactive-category-btn">
+    <a href="#" class="edit-inactive-category-btn inactive-categories category-btns-profile">
       <p data-tag-id="{{inactive.id}}">{{inactive.tag_name}}</p>
     </a>
     {% endfor %}

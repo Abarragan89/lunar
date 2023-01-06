@@ -1,0 +1,36 @@
+<div class="modal-container" id="edit-active-salary-modal">
+    <div class="modal">
+      <h2 class='section-heading modal-heading'>
+        <span>
+          Monthly Income
+        </span>
+      </h2>
+      <h3>${{active_salary.salary_amount}}</h3>
+        <form action="api/edit-user-active-salary", method="POST">
+            <div class="flex-box-sa edit-salary-date-div">
+                <label for="">Amount:</label>
+                <div>
+                    <span class="input-symbol-dollar">
+                        <input type="number" id="new-active-monthly-income-edit" name="new-active-monthly-income" value="{{active_salary.salary_amount}}" step="0.01" required />
+                    </span> 
+                </div>
+            </div>
+            <div class="flex-box-sa edit-salary-date-div">
+                <p>Start date:</p>
+                <input type="month" name="active-salary-start-date-edit" id="active-salary-start-date-edit" 
+                value="{{(active_salary.start_date | string)[:4] }}-{{(active_salary.start_date | string)[4:]}}"
+                max="{{today.strftime("%Y")}}-{{today.strftime('%m')}}"
+                required>
+            </div>
+            <div class="flex-box-sa edit-salary-date-div">
+                <button class="button-30" type="submit">Update</button>
+        </form>
+              <div class="flex-box-sa">
+                  <p id="remove-current-salary-btn" class="button-30 delete-btn">Stop</p>
+                </div>
+            </div>
+            <p>Or</p>
+            <button id="new-salary-btn" class="button-30">Create new salary</button>
+          </div>
+    </div>
+</div>

@@ -2,11 +2,20 @@
 #profile-main {
   margin-top: 20px;
 }
+#profile-main .user-info-section-profile {
+  align-items: baseline;
+}
+#profile-main #view-previous-salaries-btn {
+  padding-top: 33px;
+  font-size: 0.95rem;
+  text-decoration: underline;
+  color: #6bd0d2;
+}
 #profile-main .user-profile {
   margin-bottom: 40px;
 }
 #profile-main .user-profile p {
-  font-size: 1.33em;
+  font-size: 1.15rem;
   margin-bottom: 15px;
   margin-right: 10px;
 }
@@ -15,8 +24,8 @@
 }
 #profile-main .user-profile input:disabled {
   height: 25px;
-  font-size: 1.2em;
-  width: 100px;
+  font-size: 1.1rem;
+  width: 120px;
   color: #6bd0d2;
   background-color: #031920;
   border: none;
@@ -24,7 +33,7 @@
 #profile-main .user-profile input {
   height: 25px;
   padding: 2px 3px;
-  font-size: 1.2em;
+  font-size: 1.1rem;
   width: 100px;
   color: black;
   background-color: rgb(199, 195, 195);
@@ -35,7 +44,7 @@
   padding: 0;
   height: 0;
   color: rgb(199, 195, 195);
-  font-size: 1.4em;
+  font-size: 1.4rem;
 }
 #profile-main .edit-pencil-btn:hover {
   cursor: pointer;
@@ -43,12 +52,145 @@
 #profile-main .edit-pencil-btn:hover, #profile-main .edit-pencil-btn:active {
   color: rgb(228, 240, 239);
 }
+#profile-main .salary-div {
+  height: 27px;
+}
+#profile-main .salary-div .small-text {
+  color: rgb(199, 195, 195);
+  font-size: 0.8rem;
+}
+#profile-main #salary-start-date {
+  font-size: 0.85rem;
+  font-style: italic;
+  font-weight: 900;
+}
 
-#new_salary {
-  width: 120px;
+.make-active-div {
+  padding-left: 118px;
+  font-size: 1.1rem;
+  margin-right: 10px;
+}
+.make-active-div input {
+  width: 15px;
+  height: 15px;
+  accent-color: #6bd0d2;
+}
+
+#new-salary-btn {
+  background-color: rgb(13, 90, 102);
+  color: rgb(228, 240, 239);
+}
+
+.edit-salary-date-div {
+  align-items: baseline;
+}
+.edit-salary-date-div input {
+  width: 150px;
+}
+.edit-salary-date-div p {
+  padding-bottom: 3px;
+  font-size: 1rem;
+}
+
+#salary-displayed {
+  color: #6bd0d2;
+  font-weight: 900;
+  border: 1px solid #6bd0d2;
+  padding: 2px 4px;
+  min-width: 150px;
+  border-radius: 4px;
+}
+
+#new_salary, #new-monthly-income-edit {
+  width: 150px;
   margin-bottom: 20px;
 }
 
 #new_salary_date {
-  margin-top: 10px;
+  margin-top: 25px;
+  width: 150px;
+}
+
+#edit-active-salary-modal h3 {
+  font-size: 1.4rem;
+  color: #6bd0d2;
+  padding-top: 20px;
+}
+#edit-active-salary-modal input[type=number] {
+  min-width: 150px;
+}
+
+.active-categories p, .inactive-categories p {
+  padding-bottom: 7px;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+/* CSS */
+.category-btns-profile {
+  align-items: center;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background-color: #FCFCFD;
+  border-radius: 4px;
+  border-width: 0;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #6bd0d2 0 -3px 0 inset;
+  box-sizing: border-box;
+  color: #36395A;
+  cursor: pointer;
+  display: inline-flex;
+  height: 35px;
+  justify-content: center;
+  line-height: 1;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 5px;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transition: box-shadow 0.15s, transform 0.15s;
+  -moz-user-select: none;
+   -ms-user-select: none;
+       user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  will-change: box-shadow, transform;
+  font-size: 1rem;
+}
+
+.category-btns-profile:focus {
+  box-shadow: #D6D6E7 0 0 0 1.5px inset, rgba(45, 35, 66, 0.4) 0 2px 4px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #D6D6E7 0 -3px 0 inset;
+}
+
+.category-btns-profile:hover {
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #6bd0d2 0 -3px 0 inset;
+  transform: translateY(-2px);
+}
+
+.category-btns-profile:active {
+  box-shadow: #D6D6E7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.active-categories {
+  background-color: rgb(13, 90, 102);
+  margin-bottom: 15px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #6bd0d2 0 -3px 0 inset;
+}
+.active-categories p {
+  color: rgb(228, 240, 239);
+}
+
+.inactive-categories {
+  background-color: rgb(204, 5, 5);
+  margin-bottom: 15px;
+  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, rgb(199, 195, 195) 0 -3px 0 inset;
+}
+.inactive-categories p {
+  color: rgb(199, 195, 195);
 }/*# sourceMappingURL=profile.css.map */

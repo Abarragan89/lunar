@@ -66,10 +66,6 @@ function openMainMenu() {
     }
 
 
-
-
-
-
     document.getElementById('nav-items-main-div').style.width = '100%'
     document.getElementById('hamburger').classList.remove('fa-solid', 'fa-arrow-left')
     document.getElementById('hamburger').classList.add('fa-solid', 'fa-arrow-right')

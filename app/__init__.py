@@ -1,11 +1,15 @@
 from flask import Flask
 from dotenv import load_dotenv
 import os
-from app.routes import home, api
+from app.routes import login, categories, expense, deposit, profile, charges
+from app.routes import site_login, dashboard, site_profile, site_categories, site_history
 from app.db import init_db
+from flask_mail import Mail
+from datetime import date
 
 load_dotenv()
 
+# Helper functions
 def format_date_ending(date):
     date_num = int(date)
     last_digit = date_num % 10
@@ -26,7 +30,19 @@ def convertExpirationDate(int):
     string_int = str(int)
     return f"{string_int[4:]}/{string_int[:4]}"
 
+def format_date(integer, option):
+    yearMonthString = str(integer)
+    salaryYear = int(yearMonthString[:4])
+    salaryMonth = int(yearMonthString[4:])
 
+    newDateTimeObj = date(year=salaryYear, month=salaryMonth, day=1)
+
+    if (option == 'monthName/year'):
+        return f'{newDateTimeObj.strftime("%b")}/{newDateTimeObj.strftime("%Y")}'
+
+
+
+# Creating App
 def create_app():
     # set up app config
     app = Flask(__name__, static_url_path='/')
@@ -34,17 +50,38 @@ def create_app():
     app.config.from_mapping(
         SECRET_KEY=os.getenv('SESSION_SECRET')
     )
-    
+
+    # Mail configurations
+    app.config['MAIL_SERVER']='smtp.gmail.com'
+    app.config['MAIL_PORT'] = 465
+    app.config['MAIL_USERNAME'] = os.getenv('GOOGLE_USER')
+    app.config['MAIL_PASSWORD'] = os.getenv('GOOGLE_PASSWORD')
+    app.config['MAIL_USE_TLS'] = False
+    app.config['MAIL_USE_SSL'] = True
+    app.mail = Mail(app)
+
+
     #register routes
-    app.register_blueprint(home)
-    app.register_blueprint(api)
+    app.register_blueprint(login)
+    app.register_blueprint(categories)
+    app.register_blueprint(expense)
+    app.register_blueprint(deposit)
+    app.register_blueprint(profile)
+    app.register_blueprint(charges)
+    app.register_blueprint(site_login)
+    app.register_blueprint(dashboard)
+    app.register_blueprint(site_profile)
+    app.register_blueprint(site_categories)
+    app.register_blueprint(site_history)
+
+
     init_db(app)
 
- 
+    # helper functions
     app.jinja_env.globals.update(rgbToHex=rgbToHex)
     app.jinja_env.globals.update(format_date_ending=format_date_ending)
     app.jinja_env.globals.update(convertExpirationDate=convertExpirationDate)
-
+    app.jinja_env.globals.update(format_date=format_date)
     
     return app
 

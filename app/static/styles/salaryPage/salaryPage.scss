@@ -1,0 +1,39 @@
+@import '../utilities/variables.scss';
+
+#all-salaries-main {
+    margin-top: 20px;
+
+    .old-salary-div {
+        position: relative;
+        width: 80%;
+        margin-top: 50px;
+        padding-bottom: 10px;
+        border: 1px solid $gray;
+        border-top: none;
+        legend {
+            border: none;
+            font-size: 1.35rem;
+            border-top: 1px solid $gray;
+        }
+        span {
+            font-size: 1.25rem;
+            letter-spacing: .1rem;
+            color: $gray;
+        }
+    }
+    p:first-child {
+        font-size: 1rem;
+        letter-spacing: .08rem;
+        span {
+            color: $accentColor;
+            font-size: 1rem;
+            letter-spacing: .08rem;  
+        }
+    }
+    p:nth-child(2) {
+        position: absolute;
+        right: 15px;
+        top: 10px;
+        color: red;
+    }
+}

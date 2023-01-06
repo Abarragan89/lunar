@@ -34,7 +34,7 @@ a {
 
 .section-heading {
   border-bottom: 1px solid rgb(199, 195, 195);
-  font-size: 1.45rem;
+  font-size: 1.5rem;
   line-height: 0.017rem;
   margin: 35px 0 15px;
   padding: 0;
@@ -68,9 +68,19 @@ a {
   margin-left: 20px;
 }
 
+.fa-pencil:hover {
+  cursor: pointer;
+  color: rgb(228, 240, 239);
+}
+
 .fa-house {
   font-size: 1.7rem;
   margin-left: 15px;
+}
+
+.fa-house:hover {
+  cursor: pointer;
+  color: rgb(228, 240, 239);
 }
 
 nav {
@@ -618,9 +628,9 @@ nav {
 }
 
 .button-30:disabled {
-  background-color: rgba(0, 0, 0, 0.12);
+  background-color: rgb(13, 90, 102);
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 0, rgba(0, 0, 0, 0.14) 0 0 0 0, rgba(0, 0, 0, 0.12) 0 0 0 0;
-  color: rgba(0, 0, 0, 0.37);
+  color: rgba(0, 0, 0, 0.546);
   cursor: default;
   pointer-events: none;
 }
@@ -729,7 +739,7 @@ menu p:not(:first-child) {
   -webkit-text-fill-color: rgb(228, 240, 239) !important;
 }
 .modal-container .modal input[type=number] {
-  width: 80px;
+  width: 94px;
 }
 .modal-container .modal .add-expense-date {
   align-items: flex-end;

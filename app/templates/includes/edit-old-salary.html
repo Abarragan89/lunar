@@ -1,0 +1,43 @@
+<div class="modal-container" id="edit-old-salary-modal">
+    <div class="modal">
+      <h2 class='section-heading modal-heading'>
+        <span>
+          Edit Salary
+        </span>
+      </h2>
+      <form action="api/edit-user-old-salary", method="POST">
+        
+        <div class="flex-box-sa edit-salary-date-div">
+          <p>Edit Amount:</p>
+          <div>
+            <span class="input-symbol-dollar">
+              <input type="number" id="edit-salary-income" name="edit-salary-income" step="0.01" required />
+            </span>      
+          </div>
+        </div>
+          <div class="flex-box-sa edit-salary-date-div">
+            <p>Start date:</p>
+            <input type="month" name="salary-start-date-edit" id="salary-start-date-edit" 
+            max="{{today.strftime("%Y")}}-{{today.strftime('%m')}}"
+            required>
+          </div>
+          <div class="flex-box-sa edit-salary-date-div">
+            <p>Last payday:</p>
+            <input type="month" name="salary-end-date-edit" id="salary-end-date-edit" 
+            max="{{today.strftime("%Y")}}-{{today.strftime('%m')}}"
+            >
+          </div>
+          <input type="hidden" id="salary-id-edit" name="salary-id-edit">
+          <div class="flex-box-sa">
+            <button class="button-30" type="submit">Update</button>
+        </form>
+  
+
+          <form action="api/delete-user-salary" method="POST">
+            <input type="hidden" id="salary-id-delete-data" name="salary-id">
+
+            <button class="button-30 delete-btn" type="submit">Delete</button>
+          </form>
+      </div>
+  </div>
+</div>
