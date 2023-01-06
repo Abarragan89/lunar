@@ -2,7 +2,7 @@ from flask import Flask
 from dotenv import load_dotenv
 import os
 from app.routes import login, categories, expense, deposit, profile, charges
-from app.routes import site_login, dashboard, site_profile, site_categories, site_history
+from app.routes import site_login, dashboard, site_profile, site_categories, site_history, error_page
 from app.db import init_db
 from flask_mail import Mail
 from datetime import date
@@ -73,6 +73,7 @@ def create_app():
     app.register_blueprint(site_profile)
     app.register_blueprint(site_categories)
     app.register_blueprint(site_history)
+    app.register_blueprint(error_page)
 
 
     init_db(app)

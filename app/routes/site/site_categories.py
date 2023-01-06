@@ -15,31 +15,36 @@ def categories(categoryName):
     user_id = session['user_id']
     db = start_db_session()
 
-    category = (
-        db.query(Tag)
-        .filter(Tag.user_id == user_id)
-        .filter(Tag.tag_name == categoryName)
-        .one()
-    )
+    try:
+        category = (
+            db.query(Tag)
+            .filter(Tag.user_id == user_id)
+            .filter(Tag.tag_name == categoryName)
+            .one()
+        )
 
-    totalAmountSpend= db.query(func.sum(Product.amount).label("total_value")
-        ).filter(Product.user_id == user_id
-        ).filter(Product.tag_id == category.id).all()
-    totalAmountSpend = totalAmountSpend[0][0]
+        totalAmountSpend= db.query(func.sum(Product.amount).label("total_value")
+            ).filter(Product.user_id == user_id
+            ).filter(Product.tag_id == category.id).all()
+        totalAmountSpend = totalAmountSpend[0][0]
 
-    purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
-        ).filter(Product.user_id == user_id
-        ).filter(Product.tag_id == category.id
-        ).join(Tag
-        ).order_by(desc(Product.time_created)
-        ).all()
-    
-    allTags = (
-        db.query(Tag)
-        .filter(Tag.user_id == user_id)
-        .filter(Tag.active == True)
-        .all()
-    )
+        purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
+            ).filter(Product.user_id == user_id
+            ).filter(Product.tag_id == category.id
+            ).join(Tag
+            ).order_by(desc(Product.time_created)
+            ).all()
+        
+        allTags = (
+            db.query(Tag)
+            .filter(Tag.user_id == user_id)
+            .filter(Tag.active == True)
+            .all()
+        )
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
+
     
     return render_template('categories.html',
         loggedIn=is_loggedin,

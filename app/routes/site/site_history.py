@@ -92,18 +92,14 @@ def history(yearMonth):
         ).order_by(desc(Cash.time_created)
         ).all()
 
-        
-    except Exception as e:
-        print('============================salary', e)
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
 
     # set defaults to query objects in case they come up empty
     salary = 0 if salary.total_salary_value is None else salary.total_salary_value
     if include_active:
-        salary = salary + include_active.salary_amount
-    
-    print('================include active', include_active)
-    
-    
+        salary = salary + include_active.salary_amount    
 
     all_cash_total = 0 if all_cash_total[0].total_value is None else all_cash_total[0].total_value
     past_expired_charges_total = 0 if past_expired_charges_total[0].total_value is None else past_expired_charges_total[0].total_value
@@ -145,9 +141,9 @@ def history(yearMonth):
         relevant_tag_names = [ tag_name for tag_name in chartData.keys()]
         tag_total = [float(item['product_amount']) for item in values]
         relevant_tag_colors = [item['tag_color'] for item in values]
-
-    except Exception as e:
-            print('trying to get history ==============',e) 
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
         
 
     return render_template('history.html',

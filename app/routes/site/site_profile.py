@@ -16,28 +16,30 @@ def profile():
     user_id = session.get('user_id')
     is_loggedin = session.get('loggedIn')
 
-    user_data = db.query(User).filter(User.id == session['user_id']).one()
+    try:
+        user_data = db.query(User).filter(User.id == session['user_id']).one()
+        all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+        active_salary = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).first()
 
-    all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+        if active_salary:
+            all_salaries.insert(0, active_salary)
 
-    active_salary = db.query(ActiveSalary).filter(ActiveSalary.user_id == user_id).first()
-    if active_salary:
-        all_salaries.insert(0, active_salary)
-    print('=============== all salaries', all_salaries)
+        allTags = (
+            db.query(Tag)
+            .filter(Tag.user_id == user_id)
+            .filter(Tag.active == True)
+            .all()
+        )
 
-    allTags = (
-        db.query(Tag)
-        .filter(Tag.user_id == user_id)
-        .filter(Tag.active == True)
-        .all()
-    )
-
-    all_inactive_categories = (
-        db.query(Tag)
-        .filter(Tag.user_id == user_id)
-        .filter(Tag.active == False)
-        .all()
-    )
+        all_inactive_categories = (
+            db.query(Tag)
+            .filter(Tag.user_id == user_id)
+            .filter(Tag.active == False)
+            .all()
+        )
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return render_template('profile.html',
         user_data=user_data, 
         all_salaries=all_salaries,
@@ -52,5 +54,9 @@ def profile():
 def edit_all_salaries():
     db = start_db_session()
     user_id = session['user_id']
-    all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+    try:
+        all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return render_template('all-salaries.html', all_salaries=all_salaries, today=today)

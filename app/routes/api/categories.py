@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, session, redirect
+from flask import Blueprint, request, jsonify, session, redirect, render_template
 from app.models import Tag
 from app.db import start_db_session
 
@@ -24,11 +24,13 @@ def add_category():
         db.commit()
     except AssertionError:
         db.rollback()
-        return jsonify(message='Missing fields.'), 400
+        return render_template('error-page.html', message="Missing fields. Please try again")
     except:
         db.rollback()
-        return jsonify(message='Tag not added'), 500
+        return render_template('error-page.html', message="Tag not added.")
     return redirect(request.referrer)
+
+
 # Update Category
 @bp.route('/edit-category', methods=['POST'])
 def edit_category():
@@ -47,10 +49,10 @@ def edit_category():
         db.commit()
     except AssertionError:
         db.rollback()
-        return jsonify(message='Missing fields.'), 400
+        return render_template('error-page.html', message="Missing fields. Please try again")
     except:
         db.rollback()
-        return jsonify(message='Tag not updated'), 500
+        return render_template('error-page.html', message="Tag not added.")
     return redirect(request.referrer)
 
 
@@ -65,7 +67,7 @@ def inactivate_category():
         db.commit()
     except:
         db.rollback()
-        return jsonify(message='Deposit not deleted'), 500
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect('/')
 
 # Inactivate Category from profile page(different set up)
@@ -79,8 +81,10 @@ def inactivate_category_in_profile():
         db.commit()
     except:
         db.rollback()
-        return jsonify(message='Deposit not deleted'), 500
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)
+
+
 # Reactivate Category
 @bp.route('/reactive-category', methods=['POST'])
 def reactivate_category():
@@ -92,7 +96,8 @@ def reactivate_category():
         category.active = True
         db.commit()
     except Exception as e:
-        print('========== trying to activate category', e)
+        db.rollback()
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)
 
 
@@ -106,7 +111,7 @@ def delete_category():
         db.commit()
     except:
         db.rollback()
-        return jsonify(message='category not deleted'), 500
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect('/')
 
 # Delete Category in PROFILE (different setup)
@@ -119,5 +124,5 @@ def delete_category_in_profile():
         db.commit()
     except:
         db.rollback()
-        return jsonify(message='category not deleted'), 500
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)

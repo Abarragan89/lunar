@@ -3,6 +3,7 @@ from .site import dashboard
 from .site import site_profile
 from .site import site_categories
 from .site import site_history
+from .site import error_page
 
 from .api import login
 from .api import categories

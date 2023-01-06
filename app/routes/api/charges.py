@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, session, redirect
+from flask import Blueprint, request, jsonify, session, redirect, render_template
 from app.models import MonthlyCharge, ExpiredCharges
 from app.db import start_db_session
 
@@ -27,7 +27,8 @@ def edit_monthly_charge():
         })
         db.commit()
     except Exception as e:
-        print('===============', e)
+        db.rollback()
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)
 
 
@@ -82,8 +83,9 @@ def update_monthly_charge():
             )
         db.add(newMonthly)
         db.commit()
-    except Exception as e:
-        print('===============eeee', e)
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)
 
 
@@ -117,7 +119,8 @@ def stop_monthly_charge():
         db.delete(expired_monthly)
         db.commit()
     except Exception as e:
-        print('============================23232323323223', e)
+        db.rollback()
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)
 
 
@@ -130,9 +133,8 @@ def delete_monthly_charge():
         db.query(MonthlyCharge).filter(MonthlyCharge.id == data['monthly-id']).delete()
         db.commit()
     except Exception as e:
-        print(e)
         db.rollback()
-        return jsonify(message='Expense not deleted'), 500
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)
 
 # Update Expired Charges
@@ -161,8 +163,9 @@ def update_expired_charge():
             'start_date': start_date
         })
         db.commit()
-    except Exception as e:
-        print('======================= updating expired charge', e)
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)
     
 # Delete Expired Charge
@@ -170,12 +173,10 @@ def update_expired_charge():
 def delete_expired_charge():
     data = request.form
     db = start_db_session()
-    print('=================== delete expire', data['expired-id'])
     try:
         db.query(ExpiredCharges).filter(ExpiredCharges.id == data['expired-id']).delete()
         db.commit()
     except Exception as e:
-        print(e)
         db.rollback()
-        return jsonify(message='Expense not deleted'), 500
+        return render_template('error-page.html', message="Oops, something happened. Please try again.")
     return redirect(request.referrer)

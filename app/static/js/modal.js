@@ -55,9 +55,6 @@ monthly_bill_rows.forEach((row) => {
 })
 
 
-
-
-
 // --- modal listeners to close --- //
 document.querySelector('#expense-modal').addEventListener('click', (e) => {
     const isOutside = e.target.closest('.modal');

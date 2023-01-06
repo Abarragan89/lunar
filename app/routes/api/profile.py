@@ -1,4 +1,4 @@
-from flask import Blueprint, request, session, redirect
+from flask import Blueprint, request, session, redirect, render_template
 from app.models import User, Salary, ActiveSalary
 from app.db import start_db_session
 
@@ -15,9 +15,14 @@ def update_user_name():
         user_data.username = data['new_username'].strip()
 
         db.commit()
-    except Exception as e:
-        print('=========================username', e)
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return redirect(request.referrer)
+
 
 # Add new Active Salary
 @bp.route('/add-salary', methods=['POST'])
@@ -60,8 +65,12 @@ def add_salary():
             )
             db.add(new_active)
             db.commit()
-    except Exception as e:
-        print('====================== in keep history', e)
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Income not added.")
     return redirect(request.referrer)
 
 # stop active salary
@@ -84,9 +93,9 @@ def stop_user_salary():
         db.add(new_expired_salary)
         db.delete(old_salary)
         db.commit()
-    except Exception as e:
-        print('========== stopping salary', e)
-    
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return redirect(request.referrer)
 
 
@@ -103,8 +112,9 @@ def delete_user_salary():
         else:
             db.query(Salary).filter(Salary.id == salary_id).delete()
             db.commit()
-    except Exception as e:
-        print('deleting ====== salary', e)
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return redirect(request.referrer)
 
 
@@ -123,14 +133,17 @@ def edit_user_active_salary():
         salary_to_update.salary_amount = new_monthly_income
         db.commit()
 
-    except Exception as e:
-        print('====================== in keep history', e)
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return redirect(request.referrer)
     
 # Update old user salary
 @bp.route('/edit-user-old-salary', methods=['POST'])
 def edit_user_old_salary():
-
     data = request.form
     db = start_db_session()
     new_salary_start = int(data['salary-start-date-edit'].split('-')[0] + data['salary-start-date-edit'].split('-')[1])
@@ -145,6 +158,10 @@ def edit_user_old_salary():
         salary_to_update.salary_amount = new_monthly_income
         db.commit()
 
-    except Exception as e:
-        print('====================== in keep history', e)
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return redirect(request.referrer)

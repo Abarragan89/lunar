@@ -17,9 +17,9 @@ def signup():
     db = start_db_session()
     data = request.form
     try:
-        # Make new user
+    # Make new user
+        # if user exists, then send them to error page to try again
         user_exists = db.query(User).filter(User.email == data['email'].strip()).first()
-
         if user_exists:
             db.rollback()
             return render_template('signup-fail.html', 
@@ -46,6 +46,7 @@ def signup():
             email = data['email'].strip(),
             monthly_income = data['monthly-income'].strip()
             )
+    # this only runs if the above code does not run and there is no user with that email.
     try: 
         # make unique string
         result = uuid.uuid4()
@@ -64,8 +65,12 @@ def signup():
             msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
             msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1] + request.base_url.split('/')[2]}/verify/{result}\n -Lunar"
             current_app.mail.send(msg)
-    except Exception as e:
-        print('=====================', e)
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="User not created. Please try again.")
     return render_template('signup_check_email.html')
 
 
@@ -143,10 +148,12 @@ def signup_verified():
             )
             db.add(newTag)
             db.commit()
-
-    except Exception as e:
-        print('============== making new user', e)
-
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Account not created. Please try again.")
     return redirect('/dashboard')
 
 
@@ -206,10 +213,18 @@ def forgot_password():
                 current_app.mail.send(msg)
 
                 return render_template('forgot_password_message.html', user_exists=user_exists)
-            except Exception as e:
-                print('=============================== maing token',e)
-    except Exception as e:
-        print(e)
+            except AssertionError:
+                db.rollback()
+                return render_template('error-page.html', message="Missing fields. Please try again")
+            except:
+                db.rollback()
+                return render_template('error-page.html', message="Oops. Something happened. Please try again.")
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return render_template('forgot_password_message.html', user_exists=user_exists)
 
 # Reset Password
@@ -226,8 +241,10 @@ def reset_password_change():
             find_user = db.query(User).filter(User.email == find_token.email).one()
             find_user.password = data['new-password-confirm']
             db.commit()        
-    except Exception as e:
-        print('========================',e)
-        return render_template('reset-password.html', success=False)
-    
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return render_template('login.html')
