@@ -118,7 +118,7 @@
               >
                 {{ data[3] }}
               </p>
-              <p>${{ data[1] }}</p>
+              <p>-${{ data[1] }}</p>
             </div>
             <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
             </div>
@@ -151,7 +151,7 @@
               >
                 {{ data[3] }}
               </p>
-              <p>${{ data[1] }}</p>
+              <p>-${{ data[1] }}</p>
             </div>
             <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
             </div>
@@ -190,7 +190,7 @@
             </p>
             <p class="expense-description">{{ data[2] }}</p>
           </div>
-          <p>${{ data[1] }}</p>
+          <p>-${{ data[1] }}</p>
       </div>
     </a>
     {% endfor%} 
@@ -216,15 +216,11 @@
             <p class="activity-link-deposit" data-cash-id="{{data[3]}}">Deposit</p>
             <p class="expense-description">{{ data[2] }}</p>
           </div>
-          <p>${{ data[1] }}</p>
+          <p class="positive-color">+${{ data[1] }}</p>
       </div>
     </a>
     {% endfor%} 
   </div>
-
-  
-
-
 </main>
 <script src="{{url_for('static', filename='/js/history.js')}}"></script>
 

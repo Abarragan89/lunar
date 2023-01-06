@@ -75,4 +75,11 @@
   font-size: 1.3rem;
   text-align: center;
   color: rgb(204, 5, 5);
+}
+
+#check-your-email-message {
+  color: #6bd0d2;
+  font-size: 1.3rem;
+  text-align: center;
+  margin-top: 20px;
 }/*# sourceMappingURL=login.css.map */

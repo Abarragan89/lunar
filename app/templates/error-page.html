@@ -5,8 +5,16 @@
 
 {% include 'includes/header.html' %}
 
+<h2 class='section-heading page-heading'>
+    <span>
+      <em>Error</em>
+    </span>
+  </h2>
+
 <div class="error-page-main">
-     <h2>{{message}}</h2>
+        <h2>{{message}}</h2>
+        <a href="{{url_for('site_login.home')}}"><i class="fa-solid fa-house"></i></a>
+        <p>Go Home</p>
 </div>
 
 {% endblock %}

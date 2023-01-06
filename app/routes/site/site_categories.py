@@ -27,6 +27,7 @@ def categories(categoryName):
             ).filter(Product.user_id == user_id
             ).filter(Product.tag_id == category.id).all()
         totalAmountSpend = totalAmountSpend[0][0]
+        totalAmountSpend = 0 if totalAmountSpend is None else totalAmountSpend
 
         purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
             ).filter(Product.user_id == user_id

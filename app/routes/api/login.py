@@ -199,26 +199,17 @@ def forgot_password():
         user = db.query(User).filter(User.email == user_email).first()
         if user:
             user_exists=True
-            try: 
-                new_token = ConfirmationToken(
-                    unique_string = result,
-                    email = user_email
-                )
-                db.add(new_token)
-                db.commit()
+            new_token = ConfirmationToken(
+                unique_string = result,
+                email = user_email
+            )
+            db.add(new_token)
+            db.commit()
 
-                msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
-                # wanted to get rid of the 'api/forgot-password' in the request url
-                msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1] + request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunar"
-                current_app.mail.send(msg)
-
-                return render_template('forgot_password_message.html', user_exists=user_exists)
-            except AssertionError:
-                db.rollback()
-                return render_template('error-page.html', message="Missing fields. Please try again")
-            except:
-                db.rollback()
-                return render_template('error-page.html', message="Oops. Something happened. Please try again.")
+            msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
+            # wanted to get rid of the 'api/forgot-password' in the request url
+            msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1] + request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunar"
+            current_app.mail.send(msg)
     except AssertionError:
         db.rollback()
         return render_template('error-page.html', message="Missing fields. Please try again")

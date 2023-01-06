@@ -54,9 +54,19 @@ def profile():
 def edit_all_salaries():
     db = start_db_session()
     user_id = session['user_id']
+    if user_id:
+        loggedIn=True
+    else:
+        user_id=False
     try:
         all_salaries = db.query(Salary).filter(Salary.user_id == user_id).all()
+        all_tags = (
+            db.query(Tag)
+            .filter(Tag.user_id == user_id)
+            .filter(Tag.active == True)
+            .all()
+        )
     except:
         db.rollback()
         return render_template('error-page.html', message="Oops. Something happened. Please try again.")
-    return render_template('all-salaries.html', all_salaries=all_salaries, today=today)
+    return render_template('all-salaries.html', all_salaries=all_salaries, tags=all_tags, today=today ,loggedIn=loggedIn)

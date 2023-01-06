@@ -64,3 +64,4 @@ def delete_deposit():
     except:
         db.rollback()
         return render_template('error-page.html', message="Cash not deleted.")
+    return redirect(request.referrer)
