@@ -32,11 +32,11 @@ if (window.location.pathname === '/') {
     })
 }
 
-// document.getElementById('signup-btn').addEventListener('click', function() {
-//     setTimeout(() => {
-//         this.disabled = true;
-//     }, 50)
-// })
+document.getElementById('signup-btn').addEventListener('click', function() {
+    setTimeout(() => {
+        this.disabled = true;
+    }, 10)
+})
 
 
 // reset password form logic

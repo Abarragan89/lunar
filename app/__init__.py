@@ -1,7 +1,8 @@
 from flask import Flask
 from dotenv import load_dotenv
 import os
-from app.routes import home, api
+from app.routes import login, categories, expense, deposit, profile, charges
+from app.routes import site_login, dashboard, site_profile, site_categories, site_history
 from app.db import init_db
 from flask_mail import Mail
 from datetime import date
@@ -61,8 +62,19 @@ def create_app():
 
 
     #register routes
-    app.register_blueprint(home)
-    app.register_blueprint(api)
+    app.register_blueprint(login)
+    app.register_blueprint(categories)
+    app.register_blueprint(expense)
+    app.register_blueprint(deposit)
+    app.register_blueprint(profile)
+    app.register_blueprint(charges)
+    app.register_blueprint(site_login)
+    app.register_blueprint(dashboard)
+    app.register_blueprint(site_profile)
+    app.register_blueprint(site_categories)
+    app.register_blueprint(site_history)
+
+
     init_db(app)
 
     # helper functions
