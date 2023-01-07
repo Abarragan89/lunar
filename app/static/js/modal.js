@@ -24,7 +24,6 @@ function getCurrentDate(id) {
     let month = today.getMonth() + 1;
     month = String(month).padStart(2, '0')
     day = String(day).padStart(2, '0')
-    console.log(year, today, day, month)
     document.getElementById(id).setAttribute('max', `${year}-${month}-${day}`);
     document.getElementById(id).setAttribute('value', `${year}-${month}-${day}`);
 }
