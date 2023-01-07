@@ -1,0 +1,32 @@
+<div class="modal-container" id="add-charge-modal">
+    <div class="modal">
+
+      <h2 class='section-heading modal-heading'>
+        <span>
+          Monthly Charge
+        </span>
+      </h2>
+      
+      <form action="/api/add-expense" method="POST">
+        <select name="product-category" required>
+            <option value="">Pick a category</option>
+            {% for tag in tags%}
+            <option value="{{tag.id}}">{{tag.tag_name}}</option>
+            {% endfor %}
+        </select> <br>
+        <div class="flex-box-sb">
+            <div>
+                <span class="input-symbol-dollar">
+                  <input type="number" name="product-price" min="0" step="0.01" class="input-amount-modal" placeholder="amount" autocomplete="off" required />
+                </span> 
+            </div>
+            <input type="date" id="charge-date" name="expense-date" required>
+        </div>
+
+    
+        <input type="hidden" name="monthly-bill" value="true">
+        <textarea type="product-name" name="product-name" maxlength="50" placeholder="Description(optional)" autocomplete="off"></textarea>
+        <button type="submit" class="button-30"/>Add</button>
+      </form>
+    </div>
+</div>

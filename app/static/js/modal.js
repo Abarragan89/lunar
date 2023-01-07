@@ -4,6 +4,11 @@ document.getElementById('add-expense-btn').addEventListener('click', () => {
     showModal('expense-modal');
     getCurrentDate('expense-date')
 })
+document.getElementById('add-charge-btn').addEventListener('click', () => {
+    showModal('add-charge-modal');
+    getCurrentDate('charge-date')
+})
+
 document.getElementById('add-category-btn').addEventListener('click', () => {
     showModal('category-modal');
 })
@@ -19,7 +24,6 @@ function getCurrentDate(id) {
     let month = today.getMonth() + 1;
     month = String(month).padStart(2, '0')
     day = String(day).padStart(2, '0')
-    console.log(year, today, day, month)
     document.getElementById(id).setAttribute('max', `${year}-${month}-${day}`);
     document.getElementById(id).setAttribute('value', `${year}-${month}-${day}`);
 }
@@ -55,14 +59,17 @@ monthly_bill_rows.forEach((row) => {
 })
 
 
-
-
-
 // --- modal listeners to close --- //
 document.querySelector('#expense-modal').addEventListener('click', (e) => {
     const isOutside = e.target.closest('.modal');
     if (!isOutside) {
         closeModal('expense-modal');
+    }
+})
+document.querySelector('#add-charge-modal').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('add-charge-modal');
     }
 })
 document.querySelector('#category-modal').addEventListener('click', (e) => {
@@ -120,7 +127,7 @@ function fillEditMonthlyFields(row) {
     const currentProductId = row.children[0].children[1].children[0].getAttribute('data-monthly-id');
     const currentProductName = row.children[0].children[1].children[0].nextElementSibling.textContent;
     let currentProductPrice = row.children[0].children[2].textContent;
-    currentProductPrice = currentProductPrice.slice(1);
+    currentProductPrice = currentProductPrice.slice(2);
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
 
     document.getElementById('current-monthly-price').value = currentProductPrice;
@@ -140,10 +147,9 @@ function fillEditExpenseFields(row) {
 
     const currentProductTagId = row.children[0].children[1].children[0].getAttribute('data-tag-id');
     const currentProductId = row.children[0].children[1].children[0].getAttribute('data-product-id');
-    const isMonthlyBill = row.children[0].children[1].children[0].getAttribute('data-isMonthly');
     const currentProductName = row.children[0].children[1].children[0].nextElementSibling.textContent;
     let currentProductPrice = row.children[0].children[2].textContent;
-    currentProductPrice = currentProductPrice.slice(1);
+    currentProductPrice = currentProductPrice.slice(2);
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
 
     document.getElementById('current-product-price').value = currentProductPrice;
@@ -153,11 +159,6 @@ function fillEditExpenseFields(row) {
     document.getElementById('expense-date-current').setAttribute('max', `${year}-${month}-${day}`);
     document.getElementById('expense-date-current').setAttribute('value', current_date);
     document.getElementById('delete-expense-data').value = currentProductId;
-    if (isMonthlyBill === 'True') {
-        document.getElementById('monthly-bill-edit').checked = true
-    } else {
-        document.getElementById('monthly-bill-edit').checked = false
-    }
 }
 
 function fillEditDepositFields(row) {
@@ -167,7 +168,7 @@ function fillEditDepositFields(row) {
     const month = today.getMonth() + 1;
     const currentCashName = row.children[0].children[1].children[0].nextElementSibling.textContent;
     let currentCashPrice = row.children[0].children[2].textContent;
-    currentCashPrice = currentCashPrice.slice(1);
+    currentCashPrice = currentCashPrice.slice(2);
     const currentCashId = row.children[0].children[1].children[0].getAttribute('data-cash-id');
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
 

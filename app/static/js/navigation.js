@@ -32,13 +32,6 @@ function closeMainMenu() {
     document.getElementById('nav-items-main-div').style.pointerEvents = 'none';
     document.getElementById('main-nav').classList.remove('main-nav-open')
     document.getElementById('main-nav').classList.add('main-nav-closed')
-
-    if (/history/.test(window.location.href)) {
-        document.getElementById('choose-month').style.zIndex = '1'
-    }
-    if (/categories/.test(window.location.href)) {
-        document.getElementById('edit-category-btn').style.zIndex = '1'
-    }
     document.getElementById('nav-items-main-div').style.width = '0'
     document.getElementById('hamburger').classList.remove('fa-solid', 'fa-arrow-right')
     document.getElementById('hamburger').classList.add('fa-solid', 'fa-arrow-left')
@@ -53,19 +46,8 @@ function openMainMenu() {
     document.getElementById('nav-menu-underlay').style.display = 'block'
     document.getElementById('nav-items-main-div').style.right = '0';
     document.getElementById('nav-items-main-div').style.pointerEvents = 'all';
-
     document.getElementById('main-nav').classList.remove('main-nav-closed')
     document.getElementById('main-nav').classList.add('main-nav-open')
-
-    //  need the date input to sit behind the nav when opened and other buttons 
-    if (/history/.test(window.location.href)) {
-        document.getElementById('choose-month').style.zIndex = '-1'
-    }
-    if (/categories/.test(window.location.href)) {
-        document.getElementById('edit-category-btn').style.zIndex = '-1'
-    }
-
-
     document.getElementById('nav-items-main-div').style.width = '100%'
     document.getElementById('hamburger').classList.remove('fa-solid', 'fa-arrow-left')
     document.getElementById('hamburger').classList.add('fa-solid', 'fa-arrow-right')

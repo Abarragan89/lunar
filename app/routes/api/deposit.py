@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify, session, redirect
+from flask import Blueprint, request, session, redirect, render_template
 from app.models import Cash
 from app.db import start_db_session
 
@@ -21,10 +21,10 @@ def add_cash():
         db.commit()
     except AssertionError:
         db.rollback()
-        return jsonify(message='Missing fields.'), 400
+        return render_template('error-page.html', message="Missing fields. Please try again")
     except:
         db.rollback()
-        return jsonify(message='Cash not added'), 500
+        return render_template('error-page.html', message="Cash not added.")
     return redirect(request.referrer)
 
 
@@ -43,10 +43,10 @@ def update_deposit():
         db.commit()
     except AssertionError:
         db.rollback()
-        return jsonify(message='Missing fields.'), 400
+        return render_template('error-page.html', message="Missing fields. Please try again")
     except:
         db.rollback()
-        return jsonify(message='Tag not added'), 500
+        return render_template('error-page.html', message="Cash not added.")
     return redirect(request.referrer)
 
 
@@ -58,7 +58,10 @@ def delete_deposit():
     try:
         db.query(Cash).filter(Cash.id == data['cash-id']).delete()
         db.commit()
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
     except:
         db.rollback()
-        return jsonify(message='Deposit not deleted'), 500
+        return render_template('error-page.html', message="Cash not deleted.")
     return redirect(request.referrer)
