@@ -7,19 +7,13 @@
 {% endblock %} {% block body %} 
 
   <main data-set-loggedIn="false" id="home-page">
-    {% include 'includes/header.html' %}
-    <p>"take the suspense out of expenses"</p>
-    <img
-    src="https://cdn.educba.com/academy/wp-content/uploads/2019/07/pie-chart-examples.png"
-    alt="screenshot of graph"
-    />
-    {% if loggedIn %}
-    <a href="{{ url_for('site.dashboard')}}"><button class="button-30">dashbord</button></a>
-
-    {% else %}
-    <a href="{{ url_for('site_login.signup')}}"><button class="button-30">Signup</button></a>
-    <a href="{{ url_for('site_login.login')}}"><button class="button-30">Login</button></a>
-    {% endif %}
+    <h1>Lunar</h1>
+    <span id="home-page-moon"></span>
+    <p>Shine light on your finances</p>
+    <div>
+      <a href="{{ url_for('site_login.login')}}"><button id="main-login-btn" class="button-30">Login</button></a>
+      <a href="{{ url_for('site_login.signup')}}"><button id="main-signup-btn" class="button-30">Signup</button></a>
+    </div>
   </main>
   {% endblock %}
 </main>

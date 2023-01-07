@@ -1,19 +1,167 @@
 /* GLOBAL COLORS AND FONTS*/
 #home-page {
   text-align: center;
-  margin-top: 20px;
+  position: relative;
+}
+#home-page h1 {
+  letter-spacing: 0.6rem;
+  line-height: 0.7;
+  font-size: 6rem;
+  font-weight: 900;
+  position: relative;
+  top: 160px;
+  color: #6bd0d2;
+  font-family: "Coda Caption", sans-serif;
+  -webkit-text-stroke: 4px black;
+  -webkit-animation: appearIn 1s 5.2s both;
+          animation: appearIn 1s 5.2s both;
 }
 #home-page p {
-  font-size: 0.8em;
-  margin-bottom: 10px;
+  letter-spacing: 0.1rem;
+  font-size: 0.95rem;
+  font-weight: 900;
+  color: rgb(228, 240, 239);
+  -webkit-animation: appearIn 1s 5.2s both;
+          animation: appearIn 1s 5.2s both;
+  margin-top: 60px;
 }
-#home-page img {
-  width: 200px;
-}
-#home-page button {
+#home-page #main-login-btn, #home-page #main-signup-btn {
   display: block;
   margin: 0 auto;
   margin-top: 20px;
+  -webkit-animation: appearIn 1s 5.2s both;
+          animation: appearIn 1s 5.2s both;
+  width: 70%;
+}
+#home-page #main-login-btn {
+  margin-top: 30px;
+  margin-bottom: 30px;
+  background-color: #031920;
+  border: 1px solid #6bd0d2;
+  color: rgb(228, 240, 239);
+}
+#home-page #home-page-moon {
+  display: block;
+  margin: 0 auto;
+  border: 4px solid rgb(199, 195, 195);
+  height: 280px;
+  width: 280px;
+  border-radius: 280px;
+  box-shadow: #6bd0d2 0px 4px 55px, #6bd0d2 0px -12px 30px, #6bd0d2 0px 4px 6px, #6bd0d2 0px 12px 13px, #6bd0d2 0px -3px 5px;
+  -webkit-animation: blinkUp 1s cubic-bezier(1, -0.1, 0.74, 1.07), blinkDown 1s 1s cubic-bezier(0.11, 0.53, 0.65, 0.98), blinkUp 1s 2s cubic-bezier(1, -0.1, 0.74, 1.07), blinkDown 1s 3s cubic-bezier(0.11, 0.53, 0.65, 0.98), growCircle 1.2s 4s, boxShadowGlow 1s 4.2s;
+          animation: blinkUp 1s cubic-bezier(1, -0.1, 0.74, 1.07), blinkDown 1s 1s cubic-bezier(0.11, 0.53, 0.65, 0.98), blinkUp 1s 2s cubic-bezier(1, -0.1, 0.74, 1.07), blinkDown 1s 3s cubic-bezier(0.11, 0.53, 0.65, 0.98), growCircle 1.2s 4s, boxShadowGlow 1s 4.2s;
+}
+@-webkit-keyframes blinkUp {
+  from {
+    opacity: 0.01;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+  to {
+    opacity: 1;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+}
+@keyframes blinkUp {
+  from {
+    opacity: 0.01;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+  to {
+    opacity: 1;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+}
+@-webkit-keyframes blinkDown {
+  from {
+    opacity: 1;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+  to {
+    opacity: 0.01;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+}
+@keyframes blinkDown {
+  from {
+    opacity: 1;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+  to {
+    opacity: 0.01;
+    height: 20px;
+    width: 20px;
+    margin-top: 140px;
+    background-color: rgb(199, 195, 195);
+  }
+}
+@-webkit-keyframes growCircle {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes growCircle {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes boxShadowGlow {
+  from {
+    box-shadow: 1;
+  }
+  to {
+    box-shadow: #6bd0d2 0px 4px 55px, #6bd0d2 0px -7px 30px, #6bd0d2 0px 4px 6px, #6bd0d2 0px 12px 13px, #6bd0d2 0px -3px 5px;
+  }
+}
+@keyframes boxShadowGlow {
+  from {
+    box-shadow: 1;
+  }
+  to {
+    box-shadow: #6bd0d2 0px 4px 55px, #6bd0d2 0px -7px 30px, #6bd0d2 0px 4px 6px, #6bd0d2 0px 12px 13px, #6bd0d2 0px -3px 5px;
+  }
+}
+@-webkit-keyframes appearIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes appearIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 #dashboard {
@@ -83,7 +231,7 @@
   color: rgb(228, 240, 239);
   margin-left: 5%;
   padding: 3px 7px;
-  box-shadow: rgb(13, 90, 102) 0px 30px 60px -12px inset, rgb(13, 90, 102) 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+  box-shadow: rgb(13, 90, 102) 0px 30px 60px -12px inset, rgb(13, 90, 102) 0px 18px 36px -18px inset, #6bd0d2 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
 }
 .main-activity-div .activity-link .activity-link-tag, .main-activity-div .activity-link .activity-link-deposit {
   font-size: 1.1em;
