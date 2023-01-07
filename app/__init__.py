@@ -85,6 +85,3 @@ def create_app():
     app.jinja_env.globals.update(format_date=format_date)
     
     return app
-
-
-create_app()
