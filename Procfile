@@ -1,1 +1,1 @@
-web: gunicorn heroku_app:app
+web: gunicorn -w 4 "app:create_app()" --log-level=DEBUG

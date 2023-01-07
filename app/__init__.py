@@ -60,7 +60,6 @@ def create_app():
     app.config['MAIL_USE_SSL'] = True
     app.mail = Mail(app)
 
-
     #register routes
     app.register_blueprint(login)
     app.register_blueprint(categories)
@@ -74,7 +73,6 @@ def create_app():
     app.register_blueprint(site_categories)
     app.register_blueprint(site_history)
     app.register_blueprint(error_page)
-
 
     init_db(app)
 
