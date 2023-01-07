@@ -2,23 +2,125 @@
 
 #home-page {
     text-align: center;
-    margin-top: 20px;
+    position: relative;
 
-    p {
-        font-size: .8em;
-        margin-bottom: 10px;
+    h1 {
+        letter-spacing: .6rem;
+        line-height: .7;
+        font-size: 6rem;
+        font-weight: 900;
+        position: relative;
+        top: 160px;
+        color: $accentColor;
+        font-family: 'Coda Caption', sans-serif;
+        -webkit-text-stroke: 4px black;
+        animation: appearIn 1s 5.2s both;
     }
     
-    img {
-        width: 200px;
-    }
-    button {
+    p {
+        letter-spacing: .1rem;
+        font-size: .95rem;
+        font-weight: 900;
+        color: $offWhite;
+        animation: appearIn 1s 5.2s both;
+        margin-top: 60px
+    };
+    
+    #main-login-btn, #main-signup-btn {
         display: block;
         margin: 0 auto;
         margin-top: 20px;
+        animation: appearIn 1s 5.2s both;
+        width: 70%;
+    }
+    #main-login-btn {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        background-color: $primaryColor;;
+        border: 1px solid $accentColor;
+        color: $offWhite;
+    }
 
+    #home-page-moon {
+        display: block;
+        margin: 0 auto;
+        border: 4px solid $gray;
+        height: 280px;
+        width: 280px;
+        border-radius: 280px;
+        box-shadow: $accentColor 0px 4px 55px, $accentColor 0px -12px 30px, $accentColor  0px 4px 6px, $accentColor 0px 12px 13px, $accentColor 0px -3px 5px;
+
+        animation: blinkUp 1s cubic-bezier(1,-0.1,.74,1.07),
+        blinkDown 1s 1s cubic-bezier(.11,.53,.65,.98),
+        blinkUp 1s 2s cubic-bezier(1,-0.1,.74,1.07),
+        blinkDown 1s 3s cubic-bezier(.11,.53,.65,.98), 
+        growCircle 1.2s 4s,
+        boxShadowGlow 1s 4.2s,
+    }
+
+    // Moon animations
+    @keyframes blinkUp {
+        from {
+            opacity: .01;
+            height: 20px;
+            width: 20px;
+            margin-top: 140px;
+            background-color: $gray;
+        }
+        to {
+            opacity: 1;
+            height: 20px;
+            width: 20px;
+            margin-top: 140px;
+            background-color: $gray;
+
+        }
+    }
+    @keyframes blinkDown {
+        from {
+            opacity: 1;
+            height: 20px;
+            width: 20px;
+            margin-top: 140px;
+            background-color: $gray;
+        }
+        to {
+            opacity: .01;
+            height: 20px;
+            width: 20px;
+            margin-top: 140px;
+            background-color: $gray;
+
+        }
+    }
+    @keyframes growCircle {
+        from {
+            transform: scale(0)
+        }
+        to {
+            transform: scale(1)
+        }
+    }
+    @keyframes boxShadowGlow {
+        from {
+            box-shadow: opacity($color: #000000)
+        }
+        to {
+            box-shadow: $accentColor 0px 4px 55px, $accentColor 0px -7px 30px, $accentColor  0px 4px 6px, $accentColor 0px 12px 13px, $accentColor 0px -3px 5px;
+        }
+    }
+    @keyframes appearIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
     }
 }
+
+
+
 
 
 //  LOGGED IN STYLES
@@ -93,7 +195,7 @@
         color: $offWhite;
         margin-left: 5%;
         padding: 3px 7px;
-        box-shadow: $secondaryColor 0px 30px 60px -12px inset, $secondaryColor 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+        box-shadow: $secondaryColor 0px 30px 60px -12px inset, $secondaryColor 0px 18px 36px -18px inset, $accentColor  0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
     
         .activity-link-tag, .activity-link-deposit {
             font-size: 1.1em;

@@ -9,6 +9,11 @@
    
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+
+
+    {% if not loggedIn%}
+        <link href="https://fonts.googleapis.com/css2?family=Coda+Caption&family=Roboto+Condensed:ital,wght@0,400;1,300&display=swap" rel="stylesheet">
+    {% endif %}
     
     <link rel="stylesheet" href="{{url_for('static', filename='/styles/utilities/variables.css')}}">
     
