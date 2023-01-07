@@ -1,2 +1,2 @@
-web: gunincorn run:app
+web: gunincorn app:app
 
