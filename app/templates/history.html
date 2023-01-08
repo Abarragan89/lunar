@@ -20,7 +20,7 @@
   </h2>
   
   <input type="month" max="{{current_year}}-{{current_month}}" value="{{yearLookUp}}-{{monthLookUp}}" id="choose-month">
-
+  <a href="{{url_for('site_history.redirect_for_clear_history_year') }}" class="clickable-text">Year data</a>
   <div class="monthly-calculation">
     <div class="flex-box-col-sa money-labels">
       <h2>Salary:</h2>
@@ -68,7 +68,6 @@
     const pieChart = new Chart(ctx, {
       type: 'pie', 
       data: {
-        
         datasets: [
           {
             data: {{ values | safe }},
@@ -92,9 +91,6 @@
       }
   });
   </script>
-
-
-
 
   <h2 class='section-heading'>
     <span>
@@ -222,6 +218,8 @@
     {% endfor%} 
   </div>
 </main>
+
+
 <script src="{{url_for('static', filename='/js/history.js')}}"></script>
 
 {% endblock %}

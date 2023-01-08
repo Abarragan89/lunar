@@ -61,7 +61,7 @@ def history(yearMonth):
             ).all()
         any_current_monthly_total = db.query(func.sum(MonthlyCharge.amount).label("total_value")
             ).filter(MonthlyCharge.user_id == user_id
-            ).filter(MonthlyCharge.start_date <= date_limit_int).filter()
+            ).filter(MonthlyCharge.start_date <= date_limit_int).all()
         
         expired_charges = db.query(ExpiredCharges.time_created, ExpiredCharges.amount, 
             ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.start_date, ExpiredCharges.expiration_limit, ExpiredCharges.start_date
@@ -133,7 +133,6 @@ def history(yearMonth):
     
         
         allMonthlyExpenses = allMonthlyPurchases + monthly_charges_data_wheel + expired_charges_data_wheel
-        print('=====================', allMonthlyExpenses)
 
         # Create a chartData object to remove repeated Tags in products, and add up the total in products
         chartData = {}
@@ -176,8 +175,92 @@ def history(yearMonth):
 
 @bp.route('/history-year/<year>')
 def history_year(year): 
-    values = 40, 20, 20, 10, -19, 100, -59
-    return render_template('history-year.html', year=year,)
+    db = start_db_session()
+    user_id = session['user_id']
+    is_loggedin = session.get('loggedIn')
+    remaining_balances = []
+    bar_graph_colors = []
+
+    try: 
+        
+        for num in range(1, 13):
+            # create the yearmonth limit for each iteration. Pad a zero if needed
+            if num < 10:
+                month = '0' + str(num)
+            else:
+                month = str(num)
+
+            date_limit_int = year + month
+            date_limit_int = int(date_limit_int)
+
+            salary = db.query(func.sum(Salary.salary_amount).label("total_salary_value")
+                ).filter(Salary.user_id == user_id
+                ).filter(Salary.start_date <= date_limit_int
+                ).filter(Salary.last_payment >= date_limit_int
+                ).first()
+            
+            include_active = db.query(ActiveSalary
+                ).filter(ActiveSalary.user_id == user_id
+                ).filter(ActiveSalary.start_date <= date_limit_int
+                ).first()
+            # # get the total salary
+            salary = 0 if salary.total_salary_value is None else salary.total_salary_value
+            if include_active:
+                salary = salary + include_active.salary_amount  
+                
+
+            # # get all summed up values of monthly charges and purchases for the month     
+            all_purchases_total = db.query(func.sum(Product.amount).label("total_value")
+                ).filter(Product.user_id == user_id
+                ).filter(extract('month', Product.time_created) == month
+                ).filter(extract('year', Product.time_created) == year
+                ).all()
+            
+            all_cash_total = db.query(func.sum(Cash.amount).label("total_value")
+                ).filter(Cash.user_id == user_id
+                ).filter(extract('month', Cash.time_created) == month
+                ).filter(extract('year', Cash.time_created) == year
+                ).all()
+            
+            past_expired_charges_total = db.query(func.sum(ExpiredCharges.amount).label("total_value")
+                ).filter(ExpiredCharges.user_id == user_id
+                ).filter(ExpiredCharges.expiration_limit >= date_limit_int
+                ).filter(ExpiredCharges.start_date <= date_limit_int
+                ).all()
+            
+            any_current_monthly_total = db.query(func.sum(MonthlyCharge.amount).label("total_value")
+                ).filter(MonthlyCharge.user_id == user_id
+                ).filter(MonthlyCharge.start_date <= date_limit_int).all()
+
+            all_purchases_total = 0 if all_purchases_total[0].total_value is None else all_purchases_total[0].total_value
+            all_cash_total = 0 if all_cash_total[0].total_value is None else all_cash_total[0].total_value
+            past_expired_charges_total = 0 if past_expired_charges_total[0].total_value is None else past_expired_charges_total[0].total_value
+            any_current_monthly_total = 0 if any_current_monthly_total[0].total_value is None else any_current_monthly_total[0].total_value
+
+            remaining_balance = (salary + all_cash_total) - (past_expired_charges_total + any_current_monthly_total + all_purchases_total)
+
+            remaining_balances.append(float(remaining_balance))
+            if remaining_balance < 0:
+                bar_graph_colors.append('rgb(204, 5, 5)')
+            else:
+                bar_graph_colors.append('rgb(7, 171, 7)') 
+
+        # don't show future months on graph if looking at current year
+        if year == str(current_year):
+            month_limit = int(current_month)
+            remaining_balances = remaining_balances[:month_limit]
+
+    except Exception as e:
+        print('exception =======', e)
+    return render_template('history-year.html',
+        loggedIn=is_loggedin,
+        remaining_balances=remaining_balances,
+        bar_graph_colors=bar_graph_colors,
+        year=year
+        )
+
+
+
 
 
 #redirection for user clearing out the calendar in history

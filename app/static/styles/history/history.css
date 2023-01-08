@@ -11,10 +11,16 @@
   color-scheme: dark;
   margin: 0 auto;
   margin-bottom: 20px;
+  margin-right: 20px;
   padding: 5px 4px;
   border-radius: 0px 3px 3px 0;
   border: 1.5px solid #6bd0d2;
   border-left: none;
+}
+#history-main .clickable-text {
+  text-decoration: underline;
+  color: #6bd0d2;
+  font-size: 1.1rem;
 }
 #history-main .positive-money {
   color: #6bd0d2;
@@ -55,4 +61,42 @@
 #history-main .monthly-time-line {
   font-size: 0.8em;
   font-style: italic;
+}
+
+#history-main-year #bar-graph {
+  margin: 0 auto;
+}
+#history-main-year h3 {
+  color: rgb(228, 240, 239);
+  font-size: 1.3rem;
+}
+#history-main-year h3 span {
+  color: #6bd0d2;
+}
+#history-main-year .year-picker-div {
+  margin-top: 50px;
+  margin-bottom: 40px;
+}
+#history-main-year input {
+  background-color: rgb(13, 90, 102);
+  outline: none;
+  border: none;
+  font-size: 1.1rem;
+  border-radius: 4px;
+  color: rgb(228, 240, 239);
+  padding: 3px 5px;
+  margin-right: 10px;
+}
+#history-main-year button {
+  height: 25px;
+  padding: 0 3px;
+}
+#history-main-year ::-moz-placeholder {
+  color: rgb(228, 240, 239);
+}
+#history-main-year :-ms-input-placeholder {
+  color: rgb(228, 240, 239);
+}
+#history-main-year ::placeholder {
+  color: rgb(228, 240, 239);
 }/*# sourceMappingURL=history.css.map */

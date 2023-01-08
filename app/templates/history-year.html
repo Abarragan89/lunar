@@ -11,50 +11,85 @@
 {% include 'includes/edit-expired-charge-modal.html'%}
 
 
-<main id="history-main">
+<main id="history-main-year">
   <a href="{{url_for('site_dashboard.dashboard')}}"><i class="fa-solid fa-house"></i></a>
   <h2 class='section-heading page-heading'>
     <span>
       History
     </span>
   </h2>
-  
-    <canvas id="line-graph" width="340" height="200"></canvas>
+  <div class="flex-box-sa year-picker-div">
+    <h3>Year: <span>{{year}}</span></h3>
+    <form id="choose-year" action="">
+      <input type="number" min="1900" id="year-to-query" max="2099" placeholder="YYYY" />
+      <button type="submit" id="year-search-btn" class="button-30">search</button>
+    </form>
+
+  </div>
+    <canvas id="bar-graph" width="350" height="420"></canvas>
   </div>
   <script>
 
-    const ctx2 = document.getElementById('line-graph').getContext('2d')
+    const ctx2 = document.getElementById('bar-graph').getContext('2d')
     const lineChart = new Chart(ctx2, {
-      type: 'line', 
+      type: 'bar', 
       data: {
-        labels: ['hello']
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
         datasets: [
           {
-            data: 20,
-            backgroundColor: 'white',
-            borderWidth: 1,
-            borderColor: "white",
+            data: {{ remaining_balances | safe}},
+            backgroundColor: {{ bar_graph_colors | safe}},
+            borderColor: {{ bar_graph_colors | safe}}
           }
         ]
       },
       options: {
+        legend: {
+          display: false
+        },
         responsive: false,
-        tooltips: {
-          enabled: true,
-          callbacks: {
-              label: function(tooltipItem, data) {
-                const item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-                return `$${item}`
-              }
-          } 
+        scales: {
+          xAxes: [{
+              display: true,
+              scaleLabel: {
+                  display: true,
+                  labelString: 'Months',
+                  fontColor:'white',
+                  fontSize: 12,
+                },
+              ticks: {
+                 fontColor: "white",
+                 fontSize: 13
+                }
+          }],
+          yAxes: [{
+              display: true,
+              scaleLabel: {
+                  display: true,
+                  labelString: 'Ending Balance',
+                  fontColor: 'white',
+                  fontSize: 12
+              },
+              gridLines: {
+                color: 'white',
+                lineWidth: 0.5,
+              },
+              ticks: {
+                fontColor: "white",
+                fontSize: 13,
+                // Include a dollar sign in the ticks
+                callback: function(value, index, values) {
+                    return '$' + value.toFixed(2);
+                }
+            }
+          }]
         }
-      }
+    }
   });
   </script>
-
-
 </main>
-<script src="{{url_for('static', filename='/js/history.js')}}"></script>
+
+<script src="{{url_for('static', filename='/js/history-year.js')}}"></script>
 
 {% endblock %}
 

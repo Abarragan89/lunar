@@ -11,10 +11,16 @@
         color-scheme: dark;
         margin: 0 auto;
         margin-bottom: 20px;
+        margin-right: 20px;
         padding: 5px 4px;
         border-radius: 0px 3px 3px 0;
         border: 1.5px solid $accentColor;
         border-left: none;
+    }
+    .clickable-text {
+        text-decoration: underline;
+        color: $accentColor;
+        font-size: 1.1rem;
     }
     .positive-money {
         color: $accentColor;
@@ -58,5 +64,41 @@
     .monthly-time-line {
         font-size: .8em;
         font-style: italic;
+    }
+}
+
+
+// HISTORY YEAR Styles
+#history-main-year {
+    #bar-graph {
+        margin: 0 auto;
+    }
+    h3 {
+        color: $offWhite;
+        font-size: 1.3rem;
+        span {
+            color: $accentColor;
+        }
+    }
+    .year-picker-div {
+        margin-top: 50px;
+        margin-bottom: 40px;
+    }
+    input {
+        background-color: $secondaryColor;
+        outline: none;
+        border: none;
+        font-size: 1.1rem;
+        border-radius: 4px;
+        color: $offWhite;
+        padding: 3px 5px;
+        margin-right: 10px;
+    }
+    button {
+        height: 25px;
+        padding: 0 3px;
+    }
+    ::placeholder {
+        color: $offWhite;
     }
 }
