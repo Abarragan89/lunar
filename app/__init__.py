@@ -7,6 +7,7 @@ from app.db import init_db
 from flask_mail import Mail
 from datetime import date
 
+
 load_dotenv()
 
 # Helper functions
