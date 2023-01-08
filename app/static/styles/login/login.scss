@@ -1,7 +1,7 @@
 @import '../utilities/variables.scss';
 
 .login-signup-div {
-    border: 1px solid $gray;
+    border: 1px solid $secondaryColor;
     border-top: none;
     border-radius: 4px;
     text-align: center;
@@ -12,7 +12,7 @@
     font-weight: bold;
 
     legend {
-        border-bottom: 1px solid $gray;
+        border-bottom: 1px solid $secondaryColor;
         font-size: 1.7em;
         color: $offWhite;
         line-height: .017rem;
@@ -24,6 +24,7 @@
 
         span {
             background-color: $primaryColor;
+            color: $accentColor;
         }
     }
 
@@ -36,7 +37,8 @@
         margin: 5px 40px;
         padding-left: 10px;
         padding-top: 10px;
-        width: 69%
+        width: 69%;
+        outline-style: none;
     }
     input:focus {
         outline: none;
