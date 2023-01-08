@@ -28,7 +28,7 @@ def edit_monthly_charge():
         db.commit()
     except Exception as e:
         db.rollback()
-        return render_template('error-page.html', message="Oops, something happened. Please try again.")
+        return render_template('error-page.html', message="Oops, something happened. Make sure all fields are complete when updating a charge.")
     return redirect(request.referrer)
 
 
@@ -101,7 +101,6 @@ def stop_monthly_charge():
 
     try:
         expired_monthly = db.query(MonthlyCharge).filter(MonthlyCharge.id == monthly_id).one()
-        start_date = int(str(expired_monthly.time_created.year) + str(expired_monthly.time_created.strftime('%m')))
 
         # create new expired monthly based on old monthly charge
         new_expired_charge = ExpiredCharges(
@@ -110,7 +109,7 @@ def stop_monthly_charge():
             tag_id = expired_monthly.tag_id,
             user_id = session['user_id'],
             expiration_limit = expiration_limit,
-            start_date = start_date
+            start_date = expired_monthly.start_date
         )
         db.add(new_expired_charge)
         db.commit()
