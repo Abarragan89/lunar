@@ -44,43 +44,42 @@ def format_date(integer, option):
 
 
 # Creating App
-def create_app():
-    # set up app config
-    app = Flask(__name__, static_url_path='/')
-    app.url_map.strict_slashes = False
-    app.config.from_mapping(
-        SECRET_KEY=os.getenv('SESSION_SECRET')
-    )
 
-    # Mail configurations
-    app.config['MAIL_SERVER']='smtp.gmail.com'
-    app.config['MAIL_PORT'] = 465
-    app.config['MAIL_USERNAME'] = os.getenv('GOOGLE_USER')
-    app.config['MAIL_PASSWORD'] = os.getenv('GOOGLE_PASSWORD')
-    app.config['MAIL_USE_TLS'] = False
-    app.config['MAIL_USE_SSL'] = True
-    app.mail = Mail(app)
+# set up app config
+app = Flask(__name__, static_url_path='/')
+app.url_map.strict_slashes = False
+app.config.from_mapping(
+    SECRET_KEY=os.getenv('SESSION_SECRET')
+)
 
-    #register routes
-    app.register_blueprint(login)
-    app.register_blueprint(categories)
-    app.register_blueprint(expense)
-    app.register_blueprint(deposit)
-    app.register_blueprint(profile)
-    app.register_blueprint(charges)
-    app.register_blueprint(site_login)
-    app.register_blueprint(dashboard)
-    app.register_blueprint(site_profile)
-    app.register_blueprint(site_categories)
-    app.register_blueprint(site_history)
-    app.register_blueprint(error_page)
+# Mail configurations
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT'] = 465
+app.config['MAIL_USERNAME'] = os.getenv('GOOGLE_USER')
+app.config['MAIL_PASSWORD'] = os.getenv('GOOGLE_PASSWORD')
+app.config['MAIL_USE_TLS'] = False
+app.config['MAIL_USE_SSL'] = True
+app.mail = Mail(app)
 
-    init_db(app)
+#register routes
+app.register_blueprint(login)
+app.register_blueprint(categories)
+app.register_blueprint(expense)
+app.register_blueprint(deposit)
+app.register_blueprint(profile)
+app.register_blueprint(charges)
+app.register_blueprint(site_login)
+app.register_blueprint(dashboard)
+app.register_blueprint(site_profile)
+app.register_blueprint(site_categories)
+app.register_blueprint(site_history)
+app.register_blueprint(error_page)
 
-    # helper functions
-    app.jinja_env.globals.update(rgbToHex=rgbToHex)
-    app.jinja_env.globals.update(format_date_ending=format_date_ending)
-    app.jinja_env.globals.update(convertExpirationDate=convertExpirationDate)
-    app.jinja_env.globals.update(format_date=format_date)
-    
-    return app
+init_db(app)
+
+# helper functions
+app.jinja_env.globals.update(rgbToHex=rgbToHex)
+app.jinja_env.globals.update(format_date_ending=format_date_ending)
+app.jinja_env.globals.update(convertExpirationDate=convertExpirationDate)
+app.jinja_env.globals.update(format_date=format_date)
+
