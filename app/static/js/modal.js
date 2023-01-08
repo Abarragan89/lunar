@@ -120,15 +120,16 @@ function closeModal(id) {
 function fillEditMonthlyFields(row) {
     const today = new Date();
     const year = today.getFullYear();
-    const day = today.getDate();
-    const month = today.getMonth() + 1;
-
+    let month = String(today.getMonth() + 1);
+    month = month.padStart(2, '0')
     const currentProductTagId = row.children[0].children[1].children[0].getAttribute('data-monthly-tag-id');
     const currentProductId = row.children[0].children[1].children[0].getAttribute('data-monthly-id');
     const currentProductName = row.children[0].children[1].children[0].nextElementSibling.textContent;
     let currentProductPrice = row.children[0].children[2].textContent;
     currentProductPrice = currentProductPrice.slice(2);
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
+
+    console.log(currentProductId, currentProductName, currentProductPrice, current_date)
 
     document.getElementById('current-monthly-price').value = currentProductPrice;
     document.getElementById('current-monthly-tag').value = currentProductTagId;

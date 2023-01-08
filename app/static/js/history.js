@@ -28,7 +28,7 @@ function fillEditMonthlyHistoryFields(row) {
     const currentProductId = row.children[0].children[0].children[0].children[0].getAttribute('data-expired-id');
     const currentProductName = row.children[0].children[0].children[0].children[0].getAttribute('data-description');
     let currentProductPrice = row.children[0].children[0].children[0].children[0].nextElementSibling.textContent;
-    currentProductPrice = currentProductPrice.slice(1);
+    currentProductPrice = currentProductPrice.slice(2);
     // I need to convert these dates into year-month to work with date input
     let start_date = row.children[0].children[0].children[2].children[0].textContent;
     let end_date = row.children[0].children[0].children[2].children[1].textContent;
@@ -76,7 +76,7 @@ function fillEditMonthlyHistoryFieldsActiveCharges(row) {
     const currentProductId = row.children[0].children[0].children[0].children[0].getAttribute('data-monthly-id');
     const currentProductName = row.children[0].children[0].children[0].children[0].getAttribute('data-description');
     let currentProductPrice = row.children[0].children[0].children[0].children[0].nextElementSibling.textContent;
-    currentProductPrice = currentProductPrice.slice(1);
+    currentProductPrice = currentProductPrice.slice(2);
     // I need to convert these dates into year-month to work with date input
     let start_date = row.children[0].children[0].children[2].children[0].textContent;
     start_date = start_date.split(" ")[2].split("/");

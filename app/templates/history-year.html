@@ -1,0 +1,61 @@
+{% extends 'base.html' %} {% block head %}
+
+<title>History</title>
+<link
+  rel="stylesheet"
+  href="{{url_for('static', filename='/styles/home/home.css')}}"
+/>
+<link rel="stylesheet" href="{{url_for('static', filename='/styles/history/history.css')}}">
+{% endblock %} {% block body %}
+
+{% include 'includes/edit-expired-charge-modal.html'%}
+
+
+<main id="history-main">
+  <a href="{{url_for('site_dashboard.dashboard')}}"><i class="fa-solid fa-house"></i></a>
+  <h2 class='section-heading page-heading'>
+    <span>
+      History
+    </span>
+  </h2>
+  
+    <canvas id="line-graph" width="340" height="200"></canvas>
+  </div>
+  <script>
+
+    const ctx2 = document.getElementById('line-graph').getContext('2d')
+    const lineChart = new Chart(ctx2, {
+      type: 'line', 
+      data: {
+        labels: ['hello']
+        datasets: [
+          {
+            data: 20,
+            backgroundColor: 'white',
+            borderWidth: 1,
+            borderColor: "white",
+          }
+        ]
+      },
+      options: {
+        responsive: false,
+        tooltips: {
+          enabled: true,
+          callbacks: {
+              label: function(tooltipItem, data) {
+                const item = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                return `$${item}`
+              }
+          } 
+        }
+      }
+  });
+  </script>
+
+
+</main>
+<script src="{{url_for('static', filename='/js/history.js')}}"></script>
+
+{% endblock %}
+
+

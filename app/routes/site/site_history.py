@@ -120,13 +120,20 @@ def history(yearMonth):
         # This is for monthly charges mixed with purchases. Format has to be idential with the one above(can refactor this)
         monthly_charges_data_wheel = db.query(Tag.tag_name, Tag.tag_color, MonthlyCharge.amount
             ).filter(MonthlyCharge.user_id == session['user_id']
-            ).filter(extract('month', Product.time_created)==monthLookUp
-            ).filter(extract('year', Product.time_created)==yearLookUp
+            ).filter(MonthlyCharge.start_date <= date_limit_int
+            ).join(Tag
+            ).all()
+        
+        expired_charges_data_wheel = db.query(Tag.tag_name, Tag.tag_color, ExpiredCharges.amount
+            ).filter(ExpiredCharges.user_id == session['user_id']
+            ).filter(ExpiredCharges.expiration_limit >= date_limit_int
+            ).filter(ExpiredCharges.start_date <= date_limit_int
             ).join(Tag
             ).all()
     
         
-        allMonthlyExpenses = allMonthlyPurchases + monthly_charges_data_wheel
+        allMonthlyExpenses = allMonthlyPurchases + monthly_charges_data_wheel + expired_charges_data_wheel
+        print('=====================', allMonthlyExpenses)
 
         # Create a chartData object to remove repeated Tags in products, and add up the total in products
         chartData = {}
@@ -167,10 +174,19 @@ def history(yearMonth):
         relevant_tag_colors=relevant_tag_colors
     )
 
-
+@bp.route('/history-year/<year>')
+def history_year(year): 
+    values = 40, 20, 20, 10, -19, 100, -59
+    return render_template('history-year.html', year=year,)
 
 
 #redirection for user clearing out the calendar in history
 @bp.route('/history')
 def redirect_for_clear_history():
     return redirect(f'/history/{current_year}-{current_month}')
+
+
+#redirection for user clearing out the calendar in history
+@bp.route('/history-year')
+def redirect_for_clear_history_year():
+    return redirect(f'/history-year/{current_year}')
