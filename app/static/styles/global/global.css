@@ -663,7 +663,8 @@ menu div {
   width: 100%;
   font-size: 1rem;
   text-align: center;
-  padding: 0.25rem 0;
+  padding: 0.5rem 0;
+  padding-bottom: 1.5rem;
 }
 
 menu div p {

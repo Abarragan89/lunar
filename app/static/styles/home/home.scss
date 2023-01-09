@@ -19,7 +19,7 @@
     
     p {
         letter-spacing: .1rem;
-        font-size: .95rem;
+        font-size: .95rem; 
         font-weight: 900;
         color: $offWhite;
         animation: appearIn 1s 5.2s both;
@@ -118,13 +118,26 @@
     }
 }
 
-
-
-
-
 //  LOGGED IN STYLES
 #dashboard {
     margin-top: 20px;
+
+    .getting-started {
+        ol {
+            list-style: none;
+        }
+        text-align: center;
+        width: 85%;
+        line-height: 1.7;
+        margin: 0 auto;
+        font-size: 1.2rem;
+        padding-top: 20px;
+        color: $offWhite;
+        p {
+            color: $accentColor;
+        }
+
+    }
     .current-date {
         text-align: center;
         margin-top: 10px;

@@ -33,14 +33,36 @@
       <span id="days-left">{{ days_until_first }}
       </span></p>
   </div>
-  
-  <h2 class='section-heading page-heading'>
-    <span>
-      {{today.strftime('%B')}}
-    </span>
-  </h2>
 
- 
+  {% if not activity_data and not category_data%}
+    <h2 class='section-heading page-heading'>
+      <span>
+        Get Started
+      </span>
+  </h2>
+  {% else %}
+    <h2 class='section-heading page-heading'>
+      <span>
+        {{today.strftime('%B')}}
+      </span>
+    </h2>
+  {% endif %}
+
+  
+
+  {% if not activity_data and not category_data%}
+  <div class="getting-started">
+    <ol>
+      <li>1. Customize your categories to fit your spending habits.</li>
+      <li>2. Enter your steady monthly charges. These are deducted automatically every month.</li>
+      <li>3. If you earn extra cash, enter it as a deposit.</li>
+      <li>4. If you buy something, add a purchase.</li>
+    </ol>
+    <br>
+    <p>That's it! Lunar will take care of the rest. We'll keep track of your money and provide easy-to-read data so you're never left in the dark.</p>
+  </div>
+  {% endif %}
+
 
   <div class='current-data-graph-div flex-box-col-sa'>
     <div class='flex-box-sa-wrap'>
@@ -82,6 +104,7 @@
   });
   </script>
 
+  {% if activity_data %}
   <h2 class='section-heading'>
     <span>
       Recent Activity
@@ -112,8 +135,6 @@
             <p class="expense-description">{{ data[2] }}</p>
           </div>
           <p>-${{ data[1] }}</p>
-
-
             {% else%}
             <p class="activity-link-deposit" data-cash-id="{{data[3]}}">Deposit</p>
             <p class="expense-description">{{ data[2] }}</p>
@@ -123,7 +144,10 @@
       </div>
     </a>
     {% endfor%} 
+    {% endif %}
 
+
+    {% if category_data %}
     <h2 class='section-heading'>
       <span>
         Monthly Charges
@@ -152,6 +176,7 @@
       </div>
     </a>
     {% endfor %}
+    {% endif %}
   </div>
   {% endblock %}
   
