@@ -64,6 +64,9 @@
   color: black;
   margin: 20px 0;
 }
+.login-signup-div .create-password {
+  border-bottom: 1px solid rgb(13, 90, 102);
+}
 
 .need-account {
   text-align: center;

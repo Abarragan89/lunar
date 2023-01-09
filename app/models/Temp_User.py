@@ -9,7 +9,6 @@ class TempUser(Base):
     username = Column(String(50), nullable=False)
     email = Column(String(50), nullable=False)
     unique_id = Column(String(50), nullable=False, unique=True)
-    salary_amount = Column(Numeric(precision=15, scale=2), nullable=False)
     prefixes=['TEMPORARY']
 
     @validates('email')
