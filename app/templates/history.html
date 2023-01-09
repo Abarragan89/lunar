@@ -92,12 +92,12 @@
   });
   </script>
 
+{% if active_monthly_charges or expired_charges%}
   <h2 class='section-heading'>
     <span>
       Charges
     </span>
   </h2>
-
   {% if active_monthly_charges|length > 0 %}
   <div class="main-activity-div">
     {% for data in active_monthly_charges %}
@@ -161,7 +161,9 @@
     {% endfor %}
   </div>
   {% endif %}
+{% endif %}
 
+{% if all_purchases %}
   <h2 class='section-heading'>
     <span>
       Purchases
@@ -191,9 +193,10 @@
     </a>
     {% endfor%} 
   </div>
+{% endif %}
 
 
-
+{% if added_cash_data %}
   <h2 class='section-heading'>
     <span>
       Cash Added
@@ -217,8 +220,8 @@
     </a>
     {% endfor%} 
   </div>
+{% endif %}
 </main>
-
 
 <script src="{{url_for('static', filename='/js/history.js')}}"></script>
 

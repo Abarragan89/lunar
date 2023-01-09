@@ -2,13 +2,13 @@
     <div class="modal">      
       <h2 class='section-heading'>
         <span>
-          Create New Salary
+          New Monthly Income
         </span>
       </h2>
 
       <form action="/api/add-salary", method="POST">
         <span class="input-symbol-dollar">
-          <input type="number" name="new-monthly-income" id="new_salary" step="0.01" maxlength="19" id="new_salary" placeholder="New Salary"/>
+          <input type="number" name="new-monthly-income" id="new_salary" step="0.01" maxlength="19" id="new_salary" placeholder="New Income"/>
         </span> 
         <p>Salary start date:</p>
         <input type="month"name="new-salary-date" id="new_salary_date" max="{{today.strftime("%Y")}}-{{today.strftime('%m')}}"> <br>

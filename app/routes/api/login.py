@@ -1,6 +1,6 @@
 from flask import Blueprint, request, session, redirect, render_template, current_app
 import datetime
-from app.models import User, Tag, ActiveSalary, TempUser, ConfirmationToken
+from app.models import User, Tag, TempUser, ConfirmationToken
 from app.db import start_db_session
 from flask_mail import Message
 import uuid
@@ -57,7 +57,6 @@ def signup():
             username_lowercase = data['username'].lower().strip(),
             email = data['email'].strip(),
             unique_id = result,
-            salary_amount = data['monthly-income']
         )
         db.add(newUser)
         db.commit()
@@ -100,15 +99,8 @@ def signup_verified():
         session['user_id'] = newUser.id
         session['loggedIn'] = True
 
-        # Add Salary Model
-        newSalary = ActiveSalary (
-            salary_amount = temp_user.salary_amount,
-            start_date = str(current_year) + str(current_month).rjust(2, '0'),
-            user_id = newUser.id
-        )
-        db.add(newSalary)
+
         #delete temp user
-        db.commit()
         db.delete(temp_user)
         db.commit()
 

@@ -7,7 +7,7 @@
           </h2>
           <br>
           <form action="{{base_url}}/api/stop-active-salary", method="POST">
-            <p>Would you like to stop this salary on a certain date?</p>
+            <p>Would you like to stop this income on a certain date?</p>
             <input type="month", name="expiration-limit-date" required>
             <input type="hidden" name="salary-id" value="{{active_salary.id}}">
             <button type="submit" class="button-30">Stop salary on date</button>
@@ -16,7 +16,7 @@
           <p>OR</p>
           <br>
           <form action="{{base_url}}/api/delete-user-salary", method="POST">
-            <p>Would you like to remove the salary completely and erase its history?</p>
+            <p>Would you like to remove the income completely and erase its history?</p>
             <input type="hidden" name="salary-is-active-delete" value="True">
             <input type="hidden" name="salary-id" value="{{active_salary.id}}">
             <button type="submit" class="button-30 delete-btn">Delete and erase all history</button>
