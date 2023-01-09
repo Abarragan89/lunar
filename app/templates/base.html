@@ -3,11 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name='viewport' content='initial-scale=1.0, width=device-width' />
+    <meta name="description" content='Take ownership of your finances and track your spending habits.' />
+    <meta name='keywords' content='money tracker, money, finances, lunar, expenses, expense tracker, finance, dollar, saving, saving app, saving application, spending habits'/>
+    <meta name='og:title' property='og:title' content='Lunar' />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content="Take ownership of your finances and track your spending habits." />
+
+    <meta property="og:image" content="{{url_for('static', filename='images/favicon.ico')}}" />
+    <meta property="og:image:type" content="{{url_for('static', filename='images/favicon.ico')}}" />
+    <link rel="shortcut icon" href="{{url_for('static', filename='images/favicon.ico')}}"/>
+
 
     <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='/images/apple-touch-icon.png')}}">
     
-
     <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='/images/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='/images/favicon-16x16.png')}}">
     <link rel="icon" type="image/x-icon" href="{{url_for('static', filename='images/favicon.ico')}}">
