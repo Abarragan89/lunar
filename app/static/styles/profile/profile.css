@@ -39,6 +39,11 @@
   background-color: rgb(199, 195, 195);
   border: none;
 }
+#profile-main .user-profile .zero-opacity {
+  opacity: 0;
+  pointer-events: none;
+  background-color: transparent;
+}
 #profile-main .edit-pencil-btn {
   border: 0;
   padding: 0;
