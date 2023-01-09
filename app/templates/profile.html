@@ -64,14 +64,16 @@
       </span>
     </h2>
 
-    {% for active in tags %}
-    <a href="#" class="edit-category-btn active-categories category-btns-profile">
-      <p
-      data-tag-id="{{active.id}}"
-      data-tag-color="{{ rgbToHex(active.tag_color)}}"
-      >{{active.tag_name}}</p>
-    </a>
-    {% endfor %}
+    <div class="flex-box-sa flex-wrap">
+      {% for active in tags %}
+      <a href="#" class="edit-category-btn active-categories category-btns-profile">
+        <p
+        data-tag-id="{{active.id}}"
+        data-tag-color="{{ rgbToHex(active.tag_color)}}"
+        >{{active.tag_name}}</p>
+      </a>
+      {% endfor %}
+    </div>
 
 
     <h2 class='section-heading'>
@@ -79,11 +81,14 @@
         Inactive Categories
       </span>
     </h2>
-    {% for inactive in all_inactive_categories %}
-    <a href="#" class="edit-inactive-category-btn inactive-categories category-btns-profile">
-      <p data-tag-id="{{inactive.id}}">{{inactive.tag_name}}</p>
-    </a>
-    {% endfor %}
+
+    <div class="flex-box-sa flex-wrap">
+      {% for inactive in all_inactive_categories %}
+      <a href="#" class="edit-inactive-category-btn inactive-categories category-btns-profile">
+        <p data-tag-id="{{inactive.id}}">{{inactive.tag_name}}</p>
+      </a>
+      {% endfor %}
+    </div>
 
 </main>
 <script src="{{url_for('static', filename='/js/edit-profile.js')}}"></script>

@@ -664,7 +664,7 @@ menu div {
   font-size: 1rem;
   text-align: center;
   padding: 0.5rem 0;
-  padding-bottom: 1.5rem;
+  padding-bottom: 1.8rem;
 }
 
 menu div p {
@@ -874,6 +874,10 @@ menu div:not(:first-child) {
 
 .reverse-row {
   flex-direction: row-reverse;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
 
 /* small margin moves */
