@@ -7,11 +7,11 @@
   letter-spacing: 0.6rem;
   line-height: 0.7;
   font-size: 6rem;
-  font-weight: 900;
+  font-weight: 700;
   position: relative;
   top: 160px;
   color: #6bd0d2;
-  font-family: "Coda Caption", sans-serif;
+  font-family: "Rowdies", cursive;
   -webkit-text-stroke: 4px black;
   -webkit-animation: appearIn 1s 5.2s both;
           animation: appearIn 1s 5.2s both;
