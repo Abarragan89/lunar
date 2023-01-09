@@ -6,12 +6,12 @@
 #home-page h1 {
   letter-spacing: 0.6rem;
   line-height: 0.7;
-  font-size: 6rem;
+  font-size: 7rem;
   font-weight: 700;
   position: relative;
   top: 160px;
   color: #6bd0d2;
-  font-family: "Rowdies", cursive;
+  font-family: "Play", sans-serif;
   -webkit-text-stroke: 4px black;
   -webkit-animation: appearIn 1s 5.2s both;
           animation: appearIn 1s 5.2s both;
