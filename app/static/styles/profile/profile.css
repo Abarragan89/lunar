@@ -25,6 +25,7 @@
 #profile-main .user-profile input:disabled {
   height: 25px;
   font-size: 1.1rem;
+  font-weight: 900;
   width: 120px;
   color: #6bd0d2;
   background-color: #031920;
@@ -34,9 +35,10 @@
   height: 25px;
   padding: 2px 3px;
   font-size: 1.1rem;
+  font-weight: 900;
   width: 100px;
-  color: black;
-  background-color: rgb(199, 195, 195);
+  color: rgb(228, 240, 239);
+  background-color: rgb(13, 90, 102);
   border: none;
 }
 #profile-main .user-profile .zero-opacity {

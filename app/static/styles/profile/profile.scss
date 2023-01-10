@@ -26,6 +26,7 @@
         input:disabled {
             height: 25px;
             font-size: 1.1rem;
+            font-weight: 900;
             width: 120px;
             color: $accentColor;
             background-color: $primaryColor;
@@ -35,9 +36,10 @@
             height: 25px;
             padding: 2px 3px;
             font-size: 1.1rem;
+            font-weight: 900;
             width: 100px;
-            color: black;
-            background-color: $gray;
+            color: $offWhite;
+            background-color: $secondaryColor;
             border: none;
         }
         .zero-opacity {
