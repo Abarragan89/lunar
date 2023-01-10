@@ -77,31 +77,66 @@
         margin: 0 auto;
     }
     h3 {
-        color: $offWhite;
-        font-size: 1.3rem;
+        color: $gray;
+        font-size: 1.5rem;
+        letter-spacing: .2rem;
+        text-align: center;
+        margin-bottom: 20px;
         span {
             color: $accentColor;
         }
-    }
-    .year-picker-div {
-        margin-top: 50px;
-        margin-bottom: 40px;
     }
     input {
         background-color: $secondaryColor;
         outline: none;
         border: none;
         font-size: 1.1rem;
-        border-radius: 4px;
         color: $offWhite;
-        padding: 3px 5px;
-        margin-right: 10px;
+        padding: 3px 15px;
+        border: 1px solid $accentColor;
+        border-left: none;
+        border-right: none;
+    }
+    #choose-year-div {
+        position: sticky;
+        top: 13px;
+    }
+    #choose-year-form {
+        margin-bottom: 30px;
+        margin-right: 0;
     }
     button {
-        height: 25px;
-        padding: 0 3px;
+        height: 29px;
+        margin-left: -3px;
+        margin-bottom: 3px;
+        border-radius: 0 4px 4px 0;
+        padding: 0;
+        box-shadow: none;
+        border: 1px solid $accentColor;
+        border-left: none;
     }
     ::placeholder {
         color: $offWhite;
+    }
+
+    .year-history-labels {
+        margin-left: 25%;
+        margin-bottom: 10px;
+        p{
+            span {
+                display: inline-block;
+                height: 13px;
+                width: 30px;
+
+                margin-right: 5px;
+            }
+            #red-tag-history {
+                background-color: rgba(204, 5, 5, .6);
+            }
+            #green-tag-history {
+                background-color: rgba(7, 171, 7, .6);
+            }
+
+        }
     }
 }

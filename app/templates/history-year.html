@@ -18,18 +18,24 @@
       History
     </span>
   </h2>
-  <div class="flex-box-sa year-picker-div">
-    <h3>Year: <span>{{year}}</span></h3>
-    <form id="choose-year" action="">
+
+  <div id="choose-year-div">
+    <form id="choose-year-form" action="">
       <input type="number" min="1900" id="year-to-query" max="2099" placeholder="YYYY" />
       <button type="submit" id="year-search-btn" class="button-30">search</button>
     </form>
-
+    <h3>Year: <span>{{year}}</span></h3>
   </div>
+
+  </div class="flex-box-col-sa">
+    <div class="flex-box-sa year-history-labels">
+      <p><span id="red-tag-history"></span>deficit</p>
+      <p><span id="green-tag-history"></span>surplus</p>
+    </div>
     <canvas id="bar-graph" width="350" height="420"></canvas>
   </div>
-  <script>
 
+  <script>
     const ctx2 = document.getElementById('bar-graph').getContext('2d')
     const lineChart = new Chart(ctx2, {
       type: 'bar', 
@@ -39,20 +45,19 @@
           {
             data: {{ remaining_balances | safe}},
             backgroundColor: {{ bar_graph_colors | safe}},
-            borderColor: {{ bar_graph_colors | safe}},
           }
         ]
       },
       options: {
         legend: {
-          display: false
+          display: false,
         },
         responsive: false,
         scales: {
           xAxes: [{
               display: true,
               scaleLabel: {
-                  display: true,
+                  display: false,
                   labelString: 'Months',
                   fontColor:'white',
                   fontSize: 12,
@@ -65,14 +70,15 @@
           yAxes: [{
               display: true,
               scaleLabel: {
-                  display: true,
+                  display: false,
                   labelString: 'Ending Balance',
                   fontColor: 'white',
                   fontSize: 12
               },
               gridLines: {
-                color: 'white',
-                lineWidth: 0.5,
+                lineWidth: 0.3,
+                color: 'white'
+                
               },
               ticks: {
                 fontColor: "white",

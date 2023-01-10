@@ -71,29 +71,44 @@
   margin: 0 auto;
 }
 #history-main-year h3 {
-  color: rgb(228, 240, 239);
-  font-size: 1.3rem;
+  color: rgb(199, 195, 195);
+  font-size: 1.5rem;
+  letter-spacing: 0.2rem;
+  text-align: center;
+  margin-bottom: 20px;
 }
 #history-main-year h3 span {
   color: #6bd0d2;
-}
-#history-main-year .year-picker-div {
-  margin-top: 50px;
-  margin-bottom: 40px;
 }
 #history-main-year input {
   background-color: rgb(13, 90, 102);
   outline: none;
   border: none;
   font-size: 1.1rem;
-  border-radius: 4px;
   color: rgb(228, 240, 239);
-  padding: 3px 5px;
-  margin-right: 10px;
+  padding: 3px 15px;
+  border: 1px solid #6bd0d2;
+  border-left: none;
+  border-right: none;
+}
+#history-main-year #choose-year-div {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 13px;
+}
+#history-main-year #choose-year-form {
+  margin-bottom: 30px;
+  margin-right: 0;
 }
 #history-main-year button {
-  height: 25px;
-  padding: 0 3px;
+  height: 29px;
+  margin-left: -3px;
+  margin-bottom: 3px;
+  border-radius: 0 4px 4px 0;
+  padding: 0;
+  box-shadow: none;
+  border: 1px solid #6bd0d2;
+  border-left: none;
 }
 #history-main-year ::-moz-placeholder {
   color: rgb(228, 240, 239);
@@ -103,4 +118,20 @@
 }
 #history-main-year ::placeholder {
   color: rgb(228, 240, 239);
+}
+#history-main-year .year-history-labels {
+  margin-left: 25%;
+  margin-bottom: 10px;
+}
+#history-main-year .year-history-labels p span {
+  display: inline-block;
+  height: 13px;
+  width: 30px;
+  margin-right: 5px;
+}
+#history-main-year .year-history-labels p #red-tag-history {
+  background-color: rgba(204, 5, 5, 0.6);
+}
+#history-main-year .year-history-labels p #green-tag-history {
+  background-color: rgba(7, 171, 7, 0.6);
 }/*# sourceMappingURL=history.css.map */

@@ -180,8 +180,16 @@ def history_year(year):
     is_loggedin = session.get('loggedIn')
     remaining_balances = []
     bar_graph_colors = []
+    bar_graph_border_colors = []
 
     try: 
+        # need to get tags for the navbar
+        allTags = (
+            db.query(Tag)
+            .filter(Tag.user_id == user_id)
+            .filter(Tag.active == True)
+            .all()
+        )
         
         for num in range(1, 13):
             # create the yearmonth limit for each iteration. Pad a zero if needed
@@ -239,28 +247,28 @@ def history_year(year):
 
             remaining_balance = (salary + all_cash_total) - (past_expired_charges_total + any_current_monthly_total + all_purchases_total)
 
-            remaining_balances.append(float(remaining_balance))
             if remaining_balance < 0:
-                bar_graph_colors.append('rgb(204, 5, 5)')
+                bar_graph_colors.append('rgba(204, 5, 5, .6)')
             else:
-                bar_graph_colors.append('rgb(7, 171, 7)') 
+                bar_graph_colors.append('rgba(7, 171, 7, .6)') 
+            remaining_balances.append(float(abs(remaining_balance)))
 
         # don't show future months on graph if looking at current year
         if year == str(current_year):
             month_limit = int(current_month)
             remaining_balances = remaining_balances[:month_limit]
 
-    except Exception as e:
-        print('exception =======', e)
+    except:
+        db.rollback()
+        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return render_template('history-year.html',
         loggedIn=is_loggedin,
         remaining_balances=remaining_balances,
         bar_graph_colors=bar_graph_colors,
-        year=year
+        bar_graph_border_colors=bar_graph_border_colors,
+        year=year,
+        tags=allTags
         )
-
-
-
 
 
 #redirection for user clearing out the calendar in history

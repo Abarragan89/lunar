@@ -62,7 +62,6 @@
   </div>
   {% endif %}
 
-
   <div class='current-data-graph-div flex-box-col-sa'>
     <div class='flex-box-sa-wrap'>
       {% for num in range( relevant_tag_colors | length )%}
@@ -143,39 +142,42 @@
       </div>
     </a>
     {% endfor%} 
-    {% endif %}
+  {% endif %}
 
 
-    {% if category_data %}
+  {% if category_data %}
     <h2 class='section-heading'>
       <span>
         Monthly Charges
       </span>
     </h2>
+    <div class="main-activity-div">
     {% for data in category_data %}
+
     <a class="edit-monthly-charge-btn">
       <div class="flex-box-sb activity-link" data-type="expense">
-
-          <div class='flex-box-col-se date-div'
-          data-current-date="{{(data[6] | string)[:4]}}-{{(data[6] | string)[4:]}}">
+        
+        <div class='flex-box-col-se date-div'
+        data-current-date="{{(data[6] | string)[:4]}}-{{(data[6] | string)[4:]}}">
             <p>start date:</p>
             <p>{{convertExpirationDate(data[6])}}</p>
           </div>
           <div class="flex-box-col-sa activity-link-description">
             <p
-              class="activity-link-tag"
-              data-monthly-id="{{data[5]}}"
-              data-monthly-tag-id="{{data[4]}}"
+            class="activity-link-tag"
+            data-monthly-id="{{data[5]}}"
+            data-monthly-tag-id="{{data[4]}}"
             >
-              {{ data[3] }}
-            </p>
-            <p class="expense-description">{{ data[2] }}</p>
-          </div>
-          <p>-${{ data[1] }}</p>
+            {{ data[3] }}
+          </p>
+          <p class="expense-description">{{ data[2] }}</p>
+        </div>
+        <p>-${{ data[1] }}</p>
       </div>
     </a>
     {% endfor %}
-    {% endif %}
   </div>
+    {% endif %}
+  </main>
   {% endblock %}
   
