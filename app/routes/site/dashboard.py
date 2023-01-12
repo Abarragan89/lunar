@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session
+from flask import Blueprint, render_template, session, request
 from sqlalchemy import extract, desc
 from app.models import User, Tag, Product, Cash, MonthlyCharge, ActiveSalary
 from app.db import start_db_session
@@ -8,9 +8,7 @@ from ..helper_functions import days_until_first
 
 # Global varialbes that help filter relevant data
 days_until_first_data = days_until_first()
-# today = datetime.datetime.now()
-today = datetime.datetime.now().astimezone()
-
+today = datetime.datetime.now()
 
 current_month = today.strftime('%m')
 current_year = today.year
@@ -146,5 +144,5 @@ def dashboard():
         # Chart Data:
         relevant_tag_names=relevant_tag_names,
         values=tag_total,
-        relevant_tag_colors=relevant_tag_colors
+        relevant_tag_colors=relevant_tag_colors,
     )
