@@ -26,7 +26,6 @@ def signup():
                 error='Email is already taken.',
                 username = data['username'].strip(),
                 email = data['email'].strip(),
-                monthly_income = data['monthly-income'].strip()
                 )
     except AssertionError:
         db.rollback()
@@ -35,7 +34,6 @@ def signup():
             error='Please fill in all fields.',
             username = data['username'].strip(),
             email = data['email'].strip(),
-            monthly_income = data['monthly-income'].strip()
             )
     except Exception as e:
         print(e)
@@ -44,7 +42,6 @@ def signup():
             error='An error occurred. Please try again',
             username = data['username'].strip(),
             email = data['email'].strip(),
-            monthly_income = data['monthly-income'].strip()
             )
     # this only runs if the above code does not run and there is no user with that email.
     try: 

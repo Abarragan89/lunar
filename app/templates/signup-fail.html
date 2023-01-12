@@ -16,8 +16,12 @@
     <button type="submit" class="button-30" />Sign up</button>
   </form>
 </div>
-<p class="error-msg">{{error}}</p>
-<p class="need-account">Already have an account? <a href="{{ url_for('site_login.login')}}">Login</a></p>
+<span class="login-signup-moon"></span>
+<p class="error-msg">{{ error }}</p>
+  <div class="need-account">
+    <p class="need-account">Already have an account? <a href="{{ url_for('site_login.login')}}">Login</a></p>
+  </div>
+
 
 
 

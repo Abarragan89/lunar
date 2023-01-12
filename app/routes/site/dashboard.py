@@ -5,18 +5,18 @@ from app.db import start_db_session
 import datetime
 from sqlalchemy.sql import func
 from ..helper_functions import days_until_first
-import pytz
 
 # Global varialbes that help filter relevant data
 days_until_first_data = days_until_first()
-today = datetime.datetime.now(pytz.timezone('America/Los_Angeles'))
+# today = datetime.datetime.now()
+today = datetime.datetime.now().astimezone()
+
+
 current_month = today.strftime('%m')
 current_year = today.year
 
 # Create Blueprint
 bp = Blueprint('site_dashboard', __name__)
-
-
 
 @bp.route('/dashboard')
 def dashboard():

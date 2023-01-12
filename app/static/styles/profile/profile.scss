@@ -2,7 +2,7 @@
 
 #profile-main {
     margin-top: 20px;
-    
+    margin-bottom: 50px;
     .user-info-section-profile {
         align-items: baseline;
     }
@@ -75,6 +75,10 @@
         font-size: .85rem;
         font-style: italic;
         font-weight: 900;
+    }
+    .monthly-time-line {
+        font-size: .8em;
+        font-style: italic;
     }
 }
 

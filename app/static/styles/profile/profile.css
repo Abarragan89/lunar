@@ -1,6 +1,7 @@
 /* GLOBAL COLORS AND FONTS*/
 #profile-main {
   margin-top: 20px;
+  margin-bottom: 50px;
 }
 #profile-main .user-info-section-profile {
   align-items: baseline;
@@ -70,6 +71,10 @@
   font-size: 0.85rem;
   font-style: italic;
   font-weight: 900;
+}
+#profile-main .monthly-time-line {
+  font-size: 0.8em;
+  font-style: italic;
 }
 
 .make-active-div {

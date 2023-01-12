@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, session
-from app.models import User, Tag, Salary, ActiveSalary
+from app.models import User, Tag, Salary, ActiveSalary, MonthlyCharge, ExpiredCharges
 from app.db import start_db_session
 import datetime
 
@@ -37,7 +37,19 @@ def profile():
             .filter(Tag.active == False)
             .all()
         )
-    except:
+        # Change this query to just getting monthly charges to display on 'monthly charges'
+        monthly_charges = db.query(MonthlyCharge.time_created, MonthlyCharge.amount, MonthlyCharge.description, Tag.tag_name, Tag.id, MonthlyCharge.id, MonthlyCharge.start_date
+            ).filter(MonthlyCharge.user_id == user_id
+            ).join(Tag
+            ).all()
+        
+        expired_charges = db.query(ExpiredCharges.time_created, ExpiredCharges.amount, 
+            ExpiredCharges.description, Tag.tag_name, Tag.id, ExpiredCharges.id, ExpiredCharges.start_date, ExpiredCharges.expiration_limit, ExpiredCharges.start_date
+        ).filter(ExpiredCharges.user_id == session['user_id']
+        ).join(Tag
+        ).all()
+
+    except Exception as e:
         db.rollback()
         return render_template('error-page.html', message="Oops. Something happened. Please try again.")
     return render_template('profile.html',
@@ -47,7 +59,9 @@ def profile():
         loggedIn=is_loggedin,
         tags = allTags, 
         today=today,
-        all_inactive_categories=all_inactive_categories
+        all_inactive_categories=all_inactive_categories,
+        monthly_charges=monthly_charges, 
+        expired_charges=expired_charges
     )
 
 @bp.route('/edit-all-salaries')
