@@ -3,13 +3,17 @@
   rel="stylesheet"
   href="{{url_for('static', filename='/styles/home/home.css')}}"
 />
+<script
+      src="https://cdn.jsdelivr.net/npm/dayjs@1.11.3/dayjs.min.js"
+      integrity="sha256-iu/zLUB+QgISXBLCW/mcDi/rnf4m4uEDO0wauy76x7U="
+      crossorigin="anonymous"
+  ></script>
 <title>Dashboard</title>
 {% endblock %} {% block body %} 
 
 
 <main data-set-loggedIn="true" id="dashboard">
   <div class="current-date">
-    <h2>{{today.astimezone().strftime('%A')}}, {{today.astimezone().strftime('%-d')}}{{ format_date_ending(today.astimezone().strftime('%-d'))}}</h2>
     <h2 id="dashboard-current-time"></h2>
   </div>
   <div class="flex-box-sa money-day-countdown">
@@ -180,7 +184,6 @@
   </div>
     {% endif %}
   </main>
-
   <script src="{{url_for('static', filename='/js/current-time.js')}}"></script>
 
   {% endblock %}
