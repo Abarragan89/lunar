@@ -9,7 +9,7 @@
 
 <main data-set-loggedIn="true" id="dashboard">
   <div class="current-date">
-    <h2>{{today.strftime('%A')}}, {{today.strftime('%-d')}}{{ format_date_ending(today.strftime('%-d'))}}</h2>
+    <h2>{{today.astimezone().strftime('%A')}}, {{today.astimezone().strftime('%-d')}}{{ format_date_ending(today.astimezone().strftime('%-d'))}}</h2>
   </div>
   <div class="flex-box-sa money-day-countdown">
     <p>
