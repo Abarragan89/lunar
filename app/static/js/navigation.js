@@ -55,14 +55,16 @@ function openMainMenu() {
     document.getElementById('nav-items-main-div').style.width = '100%'
     document.getElementById('hamburger').classList.remove('fa-solid', 'fa-arrow-left')
     document.getElementById('hamburger').classList.add('fa-solid', 'fa-arrow-right')
-    document.getElementById('hamburger').style.paddingRight = `${screen.width - 10}px `;
+    document.getElementById('hamburger').style.paddingRight = `${screen.width - 20}px `;
     document.getElementById('hamburger').style.top = '0px'
     document.getElementById('hamburger').style.borderRadius = '0';
     createMainMenuElements()
     addListenerToCategories()
-    // Need to reinstate pointer events after menu closes to the dashboard charts
-    dashboardCanvasEl = document.querySelector('.slideshow-container') 
-    dashboardCanvasEl.style.pointerEvents = 'none';
+    if (window.location.pathname == '/dashboard') {
+        // Need to reinstate pointer events after menu closes to the dashboard charts
+        dashboardCanvasEl = document.querySelector('.slideshow-container') 
+        dashboardCanvasEl.style.pointerEvents = 'none';
+    }
 }
 
 
@@ -110,9 +112,11 @@ function addListenerToCategories() {
 
 // Create and append the three menu items
 function createMainMenuElements() {
-    // need to eliminate pointer events so the underlay can recieve events and close the menu
-    dashboardCanvasEl = document.querySelector('.slideshow-container') 
-    dashboardCanvasEl.style.pointerEvents = 'none';
+    if (window.location.pathname === '/dashboard') {
+        // need to eliminate pointer events so the underlay can recieve events and close the menu
+        dashboardCanvasEl = document.querySelector('.slideshow-container') 
+        dashboardCanvasEl.style.pointerEvents = 'none';
+    }
 
     // bring in 'Buy me a coffee' link
     const buyMeCoffeeEl = document.getElementById('buy-me-coffee-img')
