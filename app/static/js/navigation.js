@@ -174,7 +174,6 @@ function createMainMenuElements() {
     // bring in 'Buy me a coffee' link
     const buyMeCoffeeEl = document.getElementById('buy-me-coffee-img')
     buyMeCoffeeEl.style.opacity = '1'
-    buyMeCoffeeEl.style.zIndex = '999'
 }
 
 function closeMainMenuElements() {

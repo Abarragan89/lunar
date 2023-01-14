@@ -34,7 +34,8 @@ a {
 
 ///////////////////// Section Heading Titles ///////////////////
 .section-heading {
-  border-bottom: 1px solid $gray;
+  border-bottom: 1px solid $offWhite;
+  color: $offWhite;
   font-size: 1.5rem;
   line-height: .017rem;
   margin: 35px 0 15px;
@@ -53,6 +54,7 @@ a {
   margin-top: 15px;
   font-size: 1.8rem;
   letter-spacing: .1em;
+  color: $offWhite
 }
 
 ////////////////// Navigation Bar //////////////////

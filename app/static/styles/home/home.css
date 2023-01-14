@@ -167,37 +167,49 @@
   margin-top: 20px;
   margin-bottom: 50px;
 }
+#dashboard #dashboard-current-time {
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 20px;
+  color: rgb(228, 240, 239);
+  font-size: 2rem;
+}
 #dashboard .getting-started {
   text-align: center;
   width: 85%;
   line-height: 1.7;
   margin: 0 auto;
   font-size: 1.2rem;
-  padding-top: 20px;
+  padding-top: 5px;
   color: rgb(228, 240, 239);
 }
 #dashboard .getting-started ol {
   list-style: none;
 }
+#dashboard .getting-started ol li {
+  font-size: 1.1rem;
+  margin-bottom: 20px;
+}
+#dashboard .getting-started ol li span {
+  margin-right: 10px;
+  font-weight: 900;
+}
 #dashboard .getting-started p {
   color: #6bd0d2;
-}
-#dashboard .current-date {
-  text-align: center;
-  margin-top: 10px;
-  color: rgb(199, 195, 195);
-  font-size: 1.1em;
+  font-size: 1.1rem;
 }
 #dashboard .money-day-countdown {
-  margin: 10px 0 30px 0;
+  margin: 10px 0 50px 0;
 }
 #dashboard .money-day-countdown p {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   text-align: center;
   color: rgb(228, 240, 239);
+  font-weight: 900;
 }
 #dashboard .money-day-countdown #money-left-positive, #dashboard .money-day-countdown #money-left-negative {
   font-size: 1.2rem;
+  font-weight: 500;
 }
 #dashboard .money-day-countdown #money-left-positive {
   color: #6bd0d2;
@@ -208,6 +220,7 @@
 #dashboard .money-day-countdown #days-left {
   font-size: 1.2rem;
   color: #6bd0d2;
+  font-weight: 500;
 }
 #dashboard .relevant-graph-tags {
   margin-right: 15px;
@@ -242,7 +255,7 @@
   margin-bottom: 10px;
   margin-right: 5%;
   font-size: 1.05em;
-  color: rgb(228, 240, 239);
+  color: white;
   margin-left: 5%;
   padding: 3px 7px;
   box-shadow: rgb(13, 90, 102) 0px 30px 60px -12px inset, rgb(13, 90, 102) 0px 18px 36px -18px inset, black 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
@@ -264,6 +277,9 @@
 }
 .main-activity-div .activity-link #currently-active-text-monthly {
   color: #6bd0d2;
+}
+.main-activity-div .expired-activity-link {
+  color: rgb(176, 170, 170);
 }
 .main-activity-div .activity-link:hover {
   box-shadow: #4FBDBA 0px 30px 60px -12px inset, #4FBDBA 0px 18px 36px -18px inset, rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;

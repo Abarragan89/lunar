@@ -117,44 +117,60 @@
     }
 }
 
-//  LOGGED IN STYLES
+
+///////  LOGGED IN STYLES ////////
 #dashboard {
     margin-top: 20px;
     margin-bottom: 50px;
 
+    #dashboard-current-time { 
+        text-align: center;
+        margin-top: 25px;
+        margin-bottom: 20px;
+        color: $offWhite;
+        font-size: 2rem;
+    }
+
     .getting-started {
         ol {
             list-style: none;
+            li {
+                font-size: 1.1rem;
+                margin-bottom: 20px;
+
+                span {
+                    margin-right: 10px;
+                    font-weight: 900;
+                }
+            }
         }
         text-align: center;
         width: 85%;
         line-height: 1.7;
         margin: 0 auto;
         font-size: 1.2rem;
-        padding-top: 20px;
+        padding-top: 5px;
         color: $offWhite;
         p {
             color: $accentColor;
+            font-size: 1.1rem;
         }
 
     }
-    .current-date {
-        text-align: center;
-        margin-top: 10px;
-        color: $gray;
-        font-size: 1.1em;
-    }
     .money-day-countdown {
-        margin: 10px 0 30px 0;
+        margin: 10px 0 50px 0;
 
         p {
-            font-size: 1.2em;
+            font-size: 1.2rem;
             text-align: center;
             color: $offWhite;
+            font-weight: 900;
+           
         }
 
         #money-left-positive, #money-left-negative {
             font-size: 1.2rem;
+            font-weight: 500;
         }
         #money-left-positive {
             color: $accentColor;
@@ -165,6 +181,7 @@
         #days-left {
             font-size: 1.2rem;
             color: $accentColor;
+            font-weight: 500;
         }
     }
     // Tag colored squares
@@ -203,7 +220,7 @@
         margin-bottom: 10px;
         margin-right: 5%;
         font-size: 1.05em;
-        color: $offWhite;
+        color: white;
         margin-left: 5%;
         padding: 3px 7px;
         box-shadow: $secondaryColor 0px 30px 60px -12px inset, $secondaryColor 0px 18px 36px -18px inset, black  0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
@@ -228,6 +245,9 @@
         #currently-active-text-monthly {
             color: $accentColor;
         }
+    }
+    .expired-activity-link {
+        color: rgb(176, 170, 170);
     }
     
     .activity-link:hover {

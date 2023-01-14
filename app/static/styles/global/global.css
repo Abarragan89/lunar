@@ -33,7 +33,8 @@ a {
 }
 
 .section-heading {
-  border-bottom: 1px solid rgb(199, 195, 195);
+  border-bottom: 1px solid rgb(228, 240, 239);
+  color: rgb(228, 240, 239);
   font-size: 1.5rem;
   line-height: 0.017rem;
   margin: 35px 0 15px;
@@ -52,6 +53,7 @@ a {
   margin-top: 15px;
   font-size: 1.8rem;
   letter-spacing: 0.1em;
+  color: rgb(228, 240, 239);
 }
 
 #nav-menu-underlay {
