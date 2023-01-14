@@ -259,5 +259,15 @@
         box-shadow: $accentColor 0px 30px 60px -12px inset, $accentColor 0px 18px 36px -18px inset;
         color: white;
     }
+}
 
+
+
+#practice-color-dashboard {
+    width: 100px;
+    height: 100px;
+    margin-top: 50px;
+    margin: 0 auto;
+    display: block;
+    background-color: rgb(5, 80, 103);
 }
