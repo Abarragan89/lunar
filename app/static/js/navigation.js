@@ -123,11 +123,7 @@ function createMainMenuElements() {
         dashboardCanvasEl = document.querySelector('.slideshow-container') 
         dashboardCanvasEl.style.pointerEvents = 'none';
     }
-
-    // bring in 'Buy me a coffee' link
-    const buyMeCoffeeEl = document.getElementById('buy-me-coffee-img')
-    buyMeCoffeeEl.style.opacity = '1'
-
+    
     // Create and append the main menu items
     const navCategoryDiv = document.getElementById('nav-categories-div')
     
@@ -144,36 +140,41 @@ function createMainMenuElements() {
     profileBtn.classList.add('main-nav-item');
     profileBtn.href = '/profile';
     navCategoryDiv.insertAdjacentElement('beforebegin', profileBtn);
-
-
+    
+    
     // Category Link
     const categoryBtn = document.createElement('a');
     categoryBtn.textContent = 'Categories';
     categoryBtn.classList.add('main-nav-item');
     categoryBtn.setAttribute('id', 'category-nav-btn');
     navCategoryDiv.insertAdjacentElement('beforebegin', categoryBtn);
-
+    
     // Logout Link
     const logoutBtn = document.createElement('a');
     logoutBtn.textContent = 'Logout';
     logoutBtn.href = "/api/logout"
     logoutBtn.classList.add('main-nav-item');
     navCategoryDiv.insertAdjacentElement('afterEnd', logoutBtn)
-
+    
     // History Link
     // Get current date so link goes straight to current month and year
     const today = new Date();
     const year = today.getFullYear();
     let month = today.getMonth() + 1;
     month = month.toString()
-
-
+    
+    // History Link 
     const historyBtn = document.createElement('a');
     historyBtn.textContent = 'History';
     historyBtn.classList.add('main-nav-item');
     historyBtn.href = `/history/${year}-${month.padStart(2, '0')}`
     historyBtn.setAttribute('id', 'history-nav-btn');
     navCategoryDiv.insertAdjacentElement('afterEnd', historyBtn);
+
+    // bring in 'Buy me a coffee' link
+    const buyMeCoffeeEl = document.getElementById('buy-me-coffee-img')
+    buyMeCoffeeEl.style.opacity = '1'
+    buyMeCoffeeEl.style.zIndex = '999'
 }
 
 function closeMainMenuElements() {

@@ -25,8 +25,6 @@
   width: 90%;
   font-weight: bold;
   z-index: 10;
-  border: 1px solid rgb(13, 90, 102);
-  border-top: none;
 }
 .login-signup-div legend {
   font-size: 1.7em;
@@ -83,9 +81,6 @@
   color: black;
   margin: 20px 0;
 }
-.login-signup-div h2 {
-  border-bottom: 1px solid rgb(13, 90, 102);
-}
 .login-signup-div .colored-input {
   border: none;
   background-color: rgb(13, 90, 102);
@@ -94,6 +89,14 @@
 }
 .login-signup-div .colored-input:focus {
   background-color: rgb(13, 90, 102);
+}
+
+.create-password {
+  border: 1px solid #6bd0d2;
+  border-top: none;
+}
+.create-password h2 {
+  border-bottom: 1px solid #6bd0d2;
 }
 
 .need-account {

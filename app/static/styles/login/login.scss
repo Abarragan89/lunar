@@ -78,12 +78,7 @@
         color: black;
         margin: 20px 0;
     }
-    h2 {
-        border-bottom: 1px solid $secondaryColor;
-    }
-    border: 1px solid $secondaryColor;
-    border-top: none;
-
+    
     .colored-input {
         border: none;
         background-color: $secondaryColor;
@@ -93,8 +88,18 @@
     .colored-input:focus {
         background-color: $secondaryColor;
     }
-
+    
 }
+
+.create-password {
+    h2 {
+        border-bottom: 1px solid $accentColor;
+    }
+    border: 1px solid $accentColor;
+    border-top: none;
+}
+
+
 .need-account {
     text-align: center;
     margin-top: 36px;
