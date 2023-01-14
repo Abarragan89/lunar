@@ -5,13 +5,14 @@
 }
 #home-page h1 {
   line-height: 0.7;
-  font-size: 6rem;
-  font-weight: 700;
+  font-size: 6.5rem;
+  font-weight: 800;
   position: relative;
+  letter-spacing: 4px;
   top: 160px;
   color: #6bd0d2;
-  font-family: "Play", sans-serif;
-  -webkit-text-stroke: 4px black;
+  font-family: "Barlow Condensed", sans-serif;
+  -webkit-text-stroke: 4.5px rgb(10, 20, 18);
   -webkit-animation: appearIn 1s 5.2s both;
           animation: appearIn 1s 5.2s both;
 }

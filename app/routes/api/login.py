@@ -195,9 +195,9 @@ def forgot_password():
             db.add(new_token)
             db.commit()
 
-            msg = Message('Lunar: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
+            msg = Message('Lunaris: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
             # wanted to get rid of the 'api/forgot-password' in the request url
-            msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1] + request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunar"
+            msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1] + request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunaris"
             current_app.mail.send(msg)
     except AssertionError:
         db.rollback()
