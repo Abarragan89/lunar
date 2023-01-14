@@ -15,7 +15,6 @@ document.querySelector('#edit-active-salary-modal').addEventListener('click', (e
     }
 })
 
-
 document.querySelector('#edit-category-in-profile').addEventListener('click', (e) => {
     const isOutside = e.target.closest('.modal');
     if (!isOutside) {
@@ -213,3 +212,26 @@ function fillEditMonthlyHistoryFields(row) {
     document.getElementById('start-date').setAttribute('max', `${year}-${month}-${day}`);
     document.getElementById('start-date').setAttribute('value', start_date);
 }
+
+/////////////////// Delete User /////////////////////
+document.getElementById('delete-user-btn').addEventListener('click', function() {
+        showModal('confirm-delete-user')
+})
+
+document.querySelector('#confirm-delete-user').addEventListener('click', (e) => {
+    const isOutside = e.target.closest('.modal');
+    if (!isOutside) {
+        closeModal('confirm-delete-user');
+    }
+})
+
+document.getElementById('confirm-delete-text').addEventListener('input', function() {
+    deleteBtn = document.getElementById('perm-delete-user-btn')
+    if (this.value === 'Goodbye Lunaris') {
+        deleteBtn.disabled = false;
+        deleteBtn.classList.add('delete-btn')
+    } else {
+        deleteBtn.disabled = true;
+        deleteBtn.classList.remove('delete-btn')
+    }
+})

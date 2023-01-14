@@ -102,14 +102,12 @@
             <p>purchase</p>
         </div>
     </menu>
-
     <script src="{{url_for('static', filename='/js/modal.js')}}"></script>
     <script src="{{url_for('static', filename='/js/navigation.js')}}"></script>
     <script src="{{url_for('static', filename='/js/update-monthly.js')}}"></script>
     
-    {% endif %}
-    
+    {% else %}
     <script src="{{url_for('static', filename='/js/data-validation.js')}}"></script>
-
+    {% endif %}
 </body>
 </html>

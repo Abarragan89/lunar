@@ -1,10 +1,27 @@
 /* GLOBAL COLORS AND FONTS*/
+#confirm-delete-text {
+  background-color: rgb(13, 90, 102);
+  border-radius: 4px;
+  border: none;
+  padding: 3px 0;
+}
+
 #profile-main {
   margin-top: 20px;
   margin-bottom: 50px;
 }
+#profile-main .delete-profile-edit-salary-div {
+  align-items: flex-end;
+}
 #profile-main .user-info-section-profile {
   align-items: baseline;
+}
+#profile-main .user-info-section-profile #delete-user-btn {
+  background-color: rgb(204, 5, 5);
+  color: rgb(228, 240, 239);
+  padding: 0;
+  height: 25px;
+  width: 50px;
 }
 #profile-main #view-previous-salaries-btn {
   padding-top: 33px;

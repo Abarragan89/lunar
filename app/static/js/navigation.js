@@ -43,6 +43,12 @@ function closeMainMenu() {
     const buyMeCoffeeEl = document.getElementById('buy-me-coffee-img')
     buyMeCoffeeEl.style.opacity = '0'
 
+    if (window.location.pathname == '/dashboard') {
+        // Need to reinstate pointer events after menu closes to the dashboard charts
+        dashboardCanvasEl = document.querySelector('.slideshow-container') 
+        dashboardCanvasEl.style.pointerEvents = 'all';
+    }
+
 
 }
 
@@ -55,7 +61,7 @@ function openMainMenu() {
     document.getElementById('nav-items-main-div').style.width = '100%'
     document.getElementById('hamburger').classList.remove('fa-solid', 'fa-arrow-left')
     document.getElementById('hamburger').classList.add('fa-solid', 'fa-arrow-right')
-    document.getElementById('hamburger').style.paddingRight = `${screen.width - 20}px `;
+    document.getElementById('hamburger').style.paddingRight = `${screen.width - 15}px `;
     document.getElementById('hamburger').style.top = '0px'
     document.getElementById('hamburger').style.borderRadius = '0';
     createMainMenuElements()

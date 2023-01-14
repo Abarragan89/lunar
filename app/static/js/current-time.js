@@ -14,5 +14,7 @@ const nth = function(d) {
 const day_date = dayjs()
 const current_day_of_week = day_date.format('dddd')
 const current_date = day_date.format('D')
+const full_month = day_date.format('MMMM')
 
 document.getElementById('dashboard-current-time').textContent = `${current_day_of_week}, ${current_date}${nth(current_date)}`
+document.getElementById('current-month-in-dashboard').textContent = full_month

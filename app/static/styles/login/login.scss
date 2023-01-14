@@ -78,8 +78,20 @@
         color: black;
         margin: 20px 0;
     }
-    .create-password {
+    h2 {
         border-bottom: 1px solid $secondaryColor;
+    }
+    border: 1px solid $secondaryColor;
+    border-top: none;
+
+    .colored-input {
+        border: none;
+        background-color: $secondaryColor;
+        padding: 3px;
+        border-radius: 4px;
+    }
+    .colored-input:focus {
+        background-color: $secondaryColor;
     }
 
 }

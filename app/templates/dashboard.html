@@ -51,8 +51,7 @@
   </h2>
   {% else %}
     <h2 class='section-heading page-heading'>
-      <span>
-        {{today.strftime('%B')}}
+      <span id="current-month-in-dashboard">
       </span>
     </h2>
   {% endif %}
@@ -61,43 +60,43 @@
   {% if not activity_data and not category_data%}
   <div class="getting-started">
     <ol>
-      <li>1. Go to your profile. Enter you monthly income and customize your categories to fit your lifestyle. If your monthly salary is not consistent, leave it as zero and make a deposit everytime you get paid.</li>
+      <li>1. Go to your profile. Enter you monthly income and customize your categories to fit your lifestyle. If your monthly income is not consistent, leave it as zero and make a deposit everytime you get paid.</li>
       <li>2. Enter your steady monthly charges. These are deducted automatically every month.</li>
       <li>3. If you earn extra cash, enter it as a deposit.</li>
       <li>4. If you buy something, add a purchase.</li>
     </ol>
     <br>
-    <p>That's it! Lunar will take care of the rest. We'll keep track of your money and provide easy-to-read data so you're never left in the dark.</p>
+    <p>That's it! Lunar will take care of the rest. We'll let you know if you're over or under your monthly budget and provide easy-to-read data so you're never left in the dark.</p>
   </div>
   {% endif %}
 
   <div class='current-data-graph-div flex-box-col-sa'>
-    
-    
     <!-- Slideshow container -->
     <div class="slideshow-container">
       <!-- Full-width images with number and caption text -->
       <div class="mySlides fade">
-      <div class='flex-box-sa-wrap'>
-        {% for num in range( relevant_tag_colors | length )%}
+        <div class='flex-box-sa-wrap'>
+          {% for num in range( relevant_tag_colors | length )%}
          <a href="/categories/{{relevant_tag_names[num]}}">
            <p class="relevant-graph-tags"><span class="tag-color-square" data-color="{{relevant_tag_colors[num]}}"></span>{{relevant_tag_names[num]}}</p>
-         </a>
-        {% endfor %}
+          </a>
+          {% endfor %}
+        </div>
+        <canvas id="pieChart" width="290" height="290"></canvas>
       </div>
-      <canvas id="pieChart" width="290" height="290"></canvas>
+      
+      <div class="mySlides fade">
+        <canvas id="barChart" width="290" height="350"></canvas>
+      </div>
+      
+      {% if activity_data or category_data%}
+      <!-- Next and previous buttons -->
+      <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+      <a class="next" onclick="plusSlides(1)">&#10095;</a>
+      {% endif %}
     </div>
     
-    <div class="mySlides fade">
-      <canvas id="barChart" width="290" height="350"></canvas>
-    </div>
-
-    <!-- Next and previous buttons -->
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
   </div>
-
-</div>
   <script>
     const ctx = document.getElementById('pieChart').getContext('2d')
     const pieChart = new Chart(ctx, {

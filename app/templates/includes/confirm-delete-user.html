@@ -1,0 +1,16 @@
+<div class="modal-container" id="confirm-delete-user">
+    <div class="modal">
+        <h2 class='section-heading modal-heading'>
+            <span>
+              Confirm
+            </span>
+          </h2>
+          <br>
+          <form action="{{base_url}}/api/delete-user", method="POST">
+            <p>Are you sure you want to delete your profile? All data will be erased permanently.</p>
+            <p>Type 'Goodbye Lunaris' to confirm.</p>
+            <input type="text" id="confirm-delete-text" name="confirm-delete-text"><br>
+            <button id="perm-delete-user-btn" type="submit" class="button-30" disabled>Permanently Delete</button>
+          </form>
+    </div>
+</div>

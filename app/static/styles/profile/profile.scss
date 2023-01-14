@@ -1,10 +1,28 @@
 @import '../utilities/variables.scss';
 
+#confirm-delete-text {
+    background-color: $secondaryColor;
+    border-radius: 4px;
+    border: none;
+    padding: 3px 0;
+}
+
 #profile-main {
     margin-top: 20px;
     margin-bottom: 50px;
+
+    .delete-profile-edit-salary-div {
+        align-items: flex-end;
+    }
     .user-info-section-profile {
         align-items: baseline;
+        #delete-user-btn {
+            background-color: $redMsg;
+            color: $offWhite;
+            padding: 0;
+            height: 25px;
+            width: 50px;
+        }
     }
     #view-previous-salaries-btn {
         padding-top: 33px;

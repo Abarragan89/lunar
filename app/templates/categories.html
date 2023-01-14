@@ -23,14 +23,19 @@
         <div class="flex-box-col-se">
             <p id="category-label-in-category-page">{{category.tag_name}} <span class="color-block" style="background:{{category.tag_color}}"></span></p> 
             
-            <p >Amount Spent: <span class="total-amount-category"> -${{total}}</span></p>
+            <p >Monthly Total: <span class="total-amount-category"> -${{total}}</span></p>
         </div>
         <div class="flex-box-col-se">
             <a href="#" id="edit-category-btn" class="button-30">Edit</a>
         </div>
     </div>
 
-    
+    {% if allExpenses %}
+    <h2 class='section-heading'>
+      <span>
+        Purchases
+      </span>
+    </h2>
     <div class="main-activity-div">
         {% for data in allExpenses %}
         <a class="edit-activity-btn">
@@ -50,11 +55,46 @@
                 </p>
                 <p class="expense-description">{{ data[2] }}</p>
               </div>
-              <p>${{ data[1] }}</p>
+              <p>-${{ data[1] }}</p>
           </div>
         </a>
         {% endfor%} 
     </div>
+    {% endif %}
+
+    {% if monthly_charge_data %}
+    <h2 class='section-heading'>
+      <span>
+        Monthly Charges
+      </span>
+    </h2>
+    <div class="main-activity-div">
+    {% for data in monthly_charge_data %}
+
+    <a class="edit-monthly-charge-btn">
+      <div class="flex-box-sb activity-link" data-type="expense">
+        
+        <div class='flex-box-col-se date-div'
+        data-current-date="{{(data[6] | string)[:4]}}-{{(data[6] | string)[4:]}}">
+            <p>start date:</p>
+            <p>{{convertExpirationDate(data[6])}}</p>
+          </div>
+          <div class="flex-box-col-sa activity-link-description">
+            <p
+            class="activity-link-tag"
+            data-monthly-id="{{data[5]}}"
+            data-monthly-tag-id="{{data[4]}}"
+            >
+            {{ data[3] }}
+          </p>
+          <p class="expense-description">{{ data[2] }}</p>
+        </div>
+        <p>-${{ data[1] }}</p>
+      </div>
+    </a>
+    {% endfor %}
+  </div>
+    {% endif %}
 
 </main>
 <script src="{{url_for('static', filename='/js/edit-category.js')}}"></script>

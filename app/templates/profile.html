@@ -16,6 +16,7 @@
 {% include 'includes/new-salary.html' %}
 {% include 'includes/confirm-salary-removal.html' %}
 {% include 'includes/edit-expired-charge-modal.html'%}
+{% include 'includes/confirm-delete-user.html' %}
 
 <main id='profile-main'>
     <a href="{{url_for('site_dashboard.dashboard')}}"><i class="fa-solid fa-house"></i></a>
@@ -52,14 +53,9 @@
           </div>
       </div>
 
-      <div class="flex-box-col-se">
-        <form action="" class="zero-opacity">
-          <label for="dark-light-mode"></label>
-          <input type="hidden" id="dark-light-mode" name="dark-light-mode">
-        </form>
-
+      <div class="flex-box-col-se delete-profile-edit-salary-div">
+        <button id="delete-user-btn" class="button-30 delete-btn">Delete</button>
         <a href="{{url_for('site_profile.edit_all_salaries')}}" id="view-previous-salaries-btn">edit past incomes</a>
-
       </div>
     </div>
     
