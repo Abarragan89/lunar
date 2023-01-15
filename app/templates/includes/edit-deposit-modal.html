@@ -6,11 +6,15 @@
       </span>
     </h2>
     <form action="/api/edit-deposit" method="POST">
-      <span class="input-symbol-dollar">
-        <input type="number" class="input-amount-modal" min="0" name="amount" placeholder="Amount" maxlength="50" id="current-deposit-amount" step="0.01" />
-      </span>
+      <div class="flex-box-sb">
+        <div>
+          <span class="input-symbol-dollar">
+            <input type="number" class="input-amount-modal" min="0" name="amount" placeholder="Amount" maxlength="50" id="current-deposit-amount" step="0.01" />
+          </span>
+        </div>
+        <input type="date" id="deposit-date" name="deposit-date">
+      </div>
       <input type="hidden" name="cash-id" id="cash-id">
-      <input type="date" id="deposit-date" name="deposit-date">
       <textarea name="money-description" id="current-deposit-description" placeholder="Description(optional)"></textarea>
     <div class="flex-box-sa reverse-row">
         <button type="submit" class="button-30">Update</button>
