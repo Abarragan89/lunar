@@ -53,7 +53,16 @@ def edit_category():
     except:
         db.rollback()
         return render_template('error-page.html', message="Tag not added.")
-    return redirect(request.referrer)
+    
+    # if they edited the name in categories, the url will need to change dynamically to avoid error
+    if 'redirect-url' in data:
+        currentURL = request.referrer
+        currentURL = currentURL.split('/')
+        currentURL[len(currentURL) - 1] = data['category-name']
+        newURL = '/'.join(currentURL)
+        return redirect(newURL)
+    else:
+        return redirect(request.referrer)
 
 
 # Inactivate Category

@@ -24,8 +24,15 @@ function getCurrentDate(id) {
     let month = today.getMonth() + 1;
     month = String(month).padStart(2, '0')
     day = String(day).padStart(2, '0')
-    document.getElementById(id).setAttribute('max', `${year}-${month}-${day}`);
-    document.getElementById(id).setAttribute('value', `${year}-${month}-${day}`);
+
+    // charge dates are only year and month
+    if (id === 'charge-date') {
+        document.getElementById(id).setAttribute('max', `${year}-${month}`);
+        document.getElementById(id).setAttribute('value', `${year}-${month}`);
+    } else {
+        document.getElementById(id).setAttribute('max', `${year}-${month}-${day}`);
+        document.getElementById(id).setAttribute('value', `${year}-${month}-${day}`);
+    }
 }
 
 // Give each activity row ability to open modal and call function to fill modal with data
@@ -127,9 +134,9 @@ function fillEditMonthlyFields(row) {
     const currentProductName = row.children[0].children[1].children[0].nextElementSibling.textContent;
     let currentProductPrice = row.children[0].children[2].textContent;
     currentProductPrice = currentProductPrice.slice(2);
-    const current_date = row.children[0].children[0].getAttribute('data-current-date');
+    currentProductPrice = currentProductPrice.replaceAll(',', '')
 
-    console.log(currentProductId, currentProductName, currentProductPrice, current_date)
+    const current_date = row.children[0].children[0].getAttribute('data-current-date');
 
     document.getElementById('current-monthly-price').value = currentProductPrice;
     document.getElementById('current-monthly-tag').value = currentProductTagId;
@@ -151,6 +158,7 @@ function fillEditExpenseFields(row) {
     const currentProductName = row.children[0].children[1].children[0].nextElementSibling.textContent;
     let currentProductPrice = row.children[0].children[2].textContent;
     currentProductPrice = currentProductPrice.slice(2);
+    currentProductPrice = currentProductPrice.replaceAll(',', '')
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
 
     document.getElementById('current-product-price').value = currentProductPrice;
@@ -170,6 +178,7 @@ function fillEditDepositFields(row) {
     const currentCashName = row.children[0].children[1].children[0].nextElementSibling.textContent;
     let currentCashPrice = row.children[0].children[2].textContent;
     currentCashPrice = currentCashPrice.slice(2);
+    currentCashPrice = currentCashPrice.replaceAll(',', '')
     const currentCashId = row.children[0].children[1].children[0].getAttribute('data-cash-id');
     const current_date = row.children[0].children[0].getAttribute('data-current-date');
 

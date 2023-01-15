@@ -762,7 +762,7 @@ menu div:not(:first-child) {
   width: 95%;
   color: rgb(228, 240, 239);
   border-radius: 5px;
-  padding: 3px;
+  padding: 5px;
   margin-top: 18px;
   text-align: center;
 }
@@ -779,7 +779,8 @@ menu div:not(:first-child) {
   -webkit-text-fill-color: rgb(228, 240, 239) !important;
 }
 .modal-container .modal input[type=number] {
-  width: 94px;
+  width: 100px;
+  padding-left: 10px;
 }
 .modal-container .modal .add-expense-date {
   align-items: flex-end;
@@ -796,7 +797,7 @@ menu div:not(:first-child) {
   left: 8px;
 }
 .modal-container .modal #current-product-price, .modal-container .modal #expense-amount-input, .modal-container .modal .input-amount-modal {
-  width: 80px;
+  width: 100px;
 }
 .modal-container .modal button {
   margin-top: 20px;

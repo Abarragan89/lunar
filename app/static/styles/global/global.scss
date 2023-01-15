@@ -371,7 +371,7 @@ menu div:not(:first-child) {
         width: 95%;
         color: $offWhite;
         border-radius:5px;
-        padding: 3px;
+        padding: 5px;
         margin-top: 18px;
         text-align: center;
       }
@@ -389,7 +389,8 @@ menu div:not(:first-child) {
         -webkit-text-fill-color: $offWhite !important;
       }
       input[type="number"] {
-        width: 94px;
+        width: 100px;
+        padding-left: 10px;
       }
       
       .add-expense-date {
@@ -407,7 +408,7 @@ menu div:not(:first-child) {
         left: 8px;
       }
       #current-product-price, #expense-amount-input, .input-amount-modal {
-        width: 80px;
+        width: 100px;
       }
       
       button {

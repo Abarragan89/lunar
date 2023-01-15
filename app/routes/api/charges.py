@@ -4,6 +4,32 @@ from app.db import start_db_session
 
 bp = Blueprint('api/charges', __name__, url_prefix='/api')
 
+# Add an expense
+@bp.route('/add-monthly-charge', methods=['POST'])
+def add_monthly_charge():
+    data = request.form
+    db = start_db_session()
+    start_date = data['expense-date']
+    expiration_limit = int(start_date.split('-')[0] + start_date.split('-')[1])
+    try:
+        newMonthly = MonthlyCharge(
+            description = data['product-name'].strip(),
+            tag_id = data['product-category'],
+            user_id = session['user_id'],
+            amount = data['product-price'].strip(),
+            time_created = f"{data['expense-date']}-01",
+            start_date = expiration_limit
+        )
+        db.add(newMonthly)
+        db.commit()
+    except AssertionError:
+        db.rollback()
+        return render_template('error-page.html', message="Missing fields. Please try again")
+    except Exception:
+        db.rollback()
+        return render_template('error-page.html', message="Expense not added.")
+    return redirect(request.referrer)
+
 
 # Update Monthly Bill (completely change history)
 @bp.route('/complete-edit-monthly-charge', methods=['POST'])

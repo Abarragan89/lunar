@@ -127,7 +127,7 @@ def signup_verified():
                 'Travel', 
                 'Shopping', 
                 'Alcohol', 
-                'Subscriptions.'
+                'Subscriptions'
                 ]
         for num in range(11):
             newTag = Tag(
