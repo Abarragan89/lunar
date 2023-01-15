@@ -12,6 +12,7 @@ load_dotenv()
 
 # Helper functions
 def format_date_ending(date):
+    """Takes a number and give it's two-letter ending"""
     date_num = int(date)
     last_digit = date_num % 10
     if last_digit == 1 and date_num != 11:
@@ -24,14 +25,17 @@ def format_date_ending(date):
         return 'th'
 
 def rgbToHex(rgb):
+    """Changes rbg colors to hex values"""
     color_nums = rgb[rgb.find("(")+1:rgb.find(")")].split(',')
     return '#%02x%02x%02x' % (int(color_nums[0]), int(color_nums[1]), int(color_nums[2]))
 
 def convertExpirationDate(int):
+    """creates a number from year and month for expiration"""
     string_int = str(int)
     return f"{string_int[4:]}/{string_int[:4]}"
 
 def format_date(integer, option):
+    """Formats a new date object into whatever option you give it"""
     yearMonthString = str(integer)
     salaryYear = int(yearMonthString[:4])
     salaryMonth = int(yearMonthString[4:])

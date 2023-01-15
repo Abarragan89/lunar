@@ -41,7 +41,7 @@
             <div class="flex-box-sb salary-div">
               <p>Income:</p>
               {% if active_salary %}
-              <p>${{active_salary.salary_amount}}<span class="small-text">/month</span></p>
+              <p>{{"${:,.2f}".format(active_salary.salary_amount)}}<span class="small-text">/month</span></p>
               {% else %}
               <p>none active</p>
               {% endif %}
@@ -120,7 +120,7 @@
           </p>
           <p class="expense-description">{{ data[2] }}</p>
         </div>
-        <p>-${{ data[1] }}</p>
+        <p>-{{ "${:,.2f}".format(data[1])}}</p>
       </div>
     </a>
     {% endfor %}
@@ -149,7 +149,7 @@
             >
               {{ data[3] }}
             </p>
-            <p>-${{ data[1] }}</p>
+            <p>-{{ "${:,.2f}".format(data[1])}}</p>
           </div>
           <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
           </div>

@@ -26,14 +26,14 @@
         {% if (total_monthly_expenses + auto_deductions) > (active_salary + user_cash)%}
         Over:<br />
         <span id="money-left-negative" 
-          >-${{(total_monthly_expenses +
-          auto_deductions) - (active_salary + user_cash)}}</span
+          >-{{"${:,.2f}".format((total_monthly_expenses +
+          auto_deductions) - (active_salary + user_cash))}}</span
         >
           {% else %}
         Money Remaining:<br />
         <span id="money-left-positive"
-          >${{ (active_salary + user_cash) - (total_monthly_expenses +
-          auto_deductions) }}</span
+          >{{ "${:,.2f}".format((active_salary + user_cash) - (total_monthly_expenses +
+          auto_deductions)) }}</span
         >
         {% endif %}
     </p>
@@ -196,6 +196,7 @@
       Recent Activity
     </span>
   </h2>
+  <a href="" id="see-all-data-link">See all data</a>
   <div class="main-activity-div">
     {% for data in activity_data %}
     <a class="edit-activity-btn">
@@ -220,12 +221,12 @@
             </p>
             <p class="expense-description">{{ data[2] }}</p>
           </div>
-          <p>-${{ data[1] }}</p>
+          <p>-{{ "${:,.2f}".format(data[1]) }}</p>
             {% else%}
             <p class="activity-link-deposit" data-cash-id="{{data[3]}}">Deposit</p>
             <p class="expense-description">{{ data[2] }}</p>
           </div>
-          <p class="positive-color">+${{ data[1] }}</p>
+          <p class="positive-color">+{{ "${:,.2f}".format(data[1]) }}</p>
           {% endif %}
       </div>
     </a>
@@ -260,7 +261,7 @@
           </p>
           <p class="expense-description">{{ data[2] }}</p>
         </div>
-        <p>-${{ data[1] }}</p>
+        <p>-{{"${:,.2f}".format(data[1])}}</p>
       </div>
     </a>
     {% endfor %}

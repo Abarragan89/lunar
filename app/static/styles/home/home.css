@@ -248,6 +248,17 @@
   display: inline-block;
 }
 
+#see-all-data-link {
+  color: #6bd0d2;
+  text-decoration: underline;
+  position: relative;
+  display: block;
+  text-align: right;
+  top: -17px;
+  font-size: 0.9rem;
+  right: 5%;
+}
+
 .main-activity-div .activity-link {
   text-align: center;
   align-items: center;

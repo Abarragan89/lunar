@@ -37,14 +37,14 @@ def dashboard():
             .filter(Tag.active == True)
             .all()
         )
-        # Get all purchases with joined with tags for activity display will be mixed with deposit data
+        # Get last 7 purchases with joined with tags for activity display; will be mixed with add_cash data
         purchase_data = db.query(Product.time_created, Product.amount, Product.description, Tag.tag_name, Tag.id, Product.id
             ).filter(Product.user_id == user_id
             ).join(Tag
             ).order_by(desc(Product.time_created)
             ).limit(7).all()
         
-        # Get last 20 cash addition to display
+        # Get last 5 cash addition to display
         add_cash_data = db.query(Cash.time_created, Cash.amount,  Cash.description, Cash.id
             ).filter(Cash.user_id == user_id
             ).order_by(desc(Cash.time_created)

@@ -23,15 +23,15 @@
   <a href="{{url_for('site_history.redirect_for_clear_history_year') }}" class="clickable-text">Year data</a>
   <div class="monthly-calculation">
     <div class="flex-box-col-sa money-labels">
-      <h2>Salary:</h2>
-      <h2>Cash:</h2>
+      <h2>Income:</h2>
+      <h2>Deposits:</h2>
     </div>
     <div class="flex-box-col-sa">
       <div class="flex-box-col-sa positive-money">
-        <h2>${{salary}}</h2>
-        <h2 class="money-col">${{all_cash_total}}</h2>
+        <h2>${{ "${:,.2f}".format(salary)}}</h2>
+        <h2 class="money-col">{{ "${:,.2f}".format(all_cash_total)}}</h2>
       </div>
-      <h2 class="positive-money">${{salary + all_cash_total}}</h2>
+      <h2 class="positive-money">${{"${:,.2f}".format(salary + all_cash_total)}}</h2>
     </div>
 
 
@@ -40,17 +40,17 @@
       <h2>Purchases:</h2>
     </div>
     <div class="flex-box-col-sa negative-money">
-      <h2>-${{total_monthly_expenses}}</h2>
-      <h2 class="money-col">-${{all_purchases_total}}</h2>
-      <h2>${{total_monthly_expenses + all_purchases_total}}</h2>
+      <h2>-{{ "${:,.2f}".format(total_monthly_expenses)}}</h2>
+      <h2 class="money-col">-{{ "${:,.2f}".format(all_purchases_total)}}</h2>
+      <h2>{{ "${:,.2f}".format(total_monthly_expenses + all_purchases_total)}}</h2>
     </div>
   </div>
 
 
   {% if (salary + all_cash_total) > (total_monthly_expenses + all_purchases_total)%}
-  <h4>Ending Balance: <span class="positive-money">${{(salary + all_cash_total) - (total_monthly_expenses + all_purchases_total)}}</span></h4>
+  <h4>Ending Balance: <span class="positive-money">{{ "${:,.2f}".format((salary + all_cash_total) - (total_monthly_expenses + all_purchases_total))}}</span></h4>
   {% else %}
-  <h4>Ending Blance: <span class="ending-balance negative-money">-${{(total_monthly_expenses + all_purchases_total) - (salary + all_cash_total)}}</span></h4>
+  <h4>Ending Blance: <span class="ending-balance negative-money">-{{ "${:,.2f}".format((total_monthly_expenses + all_purchases_total) - (salary + all_cash_total))}}</span></h4>
   {% endif %}
 
   <div class='current-data-graph-div flex-box-col-sa'>
@@ -114,7 +114,7 @@
               >
                 {{ data[3] }}
               </p>
-              <p>-${{ data[1] }}</p>
+              <p>-{{"${:,.2f}".format(data[1]) }}</p>
             </div>
             <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
             </div>
@@ -147,7 +147,7 @@
               >
                 {{ data[3] }}
               </p>
-              <p>-${{ data[1] }}</p>
+              <p>-{{ "${:,.2f}".format(data[1]) }}</p>
             </div>
             <div data-current-date="{{data[0].strftime('%Y')}}-{{data[0].strftime('%m')}}-{{data[0].strftime('%d')}}">
             </div>
@@ -188,7 +188,7 @@
             </p>
             <p class="expense-description">{{ data[2] }}</p>
           </div>
-          <p>-${{ data[1] }}</p>
+          <p>-{{ "${:,.2f}".format(data[1]) }}</p>
       </div>
     </a>
     {% endfor%} 
@@ -215,7 +215,7 @@
             <p class="activity-link-deposit" data-cash-id="{{data[3]}}">Deposit</p>
             <p class="expense-description">{{ data[2] }}</p>
           </div>
-          <p class="positive-color">+${{ data[1] }}</p>
+          <p class="positive-color">+{{ "${:,.2f}".format(data[1]) }}</p>
       </div>
     </a>
     {% endfor%} 

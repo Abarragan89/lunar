@@ -192,6 +192,8 @@
         color: $offWhite;
     }
 }
+
+
 // this is graph data that should be available to all pages for all pie charts
 .current-data-graph-div {
     align-items: center;
@@ -211,7 +213,19 @@
 }
 
 
+#see-all-data-link {
+    color: $accentColor;
+    text-decoration: underline;
+    position: relative;
+    display: block;
+    text-align: right;
+    top: -17px;
+    font-size: .9rem;
+    right: 5%;
+}
+
 .main-activity-div {
+
     
     .activity-link {
         text-align: center;
