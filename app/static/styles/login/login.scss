@@ -68,6 +68,11 @@
         -webkit-box-shadow: 0 0 0 1000px $primaryColor inset !important;
         -webkit-text-fill-color: $offWhite !important;
     }
+
+    .colored-input:-webkit-autofill {
+        -webkit-box-shadow: 0 0 0 1000px $secondaryColor inset !important;
+        -webkit-text-fill-color: $offWhite !important;
+    }
     
     ::placeholder {
         color: $gray;
@@ -84,6 +89,9 @@
         background-color: $secondaryColor;
         padding: 3px;
         border-radius: 4px;
+    }
+    .colored-input:-webkit-autofill {
+        background-color: $secondaryColor;
     }
     .colored-input:focus {
         background-color: $secondaryColor;

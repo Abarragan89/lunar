@@ -85,16 +85,24 @@ a {
   color: rgb(228, 240, 239);
 }
 
-#buy-me-coffee-img {
+#link-to-coffee {
+  text-align: center;
+  color: rgb(199, 195, 195);
+  font-size: 0.9rem;
+  font-style: italic;
   position: absolute;
-  height: 40px;
-  width: 140px;
   opacity: 0;
-  right: 10px;
+  display: none;
   pointer-events: none;
-  top: 60px;
+  right: 10px;
+  top: 50px;
   z-index: 999;
   transition: 0.15s;
+}
+
+#buy-me-coffee-img {
+  height: 30px;
+  width: 110px;
 }
 
 nav {

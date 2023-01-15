@@ -108,12 +108,12 @@ def signup_verified():
                 'rgb(160, 153, 30)', 
                 'rgb(30, 160, 32)', #green
                 'rgb(30, 114, 160)',  
-                'rgb(30, 114, 160)',
+                'rgb(30, 34, 160)',
                 'rgb(75, 30, 160)',
                 'rgb(125, 30, 160)',
                 'rgb(160, 30, 134)',
                 'rgb(125, 54, 18)',
-                'rgb(125, 54, 18)'
+                'rgb(153, 187, 27)'
                 ]
         # give user basic categories
         tag_names = [
@@ -127,7 +127,7 @@ def signup_verified():
                 'Travel', 
                 'Shopping', 
                 'Alcohol', 
-                'Misc.'
+                'Subscriptions.'
                 ]
         for num in range(11):
             newTag = Tag(

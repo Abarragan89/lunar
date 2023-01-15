@@ -40,8 +40,11 @@ function closeMainMenu() {
     document.getElementById('hamburger').style.borderRadius = '8px 0px 0px 8px';
 
     // take out in 'Buy me a coffee' link
-    const buyMeCoffeeEl = document.getElementById('buy-me-coffee-img')
+    const buyMeCoffeeEl = document.getElementById('link-to-coffee')
+    buyMeCoffeeEl.style.display = 'none'
     buyMeCoffeeEl.style.opacity = '0'
+    buyMeCoffeeEl.style.pointerEvents = 'none'
+    buyMeCoffeeEl.style.right = '-300px'
 
     if (window.location.pathname == '/dashboard') {
         // Need to reinstate pointer events after menu closes to the dashboard charts
@@ -171,9 +174,11 @@ function createMainMenuElements() {
     historyBtn.setAttribute('id', 'history-nav-btn');
     navCategoryDiv.insertAdjacentElement('afterEnd', historyBtn);
 
-    // bring in 'Buy me a coffee' link
-    const buyMeCoffeeEl = document.getElementById('buy-me-coffee-img')
-    buyMeCoffeeEl.style.opacity = '1'
+    const buyMeCoffeeEl = document.getElementById('link-to-coffee')
+    buyMeCoffeeEl.style.opacity = '.75'
+    buyMeCoffeeEl.style.right = '10px'
+    buyMeCoffeeEl.style.display = 'inline'
+    buyMeCoffeeEl.style.pointerEvents = 'all';
 }
 
 function closeMainMenuElements() {
