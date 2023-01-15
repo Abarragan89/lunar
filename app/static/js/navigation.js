@@ -46,13 +46,6 @@ function closeMainMenu() {
     buyMeCoffeeEl.style.pointerEvents = 'none'
     buyMeCoffeeEl.style.right = '-300px'
 
-    if (window.location.pathname == '/dashboard') {
-        // Need to reinstate pointer events after menu closes to the dashboard charts
-        dashboardCanvasEl = document.querySelector('.slideshow-container') 
-        dashboardCanvasEl.style.pointerEvents = 'all';
-    }
-
-
 }
 
 function openMainMenu() {
@@ -69,11 +62,6 @@ function openMainMenu() {
     document.getElementById('hamburger').style.borderRadius = '0';
     createMainMenuElements()
     addListenerToCategories()
-    if (window.location.pathname == '/dashboard') {
-        // Need to reinstate pointer events after menu closes to the dashboard charts
-        dashboardCanvasEl = document.querySelector('.slideshow-container') 
-        dashboardCanvasEl.style.pointerEvents = 'none';
-    }
 }
 
 

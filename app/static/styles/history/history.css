@@ -91,6 +91,8 @@
   border: 1px solid #6bd0d2;
   border-left: none;
   border-right: none;
+  border-radius: none;
+  width: 90px;
 }
 #history-main-year #choose-year-div {
   position: -webkit-sticky;
