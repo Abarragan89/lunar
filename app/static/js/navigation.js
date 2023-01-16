@@ -45,7 +45,6 @@ function closeMainMenu() {
     buyMeCoffeeEl.style.opacity = '0'
     buyMeCoffeeEl.style.pointerEvents = 'none'
     buyMeCoffeeEl.style.right = '-300px'
-
 }
 
 function openMainMenu() {

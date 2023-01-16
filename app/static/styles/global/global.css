@@ -716,14 +716,13 @@ menu div:not(:first-child) {
 }
 
 .modal-container {
-  opacity: 0;
+  display: none;
   background-color: rgba(0, 0, 0, 0.709);
   position: absolute;
   z-index: 900;
   width: 100%;
   height: 100%;
   pointer-events: none;
-  transition: 0.3s;
 }
 .modal-container .modal {
   width: 85%;
@@ -731,11 +730,12 @@ menu div:not(:first-child) {
   border-radius: 4px;
   padding: 20px 10px;
   position: relative;
-  top: 50px;
+  top: -300px;
   background-color: #031920;
   margin: 0 auto;
   color: white;
   border: 1px solid #6bd0d2;
+  transition: 0.2s;
 }
 .modal-container .modal .modal-heading {
   margin: 15px 0;
@@ -838,6 +838,11 @@ menu div:not(:first-child) {
 
 #add-expense-btn:hover .modal-container {
   transition: 0.2s cubic-bezier(0, 0, 1, 1);
+}
+
+.show-modal {
+  display: block;
+  pointer-events: all;
 }
 
 .show-modal {

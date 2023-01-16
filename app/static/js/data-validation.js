@@ -12,11 +12,7 @@ document.getElementById('category-form').addEventListener('submit', function(e) 
 })
 
 
-if (window.location.pathname === '/') {
-
-} else if (window.location.pathname === '/login') {
-
-} else if (window.location.pathname === '/signin') {
+if (window.location.pathname === '/signin') {
     document.getElementById('signup-form').addEventListener('submit', function(e) {
         const errorEl = document.getElementById('signup-error-msg')
         console.log(errorEl)
@@ -29,11 +25,6 @@ if (window.location.pathname === '/') {
     document.getElementById('signup-email').addEventListener('keydown', function() {
         const errorEl = document.getElementById('signup-error-msg')
         errorEl.textContent = "";
-    })
-    document.getElementById('signup-btn').addEventListener('click', function() {
-        setTimeout(() => {
-            this.disabled = true;
-        }, 10)
     })
 }
 

@@ -113,15 +113,21 @@ document.querySelector('#edit-monthly-charge').addEventListener('click', (e) => 
 
 // --- show / close function -- //
 function showModal(id) {
-    document.getElementById(id).classList.add('show-modal');
-    document.getElementById(id).style.top = `${window.scrollY}px`;
+    const modalContainerEl = document.getElementById(id)
+    modalContainerEl.classList.add('show-modal');
+    modalContainerEl.style.top = `${window.scrollY}px`;
+    modalContainerEl.children[0].style.top = '50px'
     document.documentElement.style.overflow = 'hidden';
     document.body.scroll = "no";
 }
 function closeModal(id) {
-    document.getElementById(id).classList.remove('show-modal');
-    document.documentElement.style.overflow = 'auto';
-    document.body.scroll = "yes";
+    const modalContainerEl = document.getElementById(id)
+    modalContainerEl.children[0].style.top = '-500px'
+    setTimeout(() => {
+        modalContainerEl.classList.remove('show-modal');
+        document.documentElement.style.overflow = 'auto';
+        document.body.scroll = "yes";
+    }, 200)
 }
 
 function fillEditMonthlyFields(row) {
