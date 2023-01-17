@@ -126,7 +126,7 @@ def signup_verified():
                 'Investments', 
                 'Travel', 
                 'Shopping', 
-                'Alcohol', 
+                'Automotive', 
                 'Subscriptions'
                 ]
         for num in range(11):

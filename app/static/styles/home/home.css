@@ -282,8 +282,10 @@
   flex: 1;
 }
 .main-activity-div .activity-link .activity-link-description .expense-description {
-  font-size: 0.85rem;
-  padding: 0 15px;
+  font-size: 0.835rem;
+  padding: 0 10px;
+  padding-top: 2px;
+  color: rgb(199, 195, 195);
   line-height: 0.9rem;
   font-style: italic;
 }

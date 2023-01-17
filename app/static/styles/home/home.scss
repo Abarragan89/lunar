@@ -251,8 +251,10 @@
             flex: 1;
 
             .expense-description {
-                font-size: .85rem;
-                padding: 0 15px;
+                font-size: .835rem;
+                padding: 0 10px;
+                padding-top: 2px;
+                color: $gray;
                 line-height: .9rem;
                 font-style: italic;
             }
