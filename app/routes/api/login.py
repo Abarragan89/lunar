@@ -97,7 +97,6 @@ def signup_verified():
         session['loggedIn'] = True
         session.permanent = True
 
-
         #delete temp user
         db.delete(temp_user)
         db.commit()
