@@ -95,6 +95,7 @@ def signup_verified():
         session.clear()
         session['user_id'] = newUser.id
         session['loggedIn'] = True
+        session.permanent = True
 
 
         #delete temp user
@@ -171,6 +172,7 @@ def login():
     session.clear()
     session['user_id'] = user.id
     session['loggedIn'] = True
+    session.permanent = True
 
     return redirect('/dashboard')
 
