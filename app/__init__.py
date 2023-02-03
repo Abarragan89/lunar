@@ -46,7 +46,6 @@ def format_date(integer, option):
         return f'{newDateTimeObj.strftime("%b")}/{newDateTimeObj.strftime("%Y")}'
 
 
-
 # Creating App
 def create_app():
     # set up app config

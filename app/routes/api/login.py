@@ -59,7 +59,7 @@ def signup():
         db.commit()
         if newUser:
             msg = Message('Lunaris: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
-            msg.body = f"Just one more step,\nClick the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n -Lunaris"
+            msg.body = f"Just one more step,\nUse the link below to verify your account and take ownership of your finances!\nLink will expire in 2 minutes.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n -Lunaris"
             current_app.mail.send(msg)
     except AssertionError:
         db.rollback()
