@@ -74,9 +74,7 @@ def signup():
             sender_email = "anthony.bar.89@gmail.com"
             receiver_email = newUser.email
             password = os.getenv('GOOGLE_PASSWORD')
-            message = """\
-            Subject: Hi there
-            This message is sent from Python."""
+            message = f"Lunaris Verification\n\n Just one more step,\nUse the link below to verify your account\n {request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n -Lunaris"
             context = ssl.create_default_context()
             with smtplib.SMTP(smtp_server, port) as server:
                 server.starttls(context=context)
