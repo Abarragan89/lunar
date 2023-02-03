@@ -64,17 +64,12 @@ def signup():
         db.add(newUser)
         db.commit()
         if newUser:
-            # msg = Message('Lunaris: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
-            # verificationLink = f"{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}"
-            # msg.body = f"Use the link below to verify your account\n  {request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n -Lunaris"
-            # msg.html = f"<p>Just one more step,</p>\n<p>Use the link below to verify your account and take ownership of your finances!</p>\n\n <a href='{verificationLink}'></a>\n -Lunaris"
-            # current_app.mail.send(msg)
-            port = 587  # For starttls
+            port = 587
             smtp_server = "smtp.gmail.com"
             sender_email = "anthony.bar.89@gmail.com"
             receiver_email = newUser.email
             password = os.getenv('GOOGLE_PASSWORD')
-            message = f"Lunaris Verification\n\n Just one more step,\nUse the link below to verify your account\n {request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n -Lunaris"
+            message = f"Subject:Lunaris Verification\n\nJust one more step,\nUse the link below to verify your account\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n\n-Lunaris"
             context = ssl.create_default_context()
             with smtplib.SMTP(smtp_server, port) as server:
                 server.starttls(context=context)
