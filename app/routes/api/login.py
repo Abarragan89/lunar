@@ -207,11 +207,23 @@ def forgot_password():
             )
             db.add(new_token)
             db.commit()
+            # send Email
+            port = 587
+            smtp_server = "smtp.gmail.com"
+            sender_email = "anthony.bar.89@gmail.com"
+            receiver_email = user_email
+            password = os.getenv('GOOGLE_PASSWORD')
+            message = f"Subject:Lunaris New Password\n\nLooks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunaris"
+            context = ssl.create_default_context()
+            with smtplib.SMTP(smtp_server, port) as server:
+                server.starttls(context=context)
+                server.login(sender_email, password)
+                server.sendmail(sender_email, receiver_email, message)
 
-            msg = Message('Lunaris: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
-            # wanted to get rid of the 'api/forgot-password' in the request url
-            msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunaris"
-            current_app.mail.send(msg)
+            # msg = Message('Lunaris: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
+            # # wanted to get rid of the 'api/forgot-password' in the request url
+            # msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunaris"
+            # current_app.mail.send(msg)
     except AssertionError:
         db.rollback()
         return render_template('error-page.html', message="Missing fields. Please try again")
