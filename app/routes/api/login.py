@@ -2,9 +2,7 @@ from flask import Blueprint, request, session, redirect, render_template, curren
 import datetime
 from app.models import User, Tag, TempUser, ConfirmationToken
 from app.db import start_db_session
-from flask_mail import Message
 import uuid
-
 from dotenv import load_dotenv
 load_dotenv()
 import smtplib, ssl

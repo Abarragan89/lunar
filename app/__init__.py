@@ -4,9 +4,7 @@ import os
 from app.routes import login, categories, expense, deposit, profile, charges
 from app.routes import site_login, dashboard, site_profile, site_categories, site_history, error_page
 from app.db import init_db
-from flask_mail import Mail
 from datetime import date
-
 
 load_dotenv()
 
@@ -54,14 +52,6 @@ def create_app():
     app.config.from_mapping(
         SECRET_KEY=os.getenv('SESSION_SECRET')
     )
-
-    # Mail configurations
-    app.config['MAIL_SERVER']='smtp.gmail.com'
-    app.config['MAIL_PORT'] = 587
-    app.config['MAIL_USERNAME'] = os.getenv('GOOGLE_USER')
-    app.config['MAIL_PASSWORD'] = os.getenv('GOOGLE_PASSWORD')
-    app.config['MAIL_USE_TLS'] = True
-    app.mail = Mail(app)
 
     #register routes
     app.register_blueprint(login)
