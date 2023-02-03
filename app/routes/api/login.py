@@ -59,9 +59,9 @@ def signup():
         db.commit()
         if newUser:
             msg = Message('Lunaris: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [newUser.email])
-            verificationLink = f"{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}"
-            # msg.body = f"Just one more step,\nUse the link below to verify your account and take ownership of your finances!\n\n  {request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n -Lunaris"
-            msg.body = f"<p>Just one more step,</p>\n<p>Use the link below to verify your account and take ownership of your finances!</p>\n\n <a href='{verificationLink}'> Click Here </a>\n -Lunaris"
+            # verificationLink = f"{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}"
+            msg.body = f"Just one more step,\nUse the link below to verify your account and take ownership of your finances!\n\n  {request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n -Lunaris"
+            msg.html = f"<p>Just one more step,</p>\n<p>Use the link below to verify your account and take ownership of your finances!</p>\n\n <a href='{verificationLink}'> Click Here </a>\n -Lunaris"
             current_app.mail.send(msg)
     except AssertionError:
         db.rollback()
