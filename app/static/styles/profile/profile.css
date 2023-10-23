@@ -183,7 +183,6 @@
   text-decoration: none;
   transition: box-shadow 0.15s, transform 0.15s;
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;

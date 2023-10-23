@@ -5,7 +5,7 @@ from app.db import start_db_session
 import uuid
 from dotenv import load_dotenv
 load_dotenv()
-import smtplib, ssl
+import smtplib, ssl, certifi
 import os
 
 
@@ -40,7 +40,6 @@ def signup():
             email = data['email'].strip(),
             )
     except Exception as e:
-        print(e)
         db.rollback()
         return render_template('signup-fail.html', 
             error='An error occurred. Please try again',
@@ -68,15 +67,18 @@ def signup():
             receiver_email = newUser.email
             password = os.getenv('GOOGLE_PASSWORD')
             message = f"Subject:Lunaris Verification\n\nJust one more step,\nUse the link below to verify your account\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/verify/{result}\n\n-Lunaris"
-            context = ssl.create_default_context()
+            context = ssl.create_default_context(cafile=certifi.where())
+
             with smtplib.SMTP(smtp_server, port) as server:
                 server.starttls(context=context)
                 server.login(sender_email, password)
                 server.sendmail(sender_email, receiver_email, message)
     except AssertionError:
+        print('Assertion Error in messaging')
         db.rollback()
         return render_template('error-page.html', message="Missing fields. Please try again")
-    except:
+    except Exception as e:
+        print('Assertion Error in messaging the catch all', e)
         db.rollback()
         return render_template('error-page.html', message="User not created. Please try again.")
     return render_template('signup_check_email.html')
@@ -214,22 +216,17 @@ def forgot_password():
             receiver_email = user_email
             password = os.getenv('GOOGLE_PASSWORD')
             message = f"Subject:Lunaris New Password\n\nLooks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunaris"
-            context = ssl.create_default_context()
+            context = ssl.create_default_context(cafile=certifi.where())
             with smtplib.SMTP(smtp_server, port) as server:
                 server.starttls(context=context)
                 server.login(sender_email, password)
                 server.sendmail(sender_email, receiver_email, message)
-
-            # msg = Message('Lunaris: Verify Your Account', sender = 'anthony.bar.89@gmail.com', recipients = [user_email])
-            # # wanted to get rid of the 'api/forgot-password' in the request url
-            # msg.body = f"Looks like you forgot something,\nClick the link below to reset your password.\n{request.base_url.split('/')[0] + request.base_url.split('/')[1]}//{request.base_url.split('/')[2]}/reset-password/{new_token.unique_string}\n -Lunaris"
-            # current_app.mail.send(msg)
     except AssertionError:
         db.rollback()
         return render_template('error-page.html', message="Missing fields. Please try again")
-    except:
+    except Exception as e:
         db.rollback()
-        return render_template('error-page.html', message="Oops. Something happened. Please try again.")
+        return render_template('error-page.html', message=f"Oops. Something happened. Please try again.")
     return render_template('forgot_password_message.html', user_exists=user_exists)
 
 # Reset Password

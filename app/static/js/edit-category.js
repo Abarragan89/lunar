@@ -13,7 +13,6 @@ document.querySelector('#edit-category').addEventListener('click', (e) => {
 // Show confirmation modal / Close confirmation modal
 document.getElementById('remove-category-btn').addEventListener('click', function() {
     showModal('confirm-category-remove')
-    console.log('hi')
 })
 document.querySelector('#confirm-category-remove').addEventListener('click', (e) => {
     const isOutside = e.target.closest('.modal');

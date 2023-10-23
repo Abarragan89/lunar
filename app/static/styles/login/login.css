@@ -73,10 +73,6 @@
   color: rgb(199, 195, 195);
   font-size: 1.08rem;
 }
-.login-signup-div :-ms-input-placeholder {
-  color: rgb(199, 195, 195);
-  font-size: 1.08rem;
-}
 .login-signup-div ::placeholder {
   color: rgb(199, 195, 195);
   font-size: 1.08rem;

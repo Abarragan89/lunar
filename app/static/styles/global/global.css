@@ -9,7 +9,6 @@
 }
 
 html, body {
-  height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
   background-color: #031920;
@@ -130,15 +129,6 @@ nav-menu-underlay {
   transition: 0.15s all;
 }
 
-@-webkit-keyframes slideInRight {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
 @keyframes slideInRight {
   from {
     opacity: 0;
@@ -153,8 +143,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.2169230769s both;
-          animation: slideInRight 0.5s 0.2169230769s both;
+  animation: slideInRight 0.5s 0.2169230769s both;
 }
 
 #nav-items-main-div a:nth-child(2) {
@@ -163,8 +152,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.2938461538s both;
-          animation: slideInRight 0.5s 0.2938461538s both;
+  animation: slideInRight 0.5s 0.2938461538s both;
 }
 
 #nav-items-main-div a:nth-child(3) {
@@ -173,8 +161,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.3707692308s both;
-          animation: slideInRight 0.5s 0.3707692308s both;
+  animation: slideInRight 0.5s 0.3707692308s both;
 }
 
 #nav-items-main-div a:nth-child(4) {
@@ -183,8 +170,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.4476923077s both;
-          animation: slideInRight 0.5s 0.4476923077s both;
+  animation: slideInRight 0.5s 0.4476923077s both;
 }
 
 #nav-items-main-div a:nth-child(5) {
@@ -193,8 +179,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.5246153846s both;
-          animation: slideInRight 0.5s 0.5246153846s both;
+  animation: slideInRight 0.5s 0.5246153846s both;
 }
 
 #nav-items-main-div a:nth-child(6) {
@@ -203,8 +188,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.6015384615s both;
-          animation: slideInRight 0.5s 0.6015384615s both;
+  animation: slideInRight 0.5s 0.6015384615s both;
 }
 
 #nav-items-main-div a:nth-child(7) {
@@ -213,8 +197,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.6784615385s both;
-          animation: slideInRight 0.5s 0.6784615385s both;
+  animation: slideInRight 0.5s 0.6784615385s both;
 }
 
 #nav-items-main-div a:nth-child(8) {
@@ -223,8 +206,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.7553846154s both;
-          animation: slideInRight 0.5s 0.7553846154s both;
+  animation: slideInRight 0.5s 0.7553846154s both;
 }
 
 #nav-items-main-div a:nth-child(9) {
@@ -233,8 +215,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.8323076923s both;
-          animation: slideInRight 0.5s 0.8323076923s both;
+  animation: slideInRight 0.5s 0.8323076923s both;
 }
 
 #nav-items-main-div a:nth-child(10) {
@@ -243,8 +224,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.9092307692s both;
-          animation: slideInRight 0.5s 0.9092307692s both;
+  animation: slideInRight 0.5s 0.9092307692s both;
 }
 
 #nav-items-main-div a:nth-child(11) {
@@ -253,8 +233,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 0.9861538462s both;
-          animation: slideInRight 0.5s 0.9861538462s both;
+  animation: slideInRight 0.5s 0.9861538462s both;
 }
 
 #nav-items-main-div a:nth-child(12) {
@@ -263,8 +242,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.0630769231s both;
-          animation: slideInRight 0.5s 1.0630769231s both;
+  animation: slideInRight 0.5s 1.0630769231s both;
 }
 
 #nav-items-main-div a:nth-child(13) {
@@ -273,8 +251,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.14s both;
-          animation: slideInRight 0.5s 1.14s both;
+  animation: slideInRight 0.5s 1.14s both;
 }
 
 #nav-items-main-div a:nth-child(14) {
@@ -283,8 +260,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.2169230769s both;
-          animation: slideInRight 0.5s 1.2169230769s both;
+  animation: slideInRight 0.5s 1.2169230769s both;
 }
 
 #nav-items-main-div a:nth-child(15) {
@@ -293,8 +269,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.2938461538s both;
-          animation: slideInRight 0.5s 1.2938461538s both;
+  animation: slideInRight 0.5s 1.2938461538s both;
 }
 
 #nav-items-main-div a:nth-child(16) {
@@ -303,8 +278,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.3707692308s both;
-          animation: slideInRight 0.5s 1.3707692308s both;
+  animation: slideInRight 0.5s 1.3707692308s both;
 }
 
 #nav-items-main-div a:nth-child(17) {
@@ -313,8 +287,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.4476923077s both;
-          animation: slideInRight 0.5s 1.4476923077s both;
+  animation: slideInRight 0.5s 1.4476923077s both;
 }
 
 #nav-items-main-div a:nth-child(18) {
@@ -323,8 +296,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.5246153846s both;
-          animation: slideInRight 0.5s 1.5246153846s both;
+  animation: slideInRight 0.5s 1.5246153846s both;
 }
 
 #nav-items-main-div a:nth-child(19) {
@@ -333,8 +305,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.6015384615s both;
-          animation: slideInRight 0.5s 1.6015384615s both;
+  animation: slideInRight 0.5s 1.6015384615s both;
 }
 
 #nav-items-main-div a:nth-child(20) {
@@ -343,8 +314,7 @@ nav-menu-underlay {
   padding-left: 15px;
   margin-top: 5px;
   color: rgb(228, 240, 239);
-  -webkit-animation: slideInRight 0.5s 1.6784615385s both;
-          animation: slideInRight 0.5s 1.6784615385s both;
+  animation: slideInRight 0.5s 1.6784615385s both;
 }
 
 .nav-category-item {
@@ -363,17 +333,6 @@ nav-menu-underlay {
   transition: 1.3s all;
 }
 
-@-webkit-keyframes fadeIn {
-  from {
-    opacity: 0;
-    left: -1000px;
-  }
-  to {
-    opacity: 1;
-    left: 0px;
-  }
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -388,200 +347,175 @@ nav-menu-underlay {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.0869230769s both;
-          animation: fadeIn 0.2s 0.0869230769s both;
+  animation: fadeIn 0.2s 0.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(2) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.1638461538s both;
-          animation: fadeIn 0.2s 0.1638461538s both;
+  animation: fadeIn 0.2s 0.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(3) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.2407692308s both;
-          animation: fadeIn 0.2s 0.2407692308s both;
+  animation: fadeIn 0.2s 0.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(4) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.3176923077s both;
-          animation: fadeIn 0.2s 0.3176923077s both;
+  animation: fadeIn 0.2s 0.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(5) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.3946153846s both;
-          animation: fadeIn 0.2s 0.3946153846s both;
+  animation: fadeIn 0.2s 0.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(6) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.4715384615s both;
-          animation: fadeIn 0.2s 0.4715384615s both;
+  animation: fadeIn 0.2s 0.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(7) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.5484615385s both;
-          animation: fadeIn 0.2s 0.5484615385s both;
+  animation: fadeIn 0.2s 0.5484615385s both;
 }
 
 #nav-categories-div a:nth-child(8) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.6253846154s both;
-          animation: fadeIn 0.2s 0.6253846154s both;
+  animation: fadeIn 0.2s 0.6253846154s both;
 }
 
 #nav-categories-div a:nth-child(9) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.7023076923s both;
-          animation: fadeIn 0.2s 0.7023076923s both;
+  animation: fadeIn 0.2s 0.7023076923s both;
 }
 
 #nav-categories-div a:nth-child(10) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.7792307692s both;
-          animation: fadeIn 0.2s 0.7792307692s both;
+  animation: fadeIn 0.2s 0.7792307692s both;
 }
 
 #nav-categories-div a:nth-child(11) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.8561538462s both;
-          animation: fadeIn 0.2s 0.8561538462s both;
+  animation: fadeIn 0.2s 0.8561538462s both;
 }
 
 #nav-categories-div a:nth-child(12) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 0.9330769231s both;
-          animation: fadeIn 0.2s 0.9330769231s both;
+  animation: fadeIn 0.2s 0.9330769231s both;
 }
 
 #nav-categories-div a:nth-child(13) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.01s both;
-          animation: fadeIn 0.2s 1.01s both;
+  animation: fadeIn 0.2s 1.01s both;
 }
 
 #nav-categories-div a:nth-child(14) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.0869230769s both;
-          animation: fadeIn 0.2s 1.0869230769s both;
+  animation: fadeIn 0.2s 1.0869230769s both;
 }
 
 #nav-categories-div a:nth-child(15) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.1638461538s both;
-          animation: fadeIn 0.2s 1.1638461538s both;
+  animation: fadeIn 0.2s 1.1638461538s both;
 }
 
 #nav-categories-div a:nth-child(16) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.2407692308s both;
-          animation: fadeIn 0.2s 1.2407692308s both;
+  animation: fadeIn 0.2s 1.2407692308s both;
 }
 
 #nav-categories-div a:nth-child(17) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.3176923077s both;
-          animation: fadeIn 0.2s 1.3176923077s both;
+  animation: fadeIn 0.2s 1.3176923077s both;
 }
 
 #nav-categories-div a:nth-child(18) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.3946153846s both;
-          animation: fadeIn 0.2s 1.3946153846s both;
+  animation: fadeIn 0.2s 1.3946153846s both;
 }
 
 #nav-categories-div a:nth-child(19) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.4715384615s both;
-          animation: fadeIn 0.2s 1.4715384615s both;
+  animation: fadeIn 0.2s 1.4715384615s both;
 }
 
 #nav-categories-div a:nth-child(20) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.5484615385s both;
-          animation: fadeIn 0.2s 1.5484615385s both;
+  animation: fadeIn 0.2s 1.5484615385s both;
 }
 
 #nav-categories-div a:nth-child(21) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.6253846154s both;
-          animation: fadeIn 0.2s 1.6253846154s both;
+  animation: fadeIn 0.2s 1.6253846154s both;
 }
 
 #nav-categories-div a:nth-child(22) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.7023076923s both;
-          animation: fadeIn 0.2s 1.7023076923s both;
+  animation: fadeIn 0.2s 1.7023076923s both;
 }
 
 #nav-categories-div a:nth-child(23) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.7792307692s both;
-          animation: fadeIn 0.2s 1.7792307692s both;
+  animation: fadeIn 0.2s 1.7792307692s both;
 }
 
 #nav-categories-div a:nth-child(24) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.8561538462s both;
-          animation: fadeIn 0.2s 1.8561538462s both;
+  animation: fadeIn 0.2s 1.8561538462s both;
 }
 
 #nav-categories-div a:nth-child(25) {
   color: rgb(228, 240, 239);
   padding-left: 40px;
   font-size: 1.2em;
-  -webkit-animation: fadeIn 0.2s 1.9330769231s both;
-          animation: fadeIn 0.2s 1.9330769231s both;
+  animation: fadeIn 0.2s 1.9330769231s both;
 }
 
 .main-nav-item:hover {
@@ -643,7 +577,6 @@ nav-menu-underlay {
   text-decoration: none;
   transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1);
   -moz-user-select: none;
-   -ms-user-select: none;
        user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -658,7 +591,7 @@ nav-menu-underlay {
 .button-30:disabled {
   background-color: rgb(13, 90, 102);
   box-shadow: rgba(0, 0, 0, 0.2) 0 0 0 0, rgba(0, 0, 0, 0.14) 0 0 0 0, rgba(0, 0, 0, 0.12) 0 0 0 0;
-  color: rgba(0, 0, 0, 0.546);
+  color: rgba(0, 0, 0, 0.746);
   cursor: default;
   pointer-events: none;
 }

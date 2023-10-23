@@ -40,7 +40,6 @@ function fillEditSalaryModal(row) {
     // format dates to be strings with dash
     salaryEnd = `${salaryEnd.slice(0,4)}-${salaryEnd.slice(4)}`
     salaryStart = `${salaryStart.slice(0,4)}-${salaryStart.slice(4)}`
-    console.log(salaryEnd)
 
     document.getElementById('edit-salary-income').value = salaryAmount;
     document.getElementById('salary-start-date-edit').value = salaryStart;

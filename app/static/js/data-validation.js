@@ -15,7 +15,6 @@ document.getElementById('category-form').addEventListener('submit', function(e) 
 if (window.location.pathname === '/signin') {
     document.getElementById('signup-form').addEventListener('submit', function(e) {
         const errorEl = document.getElementById('signup-error-msg')
-        console.log(errorEl)
         if (errorEl.textContent !== "") {
             e.preventDefault();
             errorEl.classList.add('show-error');
