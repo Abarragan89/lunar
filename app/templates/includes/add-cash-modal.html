@@ -1,12 +1,11 @@
 <div class="modal-container" id="add-cash-modal">
-    <div class="modal">
+  <div class="modal">
       <h2 class='section-heading modal-heading'>
         <span>
           Deposit Money
         </span>
       </h2>
       <form action="/api/add-cash" method="POST">
-
         <div class="flex-box-sb">
           <div>
             <span class="input-symbol-dollar">
@@ -15,11 +14,8 @@
           </div>
           <input type="date" id="add-cash-date" name="add-cash-date" required>
         </div>
-
         <textarea type="text" name="money-description" maxlength="50" placeholder="Description(optional)"></textarea>
-        <button type="submit" class="button-30">Add</button>
-
-
+        <button id="add-money-submit-btn" type="submit" class="button-30">Add</button>
       </form>
     </div>
 </div>

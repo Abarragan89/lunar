@@ -153,7 +153,6 @@ inactive_categories = document.querySelectorAll('.edit-inactive-category-btn');
 inactive_categories.forEach((row) => {
     row.addEventListener('click', () => {
         categoryId = row.children[0].getAttribute('data-tag-id')
-        console.log(categoryId)
         document.getElementById('make-category-active-id').value = categoryId
         showModal('reactivate-category')
     })

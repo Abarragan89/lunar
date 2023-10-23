@@ -1,12 +1,36 @@
+// this function runs to put listners on the form submit to disable button
+// to prevent user from sending multiple requests due to bad service
+function addDisableClassToSubmitButtonOnceClicked() {
+    // get all the forms
+    let formEls = document.getElementsByTagName('form')
+    // turn collection into an array
+    formEls = [].slice.call(formEls)
+    formEls.forEach((form) => {
+        //on submit
+        form.addEventListener('submit', () => {
+            // find the submit button
+            const submitButton = form.querySelector('button[type="submit"]');
+            // change text..
+            submitButton.innerHTML = 'please wait...'
+            // and disalbe it
+            submitButton.disabled = true;
+        })
+    })
+}
+
+    
+
 // SHOW AND HIDE MODALS
 // --- button listeners ---- //
 document.getElementById('add-expense-btn').addEventListener('click', () => {
     showModal('expense-modal');
+    // sets current date when modal opens
     getCurrentDate('expense-date')
 })
 document.getElementById('add-charge-btn').addEventListener('click', () => {
     showModal('add-charge-modal');
-    getCurrentDate('charge-date')
+    // sets current date when modal opens
+    getCurrentDate('charge-date');
 })
 
 document.getElementById('add-category-btn').addEventListener('click', () => {
@@ -14,6 +38,7 @@ document.getElementById('add-category-btn').addEventListener('click', () => {
 })
 document.getElementById('add-cash-btn').addEventListener('click', () => {
     showModal('add-cash-modal');
+    // sets current date when modal opens
     getCurrentDate('add-cash-date')
 })
 
@@ -117,8 +142,13 @@ function showModal(id) {
     modalContainerEl.classList.add('show-modal');
     modalContainerEl.style.top = `${window.scrollY}px`;
     modalContainerEl.children[0].style.top = '50px'
+    
     document.documentElement.style.overflow = 'hidden';
     document.body.scroll = "no";
+    setTimeout(() => {
+        addDisableClassToSubmitButtonOnceClicked();
+    }, 700)
+
 }
 function closeModal(id) {
     const modalContainerEl = document.getElementById(id)
