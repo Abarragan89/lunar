@@ -1,25 +1,44 @@
 {
-    "short_name": "Lunaris",
-    "name": "Lunaris Finance",
-    "icons": [
-      {
-        "src": "/images/favicon.ico",
-        "sizes": "64x64 32x32 24x24 16x16",
-        "type": "image/x-icon"
-      },
-      {
-        "src": "/images/android-chrome-192x192.png",
-        "type": "image/png",
-        "sizes": "192x192"
-      },
-      { 
-        "src": "/images/android-chrome-256x256.png",
-        "type": "image/png",
-        "sizes": "256x256"
-      }
-    ],
-    "start_url": ".",
-    "display": "standalone",
-    "theme_color": "#000000",
-    "background_color": "#ffffff"
-  }
+  "short_name": "Lunaris",
+  "name": "Lunaris Finance",
+  "icons": [
+    {
+      "src": "/images/favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/images/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "/images/android-chrome-256x256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "/images/android-chrome-512x512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff",
+  "orientation": "portrait",
+  "lang": "en",
+  "dir": "auto",
+  "scope": "https://lunaris-finance.herokuapp.com/",
+  "id": "expense-tracker",
+  "description": "Lunaris is your go-to personal finance app that simplifies budgeting. Set up your monthly bills and income, and let Lunaris automatically deduct bills from your earnings. Easily track expenses, add extra cash, and customize spending categories. Get monthly and yearly financial insights to stay on top of your finances so you're never in the dark about your budget",
+  "display_override": [
+    "window-controls-overlay"
+  ],
+  "categories": [
+    "business",
+    "finance",
+    "lifestyle"
+  ]
+}
