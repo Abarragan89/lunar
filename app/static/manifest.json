@@ -23,6 +23,33 @@
       "sizes": "512x512"
     }
   ],
+  "screenshots": [
+    {
+      "src": "/images/dashboardSS.png",
+      "sizes": "595x770",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/monthHistorySS.png",
+      "sizes": "596x768",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/profileSS.png",
+      "sizes": "598x770",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/yearHistorySS.png",
+      "sizes": "595x769",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/addPurchaseSS.png",
+      "sizes": "604x766",
+      "type": "image/png"
+    }
+  ],
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
